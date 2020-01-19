@@ -1,54 +1,38 @@
-import Taro, {
-  Component
-} from '@tarojs/taro'
-import {
-  View,
-  Button,
-  Text
-} from '@tarojs/components'
-import {
-  observer,
-  inject
-} from '@tarojs/mobx'
-import {
-  AtButton
-} from 'taro-ui'
-import './index.sass'
+import Taro, { Component } from "@tarojs/taro";
+import { View, Button, Text } from "@tarojs/components";
+import { observer, inject } from "@tarojs/mobx";
+import { AtButton } from "taro-ui";
+import "./index.sass";
 
-
-
-@inject('counterStore')
+@inject("counterStore")
 @observer
 class Index extends Component {
-
   config = {
-    navigationBarTitleText: '首页'
-  }
+    navigationBarTitleText: "首页"
+  };
 
-  componentWillMount() { }
+  componentWillMount() {}
 
   componentWillReact() {
-    console.log('componentWillReact')
+    console.log("componentWillReact");
   }
 
-  componentDidMount() { }
+  componentDidMount() {}
 
-  componentWillUnmount() { }
+  componentWillUnmount() {}
 
-  componentDidShow() { }
+  componentDidShow() {}
 
-  componentDidHide() { }
-
+  componentDidHide() {}
 
   render() {
     return (
-      < View >
-        < View className="iconfont icon-jian" style="font-size:30px;color:red" >
-        </View >
-      </View >
-
-    )
-
+      <View>
+        <View className="iconfont icon-jian" style="font-size:30px;color:red">
+          <View> </View>
+        </View>
+      </View>
+    );
   }
 }
-export default Index
+export default Index;
