@@ -10,7 +10,7 @@ class counterStore {
     this.counter++
   }
   @action.bound increment() {
-    this.counter += 2
+    this.counter++
   }
 
   @action.bound decrement() {
