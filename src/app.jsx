@@ -9,6 +9,7 @@ import Index from './pages/index'
 
 import counterStore from './store/counter'
 
+import './assets/icons/fonts/iconfont.css'
 import './app.sass'
 
 

@@ -25,70 +25,30 @@ class Index extends Component {
     navigationBarTitleText: '首页'
   }
 
-  componentWillMount() {}
+  componentWillMount() { }
 
   componentWillReact() {
     console.log('componentWillReact')
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
-  componentWillUnmount() {}
+  componentWillUnmount() { }
 
-  componentDidShow() {}
+  componentDidShow() { }
 
-  componentDidHide() {}
+  componentDidHide() { }
 
-  increment = () => {
-    const {
-      counterStore
-    } = this.props
-    counterStore.increment()
-  }
-
-  decrement = () => {
-    const {
-      counterStore
-    } = this.props
-    counterStore.decrement()
-  }
-
-  incrementAsync = () => {
-    const {
-      counterStore
-    } = this.props
-    counterStore.incrementAsync()
-  }
 
   render() {
-    const {
-      counterStore: {
-        counter
-      }
-    } = this.props
-    return ( <
-      View className = 'index' >
-      <
-      Text >
-      1 <
-      /Text> <
-      AtButton type = 'primary'
-      size = 'normal'
-      onClick = {
-        this.increment
-      } > + < /AtButton> <
-      Button onClick = {
-        this.decrement
-      } > - < /Button> <
-      Button onClick = {
-        this.incrementAsync
-      } > Add Async < /Button> <
-      Text > {
-        counter
-      } < /Text> < /
-      View >
+    return (
+      < View >
+        < View className="iconfont icon-jian" style="font-size:30px;color:red" >
+        </View >
+      </View >
+
     )
+
   }
 }
-
 export default Index
