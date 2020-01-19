@@ -1,6 +1,6 @@
 {
 	"miniprogramRoot": "dist/",
-	"projectname": "Hotel",
+	"projectname": "hotel",
 	"description": "hotel",
 	"appid": "touristappid",
 	"setting": {
