@@ -1,0 +1,9 @@
+.index{
+    color: red;
+    filter: grayscale(100%);
+    transition: all 1s;
+}
+
+.index:hover{
+    filter: none;
+}
