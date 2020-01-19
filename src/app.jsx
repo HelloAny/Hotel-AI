@@ -1,17 +1,11 @@
-import Taro, {
-  Component
-} from '@tarojs/taro'
-import {
-  Provider,
-  onError
-} from '@tarojs/mobx'
-import Index from './pages/index'
+import Taro, { Component } from "@tarojs/taro";
+import { Provider, onError } from "@tarojs/mobx";
+import Index from "./pages/index";
 
-import counterStore from './store/counter'
+import counterStore from "./store/counter";
 
-import './assets/icons/fonts/iconfont.css'
-import './app.sass'
-
+import "./assets/icons/fonts/iconfont.css";
+import "./app.sass";
 
 //*************taro-ui组件按需引入！！！！*****************
 
@@ -23,25 +17,22 @@ import './app.sass'
 
 const store = {
   counterStore
-}
+};
 
 onError(error => {
-  console.log('mobx global error listener:', error)
-})
+  console.log("mobx global error listener:", error);
+});
 
 class App extends Component {
-
   config = {
-    pages: [
-      'pages/index/index'
-    ],
+    pages: ["pages/index/index"],
     window: {
-      backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
+      backgroundTextStyle: "light",
+      navigationBarBackgroundColor: "#fff",
+      navigationBarTitleText: "WeChat",
+      navigationBarTextStyle: "black"
     }
-  }
+  };
 
   componentDidMount() {}
 
@@ -54,16 +45,12 @@ class App extends Component {
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数
   render() {
-    return ( <
-      Provider store = {
-        store
-      } >
-      <
-      Index / >
-      <
-      /Provider>
-    )
+    return (
+      <Provider store={store}>
+        <Index />
+      </Provider>
+    );
   }
 }
 
-Taro.render( < App / > , document.getElementById('app'))
+Taro.render(<App />, document.getElementById("app"));
