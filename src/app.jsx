@@ -4,6 +4,7 @@ import Index from "./pages/index";
 
 import counterStore from "./store/counter";
 
+import 'taro-ui/dist/style/index.scss'
 import "./assets/icons/fonts/iconfont.css";
 import "./app.sass";
 
@@ -17,40 +18,58 @@ import "./app.sass";
 
 const store = {
   counterStore
-};
+}
 
 onError(error => {
   console.log("mobx global error listener:", error);
 });
 
 class App extends Component {
+
   config = {
-    pages: ["pages/index/index"],
+    pages: [
+      'pages/CustomerService/index',
+      'pages/index/index'
+    ],
     window: {
-      backgroundTextStyle: "light",
-      navigationBarBackgroundColor: "#fff",
-      navigationBarTitleText: "WeChat",
-      navigationBarTextStyle: "black"
+      backgroundTextStyle: 'light',
+      navigationBarBackgroundColor: '#fff',
+      navigationBarTitleText: 'WeChat',
+      navigationBarTextStyle: 'black'
+    },
+    tabBar: {
+      color: "#ccc",
+      selectedColor: "#00f",
+      backgroundColor: "#fff",
+      borderStyle: "black",
+      position: "bottom",
+      list: [{
+        pagePath: "pages/index/index",
+        text: "首页"
+      },{
+        pagePath: "pages/CustomerService/index",
+        text: "客服"
+      }]
     }
-  };
+  }
 
-  componentDidMount() {}
+  componentDidMount () {}
 
-  componentDidShow() {}
+  componentDidShow () {}
 
-  componentDidHide() {}
+  componentDidHide () {}
 
-  componentDidCatchError() {}
+  componentDidCatchError () {}
 
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数
-  render() {
+  render () {
     return (
       <Provider store={store}>
         <Index />
       </Provider>
-    );
+    )
   }
 }
 
-Taro.render(<App />, document.getElementById("app"));
+Taro.render(<App />, document.getElementById('app'))

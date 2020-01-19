@@ -1,20 +1,8 @@
-import Taro, {
-  Component
-} from '@tarojs/taro'
-import {
-  View,
-  Button,
-  Text
-} from '@tarojs/components'
-import {
-  observer,
-  inject
-} from '@tarojs/mobx'
-import {
-  AtButton
-} from 'taro-ui'
-import './index.sass'
+import Taro, { Component } from '@tarojs/taro'
+import { View, Button, Text } from '@tarojs/components'
+import { observer, inject } from '@tarojs/mobx'
 
+import './index.sass'
 
 
 @inject('counterStore')
@@ -22,33 +10,54 @@ import './index.sass'
 class Index extends Component {
 
   config = {
-    navigationBarTitleText: '首页'
+    navigationBarTitleText: '首页',
+    navigationBarBackgroundColor: '#ffc',
   }
 
-  componentWillMount() { }
+  componentWillMount () { }
 
-  componentWillReact() {
+  componentWillReact () {
     console.log('componentWillReact')
   }
 
-  componentDidMount() { }
+  componentDidMount () { }
 
-  componentWillUnmount() { }
+  componentWillUnmount () { }
 
-  componentDidShow() { }
+  componentDidShow () { }
 
-  componentDidHide() { }
+  componentDidHide () { }
 
+  increment = () => {
+    const { counterStore } = this.props
+    counterStore.increment()
+  }
 
-  render() {
+  decrement = () => {
+    const { counterStore } = this.props
+    counterStore.decrement()
+  }
+
+  incrementAsync = () => {
+    const { counterStore } = this.props
+    counterStore.incrementAsync()
+  }
+
+  render () {
+    const { counterStore: { counter } } = this.props
     return (
-      < View >
+      <View className='index'>
+        < View >
         < View className="iconfont icon-jian" style="font-size:30px;color:red" >
         </View >
       </View >
-
+        <Button onClick={this.increment}>+</Button>
+        <Button onClick={this.decrement}>-</Button>
+        <Button onClick={this.incrementAsync}>Add Async</Button>
+        <Text>{counter}</Text>
+      </View>
     )
-
   }
 }
-export default Index
+
+export default Index 
