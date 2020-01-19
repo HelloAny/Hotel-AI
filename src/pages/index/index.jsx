@@ -10,8 +10,11 @@ import {
   observer,
   inject
 } from '@tarojs/mobx'
+import {
+  AtButton
+} from 'taro-ui'
+import './index.sass'
 
-import './index.css'
 
 
 @inject('counterStore')
@@ -69,9 +72,11 @@ class Index extends Component {
       Text >
       1 <
       /Text> <
-      Button onClick = {
+      AtButton type = 'primary'
+      size = 'normal'
+      onClick = {
         this.increment
-      } > + < /Button> <
+      } > + < /AtButton> <
       Button onClick = {
         this.decrement
       } > - < /Button> <

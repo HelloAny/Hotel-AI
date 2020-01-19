@@ -6,7 +6,7 @@
   "templateInfo": {
     "name": "mobx",
     "typescript": false,
-    "css": "none"
+    "css": "sass"
   },
   "scripts": {
     "build:weapp": "taro build --type weapp",
