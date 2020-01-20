@@ -11,4 +11,19 @@ class Login extends Component {
     navigationBarBackgroundColor: "#2d8cf0",
     navigationBarTextStyle: "white"
   };
+
+  componentWillMount() {}
+
+  componentWillReact() {}
+
+  componentDidMount() {}
+
+  componentWillUnmount() {}
+
+  componentDidShow() {}
+
+  componentDidHide() {}
+  render() {
+    return <View className="index">登录</View>;
+  }
 }
