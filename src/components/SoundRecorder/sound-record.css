@@ -1,0 +1,52 @@
+.sr-record-ctr{
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 1000;
+  transform: translate(-50%,-80%);
+}
+
+.sr-record-box{
+  display: flex;
+  flex-direction: row;
+  height: 80Px;
+  width: 80Px;
+  background-color: black;
+  border-radius: 16Px;
+  padding: 10Px;
+  /* transform: scale(0.8); */
+}
+
+.sr-microphone{
+  display: inline-block;
+  height: 80Px;
+  width: 45Px;
+}
+
+.sr-blocks{
+  position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content:flex-start;
+  width: 35Px;
+  height: 80Px;
+  overflow: hidden;
+}
+
+.sr-white-block{
+  height: 8Px;
+  margin: 0Px 0Px 7Px 4Px;
+  background-color: white;
+}
+
+.sr-black-block{
+  position: absolute;
+  display: block;
+  top: 0;
+  right: 0;
+  width: 100Px;
+  height: 40Px;
+  transform-origin: right top;
+  transform: rotateZ(-75deg);
+  background-color: black;
+}

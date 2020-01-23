@@ -1,17 +1,29 @@
-import Taro, { Component } from '@tarojs/taro'
-import { View, Button, Text } from '@tarojs/components'
-import { observer, inject } from '@tarojs/mobx'
+import Taro, { Component } from "@tarojs/taro";
+import { View, Button, Text } from "@tarojs/components";
+import { observer, inject } from "@tarojs/mobx";
 
-import './index.sass'
+import "./index.sass";
 
-
-@inject('counterStore')
+@inject("counterStore")
 @observer
 class Index extends Component {
-
   config = {
     navigationBarTitleText: '首页',
     navigationBarBackgroundColor: '#ffc',
+  }
+
+  state = {
+    nodes: [{
+      name: 'div',
+      attrs: {
+        class: 'div_class',
+        style: 'line-height: 60px; color: red;'
+      },
+      children: [{
+        type: 'text',
+        text: 'Hello World!'
+      }]
+    }]
   }
 
   componentWillMount () { }
@@ -20,33 +32,23 @@ class Index extends Component {
     console.log('componentWillReact')
   }
 
-  componentDidMount () { }
+  componentWillMount() {}
 
-  componentWillUnmount () { }
+  componentWillReact() {}
 
-  componentDidShow () { }
+  componentDidMount() {}
 
-  componentDidHide () { }
+  componentWillUnmount() {}
 
-  increment = () => {
-    const { counterStore } = this.props
-    counterStore.increment()
-  }
+  componentDidShow() {}
 
-  decrement = () => {
-    const { counterStore } = this.props
-    counterStore.decrement()
-  }
-
-  incrementAsync = () => {
-    const { counterStore } = this.props
-    counterStore.incrementAsync()
-  }
+  componentDidHide() {}
 
   render () {
     const { counterStore: { counter } } = this.props
     return (
       <View className='index'>
+        <RichText nodes={this.state.nodes} />
         < View >
         < View className="iconfont icon-jian" style="font-size:30px;color:red" >
         </View >
@@ -60,4 +62,4 @@ class Index extends Component {
   }
 }
 
-export default Index 
+export default Index;
