@@ -11,10 +11,10 @@ export const HTTP_STATUS = {
   BAD_GATEWAY: 502,
   SERVICE_UNAVAILABLE: 503,
   GATEWAY_TIMEOUT: 504
-}
+};
 
 export const REFRESH_STATUS = {
   NORMAL: 0,
   REFRESHING: 1,
   NO_MORE_DATA: 2
-}
+};

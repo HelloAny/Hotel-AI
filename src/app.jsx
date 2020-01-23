@@ -1,7 +1,6 @@
 import Taro, { Component } from "@tarojs/taro";
 import { Provider, onError } from "@tarojs/mobx";
 import Index from "./pages/index";
-
 import counterStore from "./store/counter";
 
 import "taro-ui/dist/style/index.scss";
@@ -32,10 +31,12 @@ class App extends Component {
       "pages/index/index"
     ],
     window: {
-      backgroundTextStyle: "light",
-      navigationBarBackgroundColor: "#fff",
-      navigationBarTitleText: "WeChat",
-      navigationBarTextStyle: "black"
+      backgroundTextStyle: 'light',
+      navigationBarBackgroundColor: '#fff',
+      navigationBarTitleText: 'WeChat',
+      navigationBarTextStyle: 'black',
+      // enablePullDownRefresh: true,
+      // backgroundTextStyle:"dark"
     },
     tabBar: {
       color: "#ccc",
