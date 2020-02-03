@@ -1,10 +1,11 @@
 import Taro, { Component } from "@tarojs/taro";
 import { Provider, onError } from "@tarojs/mobx";
+import 'taro-ui/dist/style/index.scss'
 import Index from "./pages/index";
+
 
 import counterStore from "./store/counter";
 
-import 'taro-ui/dist/style/index.scss'
 import "./assets/icons/fonts/iconfont.css";
 import "./app.sass";
 
@@ -26,15 +27,20 @@ onError(error => {
 
 class App extends Component {
 
+  componentDidMount () {}
+
   config = {
     pages: [
+      'pages/ActivityService/activityService',
       'pages/CustomerService/index',
-      'pages/index/index'
+      'pages/index/index',
+
+
     ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
+      navigationBarTitleText: 'weChat',
       navigationBarTextStyle: 'black'
     },
     tabBar: {
@@ -49,11 +55,15 @@ class App extends Component {
       },{
         pagePath: "pages/CustomerService/index",
         text: "客服"
-      }]
+      },{
+        pagePath: "pages/ActivityService/activityService",
+        text: "活动"
+      }
+    ]
     }
   }
 
-  componentDidMount () {}
+
 
   componentDidShow () {}
 

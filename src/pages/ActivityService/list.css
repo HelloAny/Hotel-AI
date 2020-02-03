@@ -1,0 +1,37 @@
+.list{
+  display: flex;
+  flex-direction: row;
+  margin-left: 100PX;  /*  这是一个绝对定位bug  */
+
+
+}
+.list_items{
+  display: flex;
+  flex-direction: column;
+  margin-top: 40PX;
+}
+.item{
+  display: flex;
+  flex-direction: column;
+  margin-top: 50PX;
+  margin-right: 20PX;
+  margin-left: 10PX;
+  font-size: large;
+  border-style: solid;
+  border-radius: 10PX;
+  border-color:rgba(97, 144, 232, 0.664) ;
+  padding:10PX;
+
+}
+.title{
+  margin-bottom: 30PX;
+}
+.num{
+  text-align: center;
+  font-size: larger;
+}
+.suggest{
+  text-align: center;
+  font-size: larger;
+  margin-top: 20PX;
+}
