@@ -1,10 +1,10 @@
 import Taro, { Component } from "@tarojs/taro";
 import { Provider, onError } from "@tarojs/mobx";
+import 'taro-ui/dist/style/index.scss'
 import Index from "./pages/index";
 
-import counterStore from "./store/counter";
 
-import "taro-ui/dist/style/index.scss";
+import counterStore from "./store/counter";
 import "./assets/icons/fonts/iconfont.css";
 import "./app.sass";
 
@@ -25,38 +25,45 @@ onError(error => {
 });
 
 class App extends Component {
+
+  componentDidMount () {}
+
   config = {
     pages: [
-      "pages/account/account",
-      "pages/CustomerService/index",
-      "pages/index/index"
+      'pages/account/account',
+      'pages/ActivityService/activityService',
+      'pages/CustomerService/index',
+      'pages/index/index',
+
+
     ],
     window: {
-      backgroundTextStyle: "light",
-      navigationBarBackgroundColor: "#fff",
-      navigationBarTitleText: "WeChat",
-      navigationBarTextStyle: "black"
+      backgroundTextStyle: 'light',
+      navigationBarBackgroundColor: '#fff',
+      navigationBarTitleText: 'WeChat',
+      navigationBarTextStyle: 'black'
     },
     tabBar: {
       color: "#ccc",
       selectedColor: "#00f",
       backgroundColor: "#fff",
       borderStyle: "black",
-      position: "top",
-      list: [
-        {
-          pagePath: "pages/index/index",
-          text: "首页"
-        },
-        {
-          pagePath: "pages/CustomerService/index",
-          text: "客服"
-        },
-        {
-          pagePath: "pages/account/account",
-          text: "我的"
-        }
-      ]
+      position: "bottom",
+      list: [{
+        pagePath: "pages/index/index",
+        text: "首页"
+      },{
+        pagePath: "pages/CustomerService/index",
+        text: "客服"
+      },{
+        pagePath: "pages/ActivityService/activityService",
+        text: "活动"
+      },
+      {
+        pagePath: "pages/account/account",
+        text: "我的"
+      }
+    ]
     }
   };
 
