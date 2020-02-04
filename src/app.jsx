@@ -5,7 +5,6 @@ import Index from "./pages/index";
 
 
 import counterStore from "./store/counter";
-
 import "./assets/icons/fonts/iconfont.css";
 import "./app.sass";
 
@@ -19,7 +18,7 @@ import "./app.sass";
 
 const store = {
   counterStore
-}
+};
 
 onError(error => {
   console.log("mobx global error listener:", error);
@@ -31,6 +30,7 @@ class App extends Component {
 
   config = {
     pages: [
+      'pages/account/account',
       'pages/ActivityService/activityService',
       'pages/CustomerService/index',
       'pages/index/index',
@@ -40,7 +40,7 @@ class App extends Component {
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'weChat',
+      navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'black'
     },
     tabBar: {
@@ -58,28 +58,32 @@ class App extends Component {
       },{
         pagePath: "pages/ActivityService/activityService",
         text: "活动"
+      },
+      {
+        pagePath: "pages/account/account",
+        text: "我的"
       }
     ]
     }
-  }
+  };
 
+  componentDidMount() {}
 
+  componentDidShow() {}
 
-  componentDidShow () {}
+  componentDidHide() {}
 
-  componentDidHide () {}
-
-  componentDidCatchError () {}
+  componentDidCatchError() {}
 
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数
-  render () {
+  render() {
     return (
       <Provider store={store}>
         <Index />
       </Provider>
-    )
+    );
   }
 }
 
-Taro.render(<App />, document.getElementById('app'))
+Taro.render(<App />, document.getElementById("app"));
