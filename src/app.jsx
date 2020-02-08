@@ -28,8 +28,13 @@ class App extends Component {
   config = {
     pages: [
       "pages/account/account",
+      "pages/login/registerByPsw",
+      "pages/login/forgetPsw",
+      "pages/login/loginByPsw",
+      "pages/login/login",
       "pages/CustomerService/index",
-      "pages/index/index"
+      "pages/index/index",
+      "pages/demo/demo"
     ],
     window: {
       backgroundTextStyle: "light",
@@ -47,10 +52,6 @@ class App extends Component {
         {
           pagePath: "pages/index/index",
           text: "首页"
-        },
-        {
-          pagePath: "pages/CustomerService/index",
-          text: "客服"
         },
         {
           pagePath: "pages/account/account",
