@@ -1,0 +1,9 @@
+.kinds_body{
+  display: flex ;
+  flex-direction: row;
+}
+
+.kinds_body .kinds{     /* 绝对定位bug之让kinds这一列fixed不动 */
+  position: fixed;
+  z-index: 4;
+}
