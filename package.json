@@ -43,6 +43,8 @@
     "@tarojs/taro-tt": "2.0.1",
     "@tarojs/taro-weapp": "2.0.1",
     "babel-runtime": "^6.26.0",
+    "blueimp-md5": "^2.12.0",
+    "crypto-js": "^3.1.9-1",
     "mobx": "4.8.0",
     "nerv-devtools": "^1.5.5",
     "nervjs": "^1.5.5",

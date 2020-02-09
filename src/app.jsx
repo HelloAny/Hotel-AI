@@ -1,9 +1,8 @@
 import Taro, { Component } from "@tarojs/taro";
 import { Provider, onError } from "@tarojs/mobx";
+import "taro-ui/dist/style/index.scss";
 import Index from "./pages/index";
 import counterStore from "./store/counter";
-
-import "taro-ui/dist/style/index.scss";
 import "./assets/icons/fonts/iconfont.css";
 import "./app.sass";
 
@@ -24,9 +23,12 @@ onError(error => {
 });
 
 class App extends Component {
+  componentDidMount() {}
+
   config = {
     pages: [
       "pages/account/account",
+      "pages/ActivityService/activityService",
       "pages/CustomerService/index",
       "pages/index/index"
     ],
@@ -43,7 +45,7 @@ class App extends Component {
       selectedColor: "#00f",
       backgroundColor: "#fff",
       borderStyle: "black",
-      position: "top",
+      position: "bottom",
       list: [
         {
           pagePath: "pages/index/index",
@@ -52,6 +54,10 @@ class App extends Component {
         {
           pagePath: "pages/CustomerService/index",
           text: "客服"
+        },
+        {
+          pagePath: "pages/ActivityService/activityService",
+          text: "活动"
         },
         {
           pagePath: "pages/account/account",

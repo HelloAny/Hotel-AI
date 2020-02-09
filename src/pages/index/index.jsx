@@ -32,17 +32,17 @@ class Index extends Component {
     console.log('componentWillReact')
   }
 
-  componentWillMount() {}
+  componentWillMount() { }
 
-  componentWillReact() {}
+  componentWillReact() { }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
-  componentWillUnmount() {}
+  componentWillUnmount() { }
 
-  componentDidShow() {}
+  componentDidShow() { }
 
-  componentDidHide() {}
+  componentDidHide() { }
 
   render () {
     const { counterStore: { counter } } = this.props
