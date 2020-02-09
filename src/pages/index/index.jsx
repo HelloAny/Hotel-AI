@@ -4,8 +4,8 @@ import { observer, inject } from "@tarojs/mobx";
 
 import "./index.sass";
 
-@inject("counterStore")
-@observer
+// @inject("counterStore")
+// @observer
 class Index extends Component {
   config = {
     navigationBarTitleText: '首页',
@@ -32,17 +32,17 @@ class Index extends Component {
     console.log('componentWillReact')
   }
 
-  componentWillMount() { }
+  componentWillMount() {}
 
-  componentWillReact() { }
+  componentWillReact() {}
 
-  componentDidMount() { }
+  componentDidMount() {}
 
-  componentWillUnmount() { }
+  componentWillUnmount() {}
 
-  componentDidShow() { }
+  componentDidShow() {}
 
-  componentDidHide() { }
+  componentDidHide() {}
 
   render () {
     const { counterStore: { counter } } = this.props

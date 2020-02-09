@@ -15,6 +15,7 @@ export default {
   /**
    * 特殊转跳，用于检测token并跳转,token不存在时转跳login界面
    * @param {callback} iteratee 当TOKEN验证正确时发起回调
+   * @return {callback} itreratee(token,arguments)
    */
   reLaunch(iteratee) {
     const token = Taro.getStorage({
@@ -29,7 +30,7 @@ export default {
     if (!!token) {
       api.tokenValidate(token).then(res => {
         if (res.data.status == 0) {
-          return iteratee(arguments);
+          return iteratee(token, arguments);
         } else if (res.data.status == -101) {
           Taro.showToast({
             title: "参数验证失败",
