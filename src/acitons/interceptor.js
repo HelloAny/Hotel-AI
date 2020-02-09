@@ -1,8 +1,6 @@
 //装饰器
 
-import Taro from '@tarojs/taro'
+import Taro from "@tarojs/taro";
+import utils from "../utils/util";
 
-
-function pageInit(){
-  return function Component()
-}
+export default {};

@@ -1,13 +1,43 @@
-import Taro, { Component } from "@tarojs/taro";
+import Taro, { Component, getUserInfo } from "@tarojs/taro";
 import "./account.sass";
 import { View } from "@tarojs/components";
 import { AtAvatar } from "taro-ui";
 import { observer, inject } from "@tarojs/mobx";
+import axios from "../../acitons/api";
+import utils from "../../utils/util";
+import HClistline from "./HClistline/HClistline";
 
+@inject("userStore")
+@observer
 class Login extends Component {
   config = {
     navigationBarTitleText: "我的",
     navigationBarBackgroundColor: "#2d8cf0"
+  };
+
+  /**界面初始化*/
+  mountedInterface = () => {
+    /**
+     * 获取个人信息并保存到mobx
+     * @param {string} token token缓存
+     */
+    const setUserInfo = token => {
+      const { userStore } = this.props;
+      axios.infoByToken(token).then(res => {
+        if (res.data.status == 0) {
+          userStore.setUserInfo(res.data.data); //保存到mobx
+        } else if (res.data.status == -100) {
+          console.log("丢失参数!");
+          Taro.showToast({
+            title: "参数丢失",
+            icon: "fail",
+            duration: 2000
+          });
+        }
+      });
+    };
+    //调用路由
+    utils.reLaunch(setUserInfo);
   };
 
   NavTo(url) {
@@ -30,6 +60,23 @@ class Login extends Component {
 
   componentDidHide() {}
   render() {
+    const listline = [
+      {
+        id: 1,
+        name: "测试",
+        icon: "icon-RectangleCopy153"
+      },
+      {
+        id: 2,
+        name: "测试2",
+        icon: "icon-RectangleCopy4"
+      },
+      {
+        id: 3,
+        name: "测试3",
+        icon: "icon-RectangleCopy8"
+      }
+    ];
     const configList = [
       {
         id: 1,
@@ -106,7 +153,12 @@ class Login extends Component {
             登录/注册
           </View>
         </View>
-        <View className="list">{List}</View>
+        <View className="list">
+          <View>
+            <HClistline listLine={listline} MaxNumber="3" />
+          </View>
+          {List}
+        </View>
       </View>
     );
   }

@@ -3,7 +3,7 @@ import { Provider, onError } from "@tarojs/mobx";
 import "taro-ui/dist/style/index.scss";
 import Index from "./pages/index";
 
-import counterStore from "./store/counter";
+import userStore from "./store/user";
 import "./assets/icons/fonts/iconfont.css";
 import "./app.sass";
 
@@ -16,7 +16,7 @@ import "./app.sass";
 // }
 
 const store = {
-  counterStore
+  userStore
 };
 
 onError(error => {
@@ -29,9 +29,13 @@ class App extends Component {
   config = {
     pages: [
       "pages/account/account",
-      "pages/ActivityService/activityService",
+      "pages/login/registerByPsw",
+      "pages/login/forgetPsw",
+      "pages/login/loginByPsw",
+      "pages/login/login",
       "pages/CustomerService/index",
-      "pages/index/index"
+      "pages/index/index",
+      "pages/demo/demo"
     ],
     window: {
       backgroundTextStyle: "light",
@@ -44,19 +48,11 @@ class App extends Component {
       selectedColor: "#00f",
       backgroundColor: "#fff",
       borderStyle: "black",
-      position: "bottom",
+      position: "top",
       list: [
         {
           pagePath: "pages/index/index",
           text: "首页"
-        },
-        {
-          pagePath: "pages/CustomerService/index",
-          text: "客服"
-        },
-        {
-          pagePath: "pages/ActivityService/activityService",
-          text: "活动"
         },
         {
           pagePath: "pages/account/account",
