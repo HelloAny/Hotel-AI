@@ -2,7 +2,7 @@ import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Picker } from "@tarojs/components";
 import { observer, inject } from "@tarojs/mobx";
 import { AtButton, AtInput, AtForm, AtCountdown, AtToast } from "taro-ui";
-import axios from "../../acitons/api";
+import axios from "../../actions/api";
 import "./login.sass";
 
 class Login extends Component {

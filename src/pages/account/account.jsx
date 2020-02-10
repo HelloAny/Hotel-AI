@@ -3,8 +3,8 @@ import "./account.sass";
 import { View } from "@tarojs/components";
 import { AtAvatar } from "taro-ui";
 import { observer, inject } from "@tarojs/mobx";
-import axios from "../../acitons/api";
-import utils from "../../utils/util";
+import axios from "../../actions/api";
+import { reLaunch } from "../../utils";
 import HClistline from "./HClistline/HClistline";
 
 @inject("userStore")
@@ -37,7 +37,7 @@ class Login extends Component {
       });
     };
     //调用路由
-    utils.reLaunch(setUserInfo);
+    reLaunch(setUserInfo);
   };
 
   NavTo(url) {

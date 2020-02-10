@@ -1,6 +1,6 @@
 import http from "../service/api";
 import netUrl from "../constants/api";
-import utils from "../utils/util";
+import { setMd5 } from "../utils";
 import loginByPsw from "../pages/login/loginByPsw";
 
 export default {
@@ -34,7 +34,7 @@ export default {
       subtype: "sms",
       data: {
         username: phone,
-        hash: utils.setMd5(code, rand),
+        hash: setMd5(code, rand),
         enduring: 1
       }
     };
@@ -54,7 +54,7 @@ export default {
       subtype: "phone",
       data: {
         username: phone,
-        hash: utils.setMd5(code, rand),
+        hash: setMd5(code, rand),
         pass: password
       }
     };
@@ -73,7 +73,7 @@ export default {
       subtype: "forget",
       data: {
         username: phone,
-        hash: utils.setMd5(code, rand),
+        hash: setMd5(code, rand),
         pass: passWord
       }
     };
@@ -91,7 +91,7 @@ export default {
       type: "sms",
       subtype: "validate",
       data: {
-        hash: utils.setMd5(code, rand)
+        hash: setMd5(code, rand)
       }
     };
     return http.post(url, config);
