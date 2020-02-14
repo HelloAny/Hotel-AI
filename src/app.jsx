@@ -3,7 +3,7 @@ import { Provider, onError } from "@tarojs/mobx";
 import "taro-ui/dist/style/index.scss";
 import Index from "./pages/index";
 
-import userStore from "./store/user";
+import userInfo from "./store/user";
 import "./assets/icons/fonts/iconfont.css";
 import "./app.sass";
 
@@ -16,7 +16,7 @@ import "./app.sass";
 // }
 
 const store = {
-  userStore
+  userStore: new userInfo()
 };
 
 onError(error => {
@@ -28,14 +28,16 @@ class App extends Component {
 
   config = {
     pages: [
+      "pages/realAuth/realAuth",
       "pages/account/account",
+      "pages/user/user",
+      "pages/user/HCchangeName/HCchangeName",
       "pages/login/registerByPsw",
       "pages/login/forgetPsw",
       "pages/login/loginByPsw",
       "pages/login/login",
       "pages/CustomerService/index",
-      "pages/index/index",
-      "pages/demo/demo"
+      "pages/index/index"
     ],
     window: {
       backgroundTextStyle: "light",
@@ -57,6 +59,10 @@ class App extends Component {
         {
           pagePath: "pages/account/account",
           text: "我的"
+        },
+        {
+          pagePath: "pages/realAuth/realAuth",
+          text: "修改个人信息"
         }
       ]
     }

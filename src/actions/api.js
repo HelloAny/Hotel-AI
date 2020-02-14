@@ -1,6 +1,6 @@
 import http from "../service/api";
 import netUrl from "../constants/api";
-import { setMd5 } from "../utils";
+import { setMd5, image2Base64 } from "../utils";
 import loginByPsw from "../pages/login/loginByPsw";
 
 export default {
@@ -10,7 +10,7 @@ export default {
    */
   Sms(param) {
     const url = "/api/captcha/";
-    const config = {
+    const request = {
       id: 1234,
       type: "sms",
       subtype: "generate",
@@ -19,7 +19,7 @@ export default {
         command_type: 1
       }
     };
-    return http.post(url, config);
+    return http.post(url, request);
   },
   /**
    * 快捷(注册/登录)接口
@@ -28,7 +28,7 @@ export default {
   Register(param) {
     const { phone, code, rand } = param;
     const url = "/api/user/login/";
-    const config = {
+    const request = {
       id: 1234,
       type: "login",
       subtype: "sms",
@@ -38,7 +38,7 @@ export default {
         enduring: 1
       }
     };
-    return http.post(url, config);
+    return http.post(url, request);
   },
   /**
    * 密码注册
@@ -47,7 +47,7 @@ export default {
   RegisterPsw(param) {
     const { phone, password, code, rand } = param;
     const url = "/api/user/register/";
-    const config = {
+    const request = {
       id: 0,
       status: 0,
       type: "register",
@@ -58,7 +58,7 @@ export default {
         pass: password
       }
     };
-    return http.post(url, config);
+    return http.post(url, request);
   },
   /**
    * 忘记密码
@@ -67,7 +67,7 @@ export default {
   ForgetPsw(param) {
     const { phone, passWord, code, rand } = param;
     const url = "/api/user/password/";
-    const config = {
+    const request = {
       id: 1234,
       type: "password",
       subtype: "forget",
@@ -77,7 +77,7 @@ export default {
         pass: passWord
       }
     };
-    return http.post(url, config);
+    return http.post(url, request);
   },
   /**
    * 确定验证码正确性
@@ -86,7 +86,7 @@ export default {
   SmsValidate(param) {
     const { code, rand } = param;
     const url = "/api/captcha/";
-    const config = {
+    const request = {
       id: 1234,
       type: "sms",
       subtype: "validate",
@@ -94,7 +94,7 @@ export default {
         hash: setMd5(code, rand)
       }
     };
-    return http.post(url, config);
+    return http.post(url, request);
   },
   /**
    * 密码登录
@@ -103,7 +103,7 @@ export default {
   loginByPsw(param) {
     const { phone, passWord } = param;
     const url = "/api/user/login/";
-    const config = {
+    const request = {
       id: 1234,
       type: "login",
       subtype: "pass",
@@ -113,7 +113,7 @@ export default {
         enduring: 1
       }
     };
-    return http.post(url, config);
+    return http.post(url, request);
   },
   /**
    * 验证token
@@ -128,10 +128,55 @@ export default {
    * @param {string} param token值
    */
   infoByToken(param) {
-    const url = `api/user/info/?token=${param}`;
+    const url = `/api/user/info/?token=${param}`;
     return http.get(url);
-  }
+  },
   /**
-   * 通过
+   * 通过token更新用户信息
+   * @param {string} param { token, username, nickname, email, ID }
    */
+  infoUpdataByToken(param) {
+    const { token, username, nickname, email, ID } = param;
+    const url = `/api/user/info/?token=${token}`;
+    const request = {
+      id: 1234,
+      type: "info",
+      subtype: "update",
+      data: {
+        username: username,
+        nickname: nickname,
+        email: email,
+        real_auth_id: ID
+      }
+    };
+    return http.post(url, request);
+  },
+  /**
+   * 获取用户头像
+   * @param {string} param username
+   */
+  userPortraitGet(param) {
+    const url = `/api/user/portrait/?username=${param}`;
+    return http.get(url);
+  },
+  /**
+   * 上传用户头像
+   * @param {string} param image和token
+   */
+  userPortraitUpload(param) {
+    const { token, image } = param;
+    console.log(token, image);
+    return image2Base64(image).then(res => {
+      const url = `/api/user/portrait/?token=${token}`;
+      const request = {
+        id: 1234,
+        type: "portrait",
+        subtype: "upload",
+        data: {
+          base64: res
+        }
+      };
+      return http.post(url, request);
+    });
+  }
 };

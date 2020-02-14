@@ -2,12 +2,26 @@
 	"miniprogramRoot": "dist/",
 	"projectname": "hotel",
 	"description": "hotel",
-	"appid": "touristappid",
+	"appid": "wx6eb04145b8e0f6fc",
 	"setting": {
 		"urlCheck": true,
-		"es6": false,
+		"es6": true,
+		"enhance": false,
 		"postcss": false,
-		"minified": false
+		"minified": false,
+		"newFeature": true,
+		"coverView": true,
+		"autoAudits": false,
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
 	},
 	"compileType": "miniprogram",
 	"simulatorType": "wechat",

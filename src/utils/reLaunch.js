@@ -13,10 +13,8 @@ let reLaunch = iteratee => {
       if (res.data.status == 0) {
         return iteratee(token, arguments);
       } else if (res.data.status == -101) {
-        Taro.showToast({
-          title: "参数验证失败",
-          icon: "none",
-          duration: 2000
+        Taro.reLaunch({
+          url: "/pages/login/login"
         });
       }
     });
