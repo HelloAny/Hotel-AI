@@ -27,7 +27,7 @@ class App extends Component {
   componentDidMount() {}
 
   config = {
-    pages: ["pages/account/account", "pages/index/index"],
+    pages: ["pages/account/account", "packageB/ActivityService/activityService"],
     subpackages: [
       {
         root: "packageA",
@@ -40,10 +40,6 @@ class App extends Component {
           "realAuth/realAuth",
           "user/HCchangeName/HCchangeName"
         ]
-      },
-      {
-        root: "packageB",
-        pages: ["CustomerService/index"]
       }
     ],
     window: {
@@ -66,8 +62,8 @@ class App extends Component {
           text: "我的"
         },
         {
-          pagePath: "pages/index/index",
-          text: "首页"
+          pagePath: "packageB/ActivityService/activityService",
+          text: "区域"
         }
       ]
     }
