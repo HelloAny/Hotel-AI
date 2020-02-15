@@ -101,7 +101,7 @@ class user extends Component {
    * 路由转跳
    * @param {string} url 路径
    */
-  navigateTo() {
+  navigateTo(url) {
     Taro.navigateTo({
       url: url
     });
