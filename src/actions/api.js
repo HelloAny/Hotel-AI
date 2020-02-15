@@ -1,7 +1,6 @@
 import http from "../service/api";
 import netUrl from "../constants/api";
 import { setMd5, image2Base64 } from "../utils";
-import loginByPsw from "../pages/login/loginByPsw";
 
 export default {
   /**
@@ -165,7 +164,6 @@ export default {
    */
   userPortraitUpload(param) {
     const { token, image } = param;
-    console.log(token, image);
     return image2Base64(image).then(res => {
       const url = `/api/user/portrait/?token=${token}`;
       const request = {
@@ -174,6 +172,48 @@ export default {
         subtype: "upload",
         data: {
           base64: res
+        }
+      };
+      return http.post(url, request);
+    });
+  },
+  /**
+   * 注册实名认证信息
+   * @param {string} param {token,idcard,name,gender,birthday}
+   */
+  realAuthCreate(param) {
+    const { token, idcard, name, gender, birthday } = param;
+    const url = `/api/realauth/?token=${token}`;
+    const request = {
+      id: 1234,
+      type: "realauth",
+      subtype: "create",
+      data: {
+        id_type: "sfz",
+        id: idcard,
+        name: name,
+        gender: gender,
+        birthday: birthday
+      }
+    };
+    return http.post(url, request);
+  },
+  /**
+   * 注册人脸验证
+   * @param {string} param {token,imagePath}
+   */
+  faceRegister(param) {
+    const { token, imagePath } = param;
+    return image2Base64(imagePath).then(res => {
+      const url = `/api/face/?token=${token}`;
+      const request = {
+        id: 1234,
+        type: "face",
+        subtype: "register",
+        data: {
+          base64: res,
+          db: 1,
+          content: "人脸数据描述"
         }
       };
       return http.post(url, request);

@@ -48,6 +48,16 @@ class Login extends Component {
     reLaunch(setUserInfo);
   };
 
+  /**
+   * 路由转跳
+   * @param {string} url 路径
+   */
+  navgiateTo(url) {
+    Taro.navigateTo({
+      url: url
+    });
+  }
+
   componentWillMount() {
     this.mountedInterface();
   }
@@ -122,14 +132,20 @@ class Login extends Component {
     return (
       <View className="container">
         <View className="topSet at-row at-row__align--center">
-          <View className="at-col at-col-3">
+          <View
+            className="at-col at-col-3"
+            onClick={this.navgiateTo.bind(this, "/packageA/user/user")}
+          >
             <AtAvatar
               circle
               className="visitor"
               image={`https://hotel.lcworkroom.cn/api/user/portrait/?username=${userName}`}
             ></AtAvatar>
           </View>
-          <View className="at-col at-col-4">
+          <View
+            className="at-col at-col-4"
+            onClick={this.navgiateTo.bind(this, "/packageA/user/user")}
+          >
             <View className="account_name">{nickName}</View>
             <View className="set_account_info">点击编辑个人信息</View>
           </View>

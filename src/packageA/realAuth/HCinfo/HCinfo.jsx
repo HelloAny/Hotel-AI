@@ -1,8 +1,8 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View } from "@tarojs/components";
-import { AtAvatar, AtInput, AtForm, AtButton } from "taro-ui";
-// import axios from "../../../actions/api";
-// import { reLaunch } from "../../../utils"; //测试用
+import { AtInput, AtForm, AtButton } from "taro-ui";
+import axios from "../../../actions/api";
+import { reLaunch } from "../../../utils"; //测试用
 import { observer, inject } from "@tarojs/mobx";
 
 import "./HCinfo.sass";
@@ -24,7 +24,9 @@ class HCinfo extends Component {
   static options = {
     addGlobalClass: true
   };
-  static defaultProps = {};
+  static defaultProps = {
+    nextBtn: Function
+  };
 
   /**
    * 更改姓名
@@ -34,7 +36,7 @@ class HCinfo extends Component {
     const { verifyIdcard } = this.state;
 
     this.setState({
-      nickNameChange: value,
+      name: value,
       verifyNextBtn: false
     });
     if (
@@ -57,6 +59,10 @@ class HCinfo extends Component {
       this.setState({
         errorCap: 0,
         verifyName: true
+      });
+    } else if (!value) {
+      this.setState({
+        errorCap: 0
       });
     } else {
       this.setState({
@@ -84,7 +90,6 @@ class HCinfo extends Component {
         verifyNextBtn: true
       });
     }
-
     return value;
   }
 
@@ -102,6 +107,10 @@ class HCinfo extends Component {
         errorCap: 0,
         verifyIdcard: true
       });
+    } else if (!value) {
+      this.setState({
+        errorCap: 0
+      });
     } else {
       this.setState({
         errorCap: 2
@@ -113,45 +122,53 @@ class HCinfo extends Component {
    * 发送请求更改用户信息
    */
   updateUserInfo() {
-    const { nickNameChange } = this.state;
+    const { name, idcard } = this.state;
     const {
       userStore: {
-        user: { userName, email, ID }
+        user: { userName, nickName, email }
       },
-      userStore
+      userStore,
+      nextBtn
     } = this.props;
-    if (nickNameChange.trim().length <= 8 && nickNameChange.trim().length > 0) {
-      const param = {
-        token: Taro.getStorageSync("token"),
-        username: userName,
-        nickname: nickNameChange,
-        email: email,
-        ID: ID
-      };
-      axios.infoUpdataByToken(param).then(res => {
-        console.log(res);
-        if (res.data.status == 0) {
-          Taro.showToast({
-            title: "修改成功",
-            icon: "success",
-            duration: 2000,
-            mask: true,
-            success: function() {
-              userStore.updateUserInfo(param);
-              Taro.reLaunch({
-                url: "/pages/user/user"
-              });
-            }
-          });
-        } else {
-          Taro.showToast({
-            title: "修改失败",
-            icon: "fail",
-            duration: 2000
-          });
-        }
-      });
-    }
+    const param = {
+      token: Taro.getStorageSync("token"),
+      idcard: idcard,
+      name: name,
+      gender: idcard.charAt(16) % 2 == 1 ? "male" : "female",
+      birthday:
+        new Date(
+          `${idcard.substring(6, 10)}-${idcard.substring(
+            10,
+            12
+          )}-${idcard.substring(12, 14)}`
+        ).getTime() / 100
+    };
+    Taro.showLoading({
+      title: "上传中",
+      mask: true
+    });
+    axios.realAuthCreate(param).then(res => {
+      Taro.hideLoading();
+      console.log(res.data);
+      if (res.data.status == 0) {
+        Taro.showToast({
+          title: "认证成功",
+          icon: "success",
+          duration: 2000,
+          mask: true,
+          success: () => {
+            userStore.setUserID(res.data.data.real_auth_id);
+            nextBtn();
+          }
+        });
+      } else {
+        Taro.showToast({
+          title: "实名认证失败",
+          icon: "fail",
+          duration: 2000
+        });
+      }
+    });
   }
   render() {
     const {
@@ -162,7 +179,7 @@ class HCinfo extends Component {
     const { name, idcard, errorCap, verifyNextBtn } = this.state;
     return (
       <View className="container">
-        <View className="at-row Input">
+        <View className="at-row inputMargin">
           <View className="at-col at-col-11">
             <AtInput
               name="value"
@@ -174,7 +191,7 @@ class HCinfo extends Component {
             />
           </View>
         </View>
-        <View className="at-row Input">
+        <View className="at-row inputMargin">
           <View className="at-col at-col-11">
             <AtInput
               name="value"
@@ -198,17 +215,12 @@ class HCinfo extends Component {
         <View className="at-row realAuthInfoBtn">
           <View className="at-col">
             {verifyNextBtn ? (
-              <AtButton
-                type="primary"
-                className=""
-                onClick={this.updateUserInfo.bind(this)}
-              >
+              <AtButton type="primary" onClick={this.updateUserInfo.bind(this)}>
                 下一步
               </AtButton>
             ) : (
               <AtButton
                 type="primary"
-                className=""
                 disabled={true}
                 onClick={this.updateUserInfo.bind(this)}
               >

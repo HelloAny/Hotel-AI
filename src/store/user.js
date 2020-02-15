@@ -5,12 +5,12 @@ import { observable, action } from "mobx";
  */
 class userInfo {
   @observable user = {
-    userName: String,
-    nickName: String,
-    email: String,
-    phone: Number,
-    ID: String,
-    Portrait: String
+    userName: "",
+    nickName: "",
+    email: "",
+    phone: "",
+    ID: "",
+    Portrait: ""
   };
 
   /**
@@ -35,6 +35,9 @@ class userInfo {
   }
 
   @action.bound setUserPortrait(user) {}
+  @action.bound setUserID(idcard) {
+    this.user.ID = idcard;
+  }
 }
 
 export default userInfo;

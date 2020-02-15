@@ -7,7 +7,7 @@ import { HTTP } from "../constants/api";
 export default {
   baseOptions(param, method = "GET") {
     let { url, data } = param;
-    let contentType = "application/json";
+    let contentType = "json";
     contentType = param.contentType || contentType;
     const option = {
       // url: url.indexOf("http") !== -1 ? url : "http://" + url,
@@ -42,7 +42,6 @@ export default {
         } else if (res.statusCode === HTTP_STATUS.SUCCESS) {
           return res.data;
         } else if (res.statusCode === HTTP_STATUS.SERVER_ERROR) {
-          console.log(1111);
           return console.log("请求失败");
         }
       },

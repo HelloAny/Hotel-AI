@@ -15,16 +15,19 @@ class realAuth extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      current: 1
+      current: 0
     };
   }
   config = {
     navigationBarTitleText: "实名认证",
     navigationBarBackgroundColor: "#2d8cf0"
   };
-  onChange(current) {
+  /**
+   * 跳转到下一步
+   */
+  changeCurrent() {
     this.setState({
-      current
+      current: this.state.current + 1
     });
   }
   render() {
@@ -39,16 +42,11 @@ class realAuth extends Component {
     const { current } = this.state;
     return (
       <View className="container">
-        <AtSteps
-          className="stepText"
-          items={items}
-          current={current}
-          onChange={this.onChange.bind(this)}
-        />
+        <AtSteps className="stepText" items={items} current={current} />
         <View>
           {
             {
-              0: <HCinfo></HCinfo>,
+              0: <HCinfo nextBtn={this.changeCurrent.bind(this)}></HCinfo>,
               1: <HCcamera></HCcamera>
             }[current]
           }

@@ -67,10 +67,10 @@ class user extends Component {
   uploadPortrait(event) {
     const { portrait } = this.state;
     const that = this;
-    Taro.chooseImage({
+    wx.chooseImage({
       count: 1,
       sizeType: "original",
-      sourceType: "album",
+      sourceType: ["camera", "album"],
       success: function(res) {
         Taro.getImageInfo({
           src: res.tempFilePaths[0],
@@ -99,7 +99,7 @@ class user extends Component {
 
   routerToHCchangeName() {
     Taro.navigateTo({
-      url: "/pages/user/HCchangeName/HCchangeName"
+      url: "/packageA/user/HCchangeName/HCchangeName"
     });
   }
 

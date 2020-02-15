@@ -14,13 +14,13 @@ let reLaunch = iteratee => {
         return iteratee(token, arguments);
       } else if (res.data.status == -101) {
         Taro.reLaunch({
-          url: "/pages/login/login"
+          url: "/packageA/login/login"
         });
       }
     });
   } else {
     Taro.reLaunch({
-      url: "/pages/login/login"
+      url: "/packageA/login/login"
     });
   }
 };
