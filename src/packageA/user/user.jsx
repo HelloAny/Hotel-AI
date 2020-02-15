@@ -97,9 +97,13 @@ class user extends Component {
     });
   }
 
+  /**
+   * 路由转跳
+   * @param {string} url 路径
+   */
   routerToHCchangeName() {
     Taro.navigateTo({
-      url: "/packageA/user/HCchangeName/HCchangeName"
+      url: url
     });
   }
 
@@ -134,7 +138,10 @@ class user extends Component {
         <View className="hr"></View>
         <View
           className="at-row at-row__align--center userInfo"
-          onClick={this.routerToHCchangeName.bind(this)}
+          onClick={this.navigateTo.bind(
+            this,
+            "/packageA/user/HCchangeName/HCchangeName"
+          )}
         >
           <View className="at-col at-col-2 title">昵称</View>
           <View className="at-col at-col-7 text">{nickName}</View>
@@ -144,7 +151,10 @@ class user extends Component {
         </View>
         <View className="hr"></View>
         <View className="hr"></View>
-        <View className="realAuth">
+        <View
+          className="realAuth"
+          onClick={this.navigateTo.bind(this, "/packageA/realAuth/realAuth")}
+        >
           <Image className="realAuthBackground" src={background} />
           <View className="at-row">
             <View className="at-col at-col-2">
