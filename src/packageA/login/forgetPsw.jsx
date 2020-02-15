@@ -2,7 +2,7 @@ import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Picker } from "@tarojs/components";
 import { observer, inject } from "@tarojs/mobx";
 import { AtButton, AtInput, AtForm, AtCountdown, AtToast } from "taro-ui";
-import axios from "../../acitons/api";
+import axios from "../../actions/api";
 import "./forgetPsw.sass";
 
 class Login extends Component {
@@ -140,53 +140,29 @@ class Login extends Component {
       return 1;
     } else if (this.state.phone.length == 11) {
       let count = this.state.btnMsg.count;
-      const timerBeforePost = setInterval(() => {
-        this.setState(
-          {
-            show_btn: 2,
-            btnMsg: {
-              count: count--,
-              code_ts: count + "S重发"
-            }
-          },
-          () => {
-            if (count === 0) {
-              clearInterval(timer);
-              this.setState({
-                show_btn: 1,
-                btnMsg: {
-                  count: 60,
-                  code_ts: "获取验证码"
-                }
-              });
-            }
-          }
-        );
-      }, 1000);
+      //幕布
+      Taro.showLoading({
+        title: "loading",
+        mask: true
+      });
       this.setState(
         {
           finalPhone: this.state.phone
         },
         () => {
-          // show_btn是false时会出现灰色按钮，当倒计时结束又变成可以触发的按钮
+          // showBtn是false时会出现灰色按钮，当倒计时结束又变成可以触发的按钮
+          //验证码接口
           axios.Sms(this.state.phone).then(res => {
-            console.log(res);
             if (res.data.status == 0) {
-              Taro.showToast({
-                title: "验证码发送成功",
-                icon: "none",
-                duration: 2000
-              });
               this.setState(
                 {
                   rand: res.data.data.rand
                 },
                 () => {
-                  clearInterval(timerBeforePost);
                   const timer = setInterval(() => {
                     this.setState(
                       {
-                        show_btn: 2,
+                        showBtn: 2,
                         btnMsg: {
                           count: count--,
                           code_ts: count + "S重发"
@@ -196,7 +172,7 @@ class Login extends Component {
                         if (count === 0) {
                           clearInterval(timer);
                           this.setState({
-                            show_btn: 1,
+                            showBtn: 1,
                             btnMsg: {
                               count: 60,
                               code_ts: "获取验证码"
@@ -206,6 +182,13 @@ class Login extends Component {
                       }
                     );
                   }, 1000);
+                  Taro.hideLoading();
+                  Taro.showToast({
+                    title: "验证码发送成功",
+                    icon: "none",
+                    duration: 2000,
+                    mask: true
+                  });
                 }
               );
             }

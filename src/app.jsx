@@ -1,9 +1,9 @@
 import Taro, { Component } from "@tarojs/taro";
 import { Provider, onError } from "@tarojs/mobx";
 import "taro-ui/dist/style/index.scss";
-import Index from "./pages/index";
+import Index from "./pages/index/index";
 
-import userStore from "./store/user";
+import userInfo from "./store/user";
 import "./assets/icons/fonts/iconfont.css";
 import "./app.sass";
 
@@ -16,7 +16,7 @@ import "./app.sass";
 // }
 
 const store = {
-  userStore
+  userStore: new userInfo()
 };
 
 onError(error => {
@@ -27,15 +27,24 @@ class App extends Component {
   componentDidMount() {}
 
   config = {
-    pages: [
-      "pages/account/account",
-      "pages/login/registerByPsw",
-      "pages/login/forgetPsw",
-      "pages/login/loginByPsw",
-      "pages/login/login",
-      "pages/CustomerService/index",
-      "pages/index/index",
-      "pages/demo/demo"
+    pages: ["pages/account/account", "pages/index/index"],
+    subpackages: [
+      {
+        root: "packageA",
+        pages: [
+          "login/registerByPsw",
+          "login/forgetPsw",
+          "login/loginByPsw",
+          "login/login",
+          "user/user",
+          "realAuth/realAuth",
+          "user/HCchangeName/HCchangeName"
+        ]
+      },
+      {
+        root: "packageB",
+        pages: ["CustomerService/index"]
+      }
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -53,12 +62,12 @@ class App extends Component {
       position: "top",
       list: [
         {
-          pagePath: "pages/index/index",
-          text: "首页"
-        },
-        {
           pagePath: "pages/account/account",
           text: "我的"
+        },
+        {
+          pagePath: "pages/index/index",
+          text: "首页"
         }
       ]
     }
