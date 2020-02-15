@@ -1,5 +1,9 @@
 Arguments: 
+<<<<<<< HEAD
   D:\node\node.exe C:\Users\Liang\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add cos-js-sdk-v5 --save
+=======
+  D:\node\node.exe C:\Users\Liang\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add socket.io
+>>>>>>> IM-node
 
 PATH: 
   D:\XShell\;C:\Program Files (x86)\Common Files\Oracle\Java\javapath\bin;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Git\cmd;D:\node\node_modules\electron-packager\bin;D:\node;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\Liang\AppData\Roaming\npm\;D:\node;D:\node\node_modules\npm\bin;"C:\Users\Liang\AppData\Local\Android\Sdk\platform-tools;";C:\Users\Liang\AppData\Local\Android\Sdk\platform-tools;C:\Users\Liang\AppData\Local\Android\Sdk\tools;C:\Program Files\Java\jdk-13.0.1\bin;
@@ -14,7 +18,11 @@ Platform:
   win32 x64
 
 Trace: 
+<<<<<<< HEAD
   Error: EPERM: operation not permitted, unlink 'C:\Users\Liang\Desktop\Hotel-AI\node_modules\babel-plugin-preval\node_modules\.bin'
+=======
+  Error: EPERM: operation not permitted, unlink 'C:\Users\Liang\Desktop\Hotel-AI\node_modules\acorn-jsx\node_modules\.bin'
+>>>>>>> IM-node
 
 npm manifest: 
   {
@@ -61,6 +69,10 @@ npm manifest:
       "@tarojs/taro-swan": "2.0.1",
       "@tarojs/taro-tt": "2.0.1",
       "@tarojs/taro-weapp": "2.0.1",
+<<<<<<< HEAD
+=======
+      "babel-runtime": "^6.26.0",
+>>>>>>> IM-node
       "mobx": "4.8.0",
       "nerv-devtools": "^1.5.5",
       "nervjs": "^1.5.5",
@@ -76,6 +88,10 @@ npm manifest:
       "babel-plugin-transform-decorators-legacy": "^1.3.4",
       "babel-plugin-transform-jsx-stylesheet": "^0.6.5",
       "babel-plugin-transform-object-rest-spread": "^6.26.0",
+<<<<<<< HEAD
+=======
+      "babel-plugin-transform-runtime": "^6.23.0",
+>>>>>>> IM-node
       "babel-preset-env": "^1.6.1",
       "eslint": "^5.16.0",
       "eslint-config-taro": "2.0.1",
@@ -1922,6 +1938,16 @@ Lockfile:
     dependencies:
       regenerator-transform "^0.10.0"
   
+<<<<<<< HEAD
+=======
+  babel-plugin-transform-runtime@^6.23.0:
+    version "6.23.0"
+    resolved "https://registry.npm.taobao.org/babel-plugin-transform-runtime/download/babel-plugin-transform-runtime-6.23.0.tgz#88490d446502ea9b8e7efb0fe09ec4d99479b1ee"
+    integrity sha1-iEkNRGUC6puOfvsP4J7E2ZR5se4=
+    dependencies:
+      babel-runtime "^6.22.0"
+  
+>>>>>>> IM-node
   babel-plugin-transform-strict-mode@^6.24.1:
     version "6.24.1"
     resolved "https://registry.npm.taobao.org/babel-plugin-transform-strict-mode/download/babel-plugin-transform-strict-mode-6.24.1.tgz#d5faf7aa578a65bbe591cf5edae04a0c67020758"

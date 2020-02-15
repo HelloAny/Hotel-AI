@@ -1,7 +1,7 @@
 /**
- * 
- * @param {string} fmt 格式  
- * @param {string || number} date 时间
+ * 根据时间戳格式化时间
+ * @param {String} fmt 格式
+ * @param {Number | Date} timestamp 时间
  * @example
  * let date = new Date()
  * dateFormat("YYYY-mm-dd HH:MM", date)
@@ -9,7 +9,7 @@
  */
 export default function(fmt, timestamp) {
   let ret;
-  let date = new Date(timestamp)
+  let date = timestamp instanceof Date ? timestamp : new Date(timestamp);
   const opt = {
     "Y+": date.getFullYear().toString(), // 年
     "m+": (date.getMonth() + 1).toString(), // 月

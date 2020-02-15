@@ -310,7 +310,11 @@
 
 "@tarojs/taro@2.0.2":
   version "2.0.2"
+<<<<<<< HEAD
   resolved "https://registry.npm.taobao.org/@tarojs/taro/download/@tarojs/taro-2.0.2.tgz#108391d79a9fc0710f401bf7fe3999e440e51ad0"
+=======
+  resolved "https://registry.npm.taobao.org/@tarojs/taro/download/@tarojs/taro-2.0.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40tarojs%2Ftaro%2Fdownload%2F%40tarojs%2Ftaro-2.0.2.tgz#108391d79a9fc0710f401bf7fe3999e440e51ad0"
+>>>>>>> IM-node
   integrity sha1-EIOR15qfwHEPQBv3/jmZ5EDlGtA=
   dependencies:
     "@tarojs/utils" "2.0.2"
@@ -3646,7 +3650,7 @@ eslint-plugin-react@^7.8.2:
 
 eslint-plugin-taro@2.0.2:
   version "2.0.2"
-  resolved "https://registry.npm.taobao.org/eslint-plugin-taro/download/eslint-plugin-taro-2.0.2.tgz#00ae8dd94f70f15691da5c0b2873b75430fabc68"
+  resolved "https://registry.npm.taobao.org/eslint-plugin-taro/download/eslint-plugin-taro-2.0.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Feslint-plugin-taro%2Fdownload%2Feslint-plugin-taro-2.0.2.tgz#00ae8dd94f70f15691da5c0b2873b75430fabc68"
   integrity sha1-AK6N2U9w8VaR2lwLKHO3VDD6vGg=
   dependencies:
     has "^1.0.1"
@@ -6318,7 +6322,7 @@ neo-async@^2.5.0, neo-async@^2.6.1:
 
 nerv-devtools@^1.5.6:
   version "1.5.6"
-  resolved "https://registry.npm.taobao.org/nerv-devtools/download/nerv-devtools-1.5.6.tgz?cache=0&sync_timestamp=1574939569900&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fnerv-devtools%2Fdownload%2Fnerv-devtools-1.5.6.tgz#2af0ef109918e5a5a7282f2cfb8a0d7e4a2858be"
+  resolved "https://registry.npm.taobao.org/nerv-devtools/download/nerv-devtools-1.5.6.tgz#2af0ef109918e5a5a7282f2cfb8a0d7e4a2858be"
   integrity sha1-KvDvEJkY5aWnKC8s+4oNfkooWL4=
   dependencies:
     nerv-shared "1.4.0"
