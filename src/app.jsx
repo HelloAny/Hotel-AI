@@ -6,7 +6,7 @@ import userInfo from "./store/user";
 import { objectDeepCompare } from "./utils";
 import Server from "./pages/IM/server";
 
-import "taro-ui/dist/style/index.scss";
+// import "taro-ui/dist/style/index.scss";
 import "./assets/icons/fonts/iconfont.css";
 import "./app.scss";
 
@@ -34,7 +34,7 @@ class App extends Component {
   componentDidMount() {}
 
   config = {
-    pages: ["pages/account/account", "packageB/ActivityService/activityService","pages/IM/index"],
+    pages: ["packageC/pages/details/index","pages/account/account","pages/IM/index"],
     subpackages: [
       {
         root: "packageA",
@@ -46,6 +46,12 @@ class App extends Component {
           "user/user",
           "realAuth/realAuth",
           "user/HCchangeName/HCchangeName"
+        ]
+      },
+      {
+        root: "packageB",
+        pages: [
+          "ActivityService/activityService"
         ]
       }
     ],
@@ -67,10 +73,6 @@ class App extends Component {
         {
           pagePath: "pages/account/account",
           text: "我的"
-        },
-        {
-          pagePath: "packageB/ActivityService/activityService",
-          text: "区域"
         },
         {
           pagePath: "pages/IM/index",

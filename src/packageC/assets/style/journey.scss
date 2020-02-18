@@ -1,0 +1,89 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: whitesmoke;
+  min-height: 100vh;
+}
+
+.header {
+  position: relative;
+  height: 260Px;
+  width: 100%;
+  .bg {
+    top: 0;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+    // filter: blur(5Px);
+  }
+  .ad {
+    position: relative;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    justify-content: center;
+    background-color: transparent;
+    .ad-title {
+      font-size: 20Px;
+      padding: 5Px;
+    }
+    .ad-btn {
+      height: 40Px;
+      width: 120Px;
+      background-color: #1890ff;
+      border-radius: 40Px;
+      color: white;
+      font-size: 16Px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0Px 2Px 6Px 0Px rgba(0, 0, 0, 0.4);
+    }
+    .ad-sub-title {
+      font-size: 12Px;
+      padding: 3Px;
+    }
+  }
+}
+
+.notice,
+.overview,
+.recommend {
+  padding: 10Px 15Px;
+  .title {
+    display: inline-block;
+    padding-left: 12Px;
+    padding-bottom: 2Px;
+    font-size: 18Px;
+    color: #303133;
+    border-left: 3Px #1890ff solid;
+    transform: translateX(-15Px);
+  }
+}
+
+.overview {
+  .overview-box {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .overview-container{
+      width: 160Px;
+      height: 190Px;
+      margin-top: 10Px;
+    }
+  }
+}
+
+.recommend {
+  .recommend-container{
+    width: 100%;
+    margin: 15Px 0Px;
+  }
+}

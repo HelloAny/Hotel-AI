@@ -17,4 +17,5 @@ import Taro from "@tarojs/taro";
 Taro.getSystemInfo().then(res => {
   Taro.setStorageSync("DEVICE_INFO",res)
 });
+
 export default Taro.getStorageSync.bind(Taro,"DEVICE_INFO")
