@@ -1,0 +1,42 @@
+.input-box {
+  position: relative;
+  width: 100vw;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  .input {
+    flex: 1;
+    padding: 5Px 10Px;
+    height: 26Px;
+    border-bottom: 1Px solid #DCDFE6;
+  }
+  .input-box-row {
+    width: 100%;
+    height: 45Px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    .iconfont{
+      padding: 3Px;
+    }
+    .input-right,.input-left{
+      display: flex;
+      flex-direction: row;
+      margin: 0 2Px;
+    }
+    .input-confirm{
+      background-color: #67C23A;
+      color: white;
+      padding: 0Px 10Px;
+      line-height: 30Px;
+      border-radius: 5Px;
+    }
+  }
+  .input-expand{
+    position: absolute;
+    top: 0;
+    z-index: 100;
+    height: 100%;
+    width: 100%;
+  }
+}

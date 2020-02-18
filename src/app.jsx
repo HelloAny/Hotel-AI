@@ -1,11 +1,14 @@
 import Taro, { Component } from "@tarojs/taro";
 import { Provider, onError } from "@tarojs/mobx";
-import "taro-ui/dist/style/index.scss";
-import Index from "./pages/index/index";
-
+import Index from "./pages/index";
+import counterStore from "./store/counter";
 import userInfo from "./store/user";
+import { objectDeepCompare } from "./utils";
+import Server from "./pages/IM/server";
+
+import "taro-ui/dist/style/index.scss";
 import "./assets/icons/fonts/iconfont.css";
-import "./app.sass";
+import "./app.scss";
 
 //*************taro-ui组件按需引入！！！！*****************
 
@@ -14,6 +17,10 @@ import "./app.sass";
 // if (process.env.NODE_ENV !== 'production' && process.env.TARO_ENV === 'h5')  {
 //   require('nerv-devtools')
 // }
+
+!function(){
+  Server.connect()
+}()
 
 const store = {
   userStore: new userInfo()
@@ -27,7 +34,7 @@ class App extends Component {
   componentDidMount() {}
 
   config = {
-    pages: ["pages/account/account", "pages/index/index"],
+    pages: ["pages/account/account", "packageB/ActivityService/activityService","pages/IM/index"],
     subpackages: [
       {
         root: "packageA",
@@ -41,17 +48,15 @@ class App extends Component {
           "realAuth/realAuth",
           "realAuth/detailAuth/detailAuth"
         ]
-      },
-      {
-        root: "packageB",
-        pages: ["CustomerService/index"]
       }
     ],
     window: {
-      backgroundTextStyle: "light",
-      navigationBarBackgroundColor: "#fff",
-      navigationBarTitleText: "WeChat",
-      navigationBarTextStyle: "black"
+      backgroundTextStyle: 'light',
+      navigationBarBackgroundColor: '#fff',
+      navigationBarTitleText: 'WeChat',
+      navigationBarTextStyle: 'black',
+      // enablePullDownRefresh: true,
+      // backgroundTextStyle:"dark"
     },
     tabBar: {
       color: "#ccc",
@@ -65,9 +70,13 @@ class App extends Component {
           text: "我的"
         },
         {
-          pagePath: "pages/index/index",
-          text: "首页"
-        }
+          pagePath: "packageB/ActivityService/activityService",
+          text: "区域"
+        },
+        {
+          pagePath: "pages/IM/index",
+          text: "聊天"
+        },
       ]
     }
   };
@@ -92,3 +101,11 @@ class App extends Component {
 }
 
 Taro.render(<App />, document.getElementById("app"));
+
+// 对象深度比较函数，注入到所有组件
+Component.prototype.compare = function(nextProps, nextState) {
+  return (
+    objectDeepCompare(this.props, nextProps, this.propsKeys) &&
+    objectDeepCompare(this.state, nextState, this.stateKeys)
+  );
+};

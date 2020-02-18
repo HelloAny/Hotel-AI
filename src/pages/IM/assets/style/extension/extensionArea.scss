@@ -1,0 +1,34 @@
+.extension-box {
+  box-sizing: border-box;
+  height: calc(100% - 45Px);
+  width: 100vw;
+  padding: 20Px;
+  .swiper {
+    height: 100%;
+    .swiper-item {
+      display: flex;
+      height: 100%;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      .list-item {
+        width: 22%;
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        .icon {
+          height: 60Px;
+          width: 100%;
+          font-size: 40Px !important;
+        }
+        .title {
+          height: 30Px;
+          width: 100%;
+          font-size: 14Px;
+          color: #606266;
+        }
+      }
+    }
+  }
+}

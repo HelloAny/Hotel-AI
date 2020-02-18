@@ -1,0 +1,33 @@
+{
+  "ExtensionArea": {
+    "pullMode": "up",
+    "position": "none"
+  },
+  "EmojiBox": {
+    "pullMode": "up",
+    "position": "right",
+    "tab": {
+      "iconType":"class",
+      "icon": "",
+      "tip": ""
+    }
+  },
+  "ImgPicker": {
+    "pullMode": "low",
+    "position": "base",
+    "tab": {
+      "iconType":"class",
+      "icon": "icon-photo",
+      "tip": "照片"
+    }
+  },
+  "SoundRecorder": {
+    "pullMode": "over-low",
+    "position": "left",
+    "tab": {
+      "iconType":"class",
+      "icon": "",
+      "tip": ""
+    }
+  }
+}
