@@ -1,5 +1,6 @@
 import Taro, { Component, getUserInfo } from "@tarojs/taro";
 import { View } from "@tarojs/components";
+// import { CommonEventFunction，ITouchEvent } from "@tarojs/components/types/common";
 import { AtAvatar } from "taro-ui";
 import { observer, inject } from "@tarojs/mobx";
 
@@ -24,6 +25,10 @@ export default class HClist extends Component {
   static options = {
     addGlobalClass: true
   };
+
+  // onClick=(event:ITouchEvent)=>{
+  //   CommonEventFunction(event)
+  // }
 
   renderList = () => {
     const { lists } = this.props;

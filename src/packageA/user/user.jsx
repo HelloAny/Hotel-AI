@@ -1,7 +1,7 @@
 import Taro, { Component, getUserInfo } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 import { AtAvatar } from "taro-ui";
-import axios from "../../actions/api";
+import { infoByToken, userPortraitUpload } from "../../actions/api";
 import { reLaunch } from "../../utils"; //测试用
 import { observer, inject } from "@tarojs/mobx";
 
@@ -30,7 +30,7 @@ class user extends Component {
      * @param {string} token token缓存
      */
     const setUserInfo = token => {
-      axios.infoByToken(token).then(res => {
+      infoByToken(token).then(res => {
         if (res.data.status == 0) {
           console.log(res.data.data);
           userStore.setUserInfo(res.data.data); //保存到mobx
@@ -79,7 +79,7 @@ class user extends Component {
               token: Taro.getStorageSync("token"),
               image: res.path
             };
-            axios.userPortraitUpload(param).then(res => {
+            userPortraitUpload(param).then(res => {
               if (res.data.status == 0) {
                 Taro.showToast({
                   title: "上传成功",
@@ -151,10 +151,7 @@ class user extends Component {
         </View>
         <View className="hr"></View>
         <View className="hr"></View>
-        <View
-          className="realAuth"
-          onClick={this.navigateTo.bind(this, "/packageA/realAuth/realAuth")}
-        >
+        <View className="realAuth">
           <Image className="realAuthBackground" src={background} />
           <View className="at-row">
             <View className="at-col at-col-2">
@@ -170,9 +167,28 @@ class user extends Component {
             </View>
             <View className="realAuthInfo at-col at-col-8">
               {!!ID ? (
-                <View>ID证件:{ID}</View>
-              ) : (
                 <View className="realAuthText">
+                  <View className="iconRealAuthYes iconfont icon-RectangleCopy1"></View>
+                  已认证
+                  <View className="realAuthWhy">ID证件:{ID}</View>
+                  <View
+                    className="realAuthAgain"
+                    onClick={this.navigateTo.bind(
+                      this,
+                      "/packageA/realAuth/realAuth"
+                    )}
+                  >
+                    重新认证
+                  </View>
+                </View>
+              ) : (
+                <View
+                  className="realAuthText"
+                  onClick={this.navigateTo.bind(
+                    this,
+                    "/packageA/realAuth/realAuth"
+                  )}
+                >
                   <View className="iconRealAuthNo iconfont icon-RectangleCopy"></View>
                   未实名认证
                   <View className="realAuthWhy">了解为什么要实名认证?</View>

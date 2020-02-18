@@ -1,7 +1,7 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 import { AtInput, AtForm, AtButton } from "taro-ui";
-import axios from "../../../actions/api";
+import { realAuthCreate } from "../../../actions/api";
 import { reLaunch } from "../../../utils"; //测试用
 import { observer, inject } from "@tarojs/mobx";
 
@@ -25,7 +25,8 @@ class HCinfo extends Component {
     addGlobalClass: true
   };
   static defaultProps = {
-    nextBtn: Function
+    nextBtn: Function,
+    detailAuth: Boolean
   };
 
   /**
@@ -141,13 +142,13 @@ class HCinfo extends Component {
             10,
             12
           )}-${idcard.substring(12, 14)}`
-        ).getTime() / 100
+        ).getTime() / 1000
     };
     Taro.showLoading({
       title: "上传中",
       mask: true
     });
-    axios.realAuthCreate(param).then(res => {
+    realAuthCreate(param).then(res => {
       Taro.hideLoading();
       console.log(res.data);
       if (res.data.status == 0) {
@@ -170,6 +171,16 @@ class HCinfo extends Component {
       }
     });
   }
+
+  /**
+   * 路由转跳
+   * @param {string} url 路径
+   */
+  navgiateTo(url) {
+    Taro.navigateTo({
+      url: url
+    });
+  }
   render() {
     const {
       userStore: {
@@ -177,6 +188,7 @@ class HCinfo extends Component {
       }
     } = this.props;
     const { name, idcard, errorCap, verifyNextBtn } = this.state;
+    const { detailAuth } = this.props;
     return (
       <View className="container">
         <View className="at-row inputMargin">
@@ -229,6 +241,27 @@ class HCinfo extends Component {
             )}
           </View>
         </View>
+        {detailAuth ? (
+          <View
+            className="at-row moreDetailAuth at-row__justify--center"
+            onClick={this.navgiateTo.bind(
+              this,
+              "/packageA/realAuth/detailAuth/detailAuth"
+            )}
+          >
+            <View
+              className="at-col at-col-3"
+              onClick={this.navgiateTo.bind(
+                this,
+                "/packageA/realAuth/detailAuth/detailAuth"
+              )}
+            >
+              增加详细资料
+            </View>
+          </View>
+        ) : (
+          <View></View>
+        )}
       </View>
     );
   }

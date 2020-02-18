@@ -1,7 +1,7 @@
 import Taro, { Component, getUserInfo } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 import { AtAvatar, AtInput, AtForm, AtButton } from "taro-ui";
-import axios from "../../../actions/api";
+import { infoUpdataByToken } from "../../../actions/api";
 import { reLaunch } from "../../../utils"; //测试用
 import { observer, inject } from "@tarojs/mobx";
 
@@ -48,7 +48,7 @@ class HCchangeName extends Component {
         email: email,
         ID: ID
       };
-      axios.infoUpdataByToken(param).then(res => {
+      infoUpdataByToken(param).then(res => {
         console.log(res);
         if (res.data.status == 0) {
           Taro.showToast({

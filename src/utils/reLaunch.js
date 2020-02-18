@@ -1,5 +1,5 @@
 import Taro from "@tarojs/taro";
-import api from "../actions/api";
+import { tokenValidate } from "../actions/api";
 
 /**
  * 特殊转跳，用于检测token并跳转,token不存在时转跳login界面
@@ -9,7 +9,7 @@ import api from "../actions/api";
 let reLaunch = iteratee => {
   const token = Taro.getStorageSync("token");
   if (!!token) {
-    api.tokenValidate(token).then(res => {
+    tokenValidate(token).then(res => {
       if (res.data.status == 0) {
         return iteratee(token, arguments);
       } else if (res.data.status == -101) {

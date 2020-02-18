@@ -2,7 +2,8 @@ import Taro, { Component, getUserInfo } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 import { AtAvatar } from "taro-ui";
 import { observer, inject } from "@tarojs/mobx";
-import axios from "../../actions/api";
+import { infoByToken } from "../../actions/api";
+import { getDistrict } from "../../actions/map";
 import { reLaunch } from "../../utils";
 import HClistline from "./HClistline/HClistline";
 import HClist from "./HClist/HClist";
@@ -29,15 +30,14 @@ class Login extends Component {
      * @param {string} token token缓存
      */
     const setUserInfo = token => {
-      axios.infoByToken(token).then(res => {
+      infoByToken(token).then(res => {
         if (res.data.status == 0) {
           console.log(res.data.data);
           userStore.setUserInfo(res.data.data); //保存到mobx
           console.log(userStore.user);
         } else if (res.data.status == -100) {
-          console.log("丢失参数!");
           Taro.showToast({
-            title: "参数丢失",
+            title: "参数错误",
             icon: "fail",
             duration: 2000
           });
@@ -60,6 +60,9 @@ class Login extends Component {
 
   componentWillMount() {
     this.mountedInterface();
+    getDistrict().then(res => {
+      console.log(res);
+    });
   }
 
   componentWillReact() {}

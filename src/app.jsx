@@ -37,8 +37,9 @@ class App extends Component {
           "login/loginByPsw",
           "login/login",
           "user/user",
+          "user/HCchangeName/HCchangeName",
           "realAuth/realAuth",
-          "user/HCchangeName/HCchangeName"
+          "realAuth/detailAuth/detailAuth"
         ]
       },
       {

@@ -1,7 +1,7 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Camera, CoverView, CoverImage, Image } from "@tarojs/components";
 import { AtAvatar, AtInput, AtForm, AtButton } from "taro-ui";
-import axios from "../../../actions/api";
+import { faceRegister } from "../../../actions/api";
 import { image2Base64 } from "../../../utils"; //测试用
 import { observer, inject } from "@tarojs/mobx";
 import cover from "../../../assets/images/cover/cover.png";
@@ -64,7 +64,7 @@ class HCcamera extends Component {
       title: "认证中",
       mask: true
     });
-    axios.faceRegister(param).then(res => {
+    faceRegister(param).then(res => {
       Taro.hideLoading();
       console.log("身份认证" + res);
       if (res.data.status == 0) {

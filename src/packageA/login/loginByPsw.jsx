@@ -2,10 +2,10 @@ import Taro, { Component, login } from "@tarojs/taro";
 import { View, Text, Picker } from "@tarojs/components";
 import { observer, inject } from "@tarojs/mobx";
 import { AtButton, AtInput } from "taro-ui";
-import axios from "../../actions/api";
+import { loginByPsw } from "../../actions/api";
 import "./registerByPsw.sass";
 
-class loginByPsw extends Component {
+class LoginByPsw extends Component {
   config = {
     navigationBarTitleText: "密码登录",
     navigationBarBackgroundColor: "#2d8cf0",
@@ -51,7 +51,7 @@ class loginByPsw extends Component {
       phone: this.state.phone,
       passWord: this.state.passWord
     };
-    axios.loginByPsw(param).then(res => {
+    loginByPsw(param).then(res => {
       if (res.data.status == 0) {
         Taro.navigateTo({
           url: "/pages/account/account"
@@ -149,4 +149,4 @@ class loginByPsw extends Component {
   }
 }
 
-export default loginByPsw;
+export default LoginByPsw;

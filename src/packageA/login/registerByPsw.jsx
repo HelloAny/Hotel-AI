@@ -2,10 +2,10 @@ import Taro, { Component, login } from "@tarojs/taro";
 import { View, Text, Picker } from "@tarojs/components";
 import { observer, inject } from "@tarojs/mobx";
 import { AtButton, AtInput } from "taro-ui";
-import axios from "../../actions/api";
+import { Sms, RegisterPsw } from "../../actions/api";
 import "./loginByPsw.sass";
 
-class loginByPsw extends Component {
+class LoginByPsw extends Component {
   config = {
     navigationBarTitleText: "密码注册",
     navigationBarBackgroundColor: "#2d8cf0",
@@ -120,7 +120,7 @@ class loginByPsw extends Component {
         () => {
           // showBtn是false时会出现灰色按钮，当倒计时结束又变成可以触发的按钮
           //验证码接口
-          axios.Sms(this.state.phone).then(res => {
+          Sms(this.state.phone).then(res => {
             if (res.data.status == 0) {
               this.setState(
                 {
@@ -195,7 +195,7 @@ class loginByPsw extends Component {
       rand: this.state.rand,
       password: this.state.passWord
     };
-    axios.RegisterPsw(param).then(res => {
+    RegisterPsw(param).then(res => {
       console.log(res.data);
       if (res.data.status == -4) {
         this.setState({
@@ -378,4 +378,4 @@ class loginByPsw extends Component {
   }
 }
 
-export default loginByPsw;
+export default LoginByPsw;
