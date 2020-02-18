@@ -64,7 +64,12 @@ export default class Details extends Component {
             访问浙科
             <AtIcon value="edit" />
           </View>
-          <View className="time">title</View>
+          <View className="time">
+            2月5日-2月8日
+          </View>
+          <View className="address">
+            <Text className="address-text"></Text>
+          </View>
         </View>
         <View className="bottomNav">
           <View className="left">

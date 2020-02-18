@@ -5,7 +5,7 @@ import { getDeviceInfo } from "../../../utils";
 
 const StyleSheet = {
   container: {
-    zIndex: "9999",
+    zIndex: "999",
     position: "fixed",
     width: "100%",
     top: "0",

@@ -14,12 +14,15 @@
     }
   }
   .main{
+    margin: 30Px 10Px 0Px;
     .title{
       font-size: 18Px;
       color: #303133;
-      margin: 10Px;
     }
-    
+    .time{
+      font-size: 12Px;
+      color: #909399;
+    }
   }
   .bottomNav{
     position: fixed;
