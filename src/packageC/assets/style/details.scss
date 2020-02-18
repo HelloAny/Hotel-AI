@@ -13,10 +13,13 @@
       height: 100%;
     }
   }
-  .title{
-    font-size: 18Px;
-    color: #303133;
-    margin: 10Px;
+  .main{
+    .title{
+      font-size: 18Px;
+      color: #303133;
+      margin: 10Px;
+    }
+    
   }
   .bottomNav{
     position: fixed;

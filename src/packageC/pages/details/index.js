@@ -59,11 +59,13 @@ export default class Details extends Component {
             />
           </SwiperItem>
         </Swiper>
-        <View className="title">
-          访问浙科
-          <AtIcon value="edit" />
+        <View className="main">
+          <View className="title">
+            访问浙科
+            <AtIcon value="edit" />
+          </View>
+          <View className="time">title</View>
         </View>
-        <View className="time">title</View>
         <View className="bottomNav">
           <View className="left">
             <AtIcon value="calendar" />
