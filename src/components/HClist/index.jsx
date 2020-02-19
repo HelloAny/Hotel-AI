@@ -4,7 +4,7 @@ import { View } from "@tarojs/components";
 import { AtAvatar } from "taro-ui";
 import { observer, inject } from "@tarojs/mobx";
 
-import "./HClist.sass";
+import "./index.sass";
 
 export default class HClist extends Component {
   constructor(props) {
@@ -30,11 +30,21 @@ export default class HClist extends Component {
   //   CommonEventFunction(event)
   // }
 
+  /**
+   * 路由跳转
+   * @param {string} url
+   */
+  navgiateTo(url) {
+    Taro.navigateTo({
+      url: url
+    });
+  }
+
   renderList = () => {
-    const { lists } = this.props;
+    const { lists, url } = this.props;
     const list = lists.map(item => {
       return (
-        <View taroKey={item.id}>
+        <View taroKey={item.id} onClick={this.navgiateTo.bind(this, item.url)}>
           <View className="account_list at-row at-row__align--center">
             <View className="at-col at-col-2">
               <View className={"icon " + "iconfont " + item.icon}></View>

@@ -1,8 +1,8 @@
 //*********API实现和路由拦截***********
 
 import Taro from "@tarojs/taro";
-import { HTTP_STATUS } from "../constants/status";
-import { HTTP } from "../constants/api";
+import { HTTP_STATUS } from "@constants/status";
+import { HTTP } from "@constants/api";
 
 /**
  * originAPI

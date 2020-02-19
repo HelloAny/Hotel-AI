@@ -1,11 +1,11 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 import { AtInput, AtForm, AtButton } from "taro-ui";
-import { realAuthCreate } from "../../../actions/api";
-import { reLaunch } from "../../../utils"; //测试用
+import { realAuthCreate } from "@actions/api";
+import { reLaunch } from "@utils"; //测试用
 import { observer, inject } from "@tarojs/mobx";
 
-import "./HCinfo.sass";
+import "./index.sass";
 
 @inject("userStore")
 @observer

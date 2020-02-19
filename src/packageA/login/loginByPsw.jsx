@@ -2,7 +2,7 @@ import Taro, { Component, login } from "@tarojs/taro";
 import { View, Text, Picker } from "@tarojs/components";
 import { observer, inject } from "@tarojs/mobx";
 import { AtButton, AtInput } from "taro-ui";
-import { loginByPsw } from "../../actions/api";
+import { loginByPsw } from "@actions/api";
 import "./registerByPsw.sass";
 
 class LoginByPsw extends Component {

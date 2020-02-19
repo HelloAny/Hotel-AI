@@ -1,10 +1,9 @@
 import Taro, { Component, getUserInfo } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 import { AtInput, AtForm, AtButton, AtSteps } from "taro-ui";
-import { reLaunch } from "../../utils"; //测试用
+import { reLaunch } from "@utils"; //测试用
 import { observer, inject } from "@tarojs/mobx";
-import HCinfo from "./HCinfo/HCinfo";
-import HCcamera from "./HCcamera/HCcamera";
+import { HCinfo, HCcamera } from "@components";
 
 import "./realAuth.sass";
 

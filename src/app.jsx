@@ -1,14 +1,14 @@
 import Taro, { Component } from "@tarojs/taro";
 import { Provider, onError } from "@tarojs/mobx";
 import Index from "./pages/index";
-import counterStore from "./store/counter";
-import userInfo from "./store/user";
-import { objectDeepCompare } from "./utils";
-import Server from "./pages/IM/server";
+import userInfo from "@store/user";
 
 import "taro-ui/dist/style/index.scss";
-import "./assets/icons/fonts/iconfont.css";
+import "@assets/icons/fontsOne/iconfont.css";
+import "@assets/icons/fontstwo/iconfont.css";
 import "./app.scss";
+import { objectDeepCompare } from "@utils";
+import Server from "./pages/IM/server";
 
 //*************taro-ui组件按需引入！！！！*****************
 
@@ -18,9 +18,9 @@ import "./app.scss";
 //   require('nerv-devtools')
 // }
 
-!function(){
-  Server.connect()
-}()
+!(function() {
+  Server.connect();
+})();
 
 const store = {
   userStore: new userInfo()
@@ -34,7 +34,11 @@ class App extends Component {
   componentDidMount() {}
 
   config = {
-    pages: ["pages/account/account", "packageB/ActivityService/activityService","pages/IM/index"],
+    pages: [
+      "pages/account/account",
+      "pages/IM/index",
+      "packageB/ActivityService/activityService"
+    ],
     subpackages: [
       {
         root: "packageA",
@@ -44,17 +48,18 @@ class App extends Component {
           "login/loginByPsw",
           "login/login",
           "user/user",
-          "user/HCchangeName/HCchangeName",
+          "user/changeName/changeName",
+          "user/changeEmail/changeEmail",
           "realAuth/realAuth",
           "realAuth/detailAuth/detailAuth"
         ]
       }
     ],
     window: {
-      backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black',
+      backgroundTextStyle: "light",
+      navigationBarBackgroundColor: "#fff",
+      navigationBarTitleText: "WeChat",
+      navigationBarTextStyle: "black"
       // enablePullDownRefresh: true,
       // backgroundTextStyle:"dark"
     },
@@ -70,13 +75,13 @@ class App extends Component {
           text: "我的"
         },
         {
-          pagePath: "packageB/ActivityService/activityService",
-          text: "区域"
-        },
-        {
           pagePath: "pages/IM/index",
           text: "聊天"
         },
+        {
+          pagePath: "packageB/ActivityService/activityService",
+          text: "区域"
+        }
       ]
     }
   };

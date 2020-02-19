@@ -1,5 +1,5 @@
 import Taro from "@tarojs/taro";
-import { tokenValidate } from "../actions/api";
+import { tokenValidate } from "@actions/api";
 
 /**
  * 特殊转跳，用于检测token并跳转,token不存在时转跳login界面

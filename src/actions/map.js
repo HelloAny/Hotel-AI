@@ -1,5 +1,5 @@
-import { get, post } from "../service/api";
-import { USERAPI } from "../constants/api";
+import { get, post } from "@service/api";
+import { USERAPI } from "@constants/api";
 
 /**
  * originApi --- MAPAPI

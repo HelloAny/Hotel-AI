@@ -1,30 +1,30 @@
 import Taro, { Component, getUserInfo } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 import { AtAvatar, AtInput, AtForm, AtButton } from "taro-ui";
-import { infoUpdataByToken } from "../../../actions/api";
-import { reLaunch } from "../../../utils"; //测试用
+import { infoUpdataByToken } from "@actions/api";
+import { reLaunch } from "@utils"; //测试用
 import { observer, inject } from "@tarojs/mobx";
 
-import "./HCchangeName.sass";
+import "./changeEmail.sass";
 
 @inject("userStore")
 @observer
-class HCchangeName extends Component {
+class changeEmail extends Component {
   constructor(props) {
     super(props);
-    this.state = { nickNameChange: "" };
+    this.state = { emailChange: "" };
   }
   config = {
-    navigationBarTitleText: "修改昵称",
+    navigationBarTitleText: "修改邮箱",
     navigationBarBackgroundColor: "#2d8cf0"
   };
   /**
    * 更改昵称
    * @param {string} value 默认
    */
-  nameChange(value) {
+  emailChange(value) {
     this.setState({
-      nickNameChange: value
+      emailChange: value
     });
     return value;
   }
@@ -33,19 +33,23 @@ class HCchangeName extends Component {
    * 发送请求更改用户信息
    */
   updateUserInfo() {
-    const { nickNameChange } = this.state;
+    const { emailChange } = this.state;
     const {
       userStore: {
-        user: { userName, email, ID }
+        user: { userName, nickName, ID }
       },
       userStore
     } = this.props;
-    if (nickNameChange.trim().length <= 8 && nickNameChange.trim().length > 0) {
+    if (
+      /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/.test(
+        emailChange
+      )
+    ) {
       const param = {
         token: Taro.getStorageSync("token"),
         username: userName,
-        nickname: nickNameChange,
-        email: email,
+        nickname: nickName,
+        email: emailChange,
         ID: ID
       };
       infoUpdataByToken(param).then(res => {
@@ -59,7 +63,7 @@ class HCchangeName extends Component {
             success: function() {
               userStore.updateUserInfo(param);
               Taro.reLaunch({
-                url: "/pages/user/user"
+                url: "/packageA/user/user"
               });
             }
           });
@@ -76,7 +80,7 @@ class HCchangeName extends Component {
   render() {
     const {
       userStore: {
-        user: { nickName }
+        user: { email }
       }
     } = this.props;
     return (
@@ -85,10 +89,10 @@ class HCchangeName extends Component {
           <View className="at-col at-col-11">
             <AtInput
               name="value"
-              title="昵称"
+              title="邮箱"
               type="text"
-              value={nickName}
-              onChange={this.nameChange.bind(this)}
+              value={email}
+              onChange={this.emailChange.bind(this)}
             />
           </View>
         </View>

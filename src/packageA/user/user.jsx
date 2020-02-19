@@ -1,13 +1,13 @@
 import Taro, { Component, getUserInfo } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 import { AtAvatar } from "taro-ui";
-import { infoByToken, userPortraitUpload } from "../../actions/api";
-import { reLaunch } from "../../utils"; //测试用
+import { infoByToken, userPortraitUpload } from "@actions/api";
+import { reLaunch } from "@utils"; //测试用
 import { observer, inject } from "@tarojs/mobx";
 
 import "./user.sass";
 
-import background from "../../assets/images/realAuth/realAuth.png";
+import background from "@assets/images/realAuth/realAuth.png";
 
 @inject("userStore")
 @observer
@@ -101,7 +101,7 @@ class user extends Component {
    * 路由转跳
    * @param {string} url 路径
    */
-  navigateTo() {
+  navigateTo(url) {
     Taro.navigateTo({
       url: url
     });
@@ -115,7 +115,7 @@ class user extends Component {
   render() {
     const {
       userStore: {
-        user: { userName, nickName, ID }
+        user: { userName, nickName, ID, email }
       }
     } = this.props;
     return (
@@ -140,11 +140,26 @@ class user extends Component {
           className="at-row at-row__align--center userInfo"
           onClick={this.navigateTo.bind(
             this,
-            "/packageA/user/HCchangeName/HCchangeName"
+            "/packageA/user/changeName/changeName"
           )}
         >
           <View className="at-col at-col-2 title">昵称</View>
           <View className="at-col at-col-7 text">{nickName}</View>
+          <View className="at-col at-col-1">
+            <View className="arch">›</View>
+          </View>
+        </View>
+        <View className="hr"></View>
+        <View className="hr"></View>
+        <View
+          className="at-row at-row__align--center userInfo"
+          onClick={this.navigateTo.bind(
+            this,
+            "/packageA/user/changeEmail/changeEmail"
+          )}
+        >
+          <View className="at-col at-col-2 title">邮箱</View>
+          <View className="at-col at-col-7 text">{email}</View>
           <View className="at-col at-col-1">
             <View className="arch">›</View>
           </View>

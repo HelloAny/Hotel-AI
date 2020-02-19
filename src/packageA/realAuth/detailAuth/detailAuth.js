@@ -1,11 +1,9 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Picker } from "@tarojs/components";
 import { AtInput, AtForm, AtButton } from "taro-ui";
-import { realAuthUpdate } from "../../../actions/api";
-import { reLaunch } from "../../../utils"; //测试用
+import { realAuthUpdate } from "@actions/api";
+import { reLaunch } from "@utils"; //测试用
 import { observer, inject } from "@tarojs/mobx";
-
-import HCdistrict from "./HCdistrict/HCdistrict";
 
 import "./detailAuth.sass";
 

@@ -1,11 +1,11 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Camera, CoverView, CoverImage, Image } from "@tarojs/components";
 import { AtAvatar, AtInput, AtForm, AtButton } from "taro-ui";
-import { faceRegister } from "../../../actions/api";
-import { image2Base64 } from "../../../utils"; //测试用
+import { faceRegister } from "@actions/api";
+import { image2Base64 } from "@utils"; //测试用
 import { observer, inject } from "@tarojs/mobx";
-import cover from "../../../assets/images/cover/cover.png";
-import "./HCcamera.sass";
+import cover from "@assets/images/cover/cover.png";
+import "./index.sass";
 
 @inject("userStore")
 @observer

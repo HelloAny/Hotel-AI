@@ -2,11 +2,9 @@ import Taro, { Component, getUserInfo } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 import { AtAvatar } from "taro-ui";
 import { observer, inject } from "@tarojs/mobx";
-import { infoByToken } from "../../actions/api";
-import { getDistrict } from "../../actions/map";
-import { reLaunch } from "../../utils";
-import HClistline from "./HClistline/HClistline";
-import HClist from "./HClist/HClist";
+import { infoByToken } from "@actions/api";
+import { reLaunch } from "@utils";
+import { HClist, HClistline } from "@components";
 
 import "./account.sass";
 
@@ -60,9 +58,6 @@ class Login extends Component {
 
   componentWillMount() {
     this.mountedInterface();
-    getDistrict().then(res => {
-      console.log(res);
-    });
   }
 
   componentWillReact() {}
@@ -84,21 +79,24 @@ class Login extends Component {
     const listline = [
       {
         id: 1,
-        name: "信息",
-        icon: "icon-RectangleCopy27",
-        badge: "2"
+        name: "酒店订单",
+        icon: "icon-l-enterprise",
+        badge: "2",
+        url: ""
       },
       {
         id: 2,
-        name: "个人中心",
-        icon: "icon-RectangleCopy4",
-        badge: ""
+        name: "账户",
+        icon: "icon-l-coupon",
+        badge: "",
+        url: ""
       },
       {
         id: 3,
-        name: "测试3",
-        icon: "icon-RectangleCopy8",
-        badge: ""
+        name: "客服",
+        icon: "icon-l-headset",
+        badge: "",
+        url: ""
       }
     ];
     //list统一设置

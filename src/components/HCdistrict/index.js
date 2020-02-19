@@ -1,10 +1,10 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, PickerView, PickerViewColumn } from "@tarojs/components";
-import { getDistrict } from "../../../../actions/map";
-import { reLaunch } from "../../../../utils"; //测试用
+import { getDistrict } from "@actions/map";
+import { reLaunch } from "@utils"; //测试用
 import { observer, inject } from "@tarojs/mobx";
 
-import "./HCdistrict.sass";
+import "./index.sass";
 
 @inject("userStore")
 @observer
