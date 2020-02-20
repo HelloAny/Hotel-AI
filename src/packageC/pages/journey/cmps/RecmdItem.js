@@ -1,10 +1,12 @@
-import Taro, { Component } from "@tarojs/taro";
+import { Component } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 
 import "../../../assets/style/journey-recmd.scss";
 
 export default class RecmdItem extends Component {
-  static defaultProps = {};
+  static defaultProps = {
+    info: {}
+  };
 
   state = {};
 
@@ -18,18 +20,22 @@ export default class RecmdItem extends Component {
   }
 
   render() {
+    const { name, tab1, tab2, img } = this.props.info;
     return (
       <View className="container">
-        <Image
-          src="http://q4ehilcoe.bkt.clouddn.com/temp3.jpg"
-          className="bg"
-        />
+        <Image src={img} className="bg" />
         <View className="icon">推 荐</View>
         <View className="content">
-          <Text className="title">首尔亲子三日游</Text>
-          <Text className="tab1">四季皆宜</Text>
+          <View className="title-box">
+            <Text className="title">{name}</Text>
+          </View>
+          {tab1.map(tab => (
+            <Text className="tab1">{tab}</Text>
+          ))}
           <View className="tab2-list">
-            <Text className="tab2">购物街</Text>
+            {tab2.map(tab => (
+              <Text className="tab2">{tab}</Text>
+            ))}
           </View>
         </View>
       </View>

@@ -43,6 +43,10 @@
       justify-content: center;
       align-items: center;
       box-shadow: 0Px 2Px 6Px 0Px rgba(0, 0, 0, 0.4);
+      transition: all 0.2s step-start;
+    }
+    .ad-btn:active{
+      opacity: 0.5;
     }
     .ad-sub-title {
       font-size: 12Px;

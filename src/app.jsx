@@ -34,7 +34,7 @@ class App extends Component {
   componentDidMount() {}
 
   config = {
-    pages: ["packageC/pages/details/index","pages/account/account","pages/IM/index"],
+    pages: ["packageC/pages/journey/index","packageC/pages/details/index","packageC/pages/addTrip/index","pages/account/account","pages/IM/index"],
     subpackages: [
       {
         root: "packageA",

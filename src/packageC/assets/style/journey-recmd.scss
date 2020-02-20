@@ -25,18 +25,24 @@
     color: white;
     display: flex;
     flex-direction: column;
-    .title,.tab1,.tab2{
-      margin-top: 10Px;
-    }
+    flex-grow: 0;
     .title{
+      display: inline-flex;
+      flex-grow: 0;
       font-size: 18Px;
+      background-color: rgba(0, 0, 0, .3);
+      border-radius: 18Px;
+      padding: 5Px 10Px;
+      transform: translateX(-10Px);
     }
     .tab1{
+      margin-top: 5Px;
       font-size: 12Px;
       opacity: 0.9;
+      margin-right: 10Px;;
     }
     .tab2-list{
-      
+      margin-top: 5Px;
       .tab2{
         display: inline;
         font-size: 10Px;
@@ -44,6 +50,7 @@
         background-color: white;
         color: black;
         border-radius: 3Px;
+        margin-right: 10Px;;
       }
     }
   }

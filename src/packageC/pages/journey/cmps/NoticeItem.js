@@ -4,7 +4,9 @@ import { View, Image } from "@tarojs/components";
 import "../../../assets/style/journey-notice.scss";
 
 export default class NoticeItem extends Component {
-  static defaultProps = {};
+  static defaultProps = {
+    info: {}
+  };
 
   state = {};
 
@@ -18,20 +20,22 @@ export default class NoticeItem extends Component {
   }
 
   render() {
+    const { name, img, time1, time2 } = this.props.info;
     return (
-      <View className="container">
-        <Image
-          src="https://hotel-1258976754.cos.ap-shanghai.myqcloud.com/journeyBg.jpg"
-          className="figure"
-        >
-          图片
-        </Image>
+      <View className="container" onClick={this.props.onClick}>
+        <Image src={img} className="figure" />
         <View className="gist">
-          <Text className="title">访问浙科</Text>
-          <Text className="tip">2020.02.02 - 2020.02.08</Text>
+          <Text className="title">{name}</Text>
+          <Text className="tip">
+            {time1} - {time2}
+          </Text>
         </View>
-        <View style={{display:"none"}} className="status success">已同意</View>
-        <View style={{display:"block"}} className="btn">查看</View>
+        <View style={{ display: "none" }} className="status success">
+          已同意
+        </View>
+        <View style={{ display: "block" }} className="btn">
+          查看
+        </View>
       </View>
     );
   }

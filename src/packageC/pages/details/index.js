@@ -1,7 +1,10 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Image, Form } from "@tarojs/components";
+import { View, Image } from "@tarojs/components";
 import { AtIcon } from "taro-ui";
+import Server from "../../../actions/api";
+import { dateFormat } from "../../../utils";
 import NavBar from "../../components/Navbar";
+import Timeline from "./Timeline";
 
 import "../../assets/style/details.scss";
 
@@ -11,20 +14,181 @@ export default class Details extends Component {
   };
   static defaultProps = {};
 
-  state = {};
+  state = {
+    timeline: [],
+    address: "火星",
+    time1: "",
+    time2: "",
+    content: "",
+    hotel: "",
+    imgs: [],
+    name: "",
+    id: "",
+    room: "",
+    introClass: "more",
+    timelineEndTime: Date.now()
+  };
 
-  propsKeys = [];
+  _getDayDiff(d1, d2) {
+    d1 -= 16 * 1000 * 60 * 60;
+    d2 -= 16 * 1000 * 60 * 60;
+    d1 = Math.floor(d1 / 24 / 60 / 60 / 1000);
+    d2 = Math.floor(d2 / 24 / 60 / 60 / 1000);
+    return d2 - d1;
+  }
 
-  stateKeys = [];
+  initState(data) {
+    const {
+      address,
+      check_in_time,
+      check_out_time,
+      content,
+      hotel,
+      imgs,
+      name,
+      order_time,
+      journey_id,
+      out_back_time,
+      room,
+      status
+    } = data;
+    this.setState({
+      timelineEndTime: check_out_time,
+      address,
+      time1: dateFormat("mm月dd日", check_in_time),
+      time2: dateFormat("mm月dd日", check_out_time),
+      content,
+      hotel,
+      imgs: imgs.horizontal,
+      name,
+      id: journey_id,
+      room,
+      status
+    });
+
+    let flagTime = order_time;
+    this.initTimeline(status, {
+      outTime: check_out_time,
+      outDay: this._getDayDiff(flagTime, check_out_time),
+      inTime: check_in_time,
+      inDay: this._getDayDiff(flagTime, check_in_time),
+      orderTime: order_time,
+      orderDay: 0,
+      orderBackTime: out_back_time,
+      orderBackDay: this._getDayDiff(flagTime, out_back_time)
+    });
+  }
+
+  initTimeline(status, timer) {
+    let timeline = [];
+
+    switch (status) {
+      case "checkout":
+        timeline[timer.outDay] = {
+          type: "process",
+          time: timer.outTime,
+          content: "完成退房"
+        };
+      case "checkin":
+        timeline[timer.inDay] = {
+          type: "process",
+          time: timer.inTime,
+          content: "入住酒店"
+        };
+      case "out_back":
+        if (status == "out_back") {
+          timeline[timer.orderBackDay] = {
+            type: "process",
+            time: timer.orderBackTime,
+            content: "成功退订"
+          };
+        }
+      case "booking":
+        timeline[0] = {
+          type: "process",
+          time: timer.orderTime,
+          content: "成功预订"
+        };
+        break;
+    }
+
+    this.setState({
+      timeline
+    });
+  }
+
+  handleIntroControl() {
+    this.setState({
+      introClass: this.state.introClass == "more" ? "fewer" : "more"
+    });
+  }
 
   handleSpreadExpansion() {
     console.log("handleSpreadExpansion");
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log("Details", nextProps, nextState);
-    let flag = !this.compare(nextProps, nextState);
-    return flag;
+  componentDidMount() {
+    const { id } = this.$router.params;
+    if (!id) return;
+    console.log(1111)
+    Taro.showLoading({
+      title: "loading"
+    });
+    Server.getJourneyDetails({
+      journey_id: id
+    })
+      .then(res => {
+        Taro.hideLoading();
+        if (res.code == 200) {
+          this.initState(res.journey_info);
+        } else {
+          Taro.showToast({
+            title: "网络开小差了...",
+            icon: "none",
+            duration: 2000
+          });
+        }
+      })
+      .catch(err => {
+        Taro.hideLoading();
+        Taro.showToast({
+          title: "网络开小差了...",
+          icon: "none",
+          duration: 2000
+        });
+      });
+  }
+
+  componentWillPreload() {
+    const { id } = this.$router.params;
+    if (!id) return;
+    Taro.showLoading({
+      title: "loading"
+    });
+    Server.getJourneyDetails({
+      journey_id: id
+    })
+      .then(res => {
+        Taro.hideLoading();
+        if (res.code == 200) {
+          this.initState(res.journey_info);
+        } else {
+          Taro.showToast({
+            title: "网络开小差了...",
+            icon: "none",
+            duration: 2000
+          });
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        Taro.hideLoading();
+        Taro.showToast({
+          title: "网络开小差了...",
+          icon: "none",
+          duration: 2000
+        });
+      });
   }
 
   componentWillUpdate() {
@@ -36,39 +200,62 @@ export default class Details extends Component {
   }
 
   render() {
+    const {
+      timeline,
+      timelineEndTime,
+      address,
+      time1,
+      time2,
+      content,
+      imgs,
+      id,
+      room,
+      name,
+      hotel,
+      introClass
+    } = this.state;
+    console.log(timeline.length)
     return (
       <View className="details-container">
         <NavBar color="white" shade />
         <Swiper className="bg-container" autoplay>
-          <SwiperItem>
-            <Image
-              src="http://q4ehilcoe.bkt.clouddn.com/temp3.jpg"
-              className="bg"
-            />
-          </SwiperItem>
-          <SwiperItem>
-            <Image
-              src="https://hotel-1258976754.cos.ap-shanghai.myqcloud.com/journeyBg.jpg"
-              className="bg"
-            />
-          </SwiperItem>
-          <SwiperItem>
-            <Image
-              src="http://q4ehilcoe.bkt.clouddn.com/temp3.jpg"
-              className="bg"
-            />
-          </SwiperItem>
+          {imgs.map(img => (
+            <SwiperItem>
+              <Image src={img} className="bg" />
+            </SwiperItem>
+          ))}
         </Swiper>
         <View className="main">
           <View className="title">
-            访问浙科
+            {name}
             <AtIcon value="edit" />
           </View>
           <View className="time">
-            2月5日-2月8日
+            {time1} - {time2}
           </View>
-          <View className="address">
-            <Text className="address-text"></Text>
+          <View className="address-box">
+            <View className="address-text">
+              <Text className="address">
+                {hotel}
+                {room}
+              </Text>
+              <Text className="address">{address}</Text>
+            </View>
+            <View className="address-help">
+              <AtIcon value="map-pin" />
+              地图/导航
+            </View>
+          </View>
+          <Text className="intro-line"></Text>
+          <View className="intro">
+            {introClass == "more" ? content.substr(0, 130) + "..." : content}
+            <Text
+              onClick={this.handleIntroControl.bind(this)}
+              className={"intro-btn " + introClass}
+            ></Text>
+          </View>
+          <View className="timeline">
+            <Timeline timeline={timeline} id={id} endTime={timelineEndTime} />
           </View>
         </View>
         <View className="bottomNav">

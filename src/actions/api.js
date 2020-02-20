@@ -218,5 +218,38 @@ export default {
       };
       return http.post(url, request);
     });
+  },
+  /**———————————————————————————————————————————————————————————journey start——————————————————————————————————————————————————————————————— */
+  getJourneyList(param) {
+    const { uid } = param;
+    const url = "/visit/user_info";
+    const request = {
+      uid
+    };
+    return http.post(url, request).then(res =>{
+      let data = res.data
+      if(data && data.code != 200) return data
+      data.records.forEach(r =>{
+        r.check_in_time *= 1000
+        r.check_out_time *= 1000
+      })
+      return data
+    });
+  },
+  getJourneyDetails(param) {
+    const { journey_id } = param;
+    const url = "/visit/journey_info";
+    const request = {
+      journey_id
+    };
+    return http.post(url, request).then(res => {
+      let data = res.data;
+      if (data && data.code != 200) return data;
+      data.journey_info.check_in_time *= 1000;
+      data.journey_info.check_out_time *= 1000;
+      data.journey_info.order_time *= 1000;
+      data.journey_info.out_back_time *= 1000;
+      return data;
+    });
   }
 };

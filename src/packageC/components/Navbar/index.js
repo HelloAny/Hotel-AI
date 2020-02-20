@@ -21,14 +21,22 @@ const StyleSheet = {
     transform: "translateY(2px)",
     backgroundColor: "",
     borderRadius: "20Px",
-    padding:"5Px 10Px 5Px 5Px",
+    padding: "2Px 10Px 2Px 5Px"
+  },
+  title: {
+    position:"absolute",
+    left: "50%",
+    top: "50%",
+    transform: "translate(-55%,-50%)"
   }
 };
 
 export default class NavBar extends Component {
   static defaultProps = {
     color: "#303133",
-    shade: false
+    shade: false,
+    title: "",
+    weight: false
   };
 
   state = {};
@@ -60,6 +68,9 @@ export default class NavBar extends Component {
     });
     Object.assign(StyleSheet.btn, {
       backgroundColor: props.shade ? "rgba(0,0,0,.25)" : ""
+    });
+    Object.assign(StyleSheet.title, {
+      fontWeight: props.weight ? "800" : "300"
     })
   }
 
@@ -81,13 +92,14 @@ export default class NavBar extends Component {
   }
 
   render() {
+    const { title } = this.props;
     return (
       <View style={StyleSheet.container}>
         <View style={StyleSheet.header}>
           <View style={StyleSheet.btn} onClick={this.handleClick.bind(this)}>
             <AtIcon value="chevron-left" /> 返回
           </View>
-          <View>（聊天）</View>
+          <View style={StyleSheet.title}>{title}</View>
         </View>
       </View>
     );
