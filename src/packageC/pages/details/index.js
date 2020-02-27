@@ -3,7 +3,7 @@ import { View, Image } from "@tarojs/components";
 import { AtIcon } from "taro-ui";
 import Server from "../../../actions/api";
 import { dateFormat } from "../../../utils";
-import NavBar from "../../components/Navbar";
+import NavBar from "../../../components/Navbar";
 import Timeline from "./Timeline";
 
 import "../../assets/style/details.scss";
@@ -130,7 +130,7 @@ export default class Details extends Component {
   componentDidMount() {
     const { id } = this.$router.params;
     if (!id) return;
-    console.log(1111)
+
     Taro.showLoading({
       title: "loading"
     });
@@ -214,7 +214,7 @@ export default class Details extends Component {
       hotel,
       introClass
     } = this.state;
-    console.log(timeline.length)
+
     return (
       <View className="details-container">
         <NavBar color="white" shade />

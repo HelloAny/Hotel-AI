@@ -94,7 +94,6 @@ export default class Timeline extends Component {
 
   render() {
     const { packUp, list, startTime } = this.state;
-    console.log(this.state);
     return (
       <View className="container">
         {packUp.index == -1 ? null : (

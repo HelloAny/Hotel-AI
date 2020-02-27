@@ -4,7 +4,7 @@ import Index from "./pages/index";
 import counterStore from "./store/counter";
 import userInfo from "./store/user";
 import { objectDeepCompare } from "./utils";
-import Server from "./pages/IM/server";
+import Server from "./service/SocketServer";
 
 // import "taro-ui/dist/style/index.scss";
 import "./assets/icons/fonts/iconfont.css";
@@ -18,6 +18,7 @@ import "./app.scss";
 //   require('nerv-devtools')
 // }
 
+// 自动开始连接socket
 !function(){
   Server.connect()
 }()
@@ -34,7 +35,7 @@ class App extends Component {
   componentDidMount() {}
 
   config = {
-    pages: ["packageC/pages/journey/index","packageC/pages/details/index","packageC/pages/addTrip/index","pages/account/account","pages/IM/index"],
+    pages: ["pages/notify/index","pages/journey/index","pages/account/account"],
     subpackages: [
       {
         root: "packageA",
@@ -53,6 +54,15 @@ class App extends Component {
         pages: [
           "ActivityService/activityService"
         ]
+      },
+      {
+        root: "packageC",
+        pages: [
+          "pages/details/index",
+          "pages/addTrip/index",
+          "pages/addTrip/tripForm",
+          "pages/IM/index"
+        ]
       }
     ],
     window: {
@@ -68,16 +78,20 @@ class App extends Component {
       selectedColor: "#00f",
       backgroundColor: "#fff",
       borderStyle: "black",
-      position: "top",
+      position: "bottom",
       list: [
         {
           pagePath: "pages/account/account",
           text: "我的"
         },
         {
-          pagePath: "pages/IM/index",
-          text: "聊天"
+          pagePath: "pages/journey/index",
+          text: "行程"
         },
+        {
+          pagePath: "pages/notify/index",
+          text: "行程"
+        }
       ]
     }
   };

@@ -219,23 +219,34 @@ export default {
       return http.post(url, request);
     });
   },
+
   /**———————————————————————————————————————————————————————————journey start——————————————————————————————————————————————————————————————— */
+
+  /**
+   * 获取所有行程列表
+   * @param {{uid: String}} param
+   */
   getJourneyList(param) {
     const { uid } = param;
     const url = "/visit/user_info";
     const request = {
       uid
     };
-    return http.post(url, request).then(res =>{
-      let data = res.data
-      if(data && data.code != 200) return data
-      data.records.forEach(r =>{
-        r.check_in_time *= 1000
-        r.check_out_time *= 1000
-      })
-      return data
+    return http.post(url, request).then(res => {
+      let data = res.data;
+      if (!data || data.code != 200) return data;
+      data.records.forEach(r => {
+        r.check_in_time *= 1000;
+        r.check_out_time *= 1000;
+      });
+      return data;
     });
   },
+
+  /**
+   * 获取指定行程详情
+   * @param {{journey_id: String}} param
+   */
   getJourneyDetails(param) {
     const { journey_id } = param;
     const url = "/visit/journey_info";
@@ -244,12 +255,61 @@ export default {
     };
     return http.post(url, request).then(res => {
       let data = res.data;
-      if (data && data.code != 200) return data;
+      if (!data || data.code != 200) return data;
       data.journey_info.check_in_time *= 1000;
       data.journey_info.check_out_time *= 1000;
       data.journey_info.order_time *= 1000;
       data.journey_info.out_back_time *= 1000;
       return data;
     });
+  },
+
+  /**———————————————————————————————————————————————————————————journey end——————————————————————————————————————————————————————————————— */
+  /**———————————————————————————————————————————————————————————visit start——————————————————————————————————————————————————————————————— */
+
+  /**
+   * 获取酒店列表
+   */
+  getHotelsList() {
+    const url = "/visit/hotels_info";
+    const request = {};
+    return http.post(url, request).then(res => {
+      let data = res.data;
+      if (!data || data.code != 200) return Promise.reject(data);
+      return data.results;
+    });
+  },
+
+  /**
+   * 模糊搜索房间
+   * @param {{ hotel_id:String, inp:String }} param
+   */
+  getVagueRoomInfo(param) {
+    const { hotel_id, inp } = param;
+    const url = "/visit/room_info";
+    const request = { hotel_id, inp };
+    return http.post(url, request).then(res => {
+      let data = res.data;
+      if (!data || data.code != 200) return Promise.reject(data);
+      return data.rooms;
+    });
+  },
+
+  /**
+   * 发送访问申请
+   * @param {{ uid, room_Id, note, beginDate, endDate }} param
+   */
+  applyVisit(param) {
+    let { uid, room_Id, note, beginDate, endDate } = param;
+    beginDate = Math.floor(beginDate / 1000 )
+    endDate = Math.floor(endDate / 1000 )
+    const url = "/visit/send_visit";
+    const request = { uid, room_Id, note, beginDate, endDate };
+    return http.post(url, request).then(res => {
+      let data = res.data;
+      if(!data || data.code != 200) return Promise.reject(data)
+      return data
+    });
   }
+  /**———————————————————————————————————————————————————————————visit end——————————————————————————————————————————————————————————————— */
 };

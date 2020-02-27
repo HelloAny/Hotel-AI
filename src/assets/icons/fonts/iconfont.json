@@ -1,0 +1,149 @@
+{
+  "id": "1646712",
+  "name": "Hotel-AI",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "6204756",
+      "name": "失败",
+      "font_class": "error",
+      "unicode": "e64e",
+      "unicode_decimal": 58958
+    },
+    {
+      "icon_id": "9826666",
+      "name": "成功",
+      "font_class": "ok",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
+      "icon_id": "11982739",
+      "name": "Gps, navigation, location",
+      "font_class": "Gpsnavigationlocation",
+      "unicode": "e9db",
+      "unicode_decimal": 59867
+    },
+    {
+      "icon_id": "13102476",
+      "name": "Gps, navigation, location",
+      "font_class": "Gpsnavigationlocation-copy",
+      "unicode": "e9dc",
+      "unicode_decimal": 59868
+    },
+    {
+      "icon_id": "6382524",
+      "name": "导航",
+      "font_class": "daohang1",
+      "unicode": "e683",
+      "unicode_decimal": 59011
+    },
+    {
+      "icon_id": "9413852",
+      "name": "定位 位置",
+      "font_class": "dingweiweizhi",
+      "unicode": "e6b6",
+      "unicode_decimal": 59062
+    },
+    {
+      "icon_id": "7139598",
+      "name": "客服",
+      "font_class": "kefu",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "12082681",
+      "name": "向上",
+      "font_class": "up",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "5648978",
+      "name": "邀请",
+      "font_class": "yaoqing",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "3705468",
+      "name": "酒店",
+      "font_class": "hotel-color",
+      "unicode": "e640",
+      "unicode_decimal": 58944
+    },
+    {
+      "icon_id": "7549346",
+      "name": "关闭",
+      "font_class": "RectangleCopy",
+      "unicode": "e6a1",
+      "unicode_decimal": 59041
+    },
+    {
+      "icon_id": "7549347",
+      "name": "完成",
+      "font_class": "RectangleCopy1",
+      "unicode": "e6a2",
+      "unicode_decimal": 59042
+    },
+    {
+      "icon_id": "7549350",
+      "name": "用户",
+      "font_class": "RectangleCopy2",
+      "unicode": "e6a3",
+      "unicode_decimal": 59043
+    },
+    {
+      "icon_id": "5532882",
+      "name": "返回",
+      "font_class": "back",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "7738015",
+      "name": "用户",
+      "font_class": "user",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "1025053",
+      "name": "键盘",
+      "font_class": "keyboard",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "1479642",
+      "name": "表情",
+      "font_class": "emoji",
+      "unicode": "e681",
+      "unicode_decimal": 59009
+    },
+    {
+      "icon_id": "4608963",
+      "name": "图库，相册",
+      "font_class": "photo",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "6255766",
+      "name": "语音",
+      "font_class": "voice",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "369850",
+      "name": "more",
+      "font_class": "more",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    }
+  ]
+}
