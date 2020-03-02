@@ -1,0 +1,143 @@
+.input-box {
+  position: relative;
+  width: 100vw;
+  height: 100%;
+  background-color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.input-box .input {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 8Px 10Px 3Px 10Px;
+  height: 26Px;
+  background-color: whitesmoke;
+  text-align: center;
+  color: #606266;
+  font-size: 14Px;
+}
+
+.input-box .input-box-row {
+  width: 100%;
+  height: 45Px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.input-box .input-box-row .iconfont {
+  padding: 3Px;
+}
+
+.input-box .input-box-row .input-right,
+.input-box .input-box-row .input-left {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin: 0 2Px;
+}
+
+.recorder {
+  position: fixed;
+  display: none;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  top: 35%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 5000;
+  width: 80Px;
+  height: 70Px;
+  padding: 20Px 10Px 0Px 10Px;
+}
+
+.recorder.active {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.recorder .stripe {
+  background-color: white;
+  width: 3Px;
+}
+
+.recorder .au1 {
+  -webkit-animation: audio 0.5s linear 0.2s infinite alternate;
+          animation: audio 0.5s linear 0.2s infinite alternate;
+}
+
+.recorder .au2 {
+  -webkit-animation: audio 0.55s linear 0.25s infinite alternate;
+          animation: audio 0.55s linear 0.25s infinite alternate;
+}
+
+.recorder .au3 {
+  -webkit-animation: audio 0.45s linear 0.35s infinite alternate;
+          animation: audio 0.45s linear 0.35s infinite alternate;
+}
+
+.recorder .au4 {
+  -webkit-animation: audio 0.48s linear 0.25s infinite alternate;
+          animation: audio 0.48s linear 0.25s infinite alternate;
+}
+
+.recorder .au5 {
+  -webkit-animation: audio 0.52s linear 0.3s infinite alternate;
+          animation: audio 0.52s linear 0.3s infinite alternate;
+}
+
+.recorder .au6 {
+  -webkit-animation: audio 0.35s linear 0.15s infinite alternate;
+          animation: audio 0.35s linear 0.15s infinite alternate;
+}
+
+.recorder .au7 {
+  -webkit-animation: audio 0.5s linear 0.2s infinite alternate;
+          animation: audio 0.5s linear 0.2s infinite alternate;
+}
+
+.recorder .au8 {
+  -webkit-animation: audio 0.5s linear 0.35s infinite alternate;
+          animation: audio 0.5s linear 0.35s infinite alternate;
+}
+
+@-webkit-keyframes audio {
+  from {
+    height: 1Px;
+  }
+  to {
+    height: 100%;
+  }
+}
+
+@keyframes audio {
+  from {
+    height: 1Px;
+  }
+  to {
+    height: 100%;
+  }
+}
+/*# sourceMappingURL=soundRecorder.css.map */

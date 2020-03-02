@@ -63,6 +63,16 @@ class LoginByPsw extends Component {
       }
     });
   }
+  /**
+   * 路由转跳
+   * @param {string} url
+   */
+  navigateTo(url) {
+    Taro.navigateTo({
+      url: url
+    });
+  }
+
   componentWillMount() {}
 
   componentWillReact() {}
@@ -142,7 +152,23 @@ class LoginByPsw extends Component {
           </View>
         </View>
         <View className="forgetPsw at-row">
-          <View className="at-col">忘记密码?</View>
+          <View
+            className="at-col"
+            onClick={this.navigateTo.bind(
+              this,
+              "/packageA/login/registerByPsw"
+            )}
+          >
+            密码注册
+          </View>
+        </View>
+        <View className="forgetPsw at-row">
+          <View
+            className="at-col"
+            onClick={this.navigateTo.bind(this, "/packageA/login/forgetPsw")}
+          >
+            忘记密码?
+          </View>
         </View>
       </View>
     );

@@ -1,0 +1,69 @@
+ /* autoprefixer: off */
+@import "~taro-ui/dist/style/components/flex.scss"
+.hotelOrder_item
+  padding-bottom: 10rpx
+  .hotelOrder_container
+    position: relative
+    height: 600rpx
+    width: 90%
+    margin: auto auto
+    margin-top: 20rpx
+    margin-bottom: 100rpx
+    border: 0rpx solid transparent
+    border-radius: 40rpx
+    box-shadow: 0 0 10rpx #c2c2c2
+    background-color: white
+    overflow: hidden
+    .hotelOrder_image
+      width: 100%
+      overflow: hidden
+      .cover_container
+        height: 100rpx
+        width: 100%
+        line-height: 2.5
+        margin: auto auto
+        position: absolute
+        top: 0
+        background: linear-gradient(#000000,transparent)
+        opacity: 0.8
+        .hotelOrder_title
+          color: #ffffff
+          font-size: 45rpx
+          font-weight: 700
+          text-align: center
+        .hotelOrder_status
+          padding: -10rpx
+          font-size: 35rpx
+          font-weight: 300
+          color: #ffffff
+        .hotelOrder_icon
+          font-size: 50rpx
+          top: 10rpx
+          height: 100%
+          width: 100%
+        .booking
+          color: #eeec65
+        .checkin
+          color: #54db81
+        .checkout
+          color: #999999
+    .hotelOrder_content
+      position: absolute
+      .hotelOrder_thumb
+        margin: auto auto
+        font-size: 30rpx
+        line-height: 1.5
+        font-weight: 300
+        .thumb
+          word-break: break-all
+          overflow: hidden
+          text-overflow: ellipsis
+          display: -webkit-box
+          box-orient: vertical
+          -webkit-box-orient: vertical
+          -webkit-line-clamp: 3
+          color: #949494
+
+      .hotelOrder_time
+        font-size: 30rpx
+        color: #5e5e5e

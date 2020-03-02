@@ -92,6 +92,7 @@ class changeEmail extends Component {
               title="邮箱"
               type="text"
               value={email}
+              autoFocus={true}
               onChange={this.emailChange.bind(this)}
             />
           </View>

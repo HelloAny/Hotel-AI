@@ -5,10 +5,6 @@ module.exports = {
   defineConstants: {},
   weapp: {
     module: {
-      postcss: {
-        autoprefixer: {
-          enable: true
-        },
         // 小程序端样式引用本地资源内联配置
         url: {
           enable: true,

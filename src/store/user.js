@@ -5,23 +5,27 @@ import { observable, action } from "mobx";
  */
 class userInfo {
   @observable user = {
+    id: "",
     userName: "",
     nickName: "",
     email: "",
     phone: "",
     ID: "",
-    Portrait: ""
+    Portrait: "",
+    if_face: ""
   };
 
   /**
    * 设置个人信息
    */
   @action.bound setUserInfo(user) {
+    this.user.id = user.id;
     this.user.userName = user.username;
     this.user.nickName = user.nickname || "游客B243";
     this.user.email = user.email;
     this.user.phone = user.phone;
     this.user.ID = user.ID;
+    this.user.if_face = user.if_face;
   }
 
   /**

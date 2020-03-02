@@ -1,7 +1,7 @@
 import Taro, { Component, getUserInfo } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 import { AtAvatar } from "taro-ui";
-import { infoByToken, userPortraitUpload } from "@actions/api";
+import { infoByToken, picUpload } from "@actions/api";
 import { reLaunch } from "@utils"; //测试用
 import { observer, inject } from "@tarojs/mobx";
 
@@ -66,6 +66,11 @@ class user extends Component {
    */
   uploadPortrait(event) {
     const { portrait } = this.state;
+    const {
+      userStore: {
+        user: { userName }
+      }
+    } = this.props;
     const that = this;
     wx.chooseImage({
       count: 1,
@@ -76,10 +81,15 @@ class user extends Component {
           src: res.tempFilePaths[0],
           success: function(res) {
             const param = {
-              token: Taro.getStorageSync("token"),
-              image: res.path
+              imagePath: res.path,
+              type: res.type,
+              name: userName,
+              upload_to: "users",
+              if_local: false,
+              content: "头像"
             };
-            userPortraitUpload(param).then(res => {
+            picUpload(param).then(res => {
+              console.log(res);
               if (res.data.status == 0) {
                 Taro.showToast({
                   title: "上传成功",
@@ -115,7 +125,7 @@ class user extends Component {
   render() {
     const {
       userStore: {
-        user: { userName, nickName, ID, email }
+        user: { userName, nickName, ID, email, if_face }
       }
     } = this.props;
     return (
@@ -131,7 +141,7 @@ class user extends Component {
               circle
               className="userAvatar"
               size="large"
-              image={`https://hotel.lcworkroom.cn/api/user/portrait/?username=${userName}`}
+              image={`https://hotel.lcworkroom.cn/api/pic/get/users?name=${userName}`}
             ></AtAvatar>
           </View>
         </View>
@@ -181,7 +191,7 @@ class user extends Component {
               </View>
             </View>
             <View className="realAuthInfo at-col at-col-8">
-              {!!ID ? (
+              {!!ID && if_face ? (
                 <View className="realAuthText">
                   <View className="iconRealAuthYes iconfont icon-RectangleCopy1"></View>
                   已认证
@@ -205,7 +215,7 @@ class user extends Component {
                   )}
                 >
                   <View className="iconRealAuthNo iconfont icon-RectangleCopy"></View>
-                  未实名认证
+                  未实名认证和人脸认证
                   <View className="realAuthWhy">了解为什么要实名认证?</View>
                 </View>
               )}

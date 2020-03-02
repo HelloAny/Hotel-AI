@@ -3,7 +3,7 @@ import { View, Input } from "@tarojs/components";
 import { EmojiBox, ImgPicker, SoundRecorder, ExtensionArea } from "./extension";
 import { Message, MessageDB } from "../../message";
 import Server from "../../server";
-import ExtensionList from "./extension/config.json";
+import ExtensionList from "./extension/config.json.js.js";
 import "../../assets/style/inputField.scss";
 
 export default class InputField extends Component {
@@ -30,9 +30,7 @@ export default class InputField extends Component {
     value: ""
   };
 
-  propsKeys = [
-    "keyboardHeight"
-  ];
+  propsKeys = ["keyboardHeight"];
 
   stateKeys = ["pullMode", "player"];
 
@@ -205,7 +203,11 @@ export default class InputField extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.resetFlag != nextProps.resetFlag && this.state.pullMode != "low") this._reset();
+    if (
+      this.props.resetFlag != nextProps.resetFlag &&
+      this.state.pullMode != "low"
+    )
+      this._reset();
   }
 
   shouldComponentUpdate(nextProps, nextState) {

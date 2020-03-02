@@ -1,0 +1,53 @@
+.extension-box {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  height: calc(100% - 45Px);
+  width: 100vw;
+  padding: 20Px;
+}
+
+.extension-box .swiper {
+  height: 100%;
+}
+
+.extension-box .swiper .swiper-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.extension-box .swiper .swiper-item .list-item {
+  width: 22%;
+  height: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+}
+
+.extension-box .swiper .swiper-item .list-item .icon {
+  height: 60Px;
+  width: 100%;
+  font-size: 40Px !important;
+}
+
+.extension-box .swiper .swiper-item .list-item .title {
+  height: 30Px;
+  width: 100%;
+  font-size: 14Px;
+  color: #606266;
+}
+/*# sourceMappingURL=extensionArea.css.map */

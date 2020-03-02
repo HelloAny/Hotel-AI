@@ -156,6 +156,7 @@ export const infoUpdataByToken = param => {
   return request(post, url, data);
 };
 /**
+ * ******************废弃废弃*************************
  * 获取用户头像
  * @param {string} param username
  */
@@ -164,6 +165,7 @@ export const userPortraitGet = param => {
   return request(get, url);
 };
 /**
+ * ******************废弃废弃*************************
  * 上传用户头像
  * @param {string} param image和token
  */
@@ -244,4 +246,28 @@ export const realAuthUpdate = param => {
     }
   };
   return request(post, url, data);
+};
+/**
+ * 上传头像或图片
+ * @param {object} param {name,content,type,upload_to,if_loacl,base64}
+ */
+export const picUpload = param => {
+  const { imagePath, name, content, type, upload_to, if_local, base64 } = param;
+  return image2Base64(imagePath).then(res => {
+    const url = "/api/pic/";
+    const data = {
+      id: 1234,
+      type: "pic",
+      subtype: "upload",
+      data: {
+        name: name,
+        content: content || "",
+        type: type,
+        upload_to: upload_to,
+        if_local: if_local || false,
+        base64: res
+      }
+    };
+    return request(post, url, data);
+  });
 };

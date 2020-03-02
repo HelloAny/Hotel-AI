@@ -1,5 +1,6 @@
-import Taro, { Component, getUserInfo } from "@tarojs/taro";
-import { View } from "@tarojs/components";
+/* eslint-disable react/sort-comp */
+import Taro, { Component } from "@tarojs/taro";
+import { View, Text } from "@tarojs/components";
 import { AtAvatar } from "taro-ui";
 import { observer, inject } from "@tarojs/mobx";
 import { infoByToken } from "@actions/api";
@@ -10,6 +11,7 @@ import "./account.sass";
 
 @inject("userStore")
 @observer
+// eslint-disable-next-line no-unused-vars
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -80,21 +82,21 @@ class Login extends Component {
       {
         id: 1,
         name: "酒店订单",
-        icon: "icon-l-enterprise",
+        icon: "icon-RectangleCopy103",
         badge: "2",
-        url: ""
+        url: "/packageA/hotelOrder/hotelOrder"
       },
       {
         id: 2,
         name: "账户",
-        icon: "icon-l-coupon",
+        icon: "icon-RectangleCopy153",
         badge: "",
         url: ""
       },
       {
         id: 3,
         name: "客服",
-        icon: "icon-l-headset",
+        icon: "icon-kefu",
         badge: "",
         url: ""
       }
@@ -124,6 +126,13 @@ class Login extends Component {
       },
       {
         id: 4,
+        name: "会员服务",
+        hr: true,
+        icon: "icon-RectangleCopy59",
+        url: ""
+      },
+      {
+        id: 5,
         name: "设置",
         hr: false,
         icon: "icon-RectangleCopy16",
@@ -140,7 +149,7 @@ class Login extends Component {
             <AtAvatar
               circle
               className="visitor"
-              image={`https://hotel.lcworkroom.cn/api/user/portrait/?username=${userName}`}
+              image={`https://hotel.lcworkroom.cn/api/pic/get/users?name=${userName}`}
             ></AtAvatar>
           </View>
           <View
@@ -153,7 +162,7 @@ class Login extends Component {
           <View className="hrx">|</View>
           <View className="icon iconfont icon-RectangleCopy61"></View>
           <View className="priceText">奖励点:</View>
-          <View className="priceNumber">0</View>
+          <Text className="priceNumber">450</Text>
         </View>
         <View className="list">
           <View>

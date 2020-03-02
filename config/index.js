@@ -47,12 +47,6 @@ const config = {
   },
   mini: {
     postcss: {
-      autoprefixer: {
-        enable: true,
-        config: {
-          browsers: ["last 3 versions", "Android >= 4.1", "ios >= 8"]
-        }
-      },
       pxtransform: {
         enable: true,
         config: {}
@@ -77,12 +71,6 @@ const config = {
     publicPath: "/",
     staticDirectory: "static",
     postcss: {
-      autoprefixer: {
-        enable: true,
-        config: {
-          browsers: ["last 3 versions", "Android >= 4.1", "ios >= 8"]
-        }
-      },
       cssModules: {
         enable: false, // 默认为 false，如需使用 css modules 功能，则设为 true
         config: {

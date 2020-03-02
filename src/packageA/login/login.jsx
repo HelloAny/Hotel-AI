@@ -182,6 +182,16 @@ class Login extends Component {
       );
     }
   }
+
+  /**
+   * 路由转跳
+   * @param {string} url
+   */
+  navigateTo(url) {
+    Taro.navigateTo({
+      url: url
+    });
+  }
   componentWillReceiveProps(nextProps) {
     console.log(this.props, nextProps);
   }
@@ -312,7 +322,23 @@ class Login extends Component {
       <View className="container">
         {this.renderA()}
         <View className="toPsw at-row">
-          <View className="at-col">密码登录注册</View>
+          <View
+            className="at-col"
+            onClick={this.navigateTo.bind(this, "/packageA/login/loginByPsw")}
+          >
+            密码登录
+          </View>
+        </View>
+        <View className="toPsw at-row">
+          <View
+            className="at-col"
+            onClick={this.navigateTo.bind(
+              this,
+              "/packageA/login/registerByPsw"
+            )}
+          >
+            密码注册
+          </View>
         </View>
       </View>
     );

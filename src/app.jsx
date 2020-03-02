@@ -1,14 +1,13 @@
 import Taro, { Component } from "@tarojs/taro";
 import { Provider, onError } from "@tarojs/mobx";
 import Index from "./pages/index";
-import userInfo from "@store/user";
+import { userInfo, cardPage } from "@store";
 
 import "taro-ui/dist/style/index.scss";
 import "@assets/icons/fontsOne/iconfont.css";
-import "@assets/icons/fontstwo/iconfont.css";
 import "./app.scss";
 import { objectDeepCompare } from "@utils";
-import Server from "./pages/IM/server";
+import Server from "@pages/IM/server";
 
 //*************taro-ui组件按需引入！！！！*****************
 
@@ -23,7 +22,8 @@ import Server from "./pages/IM/server";
 })();
 
 const store = {
-  userStore: new userInfo()
+  userStore: new userInfo(),
+  cardPage: new cardPage()
 };
 
 onError(error => {
@@ -34,11 +34,7 @@ class App extends Component {
   componentDidMount() {}
 
   config = {
-    pages: [
-      "pages/account/account",
-      "pages/IM/index",
-      "packageB/ActivityService/activityService"
-    ],
+    pages: ["pages/account/account", "pages/index/index"],
     subpackages: [
       {
         root: "packageA",
@@ -47,19 +43,26 @@ class App extends Component {
           "login/forgetPsw",
           "login/loginByPsw",
           "login/login",
+          "hotelOrder/hotelOrder",
           "user/user",
           "user/changeName/changeName",
           "user/changeEmail/changeEmail",
           "realAuth/realAuth",
           "realAuth/detailAuth/detailAuth"
         ]
+      },
+      {
+        root: "packageB",
+        pages: ["ActivityService/activityService"]
       }
     ],
     window: {
       backgroundTextStyle: "light",
       navigationBarBackgroundColor: "#fff",
       navigationBarTitleText: "WeChat",
-      navigationBarTextStyle: "black"
+      navigationBarTextStyle: "black",
+      enablePullDownRefresh: true,
+      backgroundTextStyle: "dark"
       // enablePullDownRefresh: true,
       // backgroundTextStyle:"dark"
     },
@@ -75,12 +78,8 @@ class App extends Component {
           text: "我的"
         },
         {
-          pagePath: "pages/IM/index",
-          text: "聊天"
-        },
-        {
-          pagePath: "packageB/ActivityService/activityService",
-          text: "区域"
+          pagePath: "pages/index/index",
+          text: "我的"
         }
       ]
     }

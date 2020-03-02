@@ -88,6 +88,8 @@ class changeName extends Component {
               title="昵称"
               type="text"
               value={nickName}
+              autoFocus={true}
+              selectionStart="-1"
               onChange={this.nameChange.bind(this)}
             />
           </View>
