@@ -2,7 +2,7 @@ import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Picker } from "@tarojs/components";
 import { observer, inject } from "@tarojs/mobx";
 import { AtButton, AtInput, AtForm, AtCountdown, AtToast } from "taro-ui";
-import axios from "../../actions/api";
+import { Register, Sms } from "@actions/api";
 import "./login.sass";
 
 class Login extends Component {
@@ -90,7 +90,7 @@ class Login extends Component {
       rand: this.state.rand
     };
     //快捷注册登录接口
-    axios.Register(param).then(res => {
+    Register(param).then(res => {
       if (res.data.status == -4) {
         this.setState({
           errorCap: 1
@@ -133,7 +133,7 @@ class Login extends Component {
         () => {
           // showBtn是false时会出现灰色按钮，当倒计时结束又变成可以触发的按钮
           //验证码接口
-          axios.Sms(this.state.phone).then(res => {
+          Sms(this.state.phone).then(res => {
             if (res.data.status == 0) {
               this.setState(
                 {

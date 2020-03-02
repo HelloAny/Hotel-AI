@@ -2,10 +2,9 @@ import Taro, { Component, getUserInfo } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 import { AtAvatar } from "taro-ui";
 import { observer, inject } from "@tarojs/mobx";
-import axios from "../../actions/api";
-import { reLaunch } from "../../utils";
-import HClistline from "./HClistline/HClistline";
-import HClist from "./HClist/HClist";
+import { infoByToken } from "@actions/api";
+import { reLaunch } from "@utils";
+import { HClist, HClistline } from "@components";
 
 import "./account.sass";
 
@@ -29,15 +28,14 @@ class Login extends Component {
      * @param {string} token token缓存
      */
     const setUserInfo = token => {
-      axios.infoByToken(token).then(res => {
+      infoByToken(token).then(res => {
         if (res.data.status == 0) {
           console.log(res.data.data);
           userStore.setUserInfo(res.data.data); //保存到mobx
           console.log(userStore.user);
         } else if (res.data.status == -100) {
-          console.log("丢失参数!");
           Taro.showToast({
-            title: "参数丢失",
+            title: "参数错误",
             icon: "fail",
             duration: 2000
           });
@@ -81,21 +79,24 @@ class Login extends Component {
     const listline = [
       {
         id: 1,
-        name: "信息",
-        icon: "icon-RectangleCopy27",
-        badge: "2"
+        name: "酒店订单",
+        icon: "icon-l-enterprise",
+        badge: "2",
+        url: ""
       },
       {
         id: 2,
-        name: "个人中心",
-        icon: "icon-RectangleCopy4",
-        badge: ""
+        name: "账户",
+        icon: "icon-l-coupon",
+        badge: "",
+        url: ""
       },
       {
         id: 3,
-        name: "测试3",
-        icon: "icon-RectangleCopy8",
-        badge: ""
+        name: "客服",
+        icon: "icon-l-headset",
+        badge: "",
+        url: ""
       }
     ];
     //list统一设置

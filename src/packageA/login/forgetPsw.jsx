@@ -2,7 +2,7 @@ import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Picker } from "@tarojs/components";
 import { observer, inject } from "@tarojs/mobx";
 import { AtButton, AtInput, AtForm, AtCountdown, AtToast } from "taro-ui";
-import axios from "../../actions/api";
+import { SmsValidate, ForgetPsw, Sms } from "@actions/api";
 import "./forgetPsw.sass";
 
 class Login extends Component {
@@ -91,7 +91,7 @@ class Login extends Component {
       code: this.state.captcha,
       rand: this.state.rand
     };
-    axios.SmsValidate(param).then(res => {
+    SmsValidate(param).then(res => {
       console.log(res.data);
       if (res.data.status == 100) {
         this.setState({
@@ -117,7 +117,7 @@ class Login extends Component {
       passWord: this.state.passWord
     };
     //忘记密码接口
-    axios.ForgetPsw(param).then(res => {
+    ForgetPsw(param).then(res => {
       console.log(res);
       if (res.data.status == 0) {
         Taro.navigateTo({
@@ -152,7 +152,7 @@ class Login extends Component {
         () => {
           // showBtn是false时会出现灰色按钮，当倒计时结束又变成可以触发的按钮
           //验证码接口
-          axios.Sms(this.state.phone).then(res => {
+          Sms(this.state.phone).then(res => {
             if (res.data.status == 0) {
               this.setState(
                 {

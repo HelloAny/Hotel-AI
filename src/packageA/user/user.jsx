@@ -1,13 +1,13 @@
 import Taro, { Component, getUserInfo } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 import { AtAvatar } from "taro-ui";
-import axios from "../../actions/api";
-import { reLaunch } from "../../utils"; //测试用
+import { infoByToken, userPortraitUpload } from "@actions/api";
+import { reLaunch } from "@utils"; //测试用
 import { observer, inject } from "@tarojs/mobx";
 
 import "./user.sass";
 
-import background from "../../assets/images/realAuth/realAuth.png";
+import background from "@assets/images/realAuth/realAuth.png";
 
 @inject("userStore")
 @observer
@@ -30,7 +30,7 @@ class user extends Component {
      * @param {string} token token缓存
      */
     const setUserInfo = token => {
-      axios.infoByToken(token).then(res => {
+      infoByToken(token).then(res => {
         if (res.data.status == 0) {
           console.log(res.data.data);
           userStore.setUserInfo(res.data.data); //保存到mobx
@@ -79,7 +79,7 @@ class user extends Component {
               token: Taro.getStorageSync("token"),
               image: res.path
             };
-            axios.userPortraitUpload(param).then(res => {
+            userPortraitUpload(param).then(res => {
               if (res.data.status == 0) {
                 Taro.showToast({
                   title: "上传成功",
@@ -115,7 +115,7 @@ class user extends Component {
   render() {
     const {
       userStore: {
-        user: { userName, nickName, ID }
+        user: { userName, nickName, ID, email }
       }
     } = this.props;
     return (
@@ -140,7 +140,7 @@ class user extends Component {
           className="at-row at-row__align--center userInfo"
           onClick={this.navigateTo.bind(
             this,
-            "/packageA/user/HCchangeName/HCchangeName"
+            "/packageA/user/changeName/changeName"
           )}
         >
           <View className="at-col at-col-2 title">昵称</View>
@@ -152,9 +152,21 @@ class user extends Component {
         <View className="hr"></View>
         <View className="hr"></View>
         <View
-          className="realAuth"
-          onClick={this.navigateTo.bind(this, "/packageA/realAuth/realAuth")}
+          className="at-row at-row__align--center userInfo"
+          onClick={this.navigateTo.bind(
+            this,
+            "/packageA/user/changeEmail/changeEmail"
+          )}
         >
+          <View className="at-col at-col-2 title">邮箱</View>
+          <View className="at-col at-col-7 text">{email}</View>
+          <View className="at-col at-col-1">
+            <View className="arch">›</View>
+          </View>
+        </View>
+        <View className="hr"></View>
+        <View className="hr"></View>
+        <View className="realAuth">
           <Image className="realAuthBackground" src={background} />
           <View className="at-row">
             <View className="at-col at-col-2">
@@ -170,9 +182,28 @@ class user extends Component {
             </View>
             <View className="realAuthInfo at-col at-col-8">
               {!!ID ? (
-                <View>ID证件:{ID}</View>
-              ) : (
                 <View className="realAuthText">
+                  <View className="iconRealAuthYes iconfont icon-RectangleCopy1"></View>
+                  已认证
+                  <View className="realAuthWhy">ID证件:{ID}</View>
+                  <View
+                    className="realAuthAgain"
+                    onClick={this.navigateTo.bind(
+                      this,
+                      "/packageA/realAuth/realAuth"
+                    )}
+                  >
+                    重新认证
+                  </View>
+                </View>
+              ) : (
+                <View
+                  className="realAuthText"
+                  onClick={this.navigateTo.bind(
+                    this,
+                    "/packageA/realAuth/realAuth"
+                  )}
+                >
                   <View className="iconRealAuthNo iconfont icon-RectangleCopy"></View>
                   未实名认证
                   <View className="realAuthWhy">了解为什么要实名认证?</View>

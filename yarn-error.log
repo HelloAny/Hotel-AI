@@ -5,13 +5,13 @@ PATH:
   D:\XShell\;C:\Program Files (x86)\Common Files\Oracle\Java\javapath\bin;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Git\cmd;node_modules\electron-packager\bin;%NVM_HOME%;%NVM_SYMLINK%;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\Liang\AppData\Roaming\npm\;node_modules\npm\bin;"C:\Users\Liang\AppData\Local\Android\Sdk\platform-tools;";C:\Users\Liang\AppData\Local\Android\Sdk\platform-tools;C:\Users\Liang\AppData\Local\Android\Sdk\tools;C:\Program Files\Java\jdk-13.0.1\bin;D:\Microsoft VS Code\bin;D:\nvm;C:\Program Files\nodejs
 
 Yarn version: 
-  1.19.2
+  1.16.0
 
 Node version: 
   13.8.0
 
 Platform: 
-  win32 x64
+  darwin x64
 
 Trace: 
   Error: EPERM: operation not permitted, unlink 'C:\Users\Liang\Desktop\Hotel-AI\node_modules\virtual-module-webpack-plugin\examples'

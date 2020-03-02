@@ -29,7 +29,7 @@ export default class IM extends Component {
 
   info = null;
 
-  _breakBug = false
+  _breakBug = false;
 
   constructor() {
     super(...arguments);
@@ -80,7 +80,7 @@ export default class IM extends Component {
     this.setState({
       roomName: robotRoom ? robotRoom : this.state.roomName
     });
-    this._breakBug = true
+    this._breakBug = true;
   }
 
   // socket 事件回调
@@ -178,10 +178,10 @@ export default class IM extends Component {
   }
 
   componentDidUpdate() {
-    if(this._breakBug){
-      this.setState({breakBug: !this.state.breakBug})
-      this._breakBug = false
-    } 
+    if (this._breakBug) {
+      this.setState({ breakBug: !this.state.breakBug });
+      this._breakBug = false;
+    }
     console.timeEnd("IM");
   }
 

@@ -5,6 +5,7 @@ import store from "./store"
 import { objectDeepCompare } from "./utils";
 import Server from "./service/SocketServer";
 
+import "taro-ui/dist/style/index.scss";
 import "./app.scss";
 
 //*************taro-ui组件按需引入！！！！*****************
@@ -38,8 +39,10 @@ class App extends Component {
           "login/loginByPsw",
           "login/login",
           "user/user",
+          "user/changeName/changeName",
+          "user/changeEmail/changeEmail",
           "realAuth/realAuth",
-          "user/HCchangeName/HCchangeName"
+          "realAuth/detailAuth/detailAuth"
         ]
       },
       {
@@ -59,10 +62,10 @@ class App extends Component {
       }
     ],
     window: {
-      backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black',
+      backgroundTextStyle: "light",
+      navigationBarBackgroundColor: "#fff",
+      navigationBarTitleText: "WeChat",
+      navigationBarTextStyle: "black"
       // enablePullDownRefresh: true,
       // backgroundTextStyle:"dark"
     },

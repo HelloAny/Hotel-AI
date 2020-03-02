@@ -2,10 +2,11 @@
 	"miniprogramRoot": "dist/",
 	"projectname": "Hotel-AI",
 	"description": "hotel",
-	"appid": "wx145c350a234c2a7f",
+	"appid": "wx6eb04145b8e0f6fc",
 	"setting": {
 		"urlCheck": false,
 		"es6": false,
+		"enhance": false,
 		"postcss": false,
 		"minified": false,
 		"newFeature": true,
@@ -15,7 +16,7 @@
 		"showShadowRootInWxmlPanel": true,
 		"scopeDataCheck": false,
 		"checkInvalidKey": true,
-		"checkSiteMap": true,
+		"checkSiteMap": false,
 		"uploadWithSourceMap": true,
 		"babelSetting": {
 			"ignore": [],
