@@ -1,13 +1,10 @@
 import Taro, { Component } from "@tarojs/taro";
 import { Provider, onError } from "@tarojs/mobx";
 import Index from "./pages/index";
-import counterStore from "./store/counter";
-import userInfo from "./store/user";
+import store from "./store"
 import { objectDeepCompare } from "./utils";
 import Server from "./service/SocketServer";
 
-// import "taro-ui/dist/style/index.scss";
-import "./assets/icons/fonts/iconfont.css";
 import "./app.scss";
 
 //*************taro-ui组件按需引入！！！！*****************
@@ -23,10 +20,6 @@ import "./app.scss";
   Server.connect()
 }()
 
-const store = {
-  userStore: new userInfo()
-};
-
 onError(error => {
   console.log("mobx global error listener:", error);
 });
@@ -35,7 +28,7 @@ class App extends Component {
   componentDidMount() {}
 
   config = {
-    pages: ["pages/notify/index","pages/journey/index","pages/account/account"],
+    pages: ["packageC/pages/receipt/index","packageC/pages/details/index","pages/notify/index","pages/journey/index","pages/account/account"],
     subpackages: [
       {
         root: "packageA",
@@ -55,15 +48,15 @@ class App extends Component {
           "ActivityService/activityService"
         ]
       },
-      {
-        root: "packageC",
-        pages: [
-          "pages/details/index",
-          "pages/addTrip/index",
-          "pages/addTrip/tripForm",
-          "pages/IM/index"
-        ]
-      }
+      // {
+      //   root: "packageC",
+      //   pages: [
+      //     "pages/details/index",
+      //     "pages/addTrip/index",
+      //     "pages/addTrip/tripForm",
+      //     "pages/IM/index"
+      //   ]
+      // }
     ],
     window: {
       backgroundTextStyle: 'light',

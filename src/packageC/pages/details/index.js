@@ -117,12 +117,22 @@ export default class Details extends Component {
     });
   }
 
+  // 展开介绍
   handleIntroControl() {
     this.setState({
       introClass: this.state.introClass == "more" ? "fewer" : "more"
     });
   }
 
+  // 进入同行者
+  handleNavToTraveler() {
+    const { id } = this.$router.params;
+    Taro.navigateTo({
+      url: "/packageC/pages/traveler/index?id=" + id
+    });
+  }
+
+  // 打开拓展
   handleSpreadExpansion() {
     console.log("handleSpreadExpansion");
   }
@@ -269,10 +279,10 @@ export default class Details extends Component {
           >
             <Image
               className="btn"
-              src="http://q4ehilcoe.bkt.clouddn.com/centerBtn.png"
+              src="https://hotel-1258976754.cos.ap-shanghai.myqcloud.com/centerBtn.png"
             />
           </View>
-          <View className="right">
+          <View className="right" onClick={this.handleNavToTraveler.bind(this)}>
             <AtIcon value="user" />
             <Text className="nav-text">同行者</Text>
           </View>

@@ -6,6 +6,76 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "386271",
+      "name": "QQ",
+      "font_class": "qq",
+      "unicode": "e6af",
+      "unicode_decimal": 59055
+    },
+    {
+      "icon_id": "396485",
+      "name": "复制",
+      "font_class": "fuzhi",
+      "unicode": "e668",
+      "unicode_decimal": 58984
+    },
+    {
+      "icon_id": "750883",
+      "name": "二维码",
+      "font_class": "erweima",
+      "unicode": "e7ad",
+      "unicode_decimal": 59309
+    },
+    {
+      "icon_id": "868654",
+      "name": "icon-微信朋友圈",
+      "font_class": "wxshare",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    },
+    {
+      "icon_id": "1727430",
+      "name": "208聊天、对话",
+      "font_class": "chat",
+      "unicode": "e8bc",
+      "unicode_decimal": 59580
+    },
+    {
+      "icon_id": "6940840",
+      "name": "微信",
+      "font_class": "wx",
+      "unicode": "e65c",
+      "unicode_decimal": 58972
+    },
+    {
+      "icon_id": "5412236",
+      "name": "向下",
+      "font_class": "down",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "6541461",
+      "name": "向下",
+      "font_class": "up1",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "5359613",
+      "name": "酒店",
+      "font_class": "jiudian",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
+      "icon_id": "6028319",
+      "name": "完成",
+      "font_class": "sign-readied",
+      "unicode": "e628",
+      "unicode_decimal": 58920
+    },
+    {
       "icon_id": "6204756",
       "name": "失败",
       "font_class": "error",
@@ -20,27 +90,6 @@
       "unicode_decimal": 58902
     },
     {
-      "icon_id": "11982739",
-      "name": "Gps, navigation, location",
-      "font_class": "Gpsnavigationlocation",
-      "unicode": "e9db",
-      "unicode_decimal": 59867
-    },
-    {
-      "icon_id": "13102476",
-      "name": "Gps, navigation, location",
-      "font_class": "Gpsnavigationlocation-copy",
-      "unicode": "e9dc",
-      "unicode_decimal": 59868
-    },
-    {
-      "icon_id": "6382524",
-      "name": "导航",
-      "font_class": "daohang1",
-      "unicode": "e683",
-      "unicode_decimal": 59011
-    },
-    {
       "icon_id": "9413852",
       "name": "定位 位置",
       "font_class": "dingweiweizhi",
@@ -53,13 +102,6 @@
       "font_class": "kefu",
       "unicode": "e600",
       "unicode_decimal": 58880
-    },
-    {
-      "icon_id": "12082681",
-      "name": "向上",
-      "font_class": "up",
-      "unicode": "e602",
-      "unicode_decimal": 58882
     },
     {
       "icon_id": "5648978",
