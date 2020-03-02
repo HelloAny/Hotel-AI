@@ -1,13 +1,12 @@
 import Taro, { Component } from "@tarojs/taro";
 import { Provider, onError } from "@tarojs/mobx";
-import Index from "./pages/index";
 import { userInfo, cardPage } from "@store";
+import { objectDeepCompare } from "@utils";
+import Server from "@service/SocketServer";
+import Index from "./pages/index";
 
 import "taro-ui/dist/style/index.scss";
-import "@assets/icons/fontsOne/iconfont.css";
 import "./app.scss";
-import { objectDeepCompare } from "@utils";
-import Server from "@pages/IM/server";
 
 //*************taro-ui组件按需引入！！！！*****************
 
@@ -17,14 +16,16 @@ import Server from "@pages/IM/server";
 //   require('nerv-devtools')
 // }
 
-!(function() {
-  Server.connect();
-})();
+// 自动开始连接socket
+!function(){
+  Server.connect()
+}()
 
 const store = {
   userStore: new userInfo(),
   cardPage: new cardPage()
 };
+
 
 onError(error => {
   console.log("mobx global error listener:", error);
@@ -34,7 +35,7 @@ class App extends Component {
   componentDidMount() {}
 
   config = {
-    pages: ["pages/account/account", "pages/index/index"],
+    pages: ["pages/notify/index","pages/journey/index","pages/account/account"],
     subpackages: [
       {
         root: "packageA",
@@ -53,6 +54,21 @@ class App extends Component {
       },
       {
         root: "packageB",
+        pages: [
+          "ActivityService/activityService"
+        ]
+      },
+      {
+        root: "packageC",
+        pages: [
+          "pages/details/index",
+          "pages/addTrip/index",
+          "pages/addTrip/tripForm",
+          "pages/IM/index"
+        ]
+      },
+      {
+        root: "packageB",
         pages: ["ActivityService/activityService"]
       }
     ],
@@ -63,23 +79,25 @@ class App extends Component {
       navigationBarTextStyle: "black",
       enablePullDownRefresh: true,
       backgroundTextStyle: "dark"
-      // enablePullDownRefresh: true,
-      // backgroundTextStyle:"dark"
     },
     tabBar: {
       color: "#ccc",
       selectedColor: "#00f",
       backgroundColor: "#fff",
       borderStyle: "black",
-      position: "top",
+      position: "bottom",
       list: [
         {
           pagePath: "pages/account/account",
           text: "我的"
         },
         {
-          pagePath: "pages/index/index",
-          text: "我的"
+          pagePath: "pages/journey/index",
+          text: "行程"
+        },
+        {
+          pagePath: "pages/notify/index",
+          text: "通知"
         }
       ]
     }

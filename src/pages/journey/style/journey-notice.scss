@@ -1,0 +1,67 @@
+.container {
+  background-color: white;
+  height: 36Px;
+  border-radius: 10Px;
+  display: flex;
+  flex-direction: row;
+  padding: 10Px;
+  margin-top: 10Px;
+  .figure {
+    width: 55Px;
+    height: 100%;
+    border-radius: 5Px;
+  }
+  .gist {
+    flex: 1;
+    padding: 0 10Px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .title {
+      color: #606266;
+      font-size: 14Px;
+    }
+    .tip {
+      color: #909399;
+      font-size: 12Px;
+    }
+  }
+  .status {
+    width: 60Px;
+    text-align: center;
+    line-height: 36Px;
+    &.danger {
+      color: #F56C6C;
+    }
+    &.success{
+      color: #67C23A;
+    }
+    &.info{
+      color: #E6A23C;
+    }
+  }
+  .btn {
+    font-size: 13Px;
+    color: #606266;
+    border-radius: 30Px;
+    border: 1Px #ccc solid;
+    height: 30Px;
+    width: 55Px;
+    text-align: center;
+    line-height: 30Px;
+    margin: 3Px 0Px;
+  }
+}
+
+.danger::after{
+  content: "×";
+  display: inline-block;
+  transform: translateX(3Px);
+}
+
+.success::after{
+  content: "√";
+  display: inline-block;
+  transform: translateX(3Px);
+}

@@ -6,3 +6,5 @@ export { default as HClistline } from "./HClistline";
 export { default as HCcard } from "./HCcard";
 export { default as HCpageCard } from "./HCpageCard";
 export { default as HCnavbar } from "./HCnavbar";
+export { default as Navbar } from "./Navbar"
+export { default as Ico } from "./Ico"

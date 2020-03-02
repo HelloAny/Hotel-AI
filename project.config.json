@@ -1,8 +1,8 @@
 {
 	"miniprogramRoot": "dist/",
-	"projectname": "hotel",
+	"projectname": "Hotel-AI",
 	"description": "hotel",
-	"appid": "wx6eb04145b8e0f6fc",
+	"appid": "wxff8350da77ca8d3b",
 	"setting": {
 		"urlCheck": false,
 		"es6": false,
