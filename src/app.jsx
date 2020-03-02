@@ -4,8 +4,7 @@ import { userInfo, cardPage } from "@store";
 import { objectDeepCompare } from "@utils";
 import Server from "@service/SocketServer";
 import Index from "./pages/index";
-
-import "taro-ui/dist/style/index.scss";
+// import "taro-ui/dist/style/index.scss";
 import "./app.scss";
 
 //*************taro-ui组件按需引入！！！！*****************
@@ -66,10 +65,6 @@ class App extends Component {
           "pages/addTrip/tripForm",
           "pages/IM/index"
         ]
-      },
-      {
-        root: "packageB",
-        pages: ["ActivityService/activityService"]
       }
     ],
     window: {
