@@ -279,7 +279,7 @@ export default class Details extends Component {
           >
             <Image
               className="btn"
-              src="https://hotel-1258976754.cos.ap-shanghai.myqcloud.com/centerBtn.png"
+              src="https://hotel-ai-1257814705.cos.ap-shanghai.myqcloud.com/%E5%89%8D%E7%AB%AF/journey/centerBtn.png"
             />
           </View>
           <View className="right" onClick={this.handleNavToTraveler.bind(this)}>

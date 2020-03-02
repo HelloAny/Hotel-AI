@@ -5,19 +5,23 @@ import { FriendPlus, Visit, Invitation, BoardItem } from "./cmps";
 
 import "./assets/style/board.scss";
 
+const TYPES = ["INVITATION_RECEIVE", "INVITATION_ACCEPT", "INVITATION_REFUSE","VISIT_RECEIVE", "VISIT_ACCEPT", "VISIT_REFUSE"]
+
 export default class Board extends Component {
   static defaultProps = {
     onNoticeReadied: () => {}
   };
 
-  state = {};
+  state = {
+    notifyList: []
+  };
 
   propsKeys = [];
 
   stateKeys = [];
 
   handleClick(index) {
-    this.props.onClick(index);
+    this.props.onNoticeReadied(1);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -45,7 +49,7 @@ export default class Board extends Component {
           </View>
         </View>
         <View className="list">
-          <BoardItem onClick={this.handleClick.bind(this, 1)} type="" mark>
+          <BoardItem onClick={this.handleClick.bind(this, 1)} mark>
             <FriendPlus />
           </BoardItem>
           <BoardItem onClick={this.handleClick.bind(this, 2)} mark>

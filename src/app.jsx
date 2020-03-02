@@ -28,7 +28,7 @@ class App extends Component {
   componentDidMount() {}
 
   config = {
-    pages: ["packageC/pages/receipt/index","packageC/pages/details/index","pages/notify/index","pages/journey/index","pages/account/account"],
+    pages: ["pages/notify/index","pages/journey/index","pages/account/account"],
     subpackages: [
       {
         root: "packageA",
@@ -48,15 +48,15 @@ class App extends Component {
           "ActivityService/activityService"
         ]
       },
-      // {
-      //   root: "packageC",
-      //   pages: [
-      //     "pages/details/index",
-      //     "pages/addTrip/index",
-      //     "pages/addTrip/tripForm",
-      //     "pages/IM/index"
-      //   ]
-      // }
+      {
+        root: "packageC",
+        pages: [
+          "pages/details/index",
+          "pages/addTrip/index",
+          "pages/addTrip/tripForm",
+          "pages/IM/index"
+        ]
+      }
     ],
     window: {
       backgroundTextStyle: 'light',

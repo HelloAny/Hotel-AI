@@ -3,34 +3,6 @@ import { View } from "@tarojs/components";
 import { AtIcon } from "taro-ui";
 import { getDeviceInfo } from "../../utils";
 
-const StyleSheet = {
-  container: {
-    zIndex: "999",
-    position: "fixed",
-    width: "100%",
-    top: "0",
-    backgroundColor: "transparent"
-  },
-  header: {
-    position: "absolute",
-    display: "flex",
-    alignItems: "center",
-    width: "100%"
-  },
-  btn: {
-    transform: "translateY(2px)",
-    backgroundColor: "",
-    borderRadius: "20Px",
-    padding: "2Px 10Px 2Px 5Px"
-  },
-  title: {
-    position:"absolute",
-    left: "50%",
-    top: "50%",
-    transform: "translate(-55%,-50%)"
-  }
-};
-
 export default class NavBar extends Component {
   static defaultProps = {
     color: "#303133",
@@ -105,3 +77,32 @@ export default class NavBar extends Component {
     );
   }
 }
+
+const StyleSheet = {
+  container: {
+    zIndex: "999",
+    position: "fixed",
+    width: "100%",
+    top: "0",
+    left: "0",
+    backgroundColor: "transparent"
+  },
+  header: {
+    position: "absolute",
+    display: "flex",
+    alignItems: "center",
+    width: "100%"
+  },
+  btn: {
+    transform: "translateY(2px)",
+    backgroundColor: "",
+    borderRadius: "20Px",
+    padding: "2Px 10Px 2Px 5Px"
+  },
+  title: {
+    position:"absolute",
+    left: "50%",
+    top: "50%",
+    transform: "translate(-55%,-50%)"
+  }
+};

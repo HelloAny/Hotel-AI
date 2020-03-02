@@ -1,13 +1,22 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View } from "@tarojs/components";
+import { View, Image } from "@tarojs/components";
 
-import "../assets/style/board-item.scss"
+import "../assets/style/board-item.scss";
+
+const TYPES = [
+  "INVITATION_RECEIVE",
+  "INVITATION_ACCEPT",
+  "INVITATION_REFUSE",
+  "VISIT_RECEIVE",
+  "VISIT_ACCEPT",
+  "VISIT_REFUSE"
+];
 
 export default class BoardItem extends Component {
   static defaultProps = {
     onClick: () => {},
-    type: "",
-    mark: false
+    mark: false,
+    imgUrl: "https://hotel.lcworkroom.cn/api/pic/get/users/?name=13858181317"
   };
 
   state = {};
@@ -22,10 +31,12 @@ export default class BoardItem extends Component {
   }
 
   render() {
-    const { type } = this.props
+    const { imgUrl, mark } = this.props;
     return (
       <View className="board-item" onClick={this.props.onClick}>
-        <View className="tag"></View>
+        <View className={"tag " + (mark ? "mark" : "")}>
+          <Image src={imgUrl} className="img" />
+        </View>
         <View className="detail">{this.props.children}</View>
       </View>
     );

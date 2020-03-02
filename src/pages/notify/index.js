@@ -28,17 +28,17 @@ export default class Notify extends Component {
     });
   }
 
-  // 未读通知
+  // 未读通知标为已读数量
   handleReadied(num) {
     this.setState({
-      notificationNum: this.state.notificationNum - num
+      notificationNum: Math.max(this.state.notificationNum - num, 0)
     });
   }
 
-  // 未读聊天消息
+  // 未读聊天消息标为已读数量
   handleChatReadied(num) {
     this.setState({
-      messageNum: this.state.messageNum - num
+      messageNum: Math.max(this.state.messageNum - num, 0)
     });
   }
 
@@ -59,8 +59,8 @@ export default class Notify extends Component {
   render() {
     const { current, notificationNum, messageNum } = this.state;
     const tabList = [
-      { title: "通知" + (notificationNum ? `(${notificationNum})` : "") },
-      { title: "私信" + (messageNum ? `(${messageNum})` : "") }
+      { title: "通知" + (notificationNum ? `(${notificationNum > 99 ? "99+" : notificationNum})` : "") },
+      { title: "私信" + (messageNum ? `(${messageNum > 99 ? "99+" : messageNum})` : "") }
     ];
     return (
       <View style={{ backgroundColor: "whitesmoke", height: "100vh" }}>
