@@ -1,0 +1,143 @@
+.traveler-container {
+  background-color: whitesmoke;
+  padding-top: 10Px;
+  min-height: calc(100vh - 10Px);
+  .add-traveler {
+    display: flex;
+    justify-content: space-between;
+    margin: 0Px 10Px 10Px;
+    border-radius: 10Px;
+    height: 20Px;
+    line-height: 20Px;
+    font-size: 12Px;
+    color: #606266;
+    padding: 10Px;
+    background-color: white;
+    &:active{
+      background-color: #ccc;
+    }
+  }
+  .traveler-box {
+    margin: 10Px;
+    padding: 10Px;
+    border-radius: 10Px;
+    background-color: white;
+    .title {
+      color: #303133;
+      font-size: 14Px;
+      font-weight: 800;
+    }
+    .traveler-list {
+      margin-top: 10Px;
+      border-top: 1px #E4E7ED solid;
+      .traveler-item {
+        display: flex;
+        margin: 10PX;
+        padding: 10Px;
+        border-bottom: 1px #EBEEF5 solid;
+        font-size: 12Px;
+        color: #606266;
+        align-items: center;
+        justify-content: space-between;
+        line-height: 30Px;
+        &:active{
+          opacity: 0.5;
+        }
+        .user{
+          display: flex;
+          align-items: center;
+          .user-portrait {
+            height: 30Px;
+            width: 30Px;
+            margin-right: 10Px;
+            border-radius: 30Px;
+          }
+          .user-name {
+            display: inline-block;
+            height: 30Px;
+            line-height: 30Px;
+          }
+        }
+        .character {
+          color: #909399;
+        }
+      }
+    }
+  }
+  .bottomNav {
+    position: fixed;
+    bottom: 0;
+    height: 56Px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    .left,
+    .right {
+      flex: 1;
+      height: 44Px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: white;
+      color: #909399;
+      .nav-text {
+        font-size: 12Px;
+      }
+      &.active {
+        color: #303133;
+      }
+    }
+    .center {
+      width: 100Px;
+      height: 56Px;
+      .btn {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+  .invite-box {
+    display: flex;
+    .btn {
+      color: white;
+      width: 50Px;
+      height: 50Px;
+      border-radius: 50Px;
+      background-color: greenyellow;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20Px;
+      margin-right: 20Px;
+      transition: "opacity" .15s;
+      &.red {
+        background-color: #ed5554;
+      }
+      &.green {
+        background-color: #1ec659;
+      }
+      &.green-grey {
+        background-color: #1ebea4;
+      }
+      &.blue {
+        background-color: #1eb2fc;
+      }
+      &.white{
+        color: black;
+        background-color: whitesmoke;
+      }
+      &:active {
+        opacity: 0.5;
+      }
+      .title{
+        position: absolute;
+        font-size: 12Px;
+        color: #303133;
+        transform: translateY(35Px);
+      }
+    }
+  }
+}
