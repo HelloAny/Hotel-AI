@@ -1,6 +1,6 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Picker, Textarea, Image } from "@tarojs/components";
-import Server from "../../../actions/api";
+import * as Server from "../../../actions";
 import { AtIcon, AtList, AtListItem, AtSearchBar } from "taro-ui";
 import { dateFormat } from "../../../utils";
 

@@ -1,7 +1,7 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Image } from "@tarojs/components";
 import { AtIcon } from "taro-ui";
-import Server from "../../../actions/api";
+import * as Server from "../../../actions";
 import { dateFormat } from "../../../utils";
 import NavBar from "../../../components/Navbar";
 import Timeline from "./Timeline";

@@ -1,13 +1,15 @@
 import Taro, { Component } from "@tarojs/taro";
+import { inject, observer } from "@tarojs/mobx";
 import { View, Image } from "@tarojs/components";
-import Server from "../../actions/api";
+import * as Server from "../../actions";
 import NavBar from "../../components/Navbar";
 import { NoticeItem, OverviewItem, RecmdItem } from "./cmps";
 import { dateFormat } from "../../utils";
 
 import "./style/journey.scss";
 
-export default class Journey extends Component {
+@inject("userStore")
+class Journey extends Component {
   config = {
     navigationStyle: "custom"
   };
@@ -36,33 +38,79 @@ export default class Journey extends Component {
       }),
       ongoing: records
         .map(record => {
-          if (record.status == "booking" || record.status == "checkin") {
+          if (
+            record.status == "booking" ||
+            record.status == "checkin" ||
+            (record.type == "visit" && record.end_time > Date.now())
+          ) {
             let task = {};
             task.id = record.id;
-            task.name = record.name;
-            task.time1 = dateFormat("YYYY.mm.dd", record.check_in_time);
-            task.time2 = dateFormat("YYYY.mm.dd", record.check_out_time);
+            task.name = record.name || "访问" + record.hotel;
+            task.time1 = dateFormat(
+              "YYYY.mm.dd",
+              record.check_in_time || record.add_time
+            );
+            task.time2 = dateFormat(
+              "YYYY.mm.dd",
+              record.check_out_time || record.end_time
+            );
             let imgs = record.imgs.horizontal;
             task.img = imgs[Math.floor(Math.random() * imgs.length)];
+            task.type = record.type;
+            task.status = record.status;
+            task.hotel_id = record.type == "host" ? record.id : record.guest_room_id;
+            switch (record.status) {
+              case "booking":
+                task.des = "查看";
+                break;
+              case "checkin":
+                task.des = "查看";
+                break;
+              case "waiting":
+                task.des = "等待回复";
+                break;
+              case "accept":
+                task.des = "已接受";
+                break;
+              case "refuse":
+                task.des = "已拒绝";
+                break;
+            }
             return task;
           }
         })
         .filter(v => v !== undefined),
       records: records.map(record => {
-        record.time1 = dateFormat("YYYY.mm.dd", record.check_in_time);
-        record.time2 = dateFormat("YYYY.mm.dd", record.check_out_time);
+        record.time1 = dateFormat(
+          "YYYY.mm.dd",
+          record.check_in_time || record.add_time
+        );
+        record.time2 = dateFormat(
+          "YYYY.mm.dd",
+          record.check_out_time || record.end_time
+        );
+        record.name = record.name || "访问" + record.hotel;
+        record.hotel_id = record.type == "host" ? record.id : record.guest_room_id
         switch (record.status) {
           case "booking":
-            record.status = "预定中";
+            record.des = "预定中";
             break;
           case "checkin":
-            record.status = "入住中";
+            record.des = "入住中";
             break;
           case "checkout":
-            record.status = "行程结束";
+            record.des = "行程结束";
             break;
           case "out_back":
-            record.status = "已退订";
+            record.des = "已退订";
+          case "waiting":
+            record.des = "等待";
+            break;
+          case "accept":
+            record.des = "已接受";
+            break;
+          case "refuse":
+            record.des = "已拒绝";
             break;
         }
         let imgs = record.imgs.Upright;
@@ -75,12 +123,19 @@ export default class Journey extends Component {
   handleAddJourney() {
     setTimeout(() => {
       Taro.navigateTo({
-        url: "/packageC/pages/addTrip/index"
+        url: "/packageC/pages/addTrip/chose"
       });
     }, 200);
   }
 
-  handleGoToDetails(id) {
+  handleGoToDetails(id, type = "host", status) {
+    if (type == "visit" && status != "accept") {
+      return Taro.showToast({
+        title: "暂时无法查看哦",
+        icon: "none",
+        duration: 2000
+      });
+    }
     Taro.navigateTo({
       url: "/packageC/pages/details/index?id=" + id
     });
@@ -135,7 +190,7 @@ export default class Journey extends Component {
         <View className="header">
           <View className="bg-container">
             <Image
-              src="https://hotel-1258976754.cos.ap-shanghai.myqcloud.com/journeyBg.jpg"
+              src="https://hotel-ai-1257814705.cos.ap-shanghai.myqcloud.com/%E5%89%8D%E7%AB%AF/journey/journeyBg.jpg"
               className="bg"
             />
           </View>
@@ -152,7 +207,12 @@ export default class Journey extends Component {
           {ongoing.map(o => (
             <NoticeItem
               info={o}
-              onClick={this.handleGoToDetails.bind(this, o.id)}
+              onClick={this.handleGoToDetails.bind(
+                this,
+                o.hotel_id,
+                o.type,
+                o.status
+              )}
             />
           ))}
         </View>
@@ -163,7 +223,7 @@ export default class Journey extends Component {
               <View className="overview-container">
                 <OverviewItem
                   info={r}
-                  onClick={this.handleGoToDetails.bind(this, r.id)}
+                  onClick={this.handleGoToDetails.bind(this, r.hotel_id, r.type, r.status)}
                 />
               </View>
             ))}

@@ -1,6 +1,7 @@
 import Taro, { Component } from "@tarojs/taro";
 import { Provider, onError } from "@tarojs/mobx";
-import { userInfo, cardPage } from "@store";
+import { autorun } from "mobx";
+import * as store from "@store";
 import { objectDeepCompare } from "@utils";
 import Server from "@service/SocketServer";
 import Index from "./pages/index";
@@ -15,16 +16,20 @@ import "./app.scss";
 //   require('nerv-devtools')
 // }
 
-// 自动开始连接socket
-!function(){
-  Server.connect()
-}()
-
-const store = {
-  userStore: new userInfo(),
-  cardPage: new cardPage()
-};
-
+// 自动开始连接socket,尝试初始化身份信息
+!(function() {
+  Server.connect();
+  Server.emit(
+    "preLogin",
+    Object.assign({}, store.userStore.user, {
+      token: Taro.getStorageSync("token")
+    })
+  );
+  autorun(() => {
+    let userInfo = store.userStore.user;
+    if (Server.status == "login") Server.emit("updateInfo", userInfo);
+  });
+})();
 
 onError(error => {
   console.log("mobx global error listener:", error);
@@ -34,7 +39,11 @@ class App extends Component {
   componentDidMount() {}
 
   config = {
-    pages: ["pages/notify/index","pages/journey/index","pages/account/account"],
+    pages: [
+      "pages/notify/index",
+      "pages/journey/index",
+      "pages/account/account"
+    ],
     subpackages: [
       {
         root: "packageA",
@@ -53,17 +62,19 @@ class App extends Component {
       },
       {
         root: "packageB",
-        pages: [
-          "ActivityService/activityService"
-        ]
+        pages: ["ActivityService/activityService"]
       },
       {
         root: "packageC",
         pages: [
           "pages/details/index",
-          "pages/addTrip/index",
+          "pages/traveler/index",
+          "pages/lodgerFinder/index",
+          "pages/addTrip/chose",
           "pages/addTrip/tripForm",
-          "pages/IM/index"
+          "pages/IM/index",
+          "pages/receipt/index",
+          "pages/receipt/result"
         ]
       }
     ],
@@ -92,7 +103,7 @@ class App extends Component {
         },
         {
           pagePath: "pages/notify/index",
-          text: "通知"
+          text: "消息"
         }
       ]
     }

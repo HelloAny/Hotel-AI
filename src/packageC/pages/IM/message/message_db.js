@@ -1,4 +1,6 @@
 import Taro from "@tarojs/taro";
+import { autorun } from "mobx";
+import { userStore } from "../../../../store";
 import { UUID, dateFormat } from "../../../../utils";
 import Message from "./message_body";
 
@@ -65,11 +67,18 @@ function _getTipTime(timestamp) {
 }
 
 class RoomStruct {
-  constructor({ uuid = "", master = "", members = [], messageList = [] }) {
-    this.uuid = typeof uuid == "string" && uuid ? new UUID(uuid) : uuid;
+  constructor({
+    uuid = "",
+    master = "",
+    members = [],
+    messageList = [],
+    phone = ""
+  }) {
+    this.uuid = new UUID(uuid);
     this.master = master;
     this.members = members;
     this.messageList = messageList;
+    this.phone = phone;
 
     this.messageList.push = msgId => {
       Array.prototype.push.call(this.messageList, msgId);
@@ -110,6 +119,11 @@ class RoomStruct {
   }
 
   onPush() {}
+
+  setPhone(phone) {
+    if (phone) this.phone = phone;
+    Taro.setStorageSync(this.uuid.toString(), this);
+  }
 }
 
 class MessageDB {
@@ -118,7 +132,8 @@ class MessageDB {
     master: {
       ID: "",
       uuid: "",
-      robotRoom: ""
+      robotRoom: "",
+      info: {}
     },
     rooms: []
   };
@@ -134,6 +149,13 @@ class MessageDB {
    */
   constructor(dbName) {
     this.init(dbName);
+    this.disposer = autorun(() => {
+      let userInfo = userStore.user;
+      if (this.dbInfo.master.ID && userInfo.id != this.dbInfo.master.ID)
+        createMessageDB(userInfo.id);
+      else this.updateMasterInfo(userInfo);
+    });
+    db = this;
   }
 
   /**
@@ -173,6 +195,12 @@ class MessageDB {
     this._saveDB();
   }
 
+  updateMasterInfo(info) {
+    this.dbInfo.master.info = info;
+    this.dbInfo.master.ID = info.id || this.dbInfo.master.ID;
+    this._saveDB();
+  }
+
   /**
    * 加入房间
    * @param {UUID} uuid 房间唯一id 服务器生成
@@ -203,11 +231,12 @@ class MessageDB {
    */
   pushMessage(roomId, msgs) {
     if (!(msgs instanceof Array)) msgs = [msgs];
+    let room = this.getRoom(roomId);
     msgs.forEach(msg => {
       this._saveMessage(msg);
-      this.rooms.get(roomId).messageList.push(msg.uuid.toString());
-      this._saveRoom(roomId);
+      room.messageList.push(msg.uuid.toString());
     });
+    this._saveRoom(roomId);
   }
 
   /**
@@ -258,8 +287,15 @@ class MessageDB {
   }
   getRoom(uuid) {
     if (typeof uuid == "object") uuid = uuid.toString();
-    if (!this.rooms.get(uuid)) this.rooms.set(uuid,new RoomStruct({ uuid }));
-    this._saveRoom(uuid);
+    if (!this.rooms.get(uuid)) {
+      this.rooms.set(
+        uuid,
+        new RoomStruct({ uuid, master: this.dbInfo.master.uuid })
+      );
+      this.dbInfo.rooms.push(uuid);
+      this._saveDB();
+      this._saveRoom(uuid);
+    }
     return this.rooms.get(uuid);
   }
 
@@ -276,6 +312,17 @@ class MessageDB {
     if (typeof uuid == "object") uuid = uuid.toString();
     let info = Taro.getStorageSync(uuid);
     return info ? Message.parse(uuid, info) : null;
+  }
+
+  /**
+   * 查找房间
+   */
+  getRoomByPhone(phone) {
+    let res = null;
+    this.rooms.forEach(room => {
+      if (room.phone == phone) res = room;
+    });
+    return res;
   }
 
   /**
@@ -303,4 +350,14 @@ class MessageDB {
   }
 }
 
-export default new MessageDB("customer service v0.1");
+let db = new MessageDB("customer service v0.1 " + userStore.user.id);
+
+/**
+ * 切换新的db。 不存在则创建
+ * @param {number} id 用户id
+ */
+export function createMessageDB(id) {
+  db = new MessageDB("customer service v0.1 ") + id;
+}
+
+export default db;

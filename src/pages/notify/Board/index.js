@@ -2,10 +2,18 @@ import Taro, { Component } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 import { Ico } from "../../../components/Ico";
 import { FriendPlus, Visit, Invitation, BoardItem } from "./cmps";
+import * as Server from "../../../actions";
 
 import "./assets/style/board.scss";
 
-const TYPES = ["INVITATION_RECEIVE", "INVITATION_ACCEPT", "INVITATION_REFUSE","VISIT_RECEIVE", "VISIT_ACCEPT", "VISIT_REFUSE"]
+const TYPES = [
+  "INVITATION_RECEIVE",
+  "INVITATION_ACCEPT",
+  "INVITATION_REFUSE",
+  "VISIT_RECEIVE",
+  "VISIT_ACCEPT",
+  "VISIT_REFUSE"
+];
 
 export default class Board extends Component {
   static defaultProps = {
@@ -22,6 +30,24 @@ export default class Board extends Component {
 
   handleClick(index) {
     this.props.onNoticeReadied(1);
+    Taro.navigateTo({
+      url: "/packageC/pages/receipt/index?visitId=1&type=visit"
+    });
+  }
+
+  componentWillMount() {
+    Server.getNotifyList()
+      .then(res => {
+        console.log("通知列表",res);
+      })
+      .catch(err => {
+        Taro.showToast({
+          title: "网络开小差了...",
+          icon: "none",
+          duration: 2000
+        });
+        console.log(err);
+      });
   }
 
   shouldComponentUpdate(nextProps, nextState) {

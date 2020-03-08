@@ -16,9 +16,9 @@ export default class MsgsBox extends Component {
 
   static defaultProps = {
     scrollOffset: 0,
-    roomName: "robot",
+    roomName: "",
     refresh: false,
-    breakBug: false,
+    breakBug: false
   };
 
   state = {
@@ -37,7 +37,7 @@ export default class MsgsBox extends Component {
   _start = 0;
   _end = 0;
 
-  propsKeys = ["breakBug","scrollOffset", "roomName", "refresh"];
+  propsKeys = ["breakBug", "scrollOffset", "roomName", "refresh"];
 
   stateKeys = ["scrollTop", "messageList", "scrollIntoView"];
 
@@ -139,14 +139,18 @@ export default class MsgsBox extends Component {
 
   // 房间id更新将重置房间
   _checkUpdate(nextProps) {
-    if (nextProps.breakBug != this.props.breakBug || nextProps.roomName != this.props.roomName) {
-      console.log(nextProps.roomName)
+    if (
+      nextProps.breakBug != this.props.breakBug ||
+      nextProps.roomName != this.props.roomName
+    ) {
+      console.log(nextProps.roomName);
       this.init(nextProps.roomName);
     }
   }
 
   init(rn) {
     let roomName = rn || this.props.roomName;
+    if (!roomName) return;
     this.room = MessageDB.getRoom(roomName);
     this.room.onPush = this.handlePush.bind(this);
     this.end = this._end = this.room.getMsgAmount();

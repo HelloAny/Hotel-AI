@@ -58,7 +58,7 @@ export default class Socket {
    */
   _socketTask = null;
 
-  _onOpen = (e)=>{
+  _onOpen = e => {
     console.log("[Socket] connect success", e);
   };
   _onMessage = null;

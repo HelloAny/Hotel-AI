@@ -20,13 +20,13 @@ export default class OverviewItem extends Component {
   }
 
   render() {
-    const { name, img, status, time1, time2 } = this.props.info;
+    const { name, img, des, time1, time2 } = this.props.info;
     return (
       <View className="container" onClick={this.props.onClick}>
         <Image src={img} className="bg" />
         <View className="content">
           <View className="row1">
-            <Text className="status">{status}</Text>
+            <Text className="status">{des}</Text>
             <Text className="btn">···</Text>
           </View>
           <View className="row2 title">{name}</View>

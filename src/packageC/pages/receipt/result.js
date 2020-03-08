@@ -1,8 +1,8 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Image } from "@tarojs/components";
-import Navbar from "../../../components/Navbar"
+import Navbar from "../../../components/Navbar";
 
-import "../../assets/style/receipt-result.scss"
+import "../../assets/style/receipt-result.scss";
 
 export default class Result extends Component {
   config = {
@@ -31,15 +31,28 @@ export default class Result extends Component {
   }
 
   render() {
+    const { type, result } = this.$router.params;
     return (
       <View class="ctr">
-        <Navbar shade color="white"/>
-        {/* <Image class="title-icon" src="https://hotel-ai-1257814705.cos.ap-shanghai.myqcloud.com/%E5%89%8D%E7%AB%AF/visit/accept.png"/> */}
-        <Image class="title-icon" src="https://hotel-ai-1257814705.cos.ap-shanghai.myqcloud.com/%E5%89%8D%E7%AB%AF/visit/refuse.png"/>
-        <View class="title">您已接受邀请</View>
+        <Navbar shade color="white" />
+        {result == "accept" ? (
+          <Image
+            class="title-icon"
+            src="https://hotel-ai-1257814705.cos.ap-shanghai.myqcloud.com/%E5%89%8D%E7%AB%AF/visit/accept.png"
+          />
+        ) : (
+          <Image
+            class="title-icon"
+            src="https://hotel-ai-1257814705.cos.ap-shanghai.myqcloud.com/%E5%89%8D%E7%AB%AF/visit/refuse.png"
+          />
+        )}
+        <View class="title">您已接受{type == "invite" ? "邀请" : "申请"}</View>
         <View class="billboard">
           <View class="code">
-            <Image class="img" src="https://hotel-ai-1257814705.cos.ap-shanghai.myqcloud.com/%E5%89%8D%E7%AB%AF/visit/code.png"/>
+            <Image
+              class="img"
+              src="https://hotel-ai-1257814705.cos.ap-shanghai.myqcloud.com/%E5%89%8D%E7%AB%AF/visit/code.png"
+            />
           </View>
           <View class="ad">
             <View class="tip">扫码添加小程序</View>

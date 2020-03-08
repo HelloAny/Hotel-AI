@@ -1,6 +1,7 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 import { AtTabs, AtTabsPane } from "taro-ui";
+import * as Server from "../../actions";
 import Board from "./Board";
 import ChatList from "./ChatList";
 
@@ -14,12 +15,13 @@ export default class Notify extends Component {
   state = {
     current: 0,
     notificationNum: 1,
-    messageNum: 2
+    messageNum: 2,
+    unreadList: []
   };
 
   propsKeys = [];
 
-  stateKeys = ["current", "notificationNum", "messageNum"];
+  stateKeys = ["current", "notificationNum", "messageNum", "unreadList"];
 
   // 切换tab
   handleSwitchTab(index) {
@@ -42,9 +44,28 @@ export default class Notify extends Component {
     });
   }
 
+  componentWillMount() {
+    Server.getNewsNumber()
+      .then(res => {
+        console.log("未读消息", res)
+        this.setState({
+          notificationNum: res.sys,
+          messageNum: res.private,
+          unreadList: res.private_detail
+        });
+      })
+      .catch(err => {
+        Taro.showToast({
+          title: "网络开小差了...",
+          icon: "none",
+          duration: 2000
+        });
+        console.log(err);
+      });
+  }
+
   shouldComponentUpdate(nextProps, nextState) {
     let flag = !this.compare(nextProps, nextState);
-    if (flag) console.log("Notify", nextProps, nextState);
     return flag;
   }
 
@@ -57,10 +78,20 @@ export default class Notify extends Component {
   }
 
   render() {
-    const { current, notificationNum, messageNum } = this.state;
+    const { current, notificationNum, messageNum, unreadList } = this.state;
     const tabList = [
-      { title: "通知" + (notificationNum ? `(${notificationNum > 99 ? "99+" : notificationNum})` : "") },
-      { title: "私信" + (messageNum ? `(${messageNum > 99 ? "99+" : messageNum})` : "") }
+      {
+        title:
+          "通知" +
+          (notificationNum
+            ? `(${notificationNum > 99 ? "99+" : notificationNum})`
+            : "")
+      },
+      {
+        title:
+          "私信" +
+          (messageNum ? `(${messageNum > 99 ? "99+" : messageNum})` : "")
+      }
     ];
     return (
       <View style={{ backgroundColor: "whitesmoke", height: "100vh" }}>
@@ -73,7 +104,10 @@ export default class Notify extends Component {
             <Board onNoticeReadied={this.handleReadied.bind(this)} />
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={1}>
-            <ChatList onChatReadied={this.handleChatReadied.bind(this)} />
+            <ChatList
+              onChatReadied={this.handleChatReadied.bind(this)}
+              unreadList={unreadList}
+            />
           </AtTabsPane>
         </AtTabs>
       </View>

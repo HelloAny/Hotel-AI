@@ -98,7 +98,7 @@ export default class MessageBody {
    */
   static parse = (uuid, str) => {
     let msg = new MessageBody().parse(str);
-    msg.uuid = new UUID(uuid);
+    if (uuid) msg.uuid = new UUID(uuid);
     return msg;
   };
 
@@ -162,6 +162,7 @@ export default class MessageBody {
    */
   parse(str) {
     let obj = JSON.parse(str);
+    if (obj.uuid) this.uuid = new UUID(obj.uuid.uuid || obj.uuid);
     this.description = obj.description;
     this.info = obj.info;
     this.sender = obj.sender;

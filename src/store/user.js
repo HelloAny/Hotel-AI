@@ -1,10 +1,15 @@
+import Taro from "@tarojs/taro";
 import { observable, action } from "mobx";
 
 /**
- * 个人信息存储
+ * 暂时解决,后期协商
  */
-class userInfo {
-  @observable user = {
+function saveInfo(info) {
+  Taro.setStorageSync("userInfo", info);
+}
+
+function getInfo() {
+  let info = {
     id: "",
     userName: "",
     nickName: "",
@@ -14,6 +19,26 @@ class userInfo {
     Portrait: "",
     if_face: ""
   };
+  return Object.assign(info, Taro.getStorageSync("userInfo"));
+}
+
+/**
+ * 个人信息存储
+ */
+class userInfo {
+  /**
+   * @type {{
+      id: "",
+      userName: "",
+      nickName: "",
+      email: "",
+      phone: "",
+      ID: "",
+      Portrait: "",
+      if_face: ""
+    }}
+   */
+  @observable user = getInfo();
 
   /**
    * 设置个人信息
@@ -26,6 +51,7 @@ class userInfo {
     this.user.phone = user.phone;
     this.user.ID = user.ID;
     this.user.if_face = user.if_face;
+    saveInfo(this.user); // 暂时
   }
 
   /**
@@ -44,4 +70,4 @@ class userInfo {
   }
 }
 
-export default userInfo;
+export default new userInfo();
