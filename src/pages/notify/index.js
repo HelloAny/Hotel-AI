@@ -2,6 +2,7 @@ import Taro, { Component } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 import { AtTabs, AtTabsPane } from "taro-ui";
 import * as Server from "../../actions";
+import SocketServer from "../../service/SocketServer";
 import Board from "./Board";
 import ChatList from "./ChatList";
 
@@ -14,40 +15,22 @@ export default class Notify extends Component {
 
   state = {
     current: 0,
-    notificationNum: 1,
-    messageNum: 2,
-    unreadList: []
+    messageNum: "",
+    notificationNum: "",
+    unreadList: {}
   };
+  boardRefreshFlag = false;
+  chatListRefreshFlag = false;
 
   propsKeys = [];
 
   stateKeys = ["current", "notificationNum", "messageNum", "unreadList"];
 
-  // 切换tab
-  handleSwitchTab(index) {
-    this.setState({
-      current: index
-    });
-  }
-
-  // 未读通知标为已读数量
-  handleReadied(num) {
-    this.setState({
-      notificationNum: Math.max(this.state.notificationNum - num, 0)
-    });
-  }
-
-  // 未读聊天消息标为已读数量
-  handleChatReadied(num) {
-    this.setState({
-      messageNum: Math.max(this.state.messageNum - num, 0)
-    });
-  }
-
-  componentWillMount() {
+  // 页面数据
+  pullData() {
     Server.getNewsNumber()
       .then(res => {
-        console.log("未读消息", res)
+        console.log("未读消息", res);
         this.setState({
           notificationNum: res.sys,
           messageNum: res.private,
@@ -64,8 +47,68 @@ export default class Notify extends Component {
       });
   }
 
+  // 切换tab
+  handleSwitchTab(index) {
+    this.setState({
+      current: index
+    });
+  }
+
+  // 未读通知标为已读数量
+  handleReadied(msgId) {
+    if (msgId == "all") {
+      Server.markedAllNotifyAsRead().then(() => {
+        this.setState({
+          notificationNum: 0
+        });
+      });
+    } else {
+      Server.markedNotifyAsRead(msgId).then(() => {
+        this.setState({
+          notificationNum: Math.max(this.state.notificationNum - 1, 0)
+        });
+      });
+    }
+  }
+
+  // 未读聊天消息标为已读数量
+  handleChatReadied(people) {
+    let num = this.state.unreadList[people];
+    if (num) {
+      this.setState({
+        messageNum: Math.max(this.state.messageNum - num, 0)
+      });
+      this.state.unreadList[people] = 0;
+    }
+  }
+
+  componentWillMount() {
+    this.pullData();
+    SocketServer.on("globalMessage", () => {
+      this.pullData();
+      this.chatListRefreshFlag = !this.chatListRefreshFlag;
+    });
+  }
+
+  componentDidShow() {
+    if (this.state.messageNum !== "") this.pullData();
+  }
+
+  onPullDownRefresh() {
+    this.pullData();
+  }
+
+  componentWillPreload() {
+    this.pullData();
+  }
+
   shouldComponentUpdate(nextProps, nextState) {
     let flag = !this.compare(nextProps, nextState);
+
+    if (this.state.notificationNum != nextState.notificationNum) {
+      this.boardRefreshFlag = !this.boardRefreshFlag;
+    }
+
     return flag;
   }
 
@@ -101,12 +144,16 @@ export default class Notify extends Component {
           onClick={this.handleSwitchTab.bind(this)}
         >
           <AtTabsPane current={this.state.current} index={0}>
-            <Board onNoticeReadied={this.handleReadied.bind(this)} />
+            <Board
+              onNoticeReadied={this.handleReadied.bind(this)}
+              refreshFlag={this.boardRefreshFlag}
+            />
           </AtTabsPane>
           <AtTabsPane current={this.state.current} index={1}>
             <ChatList
               onChatReadied={this.handleChatReadied.bind(this)}
               unreadList={unreadList}
+              refreshFlag={this.chatListRefreshFlag}
             />
           </AtTabsPane>
         </AtTabs>

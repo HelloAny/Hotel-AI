@@ -1,14 +1,12 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 
-import "../assets/style/invitation.scss"
-
-export default class Invitation extends Component {
+export default class System extends Component {
   static defaultProps = {
-    notify:{}
+    notify: {}
   };
 
-  state = {}
+  state = {};
 
   propsKeys = [];
 
@@ -20,8 +18,6 @@ export default class Invitation extends Component {
   }
 
   render() {
-    return (
-      <View className="invitation-container">Invitation</View>
-    );
+    return <View>{this.props.notify.content}</View>;
   }
 }

@@ -2,6 +2,7 @@ import Taro, { Component } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 import { Header, Noticebar, MsgsBox, InputField } from "./components";
 import { Message, MessageDB } from "./message";
+import * as API from "../../../actions";
 import Server from "../../../service/SocketServer";
 
 import "./assets/style/index.scss";
@@ -30,7 +31,9 @@ export default class IM extends Component {
     msgBoxRefreshFlag: false,
     inputFieldResetFlag: false,
     roomName: "",
-    breakBug: false
+    breakBug: false,
+    isOnline: false,
+    nickName: ""
   };
 
   info = null;
@@ -53,15 +56,14 @@ export default class IM extends Component {
   sendMessage(msg) {
     const { phone } = this.$router.params;
     let uuid = "";
-    let content = "哈啊哈啊啊哈";
     if (msg instanceof Array) {
-      uuid = msg.map(m => m.uuid.toString());
-      let msgStr = msg.map(m => m.stringify());
-      Server.emit("message", msgStr, phone, uuid);
+      msg.forEach(m => {
+        uuid = m.uuid.toString();
+        Server.emit("message", m.stringify(), phone, uuid);
+      });
     } else {
       uuid = msg.uuid.toString();
       let msgStr = msg.stringify();
-      content = msg.description.content || content;
       Server.emit("message", msgStr, phone, uuid);
     }
   }
@@ -113,7 +115,7 @@ export default class IM extends Component {
 
   // 消息回调
   onMessage(res) {
-    let { msgStr, phone } = res;
+    let { msgStr, phone, uuid, msg_id } = res;
     if (typeof msgStr == "string") msgStr = [msgStr];
     let room = MessageDB.getRoomByPhone(phone);
     if (room) {
@@ -121,6 +123,7 @@ export default class IM extends Component {
       msgStr.forEach(m => {
         let msg = Message.parse("", m);
         MessageDB.pushMessage(uuid, msg);
+        API.markedChatMsgAsRead(msg_id);
       });
     }
   }
@@ -135,15 +138,23 @@ export default class IM extends Component {
     }
   }
 
-  // 加入房间后再初始化消息列表
+  // 加入房间后再初始化消息列表, 设置昵称 在线离线状态
   onJoin(res) {
-    const { phone } = this.$router.params;
-    const { uuid, msg_list } = res;
+    const { phone, nickName } = this.$router.params;
+    const { uuid, msg_list, isOnline } = res;
     this.setState({
-      roomName: uuid
+      roomName: uuid,
+      isOnline,
+      nickName
     });
-    MessageDB.pushMessage(uuid, msg_list);
+    MessageDB.pushMessage(
+      uuid,
+      msg_list.map(msg => {
+        return Message.parse("", msg.content);
+      })
+    );
     if (phone) MessageDB.getRoom(uuid).setPhone(phone);
+    API.markedChatAsRead(phone);
   }
 
   // 初始化房间
@@ -221,7 +232,6 @@ export default class IM extends Component {
   }
 
   componentWillMount() {
-    console.log(11)
     Server.emit(
       "login",
       Object.assign({}, MessageDB.dbInfo.master, {
@@ -254,12 +264,14 @@ export default class IM extends Component {
       roomName,
       msgBoxRefreshFlag,
       inputFieldResetFlag,
-      breakBug
+      breakBug,
+      isOnline,
+      nickName
     } = this.state;
     return (
       <View className="IM">
         <View className="header">
-          <Header />
+          <Header title={nickName} subTitle={isOnline ? "在线" : "离线"} />
           {/* <Noticebar /> */}
         </View>
         <View

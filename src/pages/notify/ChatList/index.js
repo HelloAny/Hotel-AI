@@ -8,18 +8,35 @@ import "./chat-list.scss";
 
 export default class ChatList extends Component {
   static defaultProps = {
-    unreadList: [],
+    unreadList: {},
+    refreshFlag: false,
     onChatReadied: () => {}
   };
 
   state = {
     search: "",
-    chatList: []
+    chatList: [],
+    filter: ""
   };
 
-  propsKeys = [];
+  propsKeys = ["unreadList", "refreshFlag"];
 
-  stateKeys = ["search", "chatList"];
+  stateKeys = ["search", "chatList", "filter"];
+
+  pullData() {
+    Server.getMsgSummaryInfo()
+      .then(res => {
+        this.mergeChatInfo(res.list);
+      })
+      .catch(err => {
+        Taro.showToast({
+          title: "网络开小差了...",
+          icon: "none",
+          duration: 2000
+        });
+        console.log(err);
+      });
+  }
 
   mergeChatInfo(chatList) {
     console.log("私信列表", chatList, "未读列表", this.props.unreadList);
@@ -38,30 +55,34 @@ export default class ChatList extends Component {
   // 搜索好友
   handleSearchChat() {
     this.setState({
-      search: ""
+      filter: this.state.search
+    });
+  }
+
+  //清空搜索
+  handleSearchClear() {
+    this.setState({
+      search: "",
+      filter: ""
     });
   }
 
   // 打开某好友聊天界面
-  handleOpenChatView(phone) {
-    Taro.navigateTo({
-      url: "/packageC/pages/IM/index?phone=" + phone
-    });
+  handleOpenChatView(phone, nickName) {
+    this.props.onChatReadied(phone);
+    setTimeout(() => {
+      Taro.navigateTo({
+        url: `/packageC/pages/IM/index?phone=${phone}&nickName=${nickName}`
+      });
+    }, 300);
   }
 
   componentWillMount() {
-    Server.getMsgSummaryInfo()
-      .then(res => {
-        this.mergeChatInfo(res.list);
-      })
-      .catch(err => {
-        Taro.showToast({
-          title: "网络开小差了...",
-          icon: "none",
-          duration: 2000
-        });
-        console.log(err);
-      });
+    this.pullData();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.refreshFlag != nextProps.refreshFlag) this.pullData();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -78,27 +99,36 @@ export default class ChatList extends Component {
   }
 
   render() {
+    const { chatList, search, filter } = this.state;
+    const { unreadList } = this.props;
     return (
       <ScrollView className="list-box">
         <View className="search">
           <AtSearchBar
             actionName="搜一下"
-            value={this.state.search}
+            value={search}
             onChange={this.handleSearchInput.bind(this)}
             onActionClick={this.handleSearchChat.bind(this)}
+            onConfirm={this.handleSearchChat.bind(this)}
+            onClear={this.handleSearchClear.bind(this)}
           />
         </View>
         <View className="chats-box">
-          {this.state.chatList.map(chat => {
-            return (
+          {chatList.map(chat => {
+            return chat.nickname.indexOf(filter || "") != -1 ? (
               <ChatItem
-                onClick={this.handleOpenChatView.bind(this, chat.username)}
-                unreadNum={chat.unreadNum || 0}
+                onClick={this.handleOpenChatView.bind(
+                  this,
+                  chat.username,
+                  chat.nickname
+                )}
+                unreadNum={unreadList[chat.username] || 0}
                 nickName={chat.nickname}
                 time={chat.add_time}
                 content={chat.content}
+                phone={chat.username}
               />
-            );
+            ) : null;
           })}
         </View>
         <View className="tip">没有更多内容</View>

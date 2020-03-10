@@ -1,8 +1,7 @@
 import { Socket, AsyncQueue } from "../utils";
 
 class WS {
-
-  status = "close"
+  status = "close";
   _events = {};
 
   _socket = null;
@@ -76,6 +75,7 @@ class WS {
     if (!this._events.hasOwnProperty(eventName))
       this._events[eventName] = new Array();
     if (unique) this._events[eventName][0] = callback;
+    else this._events[eventName].push(callback);
   }
 
   // socket连接，成功后设置socket
@@ -95,6 +95,11 @@ class WS {
       let args = data;
       if (this._events.hasOwnProperty(eventName)) {
         this._events[eventName].forEach(fn => {
+          fn(...args);
+        });
+      }
+      if (eventName == "message") {
+        this._events["globalMessage"].forEach(fn => {
           fn(...args);
         });
       }

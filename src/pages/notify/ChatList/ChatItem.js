@@ -11,7 +11,8 @@ export default class ChatItem extends Component {
     unreadNum: 0,
     nickName: "",
     time: "",
-    content: ""
+    content: "",
+    phone: ""
   };
 
   state = {};
@@ -44,7 +45,7 @@ export default class ChatItem extends Component {
       switch (msg.description.type) {
         case "TEXT":
           return msg.description.content.length > 20
-            ? msg.description.content.substr(0, 20)+"..."
+            ? msg.description.content.substr(0, 20) + "..."
             : msg.description.content;
         case "IMAGE":
           return "[图片]";
@@ -64,6 +65,7 @@ export default class ChatItem extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <View className="chat-item" onClick={this.props.onClick}>
         <View className="portrait-box">
@@ -72,7 +74,9 @@ export default class ChatItem extends Component {
             maxValue={99}
           >
             <Image
-              src="https://hotel.lcworkroom.cn/api/pic/get/users/?name=13858181317"
+              src={
+                "https://hotel.lcworkroom.cn/api/pic/get/users/?name=" + this.props.phone
+              }
               className="portrait"
             />
           </AtBadge>

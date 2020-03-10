@@ -16,9 +16,19 @@ import "./app.scss";
 //   require('nerv-devtools')
 // }
 
-// 自动开始连接socket,尝试初始化身份信息
+let onNotify = () => {
+  Taro.showModal({
+    title: "通知",
+    content: "您有一条新的通知，点击确定立刻前往查看"
+  }).then(res => {
+    if(res.confirm) Taro.switchTab({url:"/pages/notify/index"})
+  });
+};
+
+// 自动开始连接socket,尝试初始化身份信息,绑定全局事件
 !(function() {
   Server.connect();
+  Server.on("notify", onNotify);
   Server.emit(
     "preLogin",
     Object.assign({}, store.userStore.user, {

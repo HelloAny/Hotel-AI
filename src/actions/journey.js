@@ -22,8 +22,10 @@ export function getJourneyList(param) {
     data.records.forEach(r => {
       if (r.check_in_time) r.check_in_time *= 1000;
       if (r.check_out_time) r.check_out_time *= 1000;
-      if (r.add_time) r.add_time *= 1000
-      if (r.end_time) r.end_time *= 1000
+      if (r.start_time)
+        r.start_time = r.start_time * 1000 + 16 * 60 * 60 * 1000;
+      if (r.add_time) r.add_time *= 1000;
+      if (r.end_time) r.end_time = r.end_time * 1000 + 16 * 60 * 60 * 1000;
     });
     return data;
   });

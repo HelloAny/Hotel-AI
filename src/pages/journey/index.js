@@ -2,6 +2,7 @@ import Taro, { Component } from "@tarojs/taro";
 import { inject, observer } from "@tarojs/mobx";
 import { View, Image } from "@tarojs/components";
 import * as Server from "../../actions";
+import { userStore } from "../../store"
 import NavBar from "../../components/Navbar";
 import { NoticeItem, OverviewItem, RecmdItem } from "./cmps";
 import { dateFormat } from "../../utils";
@@ -24,11 +25,10 @@ class Journey extends Component {
 
   propsKeys = [];
 
-  stateKeys = ["ambitus", "records"];
+  stateKeys = ["ambitus", "records", "ongoing"];
 
   initState(data) {
     const { ambitus, records } = data;
-
     this.setState({
       ambitus: ambitus.map(ambit => {
         ambit.tab2 = ["经典打卡"];
@@ -48,7 +48,7 @@ class Journey extends Component {
             task.name = record.name || "访问" + record.hotel;
             task.time1 = dateFormat(
               "YYYY.mm.dd",
-              record.check_in_time || record.add_time
+              record.check_in_time || record.start_time
             );
             task.time2 = dateFormat(
               "YYYY.mm.dd",
@@ -83,7 +83,7 @@ class Journey extends Component {
       records: records.map(record => {
         record.time1 = dateFormat(
           "YYYY.mm.dd",
-          record.check_in_time || record.add_time
+          record.check_in_time || record.start_time
         );
         record.time2 = dateFormat(
           "YYYY.mm.dd",
@@ -120,6 +120,35 @@ class Journey extends Component {
     });
   }
 
+  pullDate() {
+    Taro.showLoading({
+      title: "loading"
+    });
+    Server.getJourneyList({
+      uid: userStore.user.id
+    })
+      .then(res => {
+        Taro.hideLoading();
+        if (res.code == 200) {
+          this.initState(res);
+        } else {
+          Taro.showToast({
+            title: "网络开小差了...",
+            icon: "none",
+            duration: 2000
+          });
+        }
+      })
+      .catch(err => {
+        Taro.hideLoading();
+        Taro.showToast({
+          title: "网络开小差了...",
+          icon: "none",
+          duration: 2000
+        });
+      });
+  }
+
   handleAddJourney() {
     setTimeout(() => {
       Taro.navigateTo({
@@ -142,32 +171,15 @@ class Journey extends Component {
   }
 
   componentWillMount() {
-    Taro.showLoading({
-      title: "loading"
-    });
-    Server.getJourneyList({
-      uid: "4"
-    })
-      .then(res => {
-        Taro.hideLoading();
-        if (res.code == 200) {
-          this.initState(res);
-        } else {
-          Taro.showToast({
-            title: "网络开小差了...",
-            icon: "none",
-            duration: 2000
-          });
-        }
-      })
-      .catch(err => {
-        Taro.hideLoading();
-        Taro.showToast({
-          title: "网络开小差了...",
-          icon: "none",
-          duration: 2000
-        });
-      });
+    this.pullDate()
+  }
+
+  onPullDownRefresh() {
+    this.pullDate()
+  }
+
+  componentDidShow() {
+    if(this.state.ambitus.length != 0) this.pullDate()
   }
 
   shouldComponentUpdate(nextProps, nextState) {

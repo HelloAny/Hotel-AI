@@ -26,12 +26,6 @@ export default class Header extends Component {
     Taro.navigateBack()
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    let flag = !this.compare(nextProps, nextState);
-    if (flag) console.log("Header", { nextProps, nextState });
-    return flag;
-  }
-
   componentWillUpdate() {
     console.time("Header");
   }

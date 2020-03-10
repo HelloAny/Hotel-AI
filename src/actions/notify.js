@@ -6,13 +6,14 @@ const request = (method, url, data) => {
   return method(USERAPI + url, data);
 };
 
-const token = Taro.getStorageSync("token");
-
+// const token = Taro.getStorageSync("token");
+const token = "5d84b39af168ed21477adf780423c634"
 /**
  * 获取通知和私信未读数量
  */
 export function getNewsNumber() {
   const url = "/api/msg/?token=" + token;
+
   return request(post, url, {
     id: 1234,
     type: "msg",
@@ -32,18 +33,17 @@ export function getNewsNumber() {
  */
 export function getNotifyList() {
   const url = "/api/msg/?token=" + token;
+
   return request(post, url, {
     id: 1234,
     type: "msg",
-    subtype: "filter",
+    subtype: "sys",
     data: {
-      type: "system",
-      subtype: "",
-      if_new: 1
+      if_new: 2
     }
   }).then(res => {
     if (res.data.status == 0) {
-      return res.data.data.list;
+      return res.data.data.list.reverse();
     } else {
       return Promise.reject(res.data);
     }
@@ -55,6 +55,7 @@ export function getNotifyList() {
  */
 export function getMsgSummaryInfo() {
   const url = "/api/msg/?token=" + token;
+
   return request(post, url, {
     id: 1234,
     type: "msg",
@@ -62,9 +63,9 @@ export function getMsgSummaryInfo() {
     data: {}
   }).then(res => {
     if (res.data.status == 0) {
-      res.data.data.list.forEach(chat=>{
-        chat.add_time = chat.add_time*1000
-      })
+      res.data.data.list.forEach(chat => {
+        chat.add_time = chat.add_time * 1000;
+      });
       return res.data.data;
     } else {
       return Promise.reject(res.data);
@@ -78,16 +79,21 @@ export function getMsgSummaryInfo() {
  */
 export function markedNotifyAsRead(msg_id) {
   if (!msg_id) return Promise.reject("msg_id is undefined!");
+
   const url = "/api/msg/?token=" + token;
   return request(post, url, {
     id: 1234,
     type: "msg",
     subtype: "sign",
     data: {
-      msg_id: 1
+      msg_id
     }
   }).then(res => {
-    console.log(res.data);
+    if (res.data.status == 0) {
+      return res.data;
+    } else {
+      return Promise.reject(res.data);
+    }
   });
 }
 
@@ -96,6 +102,7 @@ export function markedNotifyAsRead(msg_id) {
  */
 export function markedAllNotifyAsRead() {
   const url = "/api/msg/?token=" + token;
+
   return request(post, url, {
     id: 1234,
     type: "msg",
@@ -106,7 +113,11 @@ export function markedAllNotifyAsRead() {
       people: ""
     }
   }).then(res => {
-    console.log(res.data);
+    if (res.data.status == 0) {
+      return res.data;
+    } else {
+      return Promise.reject(res.data);
+    }
   });
 }
 
@@ -117,6 +128,7 @@ export function markedAllNotifyAsRead() {
 export function markedChatAsRead(people) {
   if (!people) return Promise.reject("people is undefined!");
   const url = "/api/msg/?token=" + token;
+
   return request(post, url, {
     id: 1234,
     type: "msg",
@@ -128,5 +140,29 @@ export function markedChatAsRead(people) {
     }
   }).then(res => {
     console.log(res.data);
+  });
+}
+
+/**
+ * 指定私聊消息设为已读
+ * @param {number} msg_id 消息id
+ */
+export function markedChatMsgAsRead(msg_id) {
+  if (!msg_id) return Promise.reject("msg_id is undefined!");
+
+  const url = "/api/msg/?token=" + token;
+  return request(post, url, {
+    id: 1234,
+    type: "msg",
+    subtype: "sign",
+    data: {
+      msg_id
+    }
+  }).then(res => {
+    if (res.data.status == 0) {
+      return res.data;
+    } else {
+      return Promise.reject(res.data);
+    }
   });
 }

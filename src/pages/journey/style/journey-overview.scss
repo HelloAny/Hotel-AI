@@ -19,6 +19,9 @@
   .row1,.row2,.row3{
     position: absolute;
     width: calc(100% - 20Px);
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
   }
   .row1{
     top: 10Px;
