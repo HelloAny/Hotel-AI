@@ -6,8 +6,8 @@ const request = (method, url, data) => {
   return method(USERAPI + url, data);
 };
 
-// const token = Taro.getStorageSync("token");
-const token = "5d84b39af168ed21477adf780423c634"
+const token = Taro.getStorageSync("token");
+// const token = "5d84b39af168ed21477adf780423c634"
 /**
  * 获取通知和私信未读数量
  */
