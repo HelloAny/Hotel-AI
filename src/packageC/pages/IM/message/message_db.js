@@ -262,7 +262,7 @@ class MessageDB {
       default:
         return false;
     }
-    return true;
+    return msg;
   }
 
   /**

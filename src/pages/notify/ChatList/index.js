@@ -26,7 +26,10 @@ export default class ChatList extends Component {
   pullData() {
     Server.getMsgSummaryInfo()
       .then(res => {
-        this.mergeChatInfo(res.list);
+        console.log("私信列表", res.list, "未读列表", this.props.unreadList);
+        this.setState({
+          chatList: res.list
+        });
       })
       .catch(err => {
         Taro.showToast({
@@ -36,13 +39,6 @@ export default class ChatList extends Component {
         });
         console.log(err);
       });
-  }
-
-  mergeChatInfo(chatList) {
-    console.log("私信列表", chatList, "未读列表", this.props.unreadList);
-    this.setState({
-      chatList: chatList
-    });
   }
 
   // 搜索框输入
@@ -82,6 +78,7 @@ export default class ChatList extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (this.props.refreshFlag != nextProps.refreshFlag) console.log("该刷新啦")
     if (this.props.refreshFlag != nextProps.refreshFlag) this.pullData();
   }
 
@@ -101,6 +98,7 @@ export default class ChatList extends Component {
   render() {
     const { chatList, search, filter } = this.state;
     const { unreadList } = this.props;
+    console.log(chatList,unreadList)
     return (
       <ScrollView className="list-box">
         <View className="search">

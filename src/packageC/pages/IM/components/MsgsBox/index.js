@@ -253,6 +253,16 @@ export default class MsgsBox extends Component {
     this.init();
   }
 
+  componentDidMount() {
+    this._scrollQuery().then(res => {
+      setTimeout(() => {
+        this.setState({
+          scrollTop: res.scrollHeight+10086
+        });
+      }, 500);
+    });
+  }
+
   componentWillReceiveProps(nextProps) {
     this._newOffset = nextProps.scrollOffset;
     this._checkUpdate(nextProps);

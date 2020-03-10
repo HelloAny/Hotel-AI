@@ -59,12 +59,14 @@ export default class IM extends Component {
     if (msg instanceof Array) {
       msg.forEach(m => {
         uuid = m.uuid.toString();
-        Server.emit("message", m.stringify(), phone, uuid);
+        if (m.type != "IMAGE" && m.type != "VOICE")
+          Server.emit("message", m.stringify(), phone, uuid);
       });
     } else {
       uuid = msg.uuid.toString();
       let msgStr = msg.stringify();
-      Server.emit("message", msgStr, phone, uuid);
+      if (m.type != "IMAGE" && m.type != "VOICE")
+        Server.emit("message", msgStr, phone, uuid);
     }
   }
 
@@ -157,6 +159,21 @@ export default class IM extends Component {
     API.markedChatAsRead(phone);
   }
 
+  // 监听server返回图片地址
+  onImage(res) {
+    const { uuid, url } = res;
+    let msg = MessageDB.updateMessage("IMAGE", uuid, { url });
+    this.sendMessage(msg);
+  }
+
+  // 监听server返回音频地址或文本
+  onVoice(res) {
+    let { uuid, url, text } = res;
+    if (!text) text = "主人，我没有听清哦";
+    let msg = MessageDB.updateMessage("VOICE", uuid, { url, text });
+    this.sendMessage(msg);
+  }
+
   // 初始化房间
   setRoom() {
     this.setState();
@@ -242,6 +259,8 @@ export default class IM extends Component {
     Server.on("message", this.onMessage.bind(this), true);
     Server.on("robot", this.onRobot.bind(this), true);
     Server.on("join", this.onJoin.bind(this), true);
+    Server.on("image", this.onImage.bind(this), true);
+    Server.on("voice", this.onVoice.bind(this), true);
   }
 
   componentWillUpdate() {

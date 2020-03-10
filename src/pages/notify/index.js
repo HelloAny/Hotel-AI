@@ -17,14 +17,14 @@ export default class Notify extends Component {
     current: 0,
     messageNum: "",
     notificationNum: "",
-    unreadList: {}
+    unreadList: {},
+    chatListRefreshFlag: false
   };
   boardRefreshFlag = false;
-  chatListRefreshFlag = false;
 
   propsKeys = [];
 
-  stateKeys = ["current", "notificationNum", "messageNum", "unreadList"];
+  stateKeys = ["current", "notificationNum", "messageNum", "unreadList", "chatListRefreshFlag"];
 
   // 页面数据
   pullData() {
@@ -75,10 +75,12 @@ export default class Notify extends Component {
   handleChatReadied(people) {
     let num = this.state.unreadList[people];
     if (num) {
+      let list =  this.state.unreadList
+      list[people] = 0
       this.setState({
-        messageNum: Math.max(this.state.messageNum - num, 0)
+        messageNum: Math.max(this.state.messageNum - num, 0),
+        unreadList: list
       });
-      this.state.unreadList[people] = 0;
     }
   }
 
@@ -86,7 +88,9 @@ export default class Notify extends Component {
     this.pullData();
     SocketServer.on("globalMessage", () => {
       this.pullData();
-      this.chatListRefreshFlag = !this.chatListRefreshFlag;
+      this.setState({
+        chatListRefreshFlag: !this.state.chatListRefreshFlag
+      })
     });
     SocketServer.on("notify", () => {
       this.pullData();
@@ -124,7 +128,7 @@ export default class Notify extends Component {
   }
 
   render() {
-    const { current, notificationNum, messageNum, unreadList } = this.state;
+    const { current, notificationNum, messageNum, unreadList, chatListRefreshFlag } = this.state;
     const tabList = [
       {
         title:
@@ -156,7 +160,7 @@ export default class Notify extends Component {
             <ChatList
               onChatReadied={this.handleChatReadied.bind(this)}
               unreadList={unreadList}
-              refreshFlag={this.chatListRefreshFlag}
+              refreshFlag={chatListRefreshFlag}
             />
           </AtTabsPane>
         </AtTabs>

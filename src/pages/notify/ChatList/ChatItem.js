@@ -17,7 +17,7 @@ export default class ChatItem extends Component {
 
   state = {};
 
-  propsKeys = [];
+  propsKeys = ["unreadNum", "nickName", "time", "content", "phone"];
 
   stateKeys = [];
 
@@ -39,6 +39,7 @@ export default class ChatItem extends Component {
   }
 
   getContent(c) {
+    c = decodeURI(c);
     if (!isJson(c)) return c;
     else {
       let msg = JSON.parse(c);
@@ -65,7 +66,7 @@ export default class ChatItem extends Component {
   }
 
   render() {
-    console.log(this.props)
+    console.log(this.props);
     return (
       <View className="chat-item" onClick={this.props.onClick}>
         <View className="portrait-box">
@@ -75,7 +76,8 @@ export default class ChatItem extends Component {
           >
             <Image
               src={
-                "https://hotel.lcworkroom.cn/api/pic/get/users/?name=" + this.props.phone
+                "https://hotel.lcworkroom.cn/api/pic/get/users/?name=" +
+                this.props.phone
               }
               className="portrait"
             />
