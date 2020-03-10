@@ -53,8 +53,8 @@ class LoginByPsw extends Component {
     };
     loginByPsw(param).then(res => {
       if (res.data.status == 0) {
-        Taro.navigateTo({
-          url: "/pages/account/account"
+        Taro.reLaunch({
+          url: "/packageA/user/user"
         });
       } else if (res.data.status == 100) {
         this.setState({

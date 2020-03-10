@@ -1,12 +1,21 @@
 import Taro from "@tarojs/taro";
 import { post } from "@service/api";
 import { USERAPI } from "@constants/api";
+import { autorun } from "mobx"
+import { userStore } from "../store"
 
 const request = (method, url, data) => {
   return method(USERAPI + url, data);
 };
 
-const token = Taro.getStorageSync("token");
+
+let token = Taro.getStorageSync("token");
+
+autorun(()=>{
+  let t = userStore.user.token
+  if(t) token = t
+})
+
 // const token = "5d84b39af168ed21477adf780423c634"
 /**
  * 获取通知和私信未读数量
