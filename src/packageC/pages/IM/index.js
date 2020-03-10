@@ -178,7 +178,10 @@ export default class IM extends Component {
   onImage(res) {
     const { uuid, url } = res;
     let msg = MessageDB.updateMessage("IMAGE", uuid, { url });
-    this.sendUpdateMessage(msg);
+    let master = MessageDB.dbInfo.master;
+    if (this.state.roomName != master.robotRoom) {
+      this.sendUpdateMessage(msg);
+    }
   }
 
   // 监听server返回音频地址或文本
@@ -186,7 +189,10 @@ export default class IM extends Component {
     let { uuid, url, text } = res;
     if (!text) text = "主人，我没有听清哦";
     let msg = MessageDB.updateMessage("VOICE", uuid, { url, text });
-    this.sendUpdateMessage(msg);
+    let master = MessageDB.dbInfo.master;
+    if (this.state.roomName != master.robotRoom) {
+      this.sendUpdateMessage(msg);
+    }
   }
 
   // 初始化房间
