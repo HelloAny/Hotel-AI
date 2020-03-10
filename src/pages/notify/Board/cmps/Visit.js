@@ -48,11 +48,11 @@ export default class Invitation extends Component {
 
     switch (subtype) {
       case "accept":
-        return sender == userStore.user.id ? "接受拜访" : "拜访已被接受";
+        return sender == userStore.user.id ? "拜访已被接受" : "接受拜访";
       case "refuse":
-        return sender == userStore.user.id ? "拒绝拜访" : "拜访已被拒绝";
+        return sender == userStore.user.id ? "拜访已被拒绝" : "拒绝拜访";
       case "waiting":
-        return sender == userStore.user.id ? "拜访函" : "申请拜访";
+        return "拜访函";
       default:
         return "";
     }
@@ -65,16 +65,14 @@ export default class Invitation extends Component {
     switch (subtype) {
       case "accept":
         return sender == userStore.user.id
-          ? `已接受 ${nickname} 参与行程 ${travel}`
-          : `${nickname} 同意您加入 ${travel}`;
+          ? `${nickname} 同意您加入 ${travel}`
+          : `已接受 ${nickname} 参与行程 ${travel}`;
       case "refuse":
         return sender == userStore.user.id
-          ? `已拒绝 ${nickname}参与行程 ${travel}`
-          : `${nickname} 拒绝拜访`;
+          ? `${nickname} 拒绝拜访`
+          : `已拒绝 ${nickname}参与行程 ${travel}`;
       case "waiting":
-        return sender == userStore.user.id
-          ? `${nickname} 申请参与行程 ${travel}`
-          : `申请参与行程 ${nickname} 的行程 ${travel}`;
+        return `${nickname} 申请参与行程 ${travel}`;
       default:
         return "";
     }

@@ -10,7 +10,7 @@ export default class NoticeItem extends Component {
 
   state = {};
 
-  propsKeys = [];
+  propsKeys = ["info"];
 
   stateKeys = [];
 

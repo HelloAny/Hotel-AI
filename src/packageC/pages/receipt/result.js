@@ -46,7 +46,7 @@ export default class Result extends Component {
             src="https://hotel-ai-1257814705.cos.ap-shanghai.myqcloud.com/%E5%89%8D%E7%AB%AF/visit/refuse.png"
           />
         )}
-        <View class="title">您已接受{type == "invite" ? "邀请" : "申请"}</View>
+        <View class="title">您已{result == "accept" ? "接受":"拒绝"}{type == "invite" ? "邀请" : "申请"}</View>
         <View class="billboard">
           <View class="code">
             <Image

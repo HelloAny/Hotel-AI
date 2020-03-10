@@ -10,7 +10,7 @@ export default class RecmdItem extends Component {
 
   state = {};
 
-  propsKeys = [];
+  propsKeys = ["info"];
 
   stateKeys = [];
 

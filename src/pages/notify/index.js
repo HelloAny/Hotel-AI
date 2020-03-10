@@ -88,6 +88,9 @@ export default class Notify extends Component {
       this.pullData();
       this.chatListRefreshFlag = !this.chatListRefreshFlag;
     });
+    SocketServer.on("notify", () => {
+      this.pullData();
+    });
   }
 
   componentDidShow() {

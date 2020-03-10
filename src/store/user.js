@@ -17,7 +17,8 @@ function getInfo() {
     phone: "",
     ID: "",
     Portrait: "",
-    if_face: ""
+    if_face: "",
+    token: ""
   };
   return Object.assign(info, Taro.getStorageSync("userInfo"));
 }
@@ -35,7 +36,8 @@ class userInfo {
       phone: "",
       ID: "",
       Portrait: "",
-      if_face: ""
+      if_face: "",
+      token: ""
     }}
    */
   @observable user = getInfo();
@@ -62,6 +64,15 @@ class userInfo {
     this.user.nickName = user.nickname;
     this.user.email = user.email;
     this.user.ID = user.real_auth_id;
+    saveInfo(this.user); // 暂时
+  }
+
+  /**
+   * 更新token
+   */
+  @action.bound updateToken(token) {
+    this.user.token = token
+    saveInfo(this.user); // 暂时
   }
 
   @action.bound setUserPortrait(user) {}

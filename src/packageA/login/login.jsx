@@ -1,6 +1,7 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Picker } from "@tarojs/components";
 import { observer, inject } from "@tarojs/mobx";
+import { userStore } from "../../store";
 import { AtButton, AtInput, AtForm, AtCountdown, AtToast } from "taro-ui";
 import { Register, Sms } from "@actions/api";
 import "./login.sass";
@@ -100,6 +101,8 @@ class Login extends Component {
           key: "token",
           data: res.data.data.token
         });
+        // 新增更新store内token ------------lyq
+        userStore.updateToken(res.data.data.token);
         //若传参的路由不存在，则跳转到个人中心界面
         if (!this.props.navigate) {
           Taro.switchTab({

@@ -10,7 +10,7 @@ export default class OverviewItem extends Component {
 
   state = {};
 
-  propsKeys = [];
+  propsKeys = ["info"];
 
   stateKeys = [];
 
