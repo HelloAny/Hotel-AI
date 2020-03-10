@@ -56,7 +56,7 @@ class LoginByPsw extends Component {
         Taro.reLaunch({
           url: "/packageA/user/user"
         });
-      } else if (res.data.status == 100) {
+      } else if (res.data.status == 102) {
         this.setState({
           errorCap: 1
         });
