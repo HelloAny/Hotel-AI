@@ -65,8 +65,23 @@ export default class IM extends Component {
     } else {
       uuid = msg.uuid.toString();
       let msgStr = msg.stringify();
-      if (m.type != "IMAGE" && m.type != "VOICE")
+      if (msg.type != "IMAGE" && msg.type != "VOICE")
         Server.emit("message", msgStr, phone, uuid);
+    }
+  }
+
+  sendUpdateMessage(msg) {
+    const { phone } = this.$router.params;
+    let uuid = "";
+    if (msg instanceof Array) {
+      msg.forEach(m => {
+        uuid = m.uuid.toString();
+        Server.emit("message", m.stringify(), phone, uuid);
+      });
+    } else {
+      uuid = msg.uuid.toString();
+      let msgStr = msg.stringify();
+      Server.emit("message", msgStr, phone, uuid);
     }
   }
 
@@ -163,7 +178,7 @@ export default class IM extends Component {
   onImage(res) {
     const { uuid, url } = res;
     let msg = MessageDB.updateMessage("IMAGE", uuid, { url });
-    this.sendMessage(msg);
+    this.sendUpdateMessage(msg);
   }
 
   // 监听server返回音频地址或文本
@@ -171,7 +186,7 @@ export default class IM extends Component {
     let { uuid, url, text } = res;
     if (!text) text = "主人，我没有听清哦";
     let msg = MessageDB.updateMessage("VOICE", uuid, { url, text });
-    this.sendMessage(msg);
+    this.sendUpdateMessage(msg);
   }
 
   // 初始化房间
