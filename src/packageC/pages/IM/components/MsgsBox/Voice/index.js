@@ -36,8 +36,11 @@ export default class VoiceMsg extends Component {
     const { duration } = description;
     const { isPlaying } = this.state;
     return (
-      <View className="voice-box right" onClick={this.handleClick.bind(this)}>
-        <View className="box right">
+      <View
+        className={"voice-box " + position}
+        onClick={this.handleClick.bind(this)}
+      >
+        <View className={"box " + position}>
           <View class="wife-symbol">
             <View class="wife-circle first" />
             <View

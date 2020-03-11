@@ -340,7 +340,7 @@ export default class MsgsBox extends Component {
           if (type == "VOICE")
             return (
               <View id={"MsgBox" + index} className={"bubble " + position}>
-                <VoiceMsg description={description} position />
+                <VoiceMsg description={description} position={position} />
               </View>
             );
         })}

@@ -59,13 +59,13 @@ export default class IM extends Component {
     if (msg instanceof Array) {
       msg.forEach(m => {
         uuid = m.uuid.toString();
-        if (m.type != "IMAGE" && m.type != "VOICE")
+        if (m.description.type != "IMAGE" && m.description.type != "VOICE")
           Server.emit("message", m.stringify(), phone, uuid);
       });
     } else {
       uuid = msg.uuid.toString();
       let msgStr = msg.stringify();
-      if (msg.type != "IMAGE" && msg.type != "VOICE")
+      if (msg.description.type != "IMAGE" && msg.description.type != "VOICE")
         Server.emit("message", msgStr, phone, uuid);
     }
   }

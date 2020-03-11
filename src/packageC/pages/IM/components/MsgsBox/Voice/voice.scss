@@ -5,6 +5,9 @@
   &.right{
     justify-content: flex-end;
   }
+  &.left{
+    justify-content: flex-start;
+  }
 }
 
 .box {
@@ -13,6 +16,9 @@
   position: relative;
   &.right{
     transform: rotate(180deg);
+  }
+  &.left{
+    transform: none;
   }
 }
 
