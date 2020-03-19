@@ -66,6 +66,13 @@ export default class Traveler extends Component {
     });
   }
 
+  // 进入酒店服务
+  handleSpreadExpansion() {
+    Taro.navigateTo({
+      url: "/packageC/pages/servicePanel/index"
+    });
+  }
+
   shouldComponentUpdate(nextProps, nextState) {
     let flag = !this.compare(nextProps, nextState);
     if (flag) console.log("Traveler", nextProps, nextState);

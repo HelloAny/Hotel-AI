@@ -98,7 +98,6 @@ export default class ChatList extends Component {
   render() {
     const { chatList, search, filter } = this.state;
     const { unreadList } = this.props;
-    console.log(chatList,unreadList)
     return (
       <ScrollView className="list-box">
         <View className="search">
@@ -115,6 +114,7 @@ export default class ChatList extends Component {
           {chatList.map(chat => {
             return chat.nickname.indexOf(filter || "") != -1 ? (
               <ChatItem
+                key={chat.add_time}
                 onClick={this.handleOpenChatView.bind(
                   this,
                   chat.username,

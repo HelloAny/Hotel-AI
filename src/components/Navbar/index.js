@@ -5,10 +5,10 @@ import { getDeviceInfo } from "../../utils";
 
 export default class NavBar extends Component {
   static defaultProps = {
-    color: "#303133",
-    shade: false,
-    title: "",
-    weight: false
+    color: "#303133", //字体颜色
+    shade: false, // 返回添加黑色阴影
+    title: "", // 标题
+    weight: false //标题是否加粗
   };
 
   state = {};
@@ -46,7 +46,8 @@ export default class NavBar extends Component {
     })
   }
 
-  handleClick() {
+  handleClick(e) {
+    e.stopPropagation();
     Taro.navigateBack();
   }
 
@@ -103,6 +104,6 @@ const StyleSheet = {
     position:"absolute",
     left: "50%",
     top: "50%",
-    transform: "translate(-55%,-50%)"
+    transform: "translate(-68%,-50%)"
   }
 };

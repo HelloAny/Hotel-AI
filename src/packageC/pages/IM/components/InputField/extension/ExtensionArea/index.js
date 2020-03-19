@@ -67,13 +67,13 @@ export default class ExtensionArea extends Component {
         style={{ display: play ? "block" : "none" }}
       >
         <Swiper className="swiper" indicatorDots circular>
-          {list.map(swiper => {
+          {list.map((swiper,index) => {
             return (
-              <SwiperItem>
+              <SwiperItem key={index}>
                 <View className="swiper-item">
                   {swiper.map(listItem => {
                     return (
-                      <View className="list-item" onClick={onSelect.bind(null,listItem.name)}>
+                      <View className="list-item" key={listItem.name} onClick={onSelect.bind(null,listItem.name)}>
                         <Image
                           className={`icon iconfont ${
                             listItem.iconType === "class" ? listItem.icon : ""

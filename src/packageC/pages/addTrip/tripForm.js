@@ -430,6 +430,7 @@ export default class TripForm extends Component {
           <AtList>
             {hotelList.map(hotel => (
               <AtListItem
+                key={hotel.id}
                 note={hotel.location}
                 title={hotel.name}
                 thumb={hotel.img}
@@ -452,6 +453,7 @@ export default class TripForm extends Component {
           <AtList>
             {rooms.map(room => (
               <AtListItem
+                key={room.id}
                 note={room.content}
                 title={room.name}
                 arrow="right"

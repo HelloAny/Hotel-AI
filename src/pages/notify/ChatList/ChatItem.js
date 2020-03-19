@@ -66,7 +66,6 @@ export default class ChatItem extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <View className="chat-item" onClick={this.props.onClick}>
         <View className="portrait-box">

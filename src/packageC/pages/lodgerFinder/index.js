@@ -93,7 +93,7 @@ export default class LodgerFinder extends Component {
         />
         {lodgerList.map(lodger => {
           return (
-            <View className="lodger-item">
+            <View className="lodger-item" key={lodger.user_id}>
               <Image
                 className="portrait"
                 src={

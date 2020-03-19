@@ -315,31 +315,31 @@ export default class MsgsBox extends Component {
             position = "right";
           if (type == "TEXT")
             return (
-              <View id={"MsgBox" + index} className={"bubble " + position}>
+              <View key={msg.uuid.uuid} id={"MsgBox" + index} className={"bubble " + position}>
                 <TextMsg position={position} description={description} />
               </View>
             );
           if (type == "TIME")
             return (
-              <View id={"MsgBox" + index} className={"bubble " + position}>
+              <View key={msg.uuid.uuid} id={"MsgBox" + index} className={"bubble " + position}>
                 <TimeMsg description={description} />
               </View>
             );
           if (type == "EMOJI")
             return (
-              <View id={"MsgBox" + index} className={"bubble " + position}>
+              <View key={msg.uuid.uuid} id={"MsgBox" + index} className={"bubble " + position}>
                 <ImageMsg description={description} />
               </View>
             );
           if (type == "IMAGE")
             return (
-              <View id={"MsgBox" + index} className={"bubble " + position}>
+              <View key={msg.uuid.uuid} id={"MsgBox" + index} className={"bubble " + position}>
                 <ImageMsg description={description} />
               </View>
             );
           if (type == "VOICE")
             return (
-              <View id={"MsgBox" + index} className={"bubble " + position}>
+              <View key={msg.uuid.uuid} id={"MsgBox" + index} className={"bubble " + position}>
                 <VoiceMsg description={description} position={position} />
               </View>
             );

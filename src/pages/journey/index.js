@@ -2,7 +2,7 @@ import Taro, { Component } from "@tarojs/taro";
 import { inject, observer } from "@tarojs/mobx";
 import { View, Image } from "@tarojs/components";
 import * as Server from "../../actions";
-import { userStore } from "../../store"
+import { userStore } from "../../store";
 import NavBar from "../../components/Navbar";
 import { NoticeItem, OverviewItem, RecmdItem } from "./cmps";
 import { dateFormat } from "../../utils";
@@ -58,7 +58,8 @@ class Journey extends Component {
             task.img = imgs[Math.floor(Math.random() * imgs.length)];
             task.type = record.type;
             task.status = record.status;
-            task.hotel_id = record.type == "host" ? record.id : record.guest_room_id;
+            task.hotel_id =
+              record.type == "host" ? record.id : record.guest_room_id;
             switch (record.status) {
               case "booking":
                 task.des = "查看";
@@ -90,7 +91,8 @@ class Journey extends Component {
           record.check_out_time || record.end_time
         );
         record.name = record.name || "访问" + record.hotel;
-        record.hotel_id = record.type == "host" ? record.id : record.guest_room_id
+        record.hotel_id =
+          record.type == "host" ? record.id : record.guest_room_id;
         switch (record.status) {
           case "booking":
             record.des = "预定中";
@@ -171,15 +173,15 @@ class Journey extends Component {
   }
 
   componentWillMount() {
-    this.pullDate()
+    this.pullDate();
   }
 
   onPullDownRefresh() {
-    this.pullDate()
+    this.pullDate();
   }
 
   componentDidShow() {
-    if(this.state.ambitus.length != 0) this.pullDate()
+    if (this.state.ambitus.length != 0) this.pullDate();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -218,6 +220,7 @@ class Journey extends Component {
           <Text className="title">行程动态</Text>
           {ongoing.map(o => (
             <NoticeItem
+              key={o.hotel_id}
               info={o}
               onClick={this.handleGoToDetails.bind(
                 this,
@@ -234,8 +237,14 @@ class Journey extends Component {
             {records.map(r => (
               <View className="overview-container">
                 <OverviewItem
+                  key={r.hotel_id}
                   info={r}
-                  onClick={this.handleGoToDetails.bind(this, r.hotel_id, r.type, r.status)}
+                  onClick={this.handleGoToDetails.bind(
+                    this,
+                    r.hotel_id,
+                    r.type,
+                    r.status
+                  )}
                 />
               </View>
             ))}
@@ -243,8 +252,8 @@ class Journey extends Component {
         </View>
         <View className="recommend">
           <Text className="title">周边精彩</Text>
-          {ambitus.map(a => (
-            <View className="recommend-container">
+          {ambitus.map((a, index) => (
+            <View key={index} className="recommend-container">
               <RecmdItem info={a} />
             </View>
           ))}

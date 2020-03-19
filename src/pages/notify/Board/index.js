@@ -95,6 +95,7 @@ export default class Board extends Component {
             if (notify.type == "system") {
               return (
                 <BoardItem
+                  key={notify.msg_id}
                   onClick={this.handleClick.bind(this, notify.msg_id)}
                   mark={!notify.status}
                   imgUrl={
@@ -108,6 +109,7 @@ export default class Board extends Component {
             if (notify.type == "visit") {
               return (
                 <BoardItem
+                  key={notify.msg_id}
                   onClick={this.handleClick.bind(this, notify.msg_id)}
                   imgUrl={
                     notify.extra.phone
@@ -124,6 +126,7 @@ export default class Board extends Component {
             if (notify.type == "invite") {
               return (
                 <BoardItem
+                  key={notify.msg_id}
                   onClick={this.handleClick.bind(this, notify.msg_id)}
                   imgUrl={
                     "https://hotel.lcworkroom.cn/api/pic/get/users/?name=" +

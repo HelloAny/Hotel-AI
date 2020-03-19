@@ -4,7 +4,7 @@
 	"description": "hotel",
 	"appid": "wxff8350da77ca8d3b",
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": false,
 		"enhance": false,
 		"postcss": false,

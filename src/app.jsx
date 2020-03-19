@@ -21,7 +21,7 @@ let onNotify = () => {
     title: "通知",
     content: "您有一条新的通知，点击确定立刻前往查看"
   }).then(res => {
-    if(res.confirm) Taro.switchTab({url:"/pages/notify/index"})
+    if (res.confirm) Taro.switchTab({ url: "/pages/notify/index" });
   });
 };
 
@@ -84,7 +84,16 @@ class App extends Component {
           "pages/addTrip/tripForm",
           "pages/IM/index",
           "pages/receipt/index",
-          "pages/receipt/result"
+          "pages/receipt/result",
+          "pages/servicePanel/index",
+          "pages/servicePanel/pages/cleaner",
+          "pages/servicePanel/pages/conv",
+          "pages/servicePanel/pages/hotelStore",
+          "pages/servicePanel/pages/medicine",
+          "pages/servicePanel/pages/order",
+          "pages/servicePanel/pages/SOS",
+          "pages/servicePanel/pages/tool",
+          "pages/servicePanel/pages/vip",
         ]
       }
     ],
