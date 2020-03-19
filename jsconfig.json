@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@actions":  ["./src/actions"],
+      "@assets":  ["./src/assets"],
+      "@components":  ["./src/components"],
+      "@constants":  ["./src/constants"],
+      "@service":  ["./src/service"],
+      "@store":  ["./src/store"],
+      "@utils":  ["./src/utils"],
+    },
+    "allowSyntheticDefaultImports":true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules","dist", ".temp"]
+}

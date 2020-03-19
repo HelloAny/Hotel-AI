@@ -1,0 +1,27 @@
+/* components/clearInput/clearInput.wxss */
+
+.clearInput {
+  display: -webkit-flex;
+  margin: 16px;
+  padding: 8px 14px 8px 8px;
+  font-size: 24px;
+  border-radius: 16px;
+  border: 1px solid gray;
+  align-items: center;
+}
+
+.searchImg {
+  width: 35px;
+  height: 35px;
+  vertical-align: center;
+}
+
+.clearImgShow {
+  width: 35px;
+  height: 35px;
+  vertical-align: center;
+}
+
+.clearImgHide {
+  display: none;
+}

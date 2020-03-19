@@ -1,0 +1,161 @@
+/* pages/homePage/homePage.wxss */
+
+Page {
+     width: 100%;
+     height: 100%;
+}
+
+.homeHeader {
+     width: 100%;
+     height: 340px;
+}
+
+.homeHeader .swiper {
+     width: 100%;
+     height: 100%;
+}
+
+.homeHeader .wx-swiper-dots.wx-swiper-dots-horizontal {
+     margin-bottom: 85px;
+}
+
+.homeHeader .wx-swiper-dot {
+     width: 40px;
+     display: inline-flex;
+     height: 10px;
+     /* margin-left: 20rpx; */
+     justify-content: space-between;
+}
+
+.homeHeader .wx-swiper-dot::before {
+     content: '';
+     flex-grow: 1;
+     background: white;
+     border-radius: 8px;
+}
+
+.homeHeader .wx-swiper-dot-active::before {
+     background: #f66e26;
+}
+
+.filterContent {
+     width: 100%;
+     box-sizing: border-box;
+     position: absolute;
+     top: 260px;
+     padding: 0 28px;
+}
+
+.filterView {
+     display: flex;
+     flex-direction: column;
+     box-sizing: border-box;
+     height: max-content;
+     width: 100%;
+     box-shadow: 0px 8px 20px #bbb;
+     border-radius: 14px;
+     background: white;
+}
+
+.location {
+     width: 100%;
+     height: max-content;
+     box-sizing: border-box;
+     padding: 22px 30px;
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+     border-bottom: 1px solid #eee;
+}
+
+.location .icon {
+     width: 24px;
+     height: 24px;
+}
+
+.location .caption, .location .city, .location .filter .text {
+     font-size: 32px;
+     margin-left: 14px;
+}
+
+.location .city {
+     flex: 1;
+}
+
+.location .filter {
+     display: flex;
+     flex-direction: row;
+     flex: 1;
+     justify-content: center;
+     align-items: center;
+}
+
+.location .filter .icon {
+     width: 34px;
+}
+
+.divideItem {
+     box-sizing: border-box;
+     width: 100%;
+     background: white;
+     padding: 24px;
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+}
+
+.divideText {
+     flex: 1;
+     text-align: center;
+     font-size: 24px;
+     color: #999;
+}
+
+.dateContent {
+     width: 100%;
+     height: max-content;
+     display: flex;
+     flex-direction: row;
+     padding: 10px 10px 26px;
+     box-sizing: border-box;
+     align-items: center;
+     border-bottom: 1px solid #eee;
+}
+
+.dateItem {
+     flex: 1;
+     display: flex;
+     flex-direction: row;
+     align-items: center;
+     position: relative;
+}
+
+.dateItem .date {
+     display: flex;
+     flex-direction: row;
+     margin: 0 auto;
+}
+
+.dateItem .date .day {
+     height: fit-content;
+     font-size: 45px;
+     color: #ee6715;
+     text-align: center;
+}
+
+.dateItem .date .monthWeek {
+     height: fit-content;
+     display: flex;
+     flex-direction: column;
+     margin-left: 6px;
+}
+
+.dateItem .date .monthWeek .week, .dateItem .date .monthWeek .month {
+     flex: 1;
+     font-size: 22px;
+}
+
+.dayCount {
+     font-size: 32px;
+     margin: 0 10px;
+}

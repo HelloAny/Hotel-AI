@@ -1,0 +1,45 @@
+$text-primary: #303133;
+$text-regular: #606266;
+$text-secondary: #909399;
+$text-placeholder: #c0c4cc;
+
+@mixin flex-box($direction: column, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+.IM-header {
+  @include flex-box(row);
+  background-color: white;
+  height: 45Px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  .left {
+    flex: 1;
+    font-size: 16Px;
+    @include flex-box(row, flex-start);
+  }
+  .center {
+    flex: 2;
+    @include flex-box;
+    .title {
+      font-size: 16Px;
+      color: $text-primary;
+    }
+    .subTitle {
+      font-size: 12Px;
+      color: $text-secondary;
+    }
+  }
+  .right {
+    flex: 1;
+    margin-right: 2Px;
+    @include flex-box(row, flex-end);
+  }
+  View {
+    padding: 3Px;
+  }
+}

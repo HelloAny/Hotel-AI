@@ -1,0 +1,20 @@
+.kinds{
+  display: flex;
+  flex-direction: column;
+  margin-top: 25PX;
+
+}
+.kinds .kinds_name{
+    display: block;
+    width: 100PX;
+    height: 85PX;
+    text-align: center ;
+    line-height: 85PX;
+    font-size: 16PX;
+}
+
+.kinds .select  {
+  color: red;
+
+}
+
