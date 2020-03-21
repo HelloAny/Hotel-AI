@@ -25,7 +25,7 @@ class BookHotel extends Taro.Component {
   constructor(){
     super(...arguments);
     this.state={
-      isDiscount: false,
+    isDiscount: false,
     roomPrice,
     hotelName,
     roomName,
@@ -35,13 +35,17 @@ class BookHotel extends Taro.Component {
     };
   }
 
-  componentWillMount(options) {
-    console.log(options)
-    roomPrice = options.price
-    hotelName = options.hotelName
-    roomName = options.roomName
-    startDate = options.startDate
-    endDate = options.endDate
+  componentWillMount() {
+    const roomPrice = this.$router.params.price
+    const hotelName = this.$router.params.hotelName
+    const roomName = this.$router.params.roomName
+    const startDate = this.$router.params.startDate
+    const endDate= this.$router.params.endDate
+    // roomPrice = options.price
+    // hotelName = options.hotelName
+    // roomName = options.roomName
+    // startDate = options.startDate
+    // endDate = options.endDate
 
     this.setState({
       roomPrice: roomPrice,

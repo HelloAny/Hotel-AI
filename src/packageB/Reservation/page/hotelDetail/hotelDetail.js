@@ -9,6 +9,11 @@ import {
 import Taro from '@tarojs/taro'
 import RoomListItemTmpl from '../../imports/RoomListItemTmpl.js'
 import './hotelDetail.scss'
+import ic_hotel_detail from '../../res/images/ic_hotel_detail.png'
+import ic_city_location from '../../res/images/ic_city_location.png'
+import ic_hotel_phone from '../../res/images/ic_hotel_phone.png'
+import ic_hotel_imag from'../../res/images/ic_hotel_image.png'
+
 // pages/hotelDetail/hotelDetail.js
 
 var currentYear = new Date().getFullYear()
@@ -154,7 +159,7 @@ class HotelDetail extends Taro.Component {
     var room = this.state.roomArray[index]
     Taro.navigateTo({
       url:
-        '/packageB/Reservation/page/bookHotel/?price=' +
+        '/packageB/Reservation/page/bookHotel/bookHotel?price=' +
         room.price +
         '&hotelName=' +
         this.state.hotelName +
@@ -308,7 +313,7 @@ class HotelDetail extends Taro.Component {
       <Block>
         <View className="hotelDetailPic">
           <Image
-            src={require('../../res/images/ic_hotel_detail.png')}
+            src={ic_hotel_detail}
             className="image"
             mode="aspectFill"
           ></Image>
@@ -321,13 +326,13 @@ class HotelDetail extends Taro.Component {
           <Image
             className="locationIcon"
             mode="aspectFit"
-            src={require('../../res/images/ic_city_location.png')}
+            src={ic_city_location}
           ></Image>
           <Text className="address">{hotelAddress}</Text>
           <Image
             className="phoneIcon"
             mode="aspectFill"
-            src={require('../../res/images/ic_hotel_phone.png')}
+            src={ic_hotel_phone}
           ></Image>
         </View>
         <View className="serviceItem">
@@ -412,7 +417,7 @@ class HotelDetail extends Taro.Component {
                 services: item.service,
                 price: item.price,
                 index: index,
-                bookTap: 'bookRoom'
+                bookTap: this.bookRoom.bind(this)
               }}
             ></RoomListItemTmpl>
           )

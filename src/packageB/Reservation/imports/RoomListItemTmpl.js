@@ -10,17 +10,17 @@ import Taro from '@tarojs/taro'
 export default class RoomListItemTmpl extends Taro.Component {
   render() {
     const {
-        //hotelItemTap,
+        hotelItemTap,
         imageUrl,
         roomName,
         services,
         price,
         bookTap,
         index
-    } = this.props
+    } = this.props.state
     return (
       <Block>
-        <View className="roomListItem" >  {/* onClick={hotelItemTap} */}
+        <View className="roomListItem" onClick={hotelItemTap} >  {/* */}
           <Image className="image" mode="scaleToFill" src={imageUrl}></Image>
           <View className="content">
             <Text className="roomName">{roomName}</Text>

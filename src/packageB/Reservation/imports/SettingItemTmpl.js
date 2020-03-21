@@ -4,7 +4,7 @@ export default class SettingItemTmpl extends Taro.Component {
   render() {
     const {
      caption, value, needIcon
-    } = this.props
+    } = this.props.state
     return (
       <Block>
         <View className="settingItem">

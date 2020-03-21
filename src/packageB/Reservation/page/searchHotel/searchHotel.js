@@ -225,7 +225,7 @@ class SearchHotel extends Taro.Component {
         {hotelArray.map((item, index) => {
             return (
               <HotelListItemTmpl
-                data={{
+                state={{
                   imageUrl: item.image,
                   name: item.name,
                   score: item.score,
