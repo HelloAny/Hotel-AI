@@ -15,13 +15,13 @@ class HotelFilter extends Taro.Component {
             state={{ caption: '酒店位置', value: '', needIcon: false }}
           ></SettingItemTmpl>
           <SettingItemTmpl
-            state={{ caption: '行政区域 ', value: '南山区 ', needIcon: true }}
+            state={{ caption: '行政区域 ', value: '南山区 ', needIcon: false }}
           ></SettingItemTmpl>
           <SettingItemTmpl
-            state={{ caption: '商圈 ', value: 'xx商圈 ', needIcon: true }}
+            state={{ caption: '商圈 ', value: 'xx商圈 ', needIcon: false }}
           ></SettingItemTmpl>
           <SettingItemTmpl
-            state={{ caption: '地铁 ', value: '地铁站 ', needIcon: true }}
+            state={{ caption: '地铁 ', value: '地铁站 ', needIcon: false }}
           ></SettingItemTmpl>
         </View>
         <View className="filterMenu">

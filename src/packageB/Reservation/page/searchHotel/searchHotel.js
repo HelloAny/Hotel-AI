@@ -1,6 +1,6 @@
 import { Block, View, Text, Image, Navigator } from '@tarojs/components'
 import Taro from '@tarojs/taro'
-import ClearInput from '../../components/clearInput/ClearInput'
+import ClearInput from '../../components/clearInput/ClearInput.js'
 import HotelListItemTmpl from '../../imports/HotelListItemTmpl.js'
 import './searchHotel.scss'
 import ic_hotel_image from '../../res/images/ic_hotel_image.png'

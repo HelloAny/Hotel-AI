@@ -100,10 +100,7 @@ class App extends Component {
           pagePath: "pages/account/account",
           text: "我的"
         },
-        // {
-        //   pagePath: "pages/Reservation/homePage",
-        //   text: "预定"
-        // },
+
         {
           pagePath: "pages/journey/index",
           text: "行程"

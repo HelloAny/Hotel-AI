@@ -1,7 +1,8 @@
 import { Block, View, Image, Input } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import './clearInput.scss'
-
+import './clear.png'
+import './search.png'
 
 
 class ClearInput extends Taro.Component {
@@ -10,10 +11,10 @@ class ClearInput extends Taro.Component {
       type: String,
       value: '搜索'
     },
-    inputIcon: {
-      type: String,
-      value: 'search.png'
-    },
+    // inputIcon: {
+    //   //type: String,
+    //   value: search.png
+    // },
     inputType: {
       type: String,
       value: 'text'
@@ -44,11 +45,11 @@ inputListener(e) {
   var value = e.detail.value
   var cursor = e.detail.cursor
   if (value === null || value === undefined || value.length === 0) {
-    this.setData({
+    this.setState({
       isClearShow: false
     })
   } else {
-    this.setData({
+    this.setState({
       isClearShow: true
     })
   }
@@ -68,14 +69,14 @@ inputConfirm(e) {
 }
 
 clearTap() {
-  this.setData({
+  this.setState({
     isClearShow: false,
     inputValue: ''
   })
 }
   render() {
     const {
-      inputIcon,
+      //inputIcon,
       inputHint,
       confirmTap,
       inputValue,
@@ -87,11 +88,12 @@ clearTap() {
     return (
       <View className="input-class">
         <Image
-          src={inputIcon}
+          src={search.png}
           mode="scaleToFill"
           className="icon-class"
         ></Image>
         <Input
+          className='input'
           placeholder={inputHint}
           onConfirm={confirmTap}
           style="flex:1;width:100%;padding-left:12rpx;"
@@ -104,7 +106,7 @@ clearTap() {
         ></Input>
         <Image
           className={isClearShow ? 'clearImgShow' : 'clearImgHide'}
-          src={require('./clear.png')}
+          src={clear.png}
           onClick={this.clearTap}
           mode="widthFix"
         ></Image>

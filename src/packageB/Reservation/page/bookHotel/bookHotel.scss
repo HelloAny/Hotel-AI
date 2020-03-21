@@ -46,7 +46,7 @@ Page {
      flex-direction: row;
      align-items: center;
      background: white;
-     border-top: 1px solid #ee6715;
+     border-top: 1px solid #409EFF;
      font-size: 32px;
      z-index: 10;
      position: fixed;
@@ -56,8 +56,8 @@ Page {
 }
 
 .payItem .priceItem {
-     flex: 1;
-     color: #ee6715;
+     flex: 2;
+     color: black ;
      padding-left: 24px;
 }
 
@@ -69,7 +69,7 @@ Page {
      color: white;
      font-weight: bold;
      width: 250px;
-     background: #ee6715;
+     background: #409EFF;
 }
 
 .settingItem {
@@ -112,11 +112,11 @@ Page {
 }
 
 .settingItem .discount {
-     color: #ee6715;
+     color: #409EFF;
 }
 
 .settingItem .invoice {
-     color: #ee6715;
+     color: #409EFF;
      position: absolute;
      right: 0;
 }

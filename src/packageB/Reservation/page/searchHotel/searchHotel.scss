@@ -93,7 +93,7 @@ Page {
 .priceItem .price {
      font-size: 35px;
      font-weight: bold;
-     color: #ff1d1d;
+     color: red;
 }
 
 .priceItem .priceTip {
@@ -149,7 +149,7 @@ Page {
 }
 
 .filterActive {
-     color: #e55509;
+     color: #409EFF;
 }
 
 .arrowUp, .arrowDown {
@@ -165,11 +165,11 @@ Page {
 
 .filterActive .arrowUp {
      border-bottom: 0;
-     border-top: 10px solid #e55509;
+     border-top: 10px solid #409EFF;
 }
 
 .filterActive .arrowDown {
-     border-bottom: 10px solid #e55509;
+     border-bottom: 10px solid #409EFF;
      border-top: 0;
 }
 
@@ -201,4 +201,8 @@ Page {
      right: 0;
      bottom: 0;
      background: white;
+}
+.loading {
+  width: 60rpx;
+  height: 60rpx;
 }

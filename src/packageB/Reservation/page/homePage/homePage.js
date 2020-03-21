@@ -9,7 +9,7 @@ import {
 } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import './homePage.scss'
-// pages/homePage/homePage.js
+import '../overall.scss'
 
 import ic_home_advertise from '../../res/images/ic_home_advertise.png'
 import { $mobx } from 'mobx'

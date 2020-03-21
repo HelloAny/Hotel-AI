@@ -53,7 +53,7 @@ Page {
 .dateItem .date .day {
      height: fit-content;
      font-size: 45px;
-     color: #ee6715;
+     color: #409EFF;
      text-align: center;
 }
 
@@ -131,7 +131,7 @@ Page {
 .content .priceItem .price {
      font-size: 35px;
      font-weight: bold;
-     color: #ff1d1d;
+     color: red;
 }
 
 .content .priceItem .priceTip {
@@ -150,11 +150,11 @@ Page {
 }
 
 .bookBtn {
-     background: #fe7e38;
+     background: #409EFF;
 }
 
 .bookBtnHover {
-     background: #e55509;
+     background: #409EFF;
 }
 
 .hotelDetailPic {

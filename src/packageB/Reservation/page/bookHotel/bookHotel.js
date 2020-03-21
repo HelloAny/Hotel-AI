@@ -8,7 +8,7 @@ import {
   Input
 } from '@tarojs/components'
 import Taro from '@tarojs/taro'
-// import ClearInput from '../../components/clearInput/clearInput'
+import ClearInput from '../../components/clearInput/clearInput'
 import SettingItemTmpl from '../../imports/SettingItemTmpl'
 import './bookHotel.scss'
 // pages/bookHotel/bookHotel.js
@@ -41,11 +41,7 @@ class BookHotel extends Taro.Component {
     const roomName = this.$router.params.roomName
     const startDate = this.$router.params.startDate
     const endDate= this.$router.params.endDate
-    // roomPrice = options.price
-    // hotelName = options.hotelName
-    // roomName = options.roomName
-    // startDate = options.startDate
-    // endDate = options.endDate
+
 
     this.setState({
       roomPrice: roomPrice,
@@ -88,33 +84,38 @@ class BookHotel extends Taro.Component {
                 isInput: false
               }}
             ></SettingItemTmpl>
+
+
             <SettingItemTmpl
-              state={{
-                caption: '房间数量 ',
-                value: '1间 ',
-                needIcon: true,
-                isInput: false
-              }}
-            ></SettingItemTmpl>
-            <View style="width:100%;height:24rpx;"></View>
-            <SettingItemTmpl
+             state={{
+               caption: '房间数量',
+               value:'1间',
+               needIcon: false,
+               isInput: false
+
+             }}
+           ></SettingItemTmpl>
+
+<View style="width:100%;height:24rpx;"></View>
+          <SettingItemTmpl
               state={{
                 caption: '入住人 ',
-                value: '1间 ',
+                // value: '1间 ',
                 needIcon: false,
                 isInput: true,
                 hint: '请输入姓名',
                 inputType: 'text'
               }}
             ></SettingItemTmpl>
+
             <SettingItemTmpl
               state={{
                 caption: '手机号码 ',
-                value: '1间 ',
+                // value: '1间 ',
                 needIcon: false,
                 isInput: true,
                 hint: '请输入手机号码',
-                inputType: 'number'
+                inputType: 1
               }}
             ></SettingItemTmpl>
             <SettingItemTmpl
@@ -137,7 +138,7 @@ class BookHotel extends Taro.Component {
             </View>
             <View className="settingItem">
               <Text className="caption">发票</Text>
-              <Switch className="invoice" color="#ee6715" checked></Switch>
+              <Switch className="invoice" color="#409EFF" checked></Switch>
             </View>
             <View className="settingItem">
               <Text className="caption">备注</Text>

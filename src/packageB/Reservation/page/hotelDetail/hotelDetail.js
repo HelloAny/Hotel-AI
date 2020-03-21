@@ -12,7 +12,7 @@ import './hotelDetail.scss'
 import ic_hotel_detail from '../../res/images/ic_hotel_detail.png'
 import ic_city_location from '../../res/images/ic_city_location.png'
 import ic_hotel_phone from '../../res/images/ic_hotel_phone.png'
-import ic_hotel_image from'../../res/images/ic_hotel_image.png'
+import ic_hotel_image from '../../res/images/ic_hotel_image.png'
 
 // pages/hotelDetail/hotelDetail.js
 
@@ -132,7 +132,7 @@ class HotelDetail extends Taro.Component {
       ]
     };
   }
-  componentWillMount(options) {
+  componentWillMount() {
     startDate = currentDate
     startYear = currentYear
     startDay = currentDay
@@ -142,10 +142,14 @@ class HotelDetail extends Taro.Component {
     this.initEndDate()
     this.setSearchDate()
 
-    console.log(options)
-    var hotelName = options.name
-    var address = options.address
-    var distance = options.distance
+    const hotelName = this.$router.params.name
+    const address = this.$router.params.address
+    const distance = this.$router.params.distance
+    this.setState({
+      hotelName,
+      address,
+      distance
+    })
     if (hotelName !== undefined) {
       this.setState({
         hotelName: hotelName,
