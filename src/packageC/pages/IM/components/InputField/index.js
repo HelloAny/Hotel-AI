@@ -34,12 +34,6 @@ export default class InputField extends Component {
 
   stateKeys = ["pullMode", "player"];
 
-  constructor() {
-    Server.on("image", res => this.onImage(res), true);
-
-    Server.on("voice", res => this.onVoice(res), true);
-  }
-
   // 切换输入模式设置state.player和拉起状态pullMode
   _switchPlayer(name) {
     let player = Object.assign({}, this.state.player);
@@ -69,19 +63,6 @@ export default class InputField extends Component {
   // 收起输入区, 除语音输入模式外将被重置
   _reset() {
     if (!this.state.player.SoundRecorder) this._switchPlayer("");
-  }
-
-  // 监听server返回图片地址
-  onImage(res) {
-    const { uuid, url } = res;
-    MessageDB.updateMessage("IMAGE", uuid, { url });
-  }
-
-  // 监听server返回音频地址或文本
-  onVoice(res) {
-    let { uuid, url, text } = res;
-    if (!text) text = "主人，我没有听清哦";
-    MessageDB.updateMessage("VOICE", uuid, { url, text });
   }
 
   // 打开拓展功能选择区
@@ -131,7 +112,6 @@ export default class InputField extends Component {
       .then(results =>
         this.props.onInput(
           results.map(info => {
-            console.log(info);
             let msg = new Message("IMAGE", info);
             FileSystemManager.readFile({
               filePath: info.path,

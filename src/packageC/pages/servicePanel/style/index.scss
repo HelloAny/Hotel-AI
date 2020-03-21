@@ -1,0 +1,89 @@
+.sp-container {
+  background-color: white;
+  min-height: 100vh;
+  background-size: cover;
+  background-color: #2c304a;
+  .head {
+    height: 230Px;
+    width: 100vw;
+    background-color: #0f2136;
+    border-bottom-left-radius: 50% 25%;
+    border-bottom-right-radius: 50% 25%;
+    overflow: hidden;
+    .head-bg{
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .body {
+    transform: translateY(-40Px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .vip-nav {
+      width: 290Px;
+      height: 40Px;
+      border-radius: 8Px;
+      background-color: #fdecd8;
+      box-shadow: 0Px 4Px 5Px #be9862;
+      padding: 0 20Px;
+      color: #c99e67;
+      line-height: 40Px;
+      font-size: 14Px;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+    }
+    .service-nav {
+      margin: 20Px auto;
+      width: 90vw;
+      height: calc(100vh - 235Px);
+      display: flex;
+      flex-direction: column;
+      .service-item {
+        height: 50Px;
+        padding: 25Px;
+        margin-top: 20Px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 1.5Px solid #ffc576;
+        border-radius: 5Px;
+        transition: all .3s;
+        .title-box{
+          line-height: 25Px;
+          .title{
+            display: block;
+            color: white;
+            font-size: 16Px;
+            font-weight: 800;
+          }
+          .sub-title{
+            display: block;
+            font-size: 12Px;
+            color: #ffc576;
+          }
+        }
+        &:active {
+          background-color: #ffc576;
+          .title{
+            color: #303133;
+          }
+          .sub-title{
+            color: #606266;
+          }
+        }
+      }
+      .service-end {
+        text-align: center;
+        color: white;
+        padding-top: 10Px;
+      }
+    }
+    .hidden {
+      transition: all 0.5s;
+      opacity: 0;
+      transform: translateY(10Px);
+    }
+  }
+}

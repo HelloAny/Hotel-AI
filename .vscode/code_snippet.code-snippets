@@ -32,7 +32,6 @@
       "  stateKeys = [];",
       "",
       "  shouldComponentUpdate(nextProps, nextState) {",
-      "    console.log(\"${1:index}\",nextProps, nextState);",
       "    let flag = !this.compare(nextProps, nextState);",
       "    return flag;",
       "  }",

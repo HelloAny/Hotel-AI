@@ -1,6 +1,7 @@
 import { Socket, AsyncQueue } from "../utils";
 
 class WS {
+  status = "close";
   _events = {};
 
   _socket = null;
@@ -43,10 +44,9 @@ class WS {
   }
 
   /**
-   *
+   * 发送广播
    * @param {String} eventName 事件名称
    * @param  {...any} args 参数
-   * @description 发出广播
    */
   emit(eventName, ...args) {
     let data = this._stringify(eventName, ...args);
@@ -69,13 +69,13 @@ class WS {
    * 监听广播
    * @param {string} eventName 事件名称
    * @param {function} callback 回调
-   * @param {boolean} unique 若该事件存在监听者则不再添加此监听
+   * @param {boolean} unique 事件仅存在唯一监听者
    */
   on(eventName, callback, unique) {
     if (!this._events.hasOwnProperty(eventName))
       this._events[eventName] = new Array();
-    if (!(unique && this._events[eventName].length > 0))
-      this._events[eventName].push(callback);
+    if (unique) this._events[eventName][0] = callback;
+    else this._events[eventName].push(callback);
   }
 
   // socket连接，成功后设置socket
@@ -95,6 +95,11 @@ class WS {
       let args = data;
       if (this._events.hasOwnProperty(eventName)) {
         this._events[eventName].forEach(fn => {
+          fn(...args);
+        });
+      }
+      if (eventName == "message") {
+        this._events["globalMessage"].forEach(fn => {
           fn(...args);
         });
       }

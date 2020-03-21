@@ -21,10 +21,9 @@ export default class Header extends Component {
 
   stateKeys = [];
 
-  shouldComponentUpdate(nextProps, nextState) {
-    let flag = !this.compare(nextProps, nextState);
-    if (flag) console.log("Header", { nextProps, nextState });
-    return flag;
+  // 返回
+  handleNavigateBack() {
+    Taro.navigateBack()
   }
 
   componentWillUpdate() {
@@ -47,7 +46,7 @@ export default class Header extends Component {
     } = this.props;
     return (
       <View className="IM-header" style={{ backgroundColor }}>
-        <View className="left">
+        <View className="left" onClick={this.handleNavigateBack}>
           <View className={`iconfont ${leftIcon}`} />
           <Text>{leftTitle}</Text>
         </View>

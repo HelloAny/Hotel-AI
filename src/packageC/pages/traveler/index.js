@@ -30,11 +30,16 @@ export default class Traveler extends Component {
   handleClose() {
     this.setState({
       boxOpen: false
-    })
+    });
   }
 
   // 应用内私聊分享
-  handleInviteByChat() {}
+  handleInviteByChat() {
+    const { id } = this.$router.params;
+    Taro.navigateTo({
+      url: "/packageC/pages/lodgerFinder/index?journeyId=" + id
+    });
+  }
 
   // 微信好友分享
   handleInviteByWx() {}
@@ -57,7 +62,14 @@ export default class Traveler extends Component {
   handleNavToDetail() {
     const { id } = this.$router.params;
     Taro.navigateTo({
-      url: "/packageC/pages/detail/index?id=" + id
+      url: "/packageC/pages/details/index?id=" + id
+    });
+  }
+
+  // 进入酒店服务
+  handleSpreadExpansion() {
+    Taro.navigateTo({
+      url: "/packageC/pages/servicePanel/index"
     });
   }
 

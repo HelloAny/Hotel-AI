@@ -10,7 +10,7 @@ export default class RecmdItem extends Component {
 
   state = {};
 
-  propsKeys = [];
+  propsKeys = ["info"];
 
   stateKeys = [];
 
@@ -29,12 +29,12 @@ export default class RecmdItem extends Component {
           <View className="title-box">
             <Text className="title">{name}</Text>
           </View>
-          {tab1.map(tab => (
-            <Text className="tab1">{tab}</Text>
+          {tab1.map((tab,index) => (
+            <Text key={index} className="tab1">{tab}</Text>
           ))}
           <View className="tab2-list">
-            {tab2.map(tab => (
-              <Text className="tab2">{tab}</Text>
+            {tab2.map((tab,index) => (
+              <Text key={index} className="tab2">{tab}</Text>
             ))}
           </View>
         </View>

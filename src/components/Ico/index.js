@@ -8,10 +8,11 @@ export default class Ico extends Component {
 
   static defaultProps = {
     value: "",
-    size: ""
+    size: "",
+    color: ""
   };
 
-  propsKeys = ["value", "size"];
+  propsKeys = ["value", "size", "color"];
 
   shouldComponentUpdate(nextProps, nextState) {
     let flag = !this.compare(nextProps, nextState);
@@ -21,7 +22,7 @@ export default class Ico extends Component {
   render() {
     return (
       <Text
-        style={{ fontSize: (this.props.size || 16) + "px" }}
+        style={{ fontSize: (this.props.size || 16) + "px", color: this.props.color }}
         className={`iconfont ${this.props.value}`}
       />
     );

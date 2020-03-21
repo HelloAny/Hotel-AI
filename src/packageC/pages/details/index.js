@@ -1,7 +1,7 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Image } from "@tarojs/components";
 import { AtIcon } from "taro-ui";
-import Server from "../../../actions/api";
+import * as Server from "../../../actions";
 import { dateFormat } from "../../../utils";
 import NavBar from "../../../components/Navbar";
 import Timeline from "./Timeline";
@@ -134,7 +134,9 @@ export default class Details extends Component {
 
   // 打开拓展
   handleSpreadExpansion() {
-    console.log("handleSpreadExpansion");
+    Taro.navigateTo({
+      url: "/packageC/pages/servicePanel/index"
+    });
   }
 
   componentDidMount() {
@@ -230,7 +232,7 @@ export default class Details extends Component {
         <NavBar color="white" shade />
         <Swiper className="bg-container" autoplay>
           {imgs.map(img => (
-            <SwiperItem>
+            <SwiperItem key={img}>
               <Image src={img} className="bg" />
             </SwiperItem>
           ))}

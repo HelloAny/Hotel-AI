@@ -1,6 +1,6 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Picker, Textarea, Image } from "@tarojs/components";
-import Server from "../../../actions/api";
+import * as Server from "../../../actions";
 import { AtIcon, AtList, AtListItem, AtSearchBar } from "taro-ui";
 import { dateFormat } from "../../../utils";
 
@@ -23,7 +23,7 @@ export default class TripForm extends Component {
   state = {
     stepIndex: 0,
     hotelList: [],
-    hotelId: "4",
+    hotelId: "",
     rooms: [],
     vagueRoomName: "",
     roomId: "",
@@ -86,6 +86,8 @@ export default class TripForm extends Component {
       case "0-1":
         if (!this.state.security) {
           return false;
+        } else {
+          return true;
         }
       case "1-2":
         if (this.state.hotelId) {
@@ -274,7 +276,7 @@ export default class TripForm extends Component {
     beginDate = new Date(beginDate + " " + beginTime).getTime();
     endDate = new Date(endDate + " " + endTime).getTime();
     Server.applyVisit({
-      uid: 4,
+      uid: 5,
       room_Id: roomId,
       note,
       beginDate,
@@ -297,8 +299,8 @@ export default class TripForm extends Component {
   // 进入行程页
   handleToJourney() {
     setTimeout(() => {
-      Taro.navigateTo({
-        url: "/packageC/pages/journey/index"
+      Taro.switchTab({
+        url: "/pages/journey/index"
       });
     }, 200);
   }
@@ -311,6 +313,9 @@ export default class TripForm extends Component {
     Server.getHotelsList()
       .then(data => {
         this.initPage2State(data);
+        setTimeout(() => {
+          if (this.state.stepIndex == 0) this.handleNextStep();
+        }, 1000);
       })
       .catch(err => {
         console.log("服务出错啦", err);
@@ -425,6 +430,7 @@ export default class TripForm extends Component {
           <AtList>
             {hotelList.map(hotel => (
               <AtListItem
+                key={hotel.id}
                 note={hotel.location}
                 title={hotel.name}
                 thumb={hotel.img}
@@ -447,6 +453,7 @@ export default class TripForm extends Component {
           <AtList>
             {rooms.map(room => (
               <AtListItem
+                key={room.id}
                 note={room.content}
                 title={room.name}
                 arrow="right"

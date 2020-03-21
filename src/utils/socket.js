@@ -12,7 +12,7 @@ export default class Socket {
    * complete	Function	否	接口调用结束的回调函数（调用成功、失败都会执行）
    */
   connectOptions = {
-    url: "ws://47.100.222.159:7320",
+    url: "wss://lyj1999.top",
     success(e) {
       console.log("[Socket] is trying to connect...", e);
     },
@@ -58,7 +58,7 @@ export default class Socket {
    */
   _socketTask = null;
 
-  _onOpen = (e)=>{
+  _onOpen = e => {
     console.log("[Socket] connect success", e);
   };
   _onMessage = null;
@@ -140,13 +140,11 @@ export default class Socket {
    * 创建一个 WebSocket 链接。
    * 支持存在最多两个 WebSocket 链接，每次成功调用 Taro.connectSocket 会返回一个新的 SocketTask。
    */
-  connect() {
-    return Taro.connectSocket(this.connectOptions).then(task => {
-      this._socketTask = task;
-      this._socketTask.onOpen(this._onOpen);
-      this._socketTask.onMessage(this._onMessage);
-      this._socketTask.onError(this._onError);
-      this._socketTask.onClose(this._onClose);
-    })
+  async connect() {
+    this._socketTask = await Taro.connectSocket(this.connectOptions);
+    this._socketTask.onOpen(this._onOpen);
+    this._socketTask.onMessage(this._onMessage);
+    this._socketTask.onError(this._onError);
+    this._socketTask.onClose(this._onClose);
   }
 }

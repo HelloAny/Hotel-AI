@@ -10,7 +10,7 @@ export default class NoticeItem extends Component {
 
   state = {};
 
-  propsKeys = [];
+  propsKeys = ["info"];
 
   stateKeys = [];
 
@@ -20,7 +20,7 @@ export default class NoticeItem extends Component {
   }
 
   render() {
-    const { name, img, time1, time2 } = this.props.info;
+    const { name, img, time1, time2, des, status } = this.props.info;
     return (
       <View className="container" onClick={this.props.onClick}>
         <Image src={img} className="figure" />
@@ -30,11 +30,8 @@ export default class NoticeItem extends Component {
             {time1} - {time2}
           </Text>
         </View>
-        <View style={{ display: "none" }} className="status success">
-          已同意
-        </View>
-        <View style={{ display: "block" }} className="btn">
-          查看
+        <View style={{ display: "block" }} className={"btn"}>
+          {des}
         </View>
       </View>
     );

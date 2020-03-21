@@ -21,7 +21,7 @@ export default class BoardItem extends Component {
 
   state = {};
 
-  propsKeys = [];
+  propsKeys = ["mark", "imgUrl"];
 
   stateKeys = [];
 

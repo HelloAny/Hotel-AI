@@ -16,9 +16,9 @@ export default class MsgsBox extends Component {
 
   static defaultProps = {
     scrollOffset: 0,
-    roomName: "robot",
+    roomName: "",
     refresh: false,
-    breakBug: false,
+    breakBug: false
   };
 
   state = {
@@ -37,7 +37,7 @@ export default class MsgsBox extends Component {
   _start = 0;
   _end = 0;
 
-  propsKeys = ["breakBug","scrollOffset", "roomName", "refresh"];
+  propsKeys = ["breakBug", "scrollOffset", "roomName", "refresh"];
 
   stateKeys = ["scrollTop", "messageList", "scrollIntoView"];
 
@@ -139,14 +139,18 @@ export default class MsgsBox extends Component {
 
   // 房间id更新将重置房间
   _checkUpdate(nextProps) {
-    if (nextProps.breakBug != this.props.breakBug || nextProps.roomName != this.props.roomName) {
-      console.log(nextProps.roomName)
+    if (
+      nextProps.breakBug != this.props.breakBug ||
+      nextProps.roomName != this.props.roomName
+    ) {
+      console.log(nextProps.roomName);
       this.init(nextProps.roomName);
     }
   }
 
   init(rn) {
     let roomName = rn || this.props.roomName;
+    if (!roomName) return;
     this.room = MessageDB.getRoom(roomName);
     this.room.onPush = this.handlePush.bind(this);
     this.end = this._end = this.room.getMsgAmount();
@@ -249,6 +253,16 @@ export default class MsgsBox extends Component {
     this.init();
   }
 
+  componentDidMount() {
+    this._scrollQuery().then(res => {
+      setTimeout(() => {
+        this.setState({
+          scrollTop: res.scrollHeight+10086
+        });
+      }, 500);
+    });
+  }
+
   componentWillReceiveProps(nextProps) {
     this._newOffset = nextProps.scrollOffset;
     this._checkUpdate(nextProps);
@@ -301,32 +315,32 @@ export default class MsgsBox extends Component {
             position = "right";
           if (type == "TEXT")
             return (
-              <View id={"MsgBox" + index} className={"bubble " + position}>
+              <View key={msg.uuid.uuid} id={"MsgBox" + index} className={"bubble " + position}>
                 <TextMsg position={position} description={description} />
               </View>
             );
           if (type == "TIME")
             return (
-              <View id={"MsgBox" + index} className={"bubble " + position}>
+              <View key={msg.uuid.uuid} id={"MsgBox" + index} className={"bubble " + position}>
                 <TimeMsg description={description} />
               </View>
             );
           if (type == "EMOJI")
             return (
-              <View id={"MsgBox" + index} className={"bubble " + position}>
+              <View key={msg.uuid.uuid} id={"MsgBox" + index} className={"bubble " + position}>
                 <ImageMsg description={description} />
               </View>
             );
           if (type == "IMAGE")
             return (
-              <View id={"MsgBox" + index} className={"bubble " + position}>
+              <View key={msg.uuid.uuid} id={"MsgBox" + index} className={"bubble " + position}>
                 <ImageMsg description={description} />
               </View>
             );
           if (type == "VOICE")
             return (
-              <View id={"MsgBox" + index} className={"bubble " + position}>
-                <VoiceMsg description={description} position />
+              <View key={msg.uuid.uuid} id={"MsgBox" + index} className={"bubble " + position}>
+                <VoiceMsg description={description} position={position} />
               </View>
             );
         })}

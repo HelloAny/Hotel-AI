@@ -6,6 +6,8 @@
   background-color: whitesmoke;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
+  border-top: solid white 60Px;
   .iconfont {
     font-size: 24Px!important;
     color: #515151;

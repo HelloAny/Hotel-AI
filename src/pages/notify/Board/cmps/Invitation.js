@@ -4,7 +4,9 @@ import { View } from "@tarojs/components";
 import "../assets/style/invitation.scss"
 
 export default class Invitation extends Component {
-  static defaultProps = {};
+  static defaultProps = {
+    notify:{}
+  };
 
   state = {}
 

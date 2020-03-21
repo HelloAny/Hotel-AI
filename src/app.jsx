@@ -1,6 +1,7 @@
 import Taro, { Component } from "@tarojs/taro";
 import { Provider, onError } from "@tarojs/mobx";
-import { userInfo, cardPage } from "@store";
+import { autorun } from "mobx";
+import * as store from "@store";
 import { objectDeepCompare } from "@utils";
 import Server from "@service/SocketServer";
 import Index from "./pages/index";
@@ -15,16 +16,30 @@ import "./app.scss";
 //   require('nerv-devtools')
 // }
 
-// 自动开始连接socket
-!function(){
-  Server.connect()
-}()
-
-const store = {
-  userStore: new userInfo(),
-  cardPage: new cardPage()
+let onNotify = () => {
+  Taro.showModal({
+    title: "通知",
+    content: "您有一条新的通知，点击确定立刻前往查看"
+  }).then(res => {
+    if (res.confirm) Taro.switchTab({ url: "/pages/notify/index" });
+  });
 };
 
+// 自动开始连接socket,尝试初始化身份信息,绑定全局事件
+!(function() {
+  Server.connect();
+  Server.on("notify", onNotify);
+  Server.emit(
+    "preLogin",
+    Object.assign({}, store.userStore.user, {
+      token: Taro.getStorageSync("token")
+    })
+  );
+  autorun(() => {
+    let userInfo = store.userStore.user;
+    if (Server.status == "login") Server.emit("updateInfo", userInfo);
+  });
+})();
 
 onError(error => {
   console.log("mobx global error listener:", error);
@@ -75,9 +90,22 @@ class App extends Component {
         root: "packageC",
         pages: [
           "pages/details/index",
-          "pages/addTrip/index",
+          "pages/traveler/index",
+          "pages/lodgerFinder/index",
+          "pages/addTrip/chose",
           "pages/addTrip/tripForm",
-          "pages/IM/index"
+          "pages/IM/index",
+          "pages/receipt/index",
+          "pages/receipt/result",
+          "pages/servicePanel/index",
+          "pages/servicePanel/pages/cleaner",
+          "pages/servicePanel/pages/conv",
+          "pages/servicePanel/pages/hotelStore",
+          "pages/servicePanel/pages/medicine",
+          "pages/servicePanel/pages/order",
+          "pages/servicePanel/pages/SOS",
+          "pages/servicePanel/pages/tool",
+          "pages/servicePanel/pages/vip",
         ]
       }
     ],
@@ -100,14 +128,13 @@ class App extends Component {
           pagePath: "pages/account/account",
           text: "我的"
         },
-
         {
           pagePath: "pages/journey/index",
           text: "行程"
         },
         {
           pagePath: "pages/notify/index",
-          text: "通知"
+          text: "消息"
         }
       ]
     }

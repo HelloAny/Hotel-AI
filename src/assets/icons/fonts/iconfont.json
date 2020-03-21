@@ -6,6 +6,104 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "1315581",
+      "name": "便利店",
+      "font_class": "hotel-store",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "9297196",
+      "name": "点餐",
+      "font_class": "order-meal",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "7311994",
+      "name": "更多",
+      "font_class": "gengduo",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "13388249",
+      "name": "周边",
+      "font_class": "zhoubian",
+      "unicode": "e65a",
+      "unicode_decimal": 58970
+    },
+    {
+      "icon_id": "11459725",
+      "name": "会员",
+      "font_class": "huiyuan",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "1263277",
+      "name": "资源借用",
+      "font_class": "tool-provider",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "1985080",
+      "name": "打扫",
+      "font_class": "cleaner",
+      "unicode": "e659",
+      "unicode_decimal": 58969
+    },
+    {
+      "icon_id": "2966997",
+      "name": "实物-行李箱",
+      "font_class": "luggage",
+      "unicode": "e70d",
+      "unicode_decimal": 59149
+    },
+    {
+      "icon_id": "4562527",
+      "name": "紧急告警",
+      "font_class": "help-urgency",
+      "unicode": "e678",
+      "unicode_decimal": 59000
+    },
+    {
+      "icon_id": "5172573",
+      "name": "优品家居_线面_床",
+      "font_class": "furniture",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "7605982",
+      "name": "移动物联",
+      "font_class": "SIoT",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "8922367",
+      "name": "医药箱",
+      "font_class": "drug",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "13179180",
+      "name": "疫情填报",
+      "font_class": "virus-query",
+      "unicode": "e624",
+      "unicode_decimal": 58916
+    },
+    {
+      "icon_id": "4249999",
+      "name": "通知",
+      "font_class": "tongzhi",
+      "unicode": "e669",
+      "unicode_decimal": 58985
+    },
+    {
       "icon_id": "386271",
       "name": "QQ",
       "font_class": "qq",

@@ -28,11 +28,12 @@ export default class UUID {
   identify = "";
 
   /**
-   * 
-   * @param {String} uuid 
+   *
+   * @param {String} uuid
    */
   constructor(uuid) {
     if (!uuid) throw "no uuid provided!";
+    if (typeof uuid == "object") uuid = uuid.uuid
     let uuidArr = uuid.split("-");
     this.uuid = uuid;
     this.timestamp = uuidArr[0];

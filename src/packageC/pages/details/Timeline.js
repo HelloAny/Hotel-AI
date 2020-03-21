@@ -114,6 +114,7 @@ export default class Timeline extends Component {
         )}
         {list.map((e, index) => (
           <View
+            key={index}
             style={{ display: index <= packUp.index ? "none" : "block" }}
             className="row"
           >
@@ -129,7 +130,7 @@ export default class Timeline extends Component {
             <View className="main">
               {e
                 ? e.map(v => (
-                    <View>
+                    <View key={v.time}>
                       <View
                         style={{
                           display: v.type == "process" ? "block" : "none"

@@ -14,7 +14,7 @@
   .gist {
     flex: 1;
     padding: 0 10Px;
-    
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -42,15 +42,23 @@
     }
   }
   .btn {
-    font-size: 13Px;
+    font-size: 12Px;
     color: #606266;
     border-radius: 30Px;
     border: 1Px #ccc solid;
     height: 30Px;
-    width: 55Px;
+    width: 60Px;
     text-align: center;
     line-height: 30Px;
     margin: 3Px 0Px;
+    &.accept{
+      color: #67C23A;
+      border-color: #67C23A;
+    }
+    &.refuse{
+      color: #F56C6C;
+      border-color: #F56C6C;
+    }
   }
 }
 

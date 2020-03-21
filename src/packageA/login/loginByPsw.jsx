@@ -52,16 +52,32 @@ class LoginByPsw extends Component {
       passWord: this.state.passWord
     };
     loginByPsw(param).then(res => {
+      console.log(res);
       if (res.data.status == 0) {
-        Taro.navigateTo({
+        Taro.setStorage({
+          key: "token",
+          data: res.data.data.token
+        });
+        Taro.reLaunch({
           url: "/pages/account/account"
         });
-      } else if (res.data.status == 100) {
+      } else if (res.data.status == 102) {
         this.setState({
           errorCap: 1
         });
       }
     });
+    // loginByPsw(param).then(res => {
+    //   if (res.data.status == 0) {
+    //     Taro.reLaunch({
+    //       url: "/packageA/user/user"
+    //     });
+    //   } else if (res.data.status == 102) {
+    //     this.setState({
+    //       errorCap: 1
+    //     });
+    //   }
+    // });
   }
   /**
    * 路由转跳
