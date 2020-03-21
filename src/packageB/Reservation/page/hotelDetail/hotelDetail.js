@@ -12,7 +12,7 @@ import './hotelDetail.scss'
 import ic_hotel_detail from '../../res/images/ic_hotel_detail.png'
 import ic_city_location from '../../res/images/ic_city_location.png'
 import ic_hotel_phone from '../../res/images/ic_hotel_phone.png'
-import ic_hotel_imag from'../../res/images/ic_hotel_image.png'
+import ic_hotel_image from'../../res/images/ic_hotel_image.png'
 
 // pages/hotelDetail/hotelDetail.js
 
@@ -68,25 +68,25 @@ class HotelDetail extends Taro.Component {
       hotelAddress: '',
       roomArray: [
         {
-          image: '../../res/images/ic_hotel_image.png',
+          image:ic_hotel_image,
           name: '标准单人间',
           service: 'WiFi/有窗/空调',
           price: 158
         },
         {
-          image: '../../res/images/ic_hotel_image.png',
+          image:ic_hotel_image,
           name: '标准双人间',
           service: 'WiFi/有窗/空调',
           price: 258
         },
         {
-          image: '../../res/images/ic_hotel_image.png',
+          image:ic_hotel_image,
           name: '豪华单人间',
           service: 'WiFi/有窗/空调',
           price: 198
         },
         {
-          image: '../../res/images/ic_hotel_image.png',
+          image:ic_hotel_image,
           name: '豪华双人间',
           service: 'WiFi/有窗/空调',
           price: 358
