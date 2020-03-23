@@ -12,7 +12,7 @@ class ClearInput extends Taro.Component {
       value: '搜索'
     },
     // inputIcon: {
-    //   //type: String,
+    //   type: String,
     //   value: search.png
     // },
     inputType: {

@@ -92,6 +92,7 @@ class App extends Component {
           "pages/details/index",
           "pages/traveler/index",
           "pages/lodgerFinder/index",
+          "pages/addTrip/index",
           "pages/addTrip/chose",
           "pages/addTrip/tripForm",
           "pages/IM/index",
