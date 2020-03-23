@@ -1,5 +1,5 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Image } from "@tarojs/components";
+import { View, Image, Swiper, SwiperItem, Text } from "@tarojs/components";
 import { AtIcon } from "taro-ui";
 import * as Server from "../../../actions";
 import { dateFormat } from "../../../utils";
@@ -127,7 +127,7 @@ export default class Details extends Component {
   // 进入同行者
   handleNavToTraveler() {
     const { id } = this.$router.params;
-    Taro.navigateTo({
+    Taro.redirectTo({
       url: "/packageC/pages/traveler/index?id=" + id
     });
   }

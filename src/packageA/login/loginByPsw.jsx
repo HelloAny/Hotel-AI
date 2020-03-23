@@ -13,6 +13,7 @@ class LoginByPsw extends Component {
   };
 
   constructor() {
+    super();
     this.state = {
       phone: "", //电话
       passWord: "", //密码

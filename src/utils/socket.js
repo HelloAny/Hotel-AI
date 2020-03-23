@@ -140,11 +140,13 @@ export default class Socket {
    * 创建一个 WebSocket 链接。
    * 支持存在最多两个 WebSocket 链接，每次成功调用 Taro.connectSocket 会返回一个新的 SocketTask。
    */
-  async connect() {
-    this._socketTask = await Taro.connectSocket(this.connectOptions);
-    this._socketTask.onOpen(this._onOpen);
-    this._socketTask.onMessage(this._onMessage);
-    this._socketTask.onError(this._onError);
-    this._socketTask.onClose(this._onClose);
+  connect() {
+    return Taro.connectSocket(this.connectOptions).then(s=>{
+      this._socketTask = s
+      this._socketTask.onOpen(this._onOpen);
+      this._socketTask.onMessage(this._onMessage);
+      this._socketTask.onError(this._onError);
+      this._socketTask.onClose(this._onClose);
+    })
   }
 }

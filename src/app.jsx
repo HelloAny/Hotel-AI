@@ -5,8 +5,10 @@ import * as store from "@store";
 import { objectDeepCompare } from "@utils";
 import Server from "@service/SocketServer";
 import Index from "./pages/index";
-// import "taro-ui/dist/style/index.scss";
+
 import "./app.scss";
+import "./assets/icons/fontsOne/iconfont.css";
+import "./assets/icons/fonts/iconfont.css";
 
 //*************taro-ui组件按需引入！！！！*****************
 

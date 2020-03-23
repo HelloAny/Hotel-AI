@@ -1,5 +1,5 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Image } from "@tarojs/components";
+import { View, Text, Image } from "@tarojs/components";
 import { AtIcon, AtActionSheet, AtActionSheetItem } from "taro-ui";
 import { Ico } from "../../../components/Ico";
 
@@ -61,7 +61,7 @@ export default class Traveler extends Component {
   // 进入行程详情
   handleNavToDetail() {
     const { id } = this.$router.params;
-    Taro.navigateTo({
+    Taro.redirectTo({
       url: "/packageC/pages/details/index?id=" + id
     });
   }

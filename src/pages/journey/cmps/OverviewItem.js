@@ -1,5 +1,5 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Image } from "@tarojs/components";
+import { View, Image, Text } from "@tarojs/components";
 
 import "../style/journey-overview.scss";
 
@@ -22,7 +22,7 @@ export default class OverviewItem extends Component {
   render() {
     const { name, img, des, time1, time2 } = this.props.info;
     return (
-      <View className="container" onClick={this.props.onClick}>
+      <View className="ov-container" onClick={this.props.onClick}>
         <Image src={img} className="bg" />
         <View className="content">
           <View className="row1">

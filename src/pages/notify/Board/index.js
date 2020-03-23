@@ -1,5 +1,5 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View } from "@tarojs/components";
+import { View, Text } from "@tarojs/components";
 import { Ico } from "../../../components/Ico";
 import { FriendPlus, Visit, Invitation, System, BoardItem } from "./cmps";
 import { isJson } from "../../../utils";

@@ -1,5 +1,5 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Button } from "@tarojs/components";
+import { View, Text, Button } from "@tarojs/components";
 import { AtIcon } from "taro-ui";
 import { dateFormat } from "../../../utils";
 
@@ -95,7 +95,7 @@ export default class Timeline extends Component {
   render() {
     const { packUp, list, startTime } = this.state;
     return (
-      <View className="container">
+      <View className="tml-container">
         {packUp.index == -1 ? null : (
           <View className="row">
             <View className="head">

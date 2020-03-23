@@ -1,6 +1,6 @@
 import Taro, { Component } from "@tarojs/taro";
 import { inject, observer } from "@tarojs/mobx";
-import { View, Image } from "@tarojs/components";
+import { View, Image, Text } from "@tarojs/components";
 import * as Server from "../../actions";
 import { userStore } from "../../store";
 import NavBar from "../../components/Navbar";
@@ -199,8 +199,7 @@ class Journey extends Component {
   render() {
     const { ambitus, records, ongoing } = this.state;
     return (
-      <View className="container">
-        <NavBar color="white" />
+      <View className="jur-container">
         <View className="header">
           <View className="bg-container">
             <Image
@@ -262,3 +261,5 @@ class Journey extends Component {
     );
   }
 }
+
+export default Journey

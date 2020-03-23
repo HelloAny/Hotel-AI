@@ -28,8 +28,10 @@ export default class SoundRecorder extends Component {
     super(...arguments);
     this._RecorderManager =
       Taro.getEnv() === "WEAPP" ? wx.getRecorderManager() : null;
-    this._RecorderManager.onStop(res => this.props.onInput(res));
-    this._RecorderManager.onError(errMsg => console.error(errMsg));
+    if (this._RecorderManager) {
+      this._RecorderManager.onStop(res => this.props.onInput(res));
+      this._RecorderManager.onError(errMsg => console.error(errMsg));
+    }
   }
 
   handleStartRecord() {

@@ -1,9 +1,9 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View } from "@tarojs/components";
+import { View, Text } from "@tarojs/components";
 
 import "./voice.scss";
 
-const Audio = wx.createInnerAudioContext();
+const Audio = Taro.createInnerAudioContext();
 
 export default class VoiceMsg extends Component {
   static defaultProps = {

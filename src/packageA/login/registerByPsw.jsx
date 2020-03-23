@@ -12,6 +12,7 @@ class LoginByPsw extends Component {
     navigationBarTextStyle: "white"
   };
   constructor() {
+    super();
     this.state = {
       phone: "", //电话
       passWord: "", //密码

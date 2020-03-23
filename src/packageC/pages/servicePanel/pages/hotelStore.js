@@ -1,5 +1,5 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Image } from "@tarojs/components";
+import { View, Text, Image } from "@tarojs/components";
 
 export default class Vip extends Component {
   config = {

@@ -1,5 +1,5 @@
 import { Component } from "@tarojs/taro";
-import { View } from "@tarojs/components";
+import { View, Text, Image } from "@tarojs/components";
 
 import "../style/journey-recmd.scss";
 
@@ -22,7 +22,7 @@ export default class RecmdItem extends Component {
   render() {
     const { name, tab1, tab2, img } = this.props.info;
     return (
-      <View className="container">
+      <View className="rd-container">
         <Image src={img} className="bg" />
         <View className="icon">推 荐</View>
         <View className="content">

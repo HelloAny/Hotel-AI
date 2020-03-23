@@ -49,6 +49,7 @@ export default class MsgsBox extends Component {
   _maxScroll = 0;
 
   constructor(props) {
+    super();
     this.newScrollOffset = props.scrollOffset;
   }
 

@@ -1,5 +1,5 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Image } from "@tarojs/components";
+import { View, Image, Text } from "@tarojs/components";
 import NavBar from "../../../components/Navbar";
 
 import "../../assets/style/addTrip.scss";

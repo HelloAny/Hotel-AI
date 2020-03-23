@@ -1,5 +1,5 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View } from "@tarojs/components";
+import { View, Text } from "@tarojs/components";
 import { dateFormat } from "../../../../utils";
 import { userStore } from "../../../../store";
 import "../assets/style/visit.scss";

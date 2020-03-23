@@ -9,7 +9,7 @@ import { HTTP } from "@constants/api";
  */
 const baseOptions = (param, method = "GET") => {
   let { url, data } = param;
-  let contentType = "json";
+  let contentType = "application/json";
   contentType = param.contentType || contentType;
   const option = {
     // url: url.indexOf("http") !== -1 ? url : "http://" + url,

@@ -1,6 +1,6 @@
 .board-container {
   height: calc(100vh - 90rpx);
-  overflow-y: scroll;
+  overflow-y: auto;
   .head {
     background-color: white;
     color: #909399;

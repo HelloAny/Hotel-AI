@@ -1,7 +1,7 @@
 import { Component } from "@tarojs/taro";
 import { Text } from "@tarojs/components";
 
-export default class Ico extends Component {
+export class Ico extends Component {
   static options = {
     addGlobalClass: true
   };
@@ -22,9 +22,11 @@ export default class Ico extends Component {
   render() {
     return (
       <Text
-        style={{ fontSize: (this.props.size || 16) + "px", color: this.props.color }}
+        style={{ fontSize: (this.props.size || 16) + "Px", color: this.props.color }}
         className={`iconfont ${this.props.value}`}
       />
     );
   }
 }
+
+export default Ico;
