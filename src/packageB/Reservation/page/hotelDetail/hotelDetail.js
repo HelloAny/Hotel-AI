@@ -10,9 +10,12 @@ import Taro from '@tarojs/taro'
 import RoomListItemTmpl from '../../imports/RoomListItemTmpl.js'
 import './hotelDetail.scss'
 import ic_hotel_detail from '../../res/images/ic_hotel_detail.png'
-import ic_city_location from '../../res/images/ic_city_location.png'
-import ic_hotel_phone from '../../res/images/ic_hotel_phone.png'
-import ic_hotel_image from '../../res/images/ic_hotel_image.png'
+ import ic_hotel_image from '../../res/images/ic_hotel_image.png'
+import breakfast from './picture/breakfast.png'
+import car from './picture/car.png'
+import gym from './picture/gym.png'
+import wifi from './picture/wifi.png'
+import phonecall from './picture/phonecall.png'
 
 // pages/hotelDetail/hotelDetail.js
 
@@ -66,6 +69,9 @@ class HotelDetail extends Taro.Component {
 
       hotelName: '',
       hotelAddress: '',
+      hotelImage:'',
+      hotelId:'',
+
       roomArray: [
         {
           image:ic_hotel_image,
@@ -94,41 +100,22 @@ class HotelDetail extends Taro.Component {
       ],
       serviceList: [
         {
-          icon: '../../res/images/ic_service_park.png',
+          icon: car,
           name: '停车场'
         },
         {
-          icon: '../../res/images/ic_service_food.png',
+          icon: breakfast,
           name: '营养早餐'
         },
         {
-          icon: '../../res/images/ic_service_park.png',
+          icon: gym,
           name: '健身室'
         },
         {
-          icon: '../../res/images/ic_service_food.png',
+          icon: wifi,
           name: '免费WiFi'
         },
-        {
-          icon: '../../res/images/ic_service_park.png',
-          name: '叫车服务'
-        },
-        {
-          icon: '../../res/images/ic_service_food.png',
-          name: '营养早餐'
-        },
-        {
-          icon: '../../res/images/ic_service_park.png',
-          name: '健身室'
-        },
-        {
-          icon: '../../res/images/ic_service_food.png',
-          name: '免费WiFi'
-        },
-        {
-          icon: '../../res/images/ic_service_park.png',
-          name: '叫车服务'
-        }
+
       ]
     };
   }
@@ -142,18 +129,22 @@ class HotelDetail extends Taro.Component {
     this.initEndDate()
     this.setSearchDate()
 
+    const hotelId = this.$router.params.hotelId
     const hotelName = this.$router.params.name
     const address = this.$router.params.address
     const distance = this.$router.params.distance
+    const hotelImage = this.$router.params.imageUrl
+
     this.setState({
       hotelName,
       address,
-      distance
+      distance,
+      hotelImage
     })
     if (hotelName !== undefined) {
       this.setState({
         hotelName: hotelName,
-        hotelAddress: address + '\n距我' + distance + '公里'
+        hotelAddress: address ,    //+ '\n距我' + distance + '公里'
       })
     }
   }
@@ -298,6 +289,8 @@ class HotelDetail extends Taro.Component {
     const {
       hotelName,
       hotelAddress,
+      hotelImage,
+      hotelId,
       serviceList,
       startDate,
       currentDate,
@@ -316,27 +309,26 @@ class HotelDetail extends Taro.Component {
     return (
       <Block>
         <View className="hotelDetailPic">
-          <Image
-            src={ic_hotel_detail}
+           {/* <View
+            // src={hotelImage}
             className="image"
             mode="aspectFill"
-          ></Image>
+          >{hotelImage}</View>  */}
+           <Image className="image" mode="scaleToFill" src={hotelImage}></Image>
           <View className="introduce">
             <View className="hotelName">{hotelName}</View>
             <View className="text">酒店介绍</View>
           </View>
         </View>
         <View className="addressItem">
+          <View className='iconfont icon-juli' style='font-size:20px; color: #777' >
+              <Text className="address" >酒店位置：{hotelAddress}</Text>
+          </View>
           <Image
-            className="locationIcon"
-            mode="aspectFit"
-            src={ic_city_location}
-          ></Image>
-          <Text className="address">{hotelAddress}</Text>
-          <Image
-            className="phoneIcon"
-            mode="aspectFill"
-            src={ic_hotel_phone}
+                  className="phoneIcon"
+                  mode="aspectFit"
+                  src={phonecall}
+                  style="font-size:80%"
           ></Image>
         </View>
         <View className="serviceItem">
@@ -412,6 +404,8 @@ class HotelDetail extends Taro.Component {
           </View>
         </View>
         {/*  日期end  */}
+
+        {/* 房间类型： */}
         {roomArray.map((item, index) => {
           return (
             <RoomListItemTmpl

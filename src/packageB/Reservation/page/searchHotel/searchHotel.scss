@@ -105,13 +105,16 @@ Page {
      width: 100%;
      height: 90px;
      box-sizing: border-box;
-     background: #f2f2f2;
+     background: white;
      display: flex;
      padding: 0 10px 0 20px;
      flex-direction: row;
      align-items: center;
 }
 
+.searchHeader .searchBar{
+  width: 80%;
+}
 .searchHeader .location {
      font-size: 24px;
      color: #666;

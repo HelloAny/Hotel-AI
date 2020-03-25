@@ -5,11 +5,14 @@ import {
   Image,
   View,
   Text,
-  Picker
+  Picker,
+
 } from '@tarojs/components'
+import { AtIcon } from 'taro-ui'
 import Taro from '@tarojs/taro'
 import './homePage.scss'
 import '../overall.scss'
+
 
 import ic_home_advertise from '../../res/images/ic_home_advertise.png'
 import { $mobx } from 'mobx'
@@ -348,41 +351,24 @@ class HomePage extends Taro.Component {
         <View className="filterContent">
           <View className="filterView">
             <View className="location">
-              <Image
-                src={ic_home_advertise}
-                mode="aspectFit"
-                className="icon"
-                onClick={this.getLocalLocation}
-              ></Image>
+              <View className='iconfont icon-dingweiweizhi' style='font-size:20PX;color:#1296db' onClick={this.getLocalLocation}></View>
               <Text className="caption" onClick={this.getLocalLocation}>
                 当前城市：
               </Text>
               <Text className="city" onClick={this.selectCity}>
                 {location}
               </Text>
-              <Image
-                src={ic_home_advertise}
-                mode="widthFix"
-                className="icon"
-                onClick={this.selectCity}
-              ></Image>
+              <AtIcon value='chevron-right' onClick={this.selectCity}></AtIcon>
             </View>
             <View className="location">
               <View className="filter" onClick={this.filterTap}>
-                <Image
-                  src={ic_home_advertise}
-                  mode="widthFix"
-                  className="icon"
-                ></Image>
+                <View className='iconfont icon-shaixuan' style='font-size:15px;color:#1296db' ></View>
                 <Text className="text">筛选</Text>
               </View>
               <View style="color:#ccc;text-align: center;">|</View>
               <View className="filter" onClick={this.nearbyTap}>
-                <Image
-                  src={ic_home_advertise}
-                  mode="widthFix"
-                  className="icon"
-                ></Image>
+
+              <View className='iconfont icon-tubiao-wode-fujindedian' style='font-size:20px;color:#1296db' ></View>
                 <Text className="text">我的附近</Text>
               </View>
             </View>

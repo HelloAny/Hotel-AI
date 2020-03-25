@@ -1,8 +1,8 @@
 import { Block, View, Image, Input } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import './clearInput.scss'
-import './clear.png'
-import './search.png'
+import clear from './clear.png'
+import search from  './search.png'
 
 
 class ClearInput extends Taro.Component {
@@ -87,11 +87,11 @@ clearTap() {
     } = this.state
     return (
       <View className="input-class">
-        <Image
-          src={search.png}
-          mode="scaleToFill"
-          className="icon-class"
-        ></Image>
+        {/* <Image
+          src={search}
+          //mode="scaleToFill"
+          className="img"
+        ></Image> */}
         <Input
           className='input'
           placeholder={inputHint}
@@ -104,12 +104,12 @@ clearTap() {
           password={isPassword}
           confirmType={confirmType}
         ></Input>
-        <Image
+        {/* <Image
           className={isClearShow ? 'clearImgShow' : 'clearImgHide'}
-          src={clear.png}
+          src={clear}
           onClick={this.clearTap}
           mode="widthFix"
-        ></Image>
+        ></Image> */}
       </View>
     )
   }

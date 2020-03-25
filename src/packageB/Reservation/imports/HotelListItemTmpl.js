@@ -4,7 +4,7 @@ import Taro from '@tarojs/taro'
 export default class HotelListItemTmpl extends Taro.Component {
   render() {
     const {
-    name, address, distance, imageUrl, score, services, price }
+    name, address, distance, imageUrl, score, services, price,hotelId }
     = this.props.state
     return (
       <Block>
@@ -16,23 +16,24 @@ export default class HotelListItemTmpl extends Taro.Component {
             '&address=' +
             address +
             '&distance=' +
-            distance
+            distance +
+            '&imageUrl=' +
+            imageUrl  +
+            '&hotelId=' +
+            hotelId
           }
         >
           <Image className="image" mode="scaleToFill" src={imageUrl}></Image>
           <View className="content">
             <Text className="hotelName">{name}</Text>
-            <View className="scoreItem">
+            {/* <View className="scoreItem">
               <Text className="score">{score + '分'}</Text>
               <Text className="services">{services}</Text>
-            </View>
+            </View> */}
             <View className="scoreItem">
-              <Image
-                src="../../res/images/ic_city_location.png"
-                style="width:24rpx;height:24rpx;margin-right:10rpx;"
-              ></Image>
+            <View className='iconfont icon-juli' style='font-size:13PX;color:#dbdbdb' onClick={this.getLocalLocation}></View>
               <Text className="address">
-                {address + '，距我' + distance + '公里'}
+                {address } {/* + '，距我' + distance + '公里' */}
               </Text>
             </View>
           </View>

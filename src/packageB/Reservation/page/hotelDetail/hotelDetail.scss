@@ -175,7 +175,7 @@ Page {
      display: flex;
      padding: 0 20px;
      flex-direction: row;
-     background: rgba(141, 73, 73, 0.6);
+     background: rgba(0, 0, 0, 0.342);
      /* opacity: 0.6; */
      position: absolute;
      bottom: 0;
@@ -208,15 +208,16 @@ Page {
      height: 24px;
      padding: 24px 0;
      margin-left: 35px;
-     margin-top: 6px;
+     margin-top: 15px;
 }
 
 .addressItem .address {
      flex: 1;
-     font-size: 24px;
+     font-size: 13PX;
      padding: 24px 0;
      color: #777;
      margin: 0 20px 0 8px;
+    text-align: center;
 }
 
 .addressItem .phoneIcon {

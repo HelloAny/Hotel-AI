@@ -11,6 +11,7 @@ export default class RoomListItemTmpl extends Taro.Component {
   render() {
     const {
         hotelItemTap,
+        hotelId,
         imageUrl,
         roomName,
         services,
