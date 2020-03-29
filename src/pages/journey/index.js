@@ -3,7 +3,6 @@ import { inject, observer } from "@tarojs/mobx";
 import { View, Image, Text } from "@tarojs/components";
 import * as Server from "../../actions";
 import { userStore } from "../../store";
-import NavBar from "../../components/Navbar";
 import { NoticeItem, OverviewItem, RecmdItem } from "./cmps";
 import { dateFormat } from "../../utils";
 

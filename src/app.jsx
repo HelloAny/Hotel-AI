@@ -52,10 +52,15 @@ class App extends Component {
 
   config = {
     pages: [
-      "pages/notify/index",
       "pages/journey/index",
+      "pages/notify/index",
       "pages/account/account"
     ],
+    permission: {
+      "scope.userLocation": {
+        desc: "你的位置信息将用于小程序位置接口的效果展示"
+      }
+    },
     subpackages: [
       {
         root: "packageA",
@@ -74,7 +79,14 @@ class App extends Component {
       },
       {
         root: "packageB",
-        pages: ["ActivityService/activityService"]
+        pages: [
+          "Reservation/page/homePage/homePage",
+          "Reservation/page/bookHotel/bookHotel",
+          "Reservation/page/hotelDetail/hotelDetail",
+          "Reservation/page/searchHotel/searchHotel",
+          "Reservation/page/hotelFilter/hotelFilter",
+          "ActivityService/activityService"
+        ]
       },
       {
         root: "packageC",
@@ -95,7 +107,7 @@ class App extends Component {
           "pages/servicePanel/pages/order",
           "pages/servicePanel/pages/SOS",
           "pages/servicePanel/pages/tool",
-          "pages/servicePanel/pages/vip",
+          "pages/servicePanel/pages/vip"
         ]
       }
     ],

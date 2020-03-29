@@ -22,7 +22,9 @@ class HCdistrict extends Component {
   static options = {
     addGlobalClass: true
   };
-  static defaultProps = {};
+  static defaultProps = {
+    onChange: () => {}
+  };
 
   /**
    * 监听地区变动
@@ -45,6 +47,11 @@ class HCdistrict extends Component {
       district: json[order[0]].districts[order[1]].districts,
       value: order
     });
+    this.props.onChange([
+      this.state.province[order[0]],
+      this.state.city[order[1]],
+      this.state.district[order[2]]
+    ]);
   }
 
   componentWillMount() {

@@ -32,7 +32,6 @@ import '../list.css'
     const Threshold = 10
 
     let {current,tabList}=this.state;
-    console.log(this.props.positionKind)
 
     return (
     <ScrollView

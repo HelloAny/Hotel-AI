@@ -1,4 +1,4 @@
-const weekChinese = ["七","一","二","三","四","五","六"]
+const weekChinese = ["七", "一", "二", "三", "四", "五", "六"];
 
 /**
  * 根据时间戳格式化时间
@@ -11,7 +11,11 @@ const weekChinese = ["七","一","二","三","四","五","六"]
  */
 export default function(fmt, timestamp) {
   let ret;
-  let date = timestamp instanceof Date ? timestamp : new Date(timestamp);
+  let date =
+    timestamp instanceof Date
+      ? timestamp
+      : new Date(isNaN(timestamp) ? timestamp : timestamp * 1);
+  if (timestamp == "Invalid Date") throw "err";
   const opt = {
     "Y+": date.getFullYear().toString(), // 年
     "m+": (date.getMonth() + 1).toString(), // 月
@@ -19,7 +23,7 @@ export default function(fmt, timestamp) {
     "H+": date.getHours().toString(), // 时
     "M+": date.getMinutes().toString(), // 分
     "S+": date.getSeconds().toString(), // 秒
-    "w+": weekChinese[date.getDay()] //周x
+    "w+": weekChinese[date.getDay()] //周X
     // 有其他格式化字符需求可以继续添加，必须转化成字符串
   };
   for (let k in opt) {

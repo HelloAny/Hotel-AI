@@ -104,6 +104,13 @@ class Login extends Component {
     //list统一设置
     const list = [
       {
+        id: 0,
+        name: "酒店预定",
+        hr: true,
+        icon: "icon-RectangleCopy153",
+        url: "../../packageB/Reservation/page/homePage/homePage"
+      },
+      {
         id: 1,
         name: "我的订单",
         hr: true,
