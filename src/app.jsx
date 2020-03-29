@@ -49,10 +49,14 @@ class App extends Component {
   componentDidMount() {}
 
   config = {
-    pages: ["pages/notify/index","pages/journey/index","pages/account/account"],
+    pages: [
+      "pages/journey/index",
+      "pages/notify/index",
+      "pages/account/account"
+    ],
     permission: {
       "scope.userLocation": {
-        "desc": "你的位置信息将用于小程序位置接口的效果展示"
+        desc: "你的位置信息将用于小程序位置接口的效果展示"
       }
     },
     subpackages: [
@@ -74,16 +78,11 @@ class App extends Component {
       {
         root: "packageB",
         pages: [
-
-          "ActivityService/activityService",
           "Reservation/page/homePage/homePage",
           "Reservation/page/bookHotel/bookHotel",
-          // "Reservation/page/selectCities/selectCities",
           "Reservation/page/hotelDetail/hotelDetail",
-          "Reservation/page/hotelFilter/hotelFilter",
-          //"Reservation/page/orderList/orderList",
           "Reservation/page/searchHotel/searchHotel",
-
+          "Reservation/page/hotelFilter/hotelFilter",
         ]
       },
       {
@@ -106,7 +105,7 @@ class App extends Component {
           "pages/servicePanel/pages/order",
           "pages/servicePanel/pages/SOS",
           "pages/servicePanel/pages/tool",
-          "pages/servicePanel/pages/vip",
+          "pages/servicePanel/pages/vip"
         ]
       }
     ],

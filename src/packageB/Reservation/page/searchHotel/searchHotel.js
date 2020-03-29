@@ -1,238 +1,245 @@
-import { Block, View, Text, Image, Navigator } from '@tarojs/components'
-import Taro from '@tarojs/taro'
-import { AtSearchBar } from 'taro-ui'
-import HotelListItemTmpl from '../../imports/HotelListItemTmpl.js'
+import { View, Text, Image } from "@tarojs/components";
+import Taro, { Component } from "@tarojs/taro";
+import { AtSearchBar } from "taro-ui";
+import HotelListItemTmpl from "../../imports/HotelListItemTmpl";
 import * as Server from "../../../../actions";
-import './searchHotel.scss'
-import ic_hotel_image from '../../res/images/ic_hotel_image.png'
-import ic_down_arrow from '../../res/images/ic_down_arrow.png'
-import ic_hotel_filter from '../../res/images/ic_hotel_filter.png'
-import loading from '../../res/images/loading.gif'
+import "./searchHotel.scss";
 
+const distanceList = [640, 1500, 700, 300, 1200, 1700, 850, 1300, 550];
 
-var mHotelList = []
+const priceList = [200, 223, 180, 199, 780, 650, 1111, 150, 350];
 
-function HotelBean() {
-  var image
-  var name
-  var score
-  var service
-  var address
-  var distance
-  var price
-}
+class SearchHotel extends Component {
+  config = {
+    navigationBarTitleText: "酒店列表",
+    enablePullDownRefresh: true
+  };
 
-class SearchHotel extends Taro.Component {
-  constructor(){
-    super(...arguments);
-    this.state={
-      nowLocation: '',
-      hotelArray: [],
-      hotelList:[],
-      loadenable: false,
-      shownavindex: 1,
+  constructor() {
+    this.state = {
+      nowLocation: "",
+      hotelList: [],
+      isLoading: false,
+      filterIndex: 1,
       priceL2H: true,
-      value:''
+      value: ""
     };
   }
 
-   initHotels(data){         //初始化酒店列表
-      this.setState({
-        hotelList:data.map(hotel => {
-          const {pk:id}= hotel;
-          const {name,location,imgs}=hotel.fields;
-          return{id,img:imgs.horizontal[0],location,name};
-        })
+  //初始化酒店列表
+  initHotels(data) {
+    this.setState({
+      hotelList: data.map(hotel => {
+        const { pk: hotelId } = hotel;
+        const { name, location, imgs } = hotel.fields;
+        return {
+          hotelId,
+          imageUrl: imgs.horizontal[0],
+          address: location,
+          name,
+          score: (Math.random() + 4).toFixed(1),
+          price: priceList[Math.floor(Math.random() * 9)],
+          distance: distanceList[Math.floor(Math.random() * 9)]
+        };
       })
-   }
+    });
+  }
 
+  // 进入酒店详情页
+  navHotelDetail(hotel) {
+    const { location, startDate, endDate } = this.$router.params;
+    Taro.navigateTo({
+      url: `/packageB/Reservation/page/hotelDetail/hotelDetail?location=${location}&startDate=${startDate}&endDate=${endDate}&hotel=${JSON.stringify(
+        hotel
+      )}`
+    });
+  }
 
   componentWillMount() {
-    const nowLocation = this.$router.params.location
+    const nowLocation = this.$router.params.location;
     this.setState({
-       nowLocation
-    })
+      nowLocation: nowLocation || "定位中..."
+    });
 
-
-    Server.getHotels()                     //加载酒店
-    .then(data => {
-      this.initHotels(data);
-      setTimeout(() => {
-        if (this.state.stepIndex == 0) this.handleNextStep();
-      }, 1000);
-    })
-    .catch(err => {
-      console.log("服务出错啦", err);
-      Taro.showToast({
-        title: "网络开小差了...",
-        icon: "none",
-        duration: 2000
+    Server.getHotels() //加载酒店
+      .then(data => {
+        this.initHotels(data);
+      })
+      .catch(err => {
+        console.log("服务出错啦", err);
+        Taro.showToast({
+          title: "网络开小差了...",
+          icon: "none",
+          duration: 2000
+        });
       });
-    })
   }
 
-  onChange (value) {
+  // 监听搜索栏内容
+  onChange(value) {
     this.setState({
       value: value
-    })
-  }
-  onActionClick () {
-    console.log('开始搜索')
+    });
   }
 
-  filterMenuTap(e) {
-    var index = e.currentTarget.dataset.index
+  // 假装搜索酒店
+  onActionClick() {
+    console.log(this.state.value);
     this.setState({
-      shownavindex: index
-    })
-    if (index == 2) {
-      var priceL2H = !this.state.priceL2H
-      this.setState({
-        priceL2H: priceL2H
+      value: ""
+    });
+  }
+
+  // 排序
+  sort(key) {
+    let list = this.state.hotelList;
+    let m = new Map();
+    let ks = [];
+
+    for (const e of list) {
+      m.set(e[key], e);
+      ks.push(e[key]);
+    }
+
+    ks.sort();
+    if (this.state.priceL2H && key == "price") ks.reverse();
+
+    this.setState({
+      hotelList: ks.map(k => {
+        return m.get(k);
       })
-    } else {
+    });
+  }
+
+  // 强行筛选
+  filterMenuTap(e) {
+    let index = e.currentTarget.dataset.index;
+    this.setState({
+      filterIndex: index
+    });
+    if (index == 2)
+      this.setState({
+        priceL2H: !this.state.priceL2H
+      });
+    else
       this.setState({
         priceL2H: true
-      })
+      });
+
+    switch (index) {
+      case "1":
+        this.sort("name");
+        break;
+      case "2":
+        this.sort("price");
+        break;
+      case "3":
+        this.sort("score");
+        break;
+      case "4":
+        this.sort("distance");
+        break;
     }
   }
 
+  // 筛选酒店条件选择
   filterTap() {
     Taro.navigateTo({
-      url: '/packageB/Reservation/page/hotelFilter/hotelFilter'
-    })
+      url: "/packageB/Reservation/page/hotelFilter/hotelFilter"
+    });
   }
 
+  // 选择地区
   locationTap() {
-    Taro.navigateTo({
-      url: '/packageB/Reservation/page/selectCities/selectCities'
-    })
+    console.log("搜索地区");
   }
 
-
-  onPullDownRefresh() {             //下拉刷新
-    var that = this
-     setTimeout(function() {
-      mHotelList = []
-      for (var i = 0; i < 10; i++) {
-        var hotelBean = new HotelBean()
-        hotelBean.image = ic_hotel_image
-        hotelBean.name = '杭州科技大酒店'
-        hotelBean.score = 4.5
-        hotelBean.service = '停车场/温泉/餐饮'
-        hotelBean.address = '地铁站'
-        hotelBean.distance = '3.5'
-        hotelBean.price = 299
-
-        mHotelList.push(hotelBean)
-      }
-
-      that.setState({
-        hotelArray: mHotelList
+  //下拉刷新
+  onPullDownRefresh() {
+    this.setState({
+      isLoading: true
+    });
+    Server.getHotels() //加载酒店
+      .then(data => {
+        this.initHotels(data);
+        Taro.showToast({
+          title: "刷新成功",
+          duration: 1500
+        });
       })
-      Taro.showToast({
-        title: '刷新成功',
-        duration: 1500
+      .catch(err => {
+        console.log("服务出错啦", err);
+        Taro.showToast({
+          title: "网络开小差了...",
+          icon: "none",
+          duration: 2000
+        });
       })
-      Taro.stopPullDownRefresh()
-    }, 2000)
-  }
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-    var that = this
-    // setTimeout(function() {
-    //   for (var i = 0; i < 10; i++) {
-    //     var hotelBean = new HotelBean()
-    //     hotelBean.image = ic_hotel_image
-    //     hotelBean.name = '杭州科技大酒店'
-    //     hotelBean.score = 4.5
-    //     hotelBean.service = '停车场/温泉/餐饮'
-    //     hotelBean.address = '深大地铁站'
-    //     hotelBean.distance = '3.5'
-    //     hotelBean.price = 299
-
-    //     mHotelList.push(hotelBean)
-    //   }
-
-    //   that.setState({
-    //     hotelArray: mHotelList
-    //   })
-    // }, 2000)
-
-
-
-  }
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {}
-
-  config = {
-    navigationBarTitleText: '酒店列表',
-    enablePullDownRefresh: true
+      .then(() => {
+        setTimeout(() => {
+          Taro.stopPullDownRefresh();
+          this.setState({
+            isLoading: false
+          });
+        }, 1500);
+      });
   }
 
   render() {
     const {
       nowLocation,
-      shownavindex,
+      filterIndex,
       priceL2H,
-      hotelArray,
       hotelList,
-      loadenable
-    } = this.state
+      isLoading
+    } = this.state;
     return (
-      <Block>
+      <View className="seH-container-smt">
         <View className="pageHeader">
           <View className="searchHeader">
             <Text className="location" onClick={this.locationTap}>
               {nowLocation}
             </Text>
             <Image
-              src={ic_down_arrow}
+              src="https://hotel-ai-1257814705.cos.ap-shanghai.myqcloud.com/%E5%89%8D%E7%AB%AF/reservation/ic_down_arrow.png"
               mode="aspectFit"
               style="width:20rpx;height:20rpx;"
             ></Image>
-
-            <View className='searchBar'>
+            <View className="searchBar">
               <AtSearchBar
-                actionName='搜一下'
+                actionName="搜一下"
                 value={this.state.value}
                 onChange={this.onChange.bind(this)}
                 onActionClick={this.onActionClick.bind(this)}
-               />
+              />
             </View>
           </View>
           <View className="filterView">
             <View className="filterOptions">
               <Text
-                className={shownavindex == 1 ? 'filterActive' : 'filterItem'}
+                className={filterIndex == 1 ? "filterActive" : "filterItem"}
                 onClick={this.filterMenuTap}
                 data-index="1"
               >
                 推荐
               </Text>
               <View
-                className={shownavindex == 2 ? 'filterActive' : 'filterItem'}
+                className={filterIndex == 2 ? "filterActive" : "filterItem"}
                 onClick={this.filterMenuTap}
                 data-index="2"
               >
                 <Text>价格</Text>
-                <View className={priceL2H ? 'arrowUp' : 'arrowDown'}></View>
+                <View className={priceL2H ? "arrowUp" : "arrowDown"}></View>
               </View>
               <Text
-                className={shownavindex == 3 ? 'filterActive' : 'filterItem'}
+                className={filterIndex == 3 ? "filterActive" : "filterItem"}
                 onClick={this.filterMenuTap}
                 data-index="3"
               >
                 好评
               </Text>
               <Text
-                className={shownavindex == 4 ? 'filterActive' : 'filterItem'}
+                className={filterIndex == 4 ? "filterActive" : "filterItem"}
                 onClick={this.filterMenuTap}
                 data-index="4"
               >
@@ -241,46 +248,39 @@ class SearchHotel extends Taro.Component {
             </View>
             <View className="filterMenu" onClick={this.filterTap}>
               <Text className="title">筛选</Text>
-              <View className='iconfont icon-shaixuan' style='font-size:10px;color:#1296db' ></View>
+              <View
+                className="iconfont icon-shaixuan"
+                style="font-size:10px;color:#1296db"
+              ></View>
             </View>
           </View>
         </View>
         <View className="hotelListContent">
-
-        {hotelList.map(hotel => {        //显示酒店
+          {hotelList.map(hotel => {
             return (
               <HotelListItemTmpl
-                state={{
-                  imageUrl: hotel.img,
-                  name: hotel.name,
-                  //score: hotel.score,
-                  services: hotel.service,
-                  address: hotel.location,
-                  //distance: hotel.distance,
-                  price:hotel.price,
-                  hotelId: hotel.id
-                }}
-              ></HotelListItemTmpl>
-            )
+                key={hotel.hotelId}
+                info={hotel}
+                onClick={this.navHotelDetail.bind(this, hotel)}
+              />
+            );
           })}
-
-
-          {loadenable ? (
+          {isLoading ? (
             <View className="loadmore">
               <Image
-                src={loading }
+                src="https://hotel-ai-1257814705.cos.ap-shanghai.myqcloud.com/%E5%89%8D%E7%AB%AF/reservation/loading.gif"
                 className="loading"
                 mode="scaleToFill"
                 style="margin:auto 0;"
-              ></Image>
+              />
               <Text style="margin-left:20rpx;">正在加载更多</Text>
             </View>
           ) : (
             <Text className="loadmore">没有更多了</Text>
           )}
         </View>
-      </Block>
-    )
+      </View>
+    );
   }
 }
 
