@@ -1,13 +1,14 @@
 import Taro, { Component } from "@tarojs/taro";
 import { Provider, onError } from "@tarojs/mobx";
-import Index from "./pages/index";
-import { userInfo, cardPage } from "@store";
-
-import "taro-ui/dist/style/index.scss";
-import "@assets/icons/fontsOne/iconfont.css";
-import "./app.scss";
+import { autorun } from "mobx";
+import * as store from "@store";
 import { objectDeepCompare } from "@utils";
-// import Server from "@pages/IM/server";
+import Server from "@service/SocketServer";
+import Index from "./pages/index";
+
+import "./app.scss";
+import "./assets/icons/fontsOne/iconfont.css";
+import "./assets/icons/fonts/iconfont.css";
 
 //*************taro-ui组件按需引入！！！！*****************
 
@@ -17,16 +18,32 @@ import { objectDeepCompare } from "@utils";
 //   require('nerv-devtools')
 // }
 
-// !(function() {
-//   Server.connect();
-// })();
-
-const store = {
-  userStore: new userInfo(),
-  cardPage: new cardPage(),
+let onNotify = () => {
+  Taro.showModal({
+    title: "通知",
+    content: "您有一条新的通知，点击确定立刻前往查看"
+  }).then(res => {
+    if (res.confirm) Taro.switchTab({ url: "/pages/notify/index" });
+  });
 };
 
-onError((error) => {
+// 自动开始连接socket,尝试初始化身份信息,绑定全局事件
+!(function() {
+  Server.connect();
+  Server.on("notify", onNotify);
+  Server.emit(
+    "preLogin",
+    Object.assign({}, store.userStore.user, {
+      token: Taro.getStorageSync("token")
+    })
+  );
+  autorun(() => {
+    let userInfo = store.userStore.user;
+    if (Server.status == "login") Server.emit("updateInfo", userInfo);
+  });
+})();
+
+onError(error => {
   console.log("mobx global error listener:", error);
 });
 
@@ -35,15 +52,14 @@ class App extends Component {
 
   config = {
     pages: [
-      "pages/home/index",
-      "pages/object/index",
-      "pages/account/account",
-      "pages/index/index",
+      "pages/journey/index",
+      "pages/notify/index",
+      "pages/account/account"
     ],
     permission: {
       "scope.userLocation": {
-        desc: "需要获取您的地理位置，请确认授权",
-      },
+        desc: "你的位置信息将用于小程序位置接口的效果展示"
+      }
     },
     subpackages: [
       {
@@ -67,6 +83,37 @@ class App extends Component {
         root: "packageB",
         pages: ["ActivityService/activityService"],
       },
+        pages: [
+          "Reservation/page/homePage/homePage",
+          "Reservation/page/bookHotel/bookHotel",
+          "Reservation/page/hotelDetail/hotelDetail",
+          "Reservation/page/searchHotel/searchHotel",
+          "Reservation/page/hotelFilter/hotelFilter",
+          "ActivityService/activityService"
+        ]
+      },
+      {
+        root: "packageC",
+        pages: [
+          "pages/details/index",
+          "pages/traveler/index",
+          "pages/lodgerFinder/index",
+          "pages/addTrip/chose",
+          "pages/addTrip/tripForm",
+          "pages/IM/index",
+          "pages/receipt/index",
+          "pages/receipt/result",
+          "pages/servicePanel/index",
+          "pages/servicePanel/pages/cleaner",
+          "pages/servicePanel/pages/conv",
+          "pages/servicePanel/pages/hotelStore",
+          "pages/servicePanel/pages/medicine",
+          "pages/servicePanel/pages/order",
+          "pages/servicePanel/pages/SOS",
+          "pages/servicePanel/pages/tool",
+          "pages/servicePanel/pages/vip"
+        ]
+      }
     ],
     window: {
       backgroundTextStyle: "light",
@@ -77,12 +124,14 @@ class App extends Component {
       backgroundTextStyle: "dark",
       // enablePullDownRefresh: true,
       // backgroundTextStyle:"dark"
+      backgroundTextStyle: "dark"
     },
     tabBar: {
       color: "#ccc",
       selectedColor: "#00f",
       backgroundColor: "#fff",
       borderStyle: "black",
+      position: "bottom",
       list: [
         {
           pagePath: "pages/home/index",
@@ -93,11 +142,15 @@ class App extends Component {
           text: "我的",
         },
         {
-          pagePath: "pages/index/index",
-          text: "我的",
+          pagePath: "pages/journey/index",
+          text: "行程"
         },
-      ],
-    },
+        {
+          pagePath: "pages/notify/index",
+          text: "消息"
+        }
+      ]
+    }
   };
 
   componentDidMount() {}

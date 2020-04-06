@@ -125,7 +125,6 @@ class Login extends Component {
         () => {
           // smsStatus是false时会出现灰色按钮，当倒计时结束又变成可以触发的按钮
           //验证码接口
-          console.log("发送请求");
           Sms(this.state.phone).then((res) => {
             console.log(res);
             if (res.data.status == 0) {

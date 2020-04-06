@@ -1,0 +1,46 @@
+.board-item {
+  position: relative;
+  display: flex;
+  padding-top: 20Px;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    background-color: #f0f0f0;
+    width: 100%;
+    height: 100%;
+    transition: background-color .15s ease-out;
+  }
+  &:active::before {
+    opacity: 1;
+  }
+  .tag {
+    position: relative;
+    width: 50Px;
+    height: 50Px;
+    padding: 0 15Px 15Px;
+    .img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50Px;
+    }
+    &.mark::after{
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0Px;
+      right: 15Px;
+      width: 8Px;
+      height: 8Px;
+      background-color: red;
+      border-radius: 8Px;
+    }
+  }
+  .detail {
+    position: relative;
+    flex: 1;
+    border-bottom: 1Px #e4e7ed solid;
+    padding-bottom: 20Px;
+  }
+}

@@ -1,0 +1,119 @@
+
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+}
+
+.vercialLine {
+  width: 1px;
+  height: 100%;
+  background: #ccc;
+}
+
+.horizontalLine {
+  height: 1px;
+  background: #ccc;
+}
+
+.commonBtn, .commonBtnHover {
+  display: block;
+  color: white;
+  font-size: 32rpx;
+  padding: 10Px;
+  border-radius: 5px;
+  margin: 40rpx;
+  text-align: center;
+}
+
+.commonBtn {
+  background: #409EFF;
+}
+
+.commonBtnHover {
+  background: #409EFF;
+}
+
+.common_search_input {
+  display: flex;
+  flex: 1;
+  margin: 16rpx;
+  padding: 8rpx 14rpx 8rpx 8rpx;
+  font-size: 24rpx;
+  border-radius: 16rpx;
+  border: 1rpx solid gray;
+  align-items: center;
+  background: white;
+}
+
+.common_search_img {
+  width: 32rpx;
+  height: 32rpx;
+  vertical-align: center;
+}
+
+.header_tab {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+}
+
+.header_tab .tab_item_default {
+  flex: 1;
+  padding: 16rpx;
+  font-size: 24rpx;
+  text-align: center;
+  color: black;
+  border-bottom: 2px solid #dedede;
+}
+
+.header_tab .tab_item_selected {
+  flex: 1;
+  padding: 16rpx;
+  font-size: 24rpx;
+  text-align: center;
+  color: #409EFF;
+  border-bottom: 2px solid #409EFF;
+}
+
+.empty_view {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
+.empty_icon {
+  width: 100rpx;
+  height: 100rpx;
+  margin: 0 auto;
+}
+
+.loading {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.loadmore {
+  width: 100%;
+  height: 100rpx;
+  font-size: 28rpx;
+  background-color: #eee;
+  color: gray;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.viewHidden {
+  display: none;
+}

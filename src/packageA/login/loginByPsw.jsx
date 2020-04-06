@@ -69,6 +69,17 @@ class LoginByPsw extends Component {
         });
       }
     });
+    // loginByPsw(param).then(res => {
+    //   if (res.data.status == 0) {
+    //     Taro.reLaunch({
+    //       url: "/packageA/user/user"
+    //     });
+    //   } else if (res.data.status == 102) {
+    //     this.setState({
+    //       errorCap: 1
+    //     });
+    //   }
+    // });
   }
   /**
    * 路由转跳

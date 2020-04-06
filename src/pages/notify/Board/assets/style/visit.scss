@@ -1,0 +1,22 @@
+.invitation-container{
+  .row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10Px;
+    .title{
+      font-size: 14Px;
+      font-weight: 800;
+      color: #303133;
+    }
+    .content{
+      font-size: 13Px;
+      color: #909399;
+    }
+    .time{
+      font-size: 12Px;
+      color: #909399;
+      margin-right: 20PX;
+    }
+  }
+}

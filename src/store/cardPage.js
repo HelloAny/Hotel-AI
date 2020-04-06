@@ -105,4 +105,4 @@ class cardPage {
   }
 }
 
-export default cardPage;
+export default new cardPage();

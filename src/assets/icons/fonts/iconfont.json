@@ -1,0 +1,457 @@
+{
+  "id": "1646712",
+  "name": "Hotel-AI",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "782225",
+      "name": "停车场",
+      "font_class": "tingchechang",
+      "unicode": "e6ca",
+      "unicode_decimal": 59082
+    },
+    {
+      "icon_id": "4342496",
+      "name": "健身房",
+      "font_class": "jianshen",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
+      "icon_id": "7940698",
+      "name": "早餐",
+      "font_class": "zaocan",
+      "unicode": "e61e",
+      "unicode_decimal": 58910
+    },
+    {
+      "icon_id": "9555249",
+      "name": "电 话 (1)",
+      "font_class": "dianhua",
+      "unicode": "e62f",
+      "unicode_decimal": 58927
+    },
+    {
+      "icon_id": "11936074",
+      "name": "WIFI 我fi",
+      "font_class": "WIFIwofi",
+      "unicode": "e61f",
+      "unicode_decimal": 58911
+    },
+    {
+      "icon_id": "5785707",
+      "name": "图标-我的-附近的店",
+      "font_class": "tubiao-wode-fujindedian",
+      "unicode": "e64a",
+      "unicode_decimal": 58954
+    },
+    {
+      "icon_id": "13313042",
+      "name": "筛 选",
+      "font_class": "shaixuan",
+      "unicode": "e6fc",
+      "unicode_decimal": 59132
+    },
+    {
+      "icon_id": "324602",
+      "name": "灯",
+      "font_class": "25",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    },
+    {
+      "icon_id": "2038551",
+      "name": "点赞",
+      "font_class": "zan2",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "2491377",
+      "name": "收藏",
+      "font_class": "shoucang",
+      "unicode": "e6fd",
+      "unicode_decimal": 59133
+    },
+    {
+      "icon_id": "11982605",
+      "name": "距离",
+      "font_class": "juli",
+      "unicode": "e80d",
+      "unicode_decimal": 59405
+    },
+    {
+      "icon_id": "13522567",
+      "name": "宠物",
+      "font_class": "svg9",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "13522566",
+      "name": "地暖",
+      "font_class": "svg8",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "13522562",
+      "name": "洗衣机",
+      "font_class": "svg7",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "13522526",
+      "name": "床",
+      "font_class": "svg6",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "13522524",
+      "name": "窗帘",
+      "font_class": "svg5",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "13522523",
+      "name": "电视",
+      "font_class": "svg4",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "13522520",
+      "name": "空调",
+      "font_class": "svg3",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "13522514",
+      "name": "wifi",
+      "font_class": "svg2",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "13522511",
+      "name": "跑步机",
+      "font_class": "svg1",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "13522502",
+      "name": "浴室",
+      "font_class": "svg",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "3853651",
+      "name": "安全",
+      "font_class": "anquan",
+      "unicode": "eb53",
+      "unicode_decimal": 60243
+    },
+    {
+      "icon_id": "3853665",
+      "name": "人脸识别",
+      "font_class": "renlianshibie",
+      "unicode": "eb56",
+      "unicode_decimal": 60246
+    },
+    {
+      "icon_id": "3853676",
+      "name": "云端数据",
+      "font_class": "yunduanshuju",
+      "unicode": "eb5d",
+      "unicode_decimal": 60253
+    },
+    {
+      "icon_id": "1315581",
+      "name": "便利店",
+      "font_class": "hotel-store",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "9297196",
+      "name": "点餐",
+      "font_class": "order-meal",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "7311994",
+      "name": "更多",
+      "font_class": "gengduo",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "13388249",
+      "name": "周边",
+      "font_class": "zhoubian",
+      "unicode": "e65a",
+      "unicode_decimal": 58970
+    },
+    {
+      "icon_id": "11459725",
+      "name": "会员",
+      "font_class": "huiyuan",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "1263277",
+      "name": "资源借用",
+      "font_class": "tool-provider",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "1985080",
+      "name": "打扫",
+      "font_class": "cleaner",
+      "unicode": "e659",
+      "unicode_decimal": 58969
+    },
+    {
+      "icon_id": "2966997",
+      "name": "实物-行李箱",
+      "font_class": "luggage",
+      "unicode": "e70d",
+      "unicode_decimal": 59149
+    },
+    {
+      "icon_id": "4562527",
+      "name": "紧急告警",
+      "font_class": "help-urgency",
+      "unicode": "e678",
+      "unicode_decimal": 59000
+    },
+    {
+      "icon_id": "5172573",
+      "name": "优品家居_线面_床",
+      "font_class": "furniture",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "7605982",
+      "name": "移动物联",
+      "font_class": "SIoT",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "8922367",
+      "name": "医药箱",
+      "font_class": "drug",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "13179180",
+      "name": "疫情填报",
+      "font_class": "virus-query",
+      "unicode": "e624",
+      "unicode_decimal": 58916
+    },
+    {
+      "icon_id": "4249999",
+      "name": "通知",
+      "font_class": "tongzhi",
+      "unicode": "e669",
+      "unicode_decimal": 58985
+    },
+    {
+      "icon_id": "386271",
+      "name": "QQ",
+      "font_class": "qq",
+      "unicode": "e6af",
+      "unicode_decimal": 59055
+    },
+    {
+      "icon_id": "396485",
+      "name": "复制",
+      "font_class": "fuzhi",
+      "unicode": "e668",
+      "unicode_decimal": 58984
+    },
+    {
+      "icon_id": "750883",
+      "name": "二维码",
+      "font_class": "erweima",
+      "unicode": "e7ad",
+      "unicode_decimal": 59309
+    },
+    {
+      "icon_id": "868654",
+      "name": "icon-微信朋友圈",
+      "font_class": "wxshare",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    },
+    {
+      "icon_id": "1727430",
+      "name": "208聊天、对话",
+      "font_class": "chat",
+      "unicode": "e8bc",
+      "unicode_decimal": 59580
+    },
+    {
+      "icon_id": "6940840",
+      "name": "微信",
+      "font_class": "wx",
+      "unicode": "e65c",
+      "unicode_decimal": 58972
+    },
+    {
+      "icon_id": "5412236",
+      "name": "向下",
+      "font_class": "down",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "6541461",
+      "name": "向下",
+      "font_class": "up1",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "5359613",
+      "name": "酒店",
+      "font_class": "jiudian",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
+      "icon_id": "6028319",
+      "name": "完成",
+      "font_class": "sign-readied",
+      "unicode": "e628",
+      "unicode_decimal": 58920
+    },
+    {
+      "icon_id": "6204756",
+      "name": "失败",
+      "font_class": "error",
+      "unicode": "e64e",
+      "unicode_decimal": 58958
+    },
+    {
+      "icon_id": "9826666",
+      "name": "成功",
+      "font_class": "ok",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
+      "icon_id": "9413852",
+      "name": "定位 位置",
+      "font_class": "dingweiweizhi",
+      "unicode": "e6b6",
+      "unicode_decimal": 59062
+    },
+    {
+      "icon_id": "7139598",
+      "name": "客服",
+      "font_class": "kefu",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "5648978",
+      "name": "邀请",
+      "font_class": "yaoqing",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "3705468",
+      "name": "酒店",
+      "font_class": "hotel-color",
+      "unicode": "e640",
+      "unicode_decimal": 58944
+    },
+    {
+      "icon_id": "7549346",
+      "name": "关闭",
+      "font_class": "RectangleCopy",
+      "unicode": "e6a1",
+      "unicode_decimal": 59041
+    },
+    {
+      "icon_id": "7549347",
+      "name": "完成",
+      "font_class": "RectangleCopy1",
+      "unicode": "e6a2",
+      "unicode_decimal": 59042
+    },
+    {
+      "icon_id": "7549350",
+      "name": "用户",
+      "font_class": "RectangleCopy2",
+      "unicode": "e6a3",
+      "unicode_decimal": 59043
+    },
+    {
+      "icon_id": "5532882",
+      "name": "返回",
+      "font_class": "back",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "7738015",
+      "name": "用户",
+      "font_class": "user",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "1025053",
+      "name": "键盘",
+      "font_class": "keyboard",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "1479642",
+      "name": "表情",
+      "font_class": "emoji",
+      "unicode": "e681",
+      "unicode_decimal": 59009
+    },
+    {
+      "icon_id": "4608963",
+      "name": "图库，相册",
+      "font_class": "photo",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "6255766",
+      "name": "语音",
+      "font_class": "voice",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "369850",
+      "name": "more",
+      "font_class": "more",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    }
+  ]
+}

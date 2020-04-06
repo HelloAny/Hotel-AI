@@ -1,0 +1,28 @@
+.board-container {
+  height: calc(100vh - 90rpx);
+  overflow-y: auto;
+  .head {
+    background-color: white;
+    color: #909399;
+    height: 58Px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14Px;
+    padding: 0 20Px;
+    border-bottom: 1Px #E4E7ED solid;
+    .title{
+      padding: 2Px 5Px;
+      letter-spacing: 1Px;
+    }
+  }
+  .list {
+    background-color: white;
+  }
+  .tip {
+    text-align: center;
+    color: #909399;
+    font-size: 14Px;
+    padding: 20Px;
+  }
+}

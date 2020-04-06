@@ -1,0 +1,53 @@
+.ov-container{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.bg{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 5Px;
+}
+
+.content{
+  position: relative;
+  padding: 10Px;
+  color: white;
+  .row1,.row2,.row3{
+    position: absolute;
+    width: calc(100% - 20Px);
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+  .row1{
+    top: 10Px;
+    display: flex;
+    justify-content: space-between;
+    .status{
+      font-size: 11Px;
+      line-height: 22Px;
+      padding: 0Px 2Px;
+      border-radius: 2Px;
+      border: 1.5Px white solid;
+    }
+    .btn{
+      letter-spacing: -2;
+      font-size: 25Px;
+      line-height: 20Px;
+      border-radius: 12Px;
+      border: 1Px rgba(255, 255, 255, 0.3) solid;
+    }
+  }
+  .row2{
+    top: 40Px;
+    font-size: 14Px;
+  }
+  .row3{
+    top: 63Px;
+    font-size: 11Px;
+  }
+}

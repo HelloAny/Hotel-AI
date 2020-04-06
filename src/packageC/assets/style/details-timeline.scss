@@ -1,0 +1,106 @@
+.tml-container {
+  margin-left: 10Px;
+  border-left: 2Px #c1d5ea solid;
+  padding: 0 15Px;
+  display: flex;
+  flex-direction: column;
+  .row {
+    margin-bottom: 20Px;
+    .head {
+      color: #303133;
+      position: relative;
+      font-size: 16Px;
+      .tip{
+        display: inline-block;
+        font-size: 12Px;
+        line-height: 16Px;
+      }
+      .tip-btn{
+        display: inline-block;
+        font-size: 12Px;
+        padding: 2Px 10Px;
+        border-radius: 12Px;
+        border: 1px #ccc solid;
+        color: #909399;
+        position: absolute;
+        right: 5Px;
+      }
+      .before-title{
+        position: absolute;
+        left: -26Px;
+        width: 18Px;
+        height: 18Px;
+        color: #c1d5ea;
+        line-height: 18Px;
+        text-align: center;
+        font-size: 10Px;
+        border-radius: 16Px;
+        background-color: #f1f1f1;
+        border: 1Px #c1d5ea solid;
+      }
+      .time{
+        display: block;
+        transform: translateY(-2Px);
+      }
+    }
+    .main {
+      color: #909399;
+      margin: 20Px 0;
+      .process {
+        background-color: white;
+        text-align: center;
+        padding: 8Px;
+        border-radius: 5Px;
+        font-size: 13Px;
+        margin-bottom: 10Px;
+      }
+      .memo {
+        margin-bottom: 20Px;
+        position: relative;
+        background-color: white;
+        border-radius: 8Px;
+        padding: 15Px 0Px 7Px 10Px;
+        .icon {
+          position: absolute;
+          left: -24Px;
+          background-color: red;
+          color: white;
+          width: 16Px;
+          height: 16Px;
+          line-height: 16Px;
+          text-align: center;
+          font-size: 10Px;
+          border-radius: 16Px;
+          .adjust{
+            transform: translate(-1Px,-1Px);
+          }
+        }
+        .name {
+          font-size: 12Px;
+          color: #303133;
+        }
+        .content {
+          font-size: 11Px;
+          padding: 10Px 0Px;
+        }
+        .memo-btn{
+          font-size: 12Px;
+          height: 12Px;
+          padding: 10Px 20Px 15Px;
+          .value{
+            float: right;
+            border: 1Px #E4E7ED solid;
+            padding: 5Px 15Px;
+            border-radius: 13Px;
+          }
+        }
+      }
+      .add-memo {
+        color: #1890ff;
+        font-size: 12Px;
+        border-radius: 10Px;
+        padding: 5Px 0;
+      }
+    }
+  }
+}

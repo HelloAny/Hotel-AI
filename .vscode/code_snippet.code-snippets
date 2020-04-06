@@ -24,15 +24,27 @@
       "",
       "export default class ${1:index} extends Component {",
       "  static defaultProps = {$2};",
-			"",
-			"  state = {$3}",
+      "",
+      "  state = {$3}",
+      "",
+      "  propsKeys = [];",
+      "",
+      "  stateKeys = [];",
       "",
       "  shouldComponentUpdate(nextProps, nextState) {",
-      "    console.log(nextProps, nextState);",
+      "    let flag = !this.compare(nextProps, nextState);",
+      "    return flag;",
+      "  }",
+      "",
+      "  componentWillUpdate() {",
+      "    console.time(\"${1:index}\");",
+      "  }",
+      "",
+      "  componentDidUpdate() {",
+      "    console.timeEnd(\"${1:index}\");",
       "  }",
       "",
       "  render() {",
-      "    console.log(\"$4 ${1:index} is rendering...\");",
       "    return (",
       "      <View>$5</View>",
       "    );",
@@ -40,6 +52,35 @@
       "}",
       ""
     ],
-    "description": "快速创建组件"
+    "description": "快速创建taro组件"
+  },
+  "update timer": {
+    "scope": "javascript",
+    "prefix": "timer",
+    "body": [
+      "componentWillUpdate() {",
+      "  console.time(\"${1:index}\");",
+      "}",
+      "",
+      "componentDidUpdate() {",
+      "  console.timeEnd(\"${1:index}\");",
+      "}"
+    ],
+    "description": "update timer"
+  },
+  "compare keys": {
+    "scope": "javascript",
+    "prefix": "cmpkeys",
+    "body": ["propsKeys = [];", "", "stateKeys = [];"],
+    "description": "taro compare keys"
+  },
+  "compare": {
+    "scope": "javascript",
+    "prefix": "cmp",
+    "body": [
+      "let flag = !this.compare(nextProps, nextState);",
+      "return flag;",
+    ],
+    "description": "taro, compare before update"
   }
 }

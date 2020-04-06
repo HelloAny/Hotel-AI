@@ -1,0 +1,45 @@
+.ctr {
+  background-color: black;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  max-width: 500Px;
+  margin: auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: url("https://hotel-ai-1257814705.cos.ap-shanghai.myqcloud.com/%E5%89%8D%E7%AB%AF/visit/back_bg.png") no-repeat center center;
+  background-size: cover;
+}
+.title {
+  color: white;
+  letter-spacing: 10Px;
+  margin: 10Px;
+}
+.title-icon {
+  width: 80Px;
+  height: 80Px;
+  padding: 20Px;
+  border: 3Px white solid;
+  border-radius: 80Px;
+  opacity: 0.9;
+  margin: 20Px;
+}
+
+.billboard {
+  margin-top: 10Px;
+  width: 70%;
+  display: flex;
+  font-size: 12Px;
+  justify-content: space-around;
+}
+
+.code .img {
+  width: 50Px;
+  height: 50Px;
+}
+
+.tip {
+  padding: 2Px;
+  color: white;
+}

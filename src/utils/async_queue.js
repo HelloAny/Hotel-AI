@@ -43,7 +43,7 @@ export default class AsyncQueue {
   push(fn) {
     if (typeof fn !== "function") console.warn("添加的异步任务非可执行函数");
     this._asyncQueue.push(fn);
-    if (!this._off) this.start();
+    if (this._off) this.start();
   }
 
   /**
@@ -66,8 +66,8 @@ export default class AsyncQueue {
   start() {
     if (!this._off) {
       this._off = true;
-      this._execute();
     }
+    this._execute();
   }
 
   // 队列是否执行完毕
@@ -87,7 +87,6 @@ export default class AsyncQueue {
           this.results.push(err);
         });
     }
-    if (!this.hasNext()) this.stop();
   }
 
   _getTask() {

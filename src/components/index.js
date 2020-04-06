@@ -17,3 +17,5 @@ export { default as HCtabCardhotel } from "./HCtabCard/hotel";
 export { default as HCwifi } from "./HCobject/wifi";
 export { default as HCkongtiao } from "./HCobject/kongtiao";
 export { default as HCyushi } from "./HCobject/yushi";
+export { default as Navbar } from "./Navbar";
+export { default as Ico } from "./Ico";
