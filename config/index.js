@@ -8,6 +8,9 @@ const config = {
     "750": 1,
     "828": 1.81 / 2
   },
+  defineConstants: {
+    LOCATION_APIKEY: JSON.stringify("WKKBZ-YT4WF-77MJO-JWI6M-UNUPF-4SFM4")
+  },
   sourceRoot: "src",
   outputRoot: "dist",
   babel: {

@@ -45,7 +45,7 @@ class realAuth extends Component {
       current: this.state.current + 1
     });
   }
-  componentWillMount() {
+  componentDidMount() {
     this.hadRealAuth();
   }
   render() {
@@ -66,7 +66,7 @@ class realAuth extends Component {
             {
               0: (
                 <HCinfo
-                  nextBtn={this.changeCurrent.bind(this)}
+                  nextBtn={this.changeCurrent}
                   detailAuth={hadRealAuth}
                 ></HCinfo>
               ),

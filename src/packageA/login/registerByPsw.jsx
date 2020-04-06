@@ -9,9 +9,10 @@ class LoginByPsw extends Component {
   config = {
     navigationBarTitleText: "密码注册",
     navigationBarBackgroundColor: "#2d8cf0",
-    navigationBarTextStyle: "white"
+    navigationBarTextStyle: "white",
   };
   constructor() {
+    super();
     this.state = {
       phone: "", //电话
       passWord: "", //密码
@@ -28,8 +29,8 @@ class LoginByPsw extends Component {
         icode: "",
         code_ts: "获取验证码",
         toast: false,
-        count: 60
-      }
+        count: 60,
+      },
     };
   }
 
@@ -40,7 +41,7 @@ class LoginByPsw extends Component {
    */
   phoneChange(value) {
     this.setState({
-      phone: value
+      phone: value,
     });
     return value;
   }
@@ -52,7 +53,7 @@ class LoginByPsw extends Component {
    */
   passWordChange(value) {
     this.setState({
-      passWord: value
+      passWord: value,
     });
     return value;
   }
@@ -65,7 +66,7 @@ class LoginByPsw extends Component {
   passWordChangeAgain(value) {
     this.setState({
       passWordAgain: value,
-      show_btn: 0
+      show_btn: 0,
     });
     if (
       this.state.passWord == value &&
@@ -74,12 +75,12 @@ class LoginByPsw extends Component {
       this.setState({
         show_btn: 1,
         validation: true,
-        errorCap: 0
+        errorCap: 0,
       });
     } else if (!value) {
       this.setState({
         validation: true,
-        errorCap: 0
+        errorCap: 0,
       });
     }
     return value;
@@ -94,7 +95,7 @@ class LoginByPsw extends Component {
     if (this.state.passWord !== value) {
       this.setState({
         validation: false,
-        errorCap: 3
+        errorCap: 3,
       });
     }
   }
@@ -111,20 +112,20 @@ class LoginByPsw extends Component {
       //幕布
       Taro.showLoading({
         title: "loading",
-        mask: true
+        mask: true,
       });
       this.setState(
         {
-          finalPhone: this.state.phone
+          finalPhone: this.state.phone,
         },
         () => {
           // showBtn是false时会出现灰色按钮，当倒计时结束又变成可以触发的按钮
           //验证码接口
-          Sms(this.state.phone).then(res => {
+          Sms(this.state.phone).then((res) => {
             if (res.data.status == 0) {
               this.setState(
                 {
-                  rand: res.data.data.rand
+                  rand: res.data.data.rand,
                 },
                 () => {
                   const timer = setInterval(() => {
@@ -133,8 +134,8 @@ class LoginByPsw extends Component {
                         showBtn: 2,
                         btnMsg: {
                           count: count--,
-                          code_ts: count + "S重发"
-                        }
+                          code_ts: count + "S重发",
+                        },
                       },
                       () => {
                         if (count === 0) {
@@ -143,8 +144,8 @@ class LoginByPsw extends Component {
                             showBtn: 1,
                             btnMsg: {
                               count: 60,
-                              code_ts: "获取验证码"
-                            }
+                              code_ts: "获取验证码",
+                            },
                           });
                         }
                       }
@@ -155,7 +156,7 @@ class LoginByPsw extends Component {
                     title: "验证码发送成功",
                     icon: "none",
                     duration: 2000,
-                    mask: true
+                    mask: true,
                   });
                 }
               );
@@ -173,11 +174,11 @@ class LoginByPsw extends Component {
     this.setState({
       captcha: value,
       show_resBtn: false,
-      errorCap: 0
+      errorCap: 0,
     });
     if (value.length == 5 && (this.state.show_btn == 1 || 2)) {
       this.setState({
-        show_resBtn: true
+        show_resBtn: true,
       });
     }
     return value;
@@ -193,18 +194,18 @@ class LoginByPsw extends Component {
       phone: this.state.finalPhone,
       code: this.state.captcha,
       rand: this.state.rand,
-      password: this.state.passWord
+      password: this.state.passWord,
     };
-    RegisterPsw(param).then(res => {
+    RegisterPsw(param).then((res) => {
       console.log(res.data);
       if (res.data.status == -4) {
         this.setState({
-          errorCap: 1
+          errorCap: 1,
         });
       } else if (res.data.status == 0) {
         if (!this.props.navigate) {
           Taro.navigateTo({
-            url: "/pages/account/account"
+            url: "/pages/account/account",
           });
         }
       }
@@ -231,7 +232,7 @@ class LoginByPsw extends Component {
       show_btn,
       validation,
       show_resBtn,
-      btnMsg
+      btnMsg,
     } = this.state;
     return (
       <View>
@@ -324,7 +325,7 @@ class LoginByPsw extends Component {
                   >
                     {btnMsg.code_ts}
                   </AtButton>
-                )
+                ),
               }[show_btn]
             }
           </View>
@@ -346,7 +347,7 @@ class LoginByPsw extends Component {
               0: <View className="tapCap at-col">验证码和手机号提醒</View>,
               1: <View className="errorCap at-col">验证码错误</View>,
               2: <View className="errorCap at-col">手机号错误</View>,
-              3: <View className="errorCap at-col">密码不一致</View>
+              3: <View className="errorCap at-col">密码不一致</View>,
             }[errorCap]
           }
         </View>

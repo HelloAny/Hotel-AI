@@ -7,7 +7,7 @@ import "taro-ui/dist/style/index.scss";
 import "@assets/icons/fontsOne/iconfont.css";
 import "./app.scss";
 import { objectDeepCompare } from "@utils";
-import Server from "@pages/IM/server";
+// import Server from "@pages/IM/server";
 
 //*************taro-ui组件按需引入！！！！*****************
 
@@ -17,16 +17,16 @@ import Server from "@pages/IM/server";
 //   require('nerv-devtools')
 // }
 
-!(function() {
-  Server.connect();
-})();
+// !(function() {
+//   Server.connect();
+// })();
 
 const store = {
   userStore: new userInfo(),
-  cardPage: new cardPage()
+  cardPage: new cardPage(),
 };
 
-onError(error => {
+onError((error) => {
   console.log("mobx global error listener:", error);
 });
 
@@ -34,7 +34,17 @@ class App extends Component {
   componentDidMount() {}
 
   config = {
-    pages: ["pages/account/account", "pages/index/index"],
+    pages: [
+      "pages/home/index",
+      "pages/object/index",
+      "pages/account/account",
+      "pages/index/index",
+    ],
+    permission: {
+      "scope.userLocation": {
+        desc: "需要获取您的地理位置，请确认授权",
+      },
+    },
     subpackages: [
       {
         root: "packageA",
@@ -48,13 +58,15 @@ class App extends Component {
           "user/changeName/changeName",
           "user/changeEmail/changeEmail",
           "realAuth/realAuth",
-          "realAuth/detailAuth/detailAuth"
-        ]
+          "realAuth/detailAuth/detailAuth",
+          "bill/bill",
+          "setting/setting",
+        ],
       },
       {
         root: "packageB",
-        pages: ["ActivityService/activityService"]
-      }
+        pages: ["ActivityService/activityService"],
+      },
     ],
     window: {
       backgroundTextStyle: "light",
@@ -62,7 +74,7 @@ class App extends Component {
       navigationBarTitleText: "WeChat",
       navigationBarTextStyle: "black",
       enablePullDownRefresh: true,
-      backgroundTextStyle: "dark"
+      backgroundTextStyle: "dark",
       // enablePullDownRefresh: true,
       // backgroundTextStyle:"dark"
     },
@@ -71,18 +83,21 @@ class App extends Component {
       selectedColor: "#00f",
       backgroundColor: "#fff",
       borderStyle: "black",
-      position: "top",
       list: [
         {
+          pagePath: "pages/home/index",
+          text: "首页",
+        },
+        {
           pagePath: "pages/account/account",
-          text: "我的"
+          text: "我的",
         },
         {
           pagePath: "pages/index/index",
-          text: "我的"
-        }
-      ]
-    }
+          text: "我的",
+        },
+      ],
+    },
   };
 
   componentDidMount() {}
@@ -107,7 +122,7 @@ class App extends Component {
 Taro.render(<App />, document.getElementById("app"));
 
 // 对象深度比较函数，注入到所有组件
-Component.prototype.compare = function(nextProps, nextState) {
+Component.prototype.compare = function (nextProps, nextState) {
   return (
     objectDeepCompare(this.props, nextProps, this.propsKeys) &&
     objectDeepCompare(this.state, nextState, this.stateKeys)

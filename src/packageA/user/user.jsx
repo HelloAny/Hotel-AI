@@ -32,11 +32,8 @@ class user extends Component {
     const setUserInfo = token => {
       infoByToken(token).then(res => {
         if (res.data.status == 0) {
-          console.log(res.data.data);
           userStore.setUserInfo(res.data.data); //保存到mobx
-          console.log(userStore.user);
         } else if (res.data.status == -100) {
-          console.log("丢失参数!");
           Taro.showToast({
             title: "参数丢失",
             icon: "fail",
@@ -132,7 +129,7 @@ class user extends Component {
       <View className="container">
         <View
           className="at-row at-row__align--center userInfo userPortrait"
-          onClick={this.uploadPortrait.bind(this)}
+          onClick={this.uploadPortrait}
         >
           <View className="at-col at-col-2 title">头像</View>
           <View className="at-col at-col-6 text">点击上传头像</View>

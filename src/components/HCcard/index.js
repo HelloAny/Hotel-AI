@@ -8,12 +8,12 @@ class HCcard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ani: ""
+      ani: "",
     };
   }
 
   static options = {
-    addGlobalClass: true
+    addGlobalClass: true,
   };
 
   static defaultProps = {
@@ -30,14 +30,14 @@ class HCcard extends Component {
         id: "", //酒店id
         imgs: {
           Upright: [],
-          horizontal: []
+          horizontal: [],
         },
         lat: "" /***废弃***/,
         location: "", //酒店地址
         lon: "" /***废弃***/,
         name: "", //酒店名
         province: "", //省
-        update_time: ""
+        update_time: "",
       },
       name: "",
       order: {
@@ -54,7 +54,7 @@ class HCcard extends Component {
         room: "", //房间id
         status: "", //付款订单状态
         totalprice: "", //总价
-        update_time: "" //
+        update_time: "", //
       },
       room: {
         add_time: "" /***废弃***/,
@@ -66,9 +66,9 @@ class HCcard extends Component {
         number: "", //房间号
         room_type_content: "", //房间类型
         room_type_name: "", //房间类型描述
-        update_time: "" /***废弃***/
-      }
-    }
+        update_time: "" /***废弃***/,
+      },
+    },
   };
 
   /**
@@ -79,18 +79,18 @@ class HCcard extends Component {
     const {
       data,
       cardPage: {
-        cardPage: { scrollTop }
+        cardPage: { scrollTop },
       },
-      cardPage
+      cardPage,
     } = this.props;
     Taro.createSelectorQuery()
       .selectViewport()
-      .scrollOffset(rect => {
+      .scrollOffset((rect) => {
         const animate = Taro.createAnimation({
           transformOrigin: "50% 50%",
           duration: 400,
           timingFunction: "ease",
-          delay: 0
+          delay: 0,
         });
         setTimeout(() => {
           animate
@@ -100,7 +100,7 @@ class HCcard extends Component {
             .step();
           this.setState(
             {
-              ani: animate.export()
+              ani: animate.export(),
             },
             () => {
               setTimeout(() => {
@@ -120,21 +120,18 @@ class HCcard extends Component {
     if (this.props.cardPage.cardPage.display == "display:none") {
       const {
         cardPage: {
-          cardPage: { offsetTop }
-        }
+          cardPage: { offsetTop },
+        },
       } = this.props;
       const animate = Taro.createAnimation({
         transformOrigin: "50% 50%",
         duration: 300,
         timingFunction: "ease",
-        delay: 0
+        delay: 0,
       });
-      animate
-        .width("90%")
-        .height("600rpx")
-        .step();
+      animate.width("90%").height("600px").step();
       this.setState({
-        ani: animate.export()
+        ani: animate.export(),
       });
     }
   }
@@ -143,8 +140,8 @@ class HCcard extends Component {
       status,
       hotel: {
         name,
-        imgs: { Upright }
-      }
+        imgs: { Upright },
+      },
     } = this.props.data;
     const { ani } = this.state;
     return (
@@ -153,7 +150,7 @@ class HCcard extends Component {
           <View className="hotelOrder_image">
             <Image
               mode="aspectFill"
-              style="width:100%;height:600rpx"
+              style="width:100%;height:600px"
               src={Upright[0]}
               lazyLoad={true}
             ></Image>
@@ -179,7 +176,7 @@ class HCcard extends Component {
                         <Text className="checkout hotelOrder_icon iconfont icon-RectangleCopy1"></Text>
                         已退房
                       </View>
-                    )
+                    ),
                   }[status]
                 }
               </View>

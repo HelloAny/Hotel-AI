@@ -3,16 +3,17 @@ import { View, Text, Picker } from "@tarojs/components";
 import { observer, inject } from "@tarojs/mobx";
 import { AtButton, AtInput, AtForm, AtCountdown, AtToast } from "taro-ui";
 import { Register, Sms } from "@actions/api";
+import { HCinterval, HCerror } from "@components";
 import "./login.sass";
 
 class Login extends Component {
   config = {
     navigationBarTitleText: "登录",
     navigationBarBackgroundColor: "#2d8cf0",
-    navigationBarTextStyle: "white"
+    navigationBarTextStyle: "white",
   };
   constructor() {
-    super(...arguments);
+    super();
     this.state = {
       phone: "", //电话
       captcha: "", //验证码
@@ -20,15 +21,7 @@ class Login extends Component {
       errorCap: 0, //错误代码
       rand: "", //rand值
       showResBtn: false, //登录按钮是否可点击
-      showBtn: 0, //验证码按钮状态
-      btnMsg: {
-        //倒计时状态码(勿改)
-        phone_no: "",
-        icode: "",
-        code_ts: "获取验证码",
-        toast: false,
-        count: 60 //倒计时's
-      }
+      smsStatus: 0, //验证码按钮状态~
     };
   }
   /**
@@ -39,19 +32,19 @@ class Login extends Component {
   phoneChange(value) {
     this.setState({
       phone: value,
-      errorCap: 0
+      errorCap: 0,
     });
     if (value.length == 11) {
       if (!/^1[3456789]\d{9}$/.test(value)) {
         //电话号码格式判断
         this.setState({
-          errorCap: 2
+          errorCap: 2,
         });
         return;
       }
-      if (this.state.showBtn == 0) {
+      if (this.state.smsStatus == 0) {
         this.setState({
-          showBtn: 1
+          smsStatus: 1,
         });
       }
     }
@@ -67,12 +60,12 @@ class Login extends Component {
     this.setState({
       captcha: value,
       showResBtn: false,
-      errorCap: 0
+      errorCap: 0,
     });
-    if (value.length == 5 && (this.state.showBtn == 1 || 2)) {
+    if (value.length == 5 && (this.state.smsStatus == 1 || 2)) {
       //判断验证码个数和可点击状态来改变登录按钮
       this.setState({
-        showResBtn: true
+        showResBtn: true,
       });
     }
     return value;
@@ -87,27 +80,27 @@ class Login extends Component {
     const param = {
       phone: this.state.finalPhone,
       code: this.state.captcha,
-      rand: this.state.rand
+      rand: this.state.rand,
     };
     //快捷注册登录接口
-    Register(param).then(res => {
+    Register(param).then((res) => {
       if (res.data.status == -4) {
         this.setState({
-          errorCap: 1
+          errorCap: 1,
         });
       } else if (res.data.status == 0) {
         Taro.setStorage({
           key: "token",
-          data: res.data.data.token
+          data: res.data.data.token,
         });
         //若传参的路由不存在，则跳转到个人中心界面
         if (!this.props.navigate) {
           Taro.switchTab({
-            url: "/pages/account/account"
+            url: "/pages/account/account",
           });
         } else {
           Taro.redirectTo({
-            url: this.props.navigate
+            url: this.props.navigate,
           });
         }
       }
@@ -120,61 +113,40 @@ class Login extends Component {
     if (this.state.phone.length !== 11) {
       return 1;
     } else if (this.state.phone.length == 11) {
-      let count = this.state.btnMsg.count;
       //幕布
       Taro.showLoading({
         title: "loading",
-        mask: true
+        mask: true,
       });
       this.setState(
         {
-          finalPhone: this.state.phone
+          finalPhone: this.state.phone,
         },
         () => {
-          // showBtn是false时会出现灰色按钮，当倒计时结束又变成可以触发的按钮
+          // smsStatus是false时会出现灰色按钮，当倒计时结束又变成可以触发的按钮
           //验证码接口
-          Sms(this.state.phone).then(res => {
+          console.log("发送请求");
+          Sms(this.state.phone).then((res) => {
+            console.log(res);
             if (res.data.status == 0) {
               this.setState(
                 {
-                  rand: res.data.data.rand
+                  rand: res.data.data.rand,
+                  smsStatus: 2,
                 },
                 () => {
-                  const timer = setInterval(() => {
-                    this.setState(
-                      {
-                        showBtn: 2,
-                        btnMsg: {
-                          count: count--,
-                          code_ts: count + "S重发"
-                        }
-                      },
-                      () => {
-                        if (count === 0) {
-                          clearInterval(timer);
-                          this.setState({
-                            showBtn: 1,
-                            btnMsg: {
-                              count: 60,
-                              code_ts: "获取验证码"
-                            }
-                          });
-                        }
-                      }
-                    );
-                  }, 1000);
                   Taro.hideLoading();
                   Taro.showToast({
                     title: "验证码发送成功",
                     icon: "none",
                     duration: 2000,
-                    mask: true
+                    mask: true,
                   });
                 }
               );
             } else if (res.data.status == 1016) {
               this.setState({
-                errorCap: 2
+                errorCap: 1,
               });
             }
           });
@@ -184,12 +156,21 @@ class Login extends Component {
   }
 
   /**
+   * 计时器函数
+   */
+  changeIntervalStatus() {
+    this.setState({
+      smsStatus: 1,
+    });
+  }
+
+  /**
    * 路由转跳
    * @param {string} url
    */
   navigateTo(url) {
     Taro.navigateTo({
-      url: url
+      url: url,
     });
   }
   componentWillReceiveProps(nextProps) {
@@ -214,10 +195,9 @@ class Login extends Component {
       selector,
       selectorChecked,
       numberChecked,
-      btnMsg,
       showResBtn,
-      showBtn,
-      errorCap
+      smsStatus,
+      errorCap,
     } = this.state;
     return (
       <View>
@@ -279,22 +259,16 @@ class Login extends Component {
                     type="secondary"
                     circle={true}
                   >
-                    {btnMsg.code_ts}
+                    <HCinterval
+                      changeIntervalStatus={this.changeIntervalStatus}
+                    />
                   </AtButton>
-                )
-              }[showBtn]
+                ),
+              }[smsStatus]
             }
           </View>
         </View>
-        <View className="at-row">
-          {
-            {
-              0: <View className="tapCap at-col">验证码和手机号提醒</View>,
-              1: <View className="errorCap at-col">验证码错误</View>,
-              2: <View className="errorCap at-col">手机号错误</View>
-            }[errorCap]
-          }
-        </View>
+        <HCerror error={errorCap} />
         <View className="phone_btn at-row">
           <View className="phone_input at-col">
             {showResBtn ? (
@@ -319,7 +293,7 @@ class Login extends Component {
 
   render() {
     return (
-      <View className="container">
+      <View className="login-container">
         {this.renderA()}
         <View className="toPsw at-row">
           <View
@@ -344,3 +318,4 @@ class Login extends Component {
     );
   }
 }
+export default Login;

@@ -10,7 +10,7 @@ const request = (method, url, data) => {
 
 /**
  * 用户曾经住过，或者已入住，或者已经预订的酒店
- * @param {object} param
+ * @param {any} param
  */
 export const userHotelInfo = param => {
   const { id } = param;

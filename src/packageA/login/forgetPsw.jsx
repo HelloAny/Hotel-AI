@@ -3,6 +3,7 @@ import { View, Text, Picker } from "@tarojs/components";
 import { observer, inject } from "@tarojs/mobx";
 import { AtButton, AtInput, AtForm, AtCountdown, AtToast } from "taro-ui";
 import { SmsValidate, ForgetPsw, Sms } from "@actions/api";
+import { HCerror, HCinterval } from "@components";
 import "./forgetPsw.sass";
 
 class Login extends Component {
@@ -21,18 +22,10 @@ class Login extends Component {
       rand: "", //rand值
       show_resBtn: false, //是否开启的登录按钮
       pswChange: false, //密码是否一致
-      show_btn: 0, //验证码按钮
+      smsStatus: 0, //验证码按钮
       passWordAgain: "", //再次输入密码
       passWord: "", //密码
-      validation: true, //界面是否跳转(手机号验证成功)
-      btnMsg: {
-        //计时器(勿改)
-        phone_no: "",
-        icode: "",
-        code_ts: "获取验证码",
-        toast: false,
-        count: 60
-      }
+      validation: true //界面是否跳转(手机号验证成功)
     };
   }
   /**
@@ -74,7 +67,7 @@ class Login extends Component {
       show_resBtn: false,
       errorCap: 0
     });
-    if (value.length == 5 && (this.state.show_btn == 1 || 2)) {
+    if (value.length == 5 && (this.state.smsStatus == 1 || 2)) {
       this.setState({
         show_resBtn: true
       });
@@ -156,32 +149,10 @@ class Login extends Component {
             if (res.data.status == 0) {
               this.setState(
                 {
-                  rand: res.data.data.rand
+                  rand: res.data.data.rand,
+                  smsStatus: 2
                 },
                 () => {
-                  const timer = setInterval(() => {
-                    this.setState(
-                      {
-                        showBtn: 2,
-                        btnMsg: {
-                          count: count--,
-                          code_ts: count + "S重发"
-                        }
-                      },
-                      () => {
-                        if (count === 0) {
-                          clearInterval(timer);
-                          this.setState({
-                            showBtn: 1,
-                            btnMsg: {
-                              count: 60,
-                              code_ts: "获取验证码"
-                            }
-                          });
-                        }
-                      }
-                    );
-                  }, 1000);
                   Taro.hideLoading();
                   Taro.showToast({
                     title: "验证码发送成功",
@@ -216,23 +187,32 @@ class Login extends Component {
   passWordChangeAgain(value) {
     this.setState({
       passWordAgain: value,
-      show_btn: 0
+      smsStatus: 0
     });
     if (
       this.state.passWord == value &&
       /^1[3456789]\d{9}$/.test(this.state.phone)
     ) {
       this.setState({
-        show_btn: 1,
+        smsStatus: 1,
         validation: true,
-        errorCap: 0
+        errorCap: 5
       });
     } else if (!value) {
       this.setState({
         validation: true,
-        errorCap: 0
+        errorCap: 5
       });
     }
+  }
+
+  /**
+   * 计时器函数
+   */
+  changeIntervalStatus() {
+    this.setState({
+      smsStatus: 1
+    });
   }
 
   /**
@@ -243,7 +223,7 @@ class Login extends Component {
     if (this.state.passWord !== value) {
       this.setState({
         validation: false,
-        errorCap: 3
+        errorCap: 5
       });
     }
   }
@@ -271,7 +251,7 @@ class Login extends Component {
       numberChecked,
       btnMsg,
       show_resBtn,
-      show_btn,
+      smsStatus,
       errorCap,
       pswChange,
       passWordAgain,
@@ -334,10 +314,12 @@ class Login extends Component {
                       type="secondary"
                       circle={true}
                     >
-                      {btnMsg.code_ts}
+                      <HCinterval
+                        changeIntervalStatus={this.changeIntervalStatus}
+                      />
                     </AtButton>
                   )
-                }[show_btn]
+                }[smsStatus]
               }
             </View>
           </View>
@@ -431,16 +413,7 @@ class Login extends Component {
     return (
       <View className="container">
         {this.renderA()}
-        <View className="at-row">
-          {
-            {
-              0: <View className="tapCap at-col">验证码和手机号提醒</View>,
-              1: <View className="errorCap at-col">验证码错误</View>,
-              2: <View className="errorCap at-col">手机号错误</View>,
-              3: <View className="errorCap at-col">密码不一致</View>
-            }[errorCap]
-          }
-        </View>
+        <HCerror error={this.state.errorCap} />>
       </View>
     );
   }

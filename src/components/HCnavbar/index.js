@@ -4,7 +4,7 @@ import "./index.sass";
 class Navbar extends Component {
   render() {
     const style = {
-      paddingTop: 44 + "px",
+      paddingTop: 0 + "px",
       height: 44 + "px",
       position: "fixed"
     };

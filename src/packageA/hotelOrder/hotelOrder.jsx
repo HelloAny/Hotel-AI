@@ -1,8 +1,3 @@
-/* eslint-disable react/jsx-boolean-value */
-/* eslint-disable react/jsx-key */
-/* eslint-disable react/sort-comp */
-/* eslint-disable react/no-unused-state */
-/* eslint-disable no-unused-vars */
 import Taro, { Component } from "@tarojs/taro";
 import { View, ScrollView } from "@tarojs/components";
 import { observer, inject } from "@tarojs/mobx";

@@ -108,22 +108,14 @@ class HCcamera extends Component {
             <View>
               <View className="at-row cameraBtn">
                 <View className="at-col">
-                  <AtButton
-                    circle
-                    type="primary"
-                    onClick={this.postImage.bind(this)}
-                  >
+                  <AtButton circle type="primary" onClick={this.postImage}>
                     上传
                   </AtButton>
                 </View>
               </View>
               <View className="at-row cameraBtn">
                 <View className="at-col">
-                  <AtButton
-                    circle
-                    type="primary"
-                    onClick={this.refreshCamera.bind(this)}
-                  >
+                  <AtButton circle type="primary" onClick={this.refreshCamera}>
                     重新拍摄
                   </AtButton>
                 </View>
@@ -132,11 +124,7 @@ class HCcamera extends Component {
           ) : (
             <View className="at-row cameraBtn">
               <View className="at-col">
-                <AtButton
-                  circle
-                  type="primary"
-                  onClick={this.takePhoto.bind(this)}
-                >
+                <AtButton circle type="primary" onClick={this.takePhoto}>
                   拍摄
                 </AtButton>
               </View>

@@ -1,11 +1,11 @@
-import Taro, { Component } from "@tarojs/taro";
+import Taro, { PureComponent } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 import { AtBadge, AtButton } from "taro-ui";
 import { observer, inject } from "@tarojs/mobx";
 
 import "./index.sass";
 
-export default class HClistline extends Component {
+export default class HClistline extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {};

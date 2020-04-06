@@ -271,3 +271,75 @@ export const picUpload = param => {
     return request(post, url, data);
   });
 };
+
+/**
+ * 预约寄存柜
+ * @param {any} param TOKEN hotel_id
+ */
+export const locker = param => {
+  const { token, hotel_id } = param;
+  const url = `/api/locker/apply/?token=${token}`;
+  const data = {
+    id: 1234,
+    type: "locker",
+    subtype: "apply",
+    data: {
+      order_id: 4
+    }
+  };
+  return request(post, url, data);
+};
+
+/**
+ * 获取寄存柜信息
+ *  * @param {any} param TOKEN hotel_id
+ */
+export const getLocker = param => {
+  const { token, hotel_id } = param;
+  const url = `/api/locker/info/?token=${token}`;
+  const data = {
+    id: 1234,
+    type: "locker",
+    subtype: "get",
+    data: {
+      apply_id: 4
+    }
+  };
+  return request(post, url, data);
+};
+
+/**
+ * 获取寄存柜列表
+ * @param {any} param TOKEN hotel_id
+ */
+export const getLockerList = param => {
+  const { token, hotel_id } = param;
+  const url = `/api/locker/info/?token=${token}`;
+  const data = {
+    id: 1234,
+    type: "locker",
+    subtype: "list",
+    data: {
+      order_id: 4
+    }
+  };
+  return request(post, url, data);
+};
+
+/**
+ * 取消寄存柜订单
+ * @param {any} param TOKEN apply_id
+ */
+export const cacelLocker = param => {
+  const { token, apply_id } = param;
+  const url = `/api/locker/apply/?token=${token}`;
+  const data = {
+    id: 1234,
+    type: "locker",
+    subtype: "cancel",
+    data: {
+      apply_id: apply_id
+    }
+  };
+  return request(post, url, data);
+};

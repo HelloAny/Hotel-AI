@@ -12,14 +12,74 @@ import "./account.sass";
 @inject("userStore")
 @observer
 // eslint-disable-next-line no-unused-vars
-class Login extends Component {
+class Account extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    (this.list = [
+      {
+        id: 1,
+        name: "我的订单",
+        hr: true,
+        icon: "icon-RectangleCopy153",
+        url: "",
+      },
+      {
+        id: 2,
+        name: "收藏",
+        hr: true,
+        icon: "icon-RectangleCopy19",
+        url: "",
+      },
+      {
+        id: 3,
+        name: "优惠券",
+        hr: true,
+        icon: "icon-RectangleCopy42",
+        url: "",
+      },
+      {
+        id: 4,
+        name: "会员服务",
+        hr: true,
+        icon: "icon-RectangleCopy59",
+        url: "",
+      },
+      {
+        id: 5,
+        name: "设置",
+        hr: false,
+        icon: "icon-RectangleCopy16",
+        url: "/packageA/setting/setting",
+      },
+    ]),
+      (this.listline = [
+        {
+          id: 1,
+          name: "酒店订单",
+          icon: "icon-RectangleCopy103",
+          badge: "",
+          url: "/packageA/hotelOrder/hotelOrder",
+        },
+        {
+          id: 2,
+          name: "账户",
+          icon: "icon-RectangleCopy153",
+          badge: "",
+          url: "/packageA/bill/bill",
+        },
+        {
+          id: 3,
+          name: "客服",
+          icon: "icon-kefu",
+          badge: "",
+          url: "",
+        },
+      ]);
   }
   config = {
     navigationBarTitleText: "我的",
-    navigationBarBackgroundColor: "#2d8cf0"
+    navigationBarBackgroundColor: "#4F4FCB",
   };
 
   /**界面初始化*/
@@ -29,17 +89,15 @@ class Login extends Component {
      * 获取个人信息并保存到mobx
      * @param {string} token token缓存
      */
-    const setUserInfo = token => {
-      infoByToken(token).then(res => {
+    const setUserInfo = (token) => {
+      infoByToken(token).then((res) => {
         if (res.data.status == 0) {
-          console.log(res.data.data);
           userStore.setUserInfo(res.data.data); //保存到mobx
-          console.log(userStore.user);
         } else if (res.data.status == -100) {
           Taro.showToast({
             title: "参数错误",
             icon: "fail",
-            duration: 2000
+            duration: 2000,
           });
         }
       });
@@ -54,17 +112,17 @@ class Login extends Component {
    */
   navgiateTo(url) {
     Taro.navigateTo({
-      url: url
+      url: url,
     });
   }
 
-  componentWillMount() {
-    this.mountedInterface();
-  }
+  componentWillMount() {}
 
   componentWillReact() {}
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.mountedInterface();
+  }
 
   componentWillUnmount() {}
 
@@ -74,71 +132,9 @@ class Login extends Component {
   render() {
     const {
       userStore: {
-        user: { nickName, userName }
-      }
+        user: { nickName, userName },
+      },
     } = this.props;
-    //lisline统一设置
-    const listline = [
-      {
-        id: 1,
-        name: "酒店订单",
-        icon: "icon-RectangleCopy103",
-        badge: "2",
-        url: "/packageA/hotelOrder/hotelOrder"
-      },
-      {
-        id: 2,
-        name: "账户",
-        icon: "icon-RectangleCopy153",
-        badge: "",
-        url: ""
-      },
-      {
-        id: 3,
-        name: "客服",
-        icon: "icon-kefu",
-        badge: "",
-        url: ""
-      }
-    ];
-    //list统一设置
-    const list = [
-      {
-        id: 1,
-        name: "我的订单",
-        hr: true,
-        icon: "icon-RectangleCopy153",
-        url: ""
-      },
-      {
-        id: 2,
-        name: "收藏",
-        hr: true,
-        icon: "icon-RectangleCopy19",
-        url: ""
-      },
-      {
-        id: 3,
-        name: "优惠券",
-        hr: true,
-        icon: "icon-RectangleCopy42",
-        url: ""
-      },
-      {
-        id: 4,
-        name: "会员服务",
-        hr: true,
-        icon: "icon-RectangleCopy59",
-        url: ""
-      },
-      {
-        id: 5,
-        name: "设置",
-        hr: false,
-        icon: "icon-RectangleCopy16",
-        url: ""
-      }
-    ];
     return (
       <View className="container">
         <View className="topSet at-row at-row__align--center">
@@ -166,12 +162,13 @@ class Login extends Component {
         </View>
         <View className="list">
           <View>
-            <HClistline listLine={listline} MaxNumber="3" />
+            <HClistline listLine={this.listline} MaxNumber="3" />
             <View className="hrFull"></View>
-            <HClist lists={list}></HClist>
+            <HClist lists={this.list}></HClist>
           </View>
         </View>
       </View>
     );
   }
 }
+export default Account;

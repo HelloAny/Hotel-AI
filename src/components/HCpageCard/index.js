@@ -1,6 +1,3 @@
-/* eslint-disable jsx-quotes */
-/* eslint-disable react/sort-comp */
-/* eslint-disable react/jsx-key */
 import Taro, { Component } from "@tarojs/taro";
 import {
   View,
@@ -8,7 +5,7 @@ import {
   Image,
   Swiper,
   SwiperItem,
-  CoverView
+  CoverView,
 } from "@tarojs/components";
 import {
   AtButton,
@@ -18,9 +15,14 @@ import {
   AtModal,
   AtModalHeader,
   AtModalContent,
-  AtModalAction
+  AtModalAction,
+  AtFloatLayout,
+  AtCard,
+  AtRate,
+  AtTextarea,
 } from "taro-ui";
 import { observer, inject } from "@tarojs/mobx";
+import { locker, getLocker, getLockerList, cacelLocker } from "@actions/api";
 import "./index.sass";
 
 @inject("cardPage")
@@ -29,31 +31,36 @@ class HCpageCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      index: 0,
+      currentIndex: 0,
       openone: false,
       opentwo: false,
       openthree: false,
-      modal: false
+      modal: false,
+      modalLockerInfo: false,
+      lockerList: [],
+      atRateFloat: false,
+      atRate: 0,
+      textarea: "",
     };
   }
 
   static options = {
-    addGlobalClass: true
+    addGlobalClass: true,
   };
 
   static defaultProps = {};
 
-  currentChange(event) {
+  currentChange = (event) => {
     this.setState({
-      index: event.detail.current
+      index: event.detail.current,
     });
-  }
+  };
 
-  close() {
+  close = () => {
     const { cardPage } = this.props;
     this.setState(
       {
-        index: 0
+        currentIndex: 0,
       },
       () => {
         setTimeout(() => {
@@ -63,78 +70,217 @@ class HCpageCard extends Component {
         }, 200);
       }
     );
-  }
-
-  componentWillMount() {}
-
+  };
   hotelSwiper() {
     const {
       cardPage: {
         info: {
           hotel: {
-            imgs: { Upright }
-          }
-        }
-      }
+            imgs: { Upright },
+          },
+        },
+      },
     } = this.props;
 
-    const list = Upright.map(item => {
-      return (
-        <SwiperItem taroKey={item}>
-          <Image
-            mode="aspectFill"
-            style="width:100vw;height:600rpx"
-            src={item}
-          ></Image>
-        </SwiperItem>
-      );
-    });
-    return <View>{list}</View>;
+    return (
+      <View>
+        {Upright.map((item, index) => (
+          <SwiperItem taroKey={index}>
+            <Image
+              mode="aspectFill"
+              style="width:100vw;height:600px"
+              src={item}
+            ></Image>
+          </SwiperItem>
+        ))}
+      </View>
+    );
   }
 
   /**
    * 第一个折叠栏
    */
-  handleClickone(value) {
+  handleClickone = (value) => {
     this.setState({
-      openone: value
+      openone: value,
     });
-  }
+  };
   /**
    * 第二个折叠栏
    */
-  handleClicktwo(value) {
+  handleClicktwo = (value) => {
     this.setState({
-      opentwo: value
+      opentwo: value,
     });
-  }
+  };
   /**
    * 第三个折叠栏
    */
-  handleClickthree(value) {
+  handleClickthree = (value) => {
     this.setState({
-      openthree: value
+      openthree: value,
     });
-  }
-  openModal() {
+  };
+  /**
+   * 打开拟态框
+   */
+  openModalLocker() {
     this.setState({
-      modal: true
-    });
-  }
-  closeModal() {
-    this.setState({
-      modal: false
+      modal: true,
     });
   }
 
+  /**
+   * 打开寄存柜订单列表
+   */
+  openLockerInfo() {
+    const param = {
+      token: Taro.getStorageSync("token"),
+      hotel_id: this.props.cardPage.info.order.id,
+    };
+    getLockerList(param).then((res) => {
+      console.log(res);
+      this.setState(
+        {
+          lockerList: res.data.data.list,
+          modalLockerInfo: true,
+        },
+        () => {
+          console.log(this.state.lockerList);
+        }
+      );
+    });
+  }
+  /**
+   * 集合 关闭拟态框或者浮动框
+   */
+  closeModal() {
+    this.setState({
+      modal: false,
+      modalLockerInfo: false,
+    });
+  }
+  /**
+   * 预约寄存柜
+   */
+  postLocker = () => {
+    console.log(this.props.cardPage.info.order.id);
+    const param = {
+      token: Taro.getStorageSync("token"),
+      hotel_id: this.props.cardPage.info.order.id,
+    };
+    locker(param).then((res) => {
+      if (res.data.status == 0) {
+        Taro.showToast({
+          title: "预约成功",
+          icon: "success",
+          duration: 2000,
+        });
+      } else if (res.data.status == 103) {
+        Taro.showToast({
+          title: "已有预约",
+          icon: "none",
+          duration: 2000,
+        });
+      } else {
+        Taro.showToast({
+          title: "参数错误",
+          icon: "none",
+          duration: 2000,
+        });
+      }
+      this.setState({
+        modal: false,
+      });
+    });
+  };
+
+  /**
+   * 取消寄存柜
+   */
+  cacelLockerOrder(apply_id) {
+    const param = {
+      token: Taro.getStorageSync("token"),
+      apply_id: apply_id,
+    };
+    cacelLocker(param).then((res) => {
+      if (res.data.status == 0) {
+        const param2 = {
+          token: Taro.getStorageSync("token"),
+          hotel_id: this.props.cardPage.info.order.id,
+        };
+        getLockerList(param2).then((resquest) => {
+          this.setState(
+            {
+              lockerList: resquest.data.data.list,
+            },
+            () => {
+              console.log(resquest.data.data.list);
+            }
+          );
+        });
+      }
+    });
+  }
+  /**
+   * 关闭评分窗口
+   */
+  atRateClose() {
+    this.setState({
+      atRateFloat: false,
+    });
+  }
+
+  /**
+   * 打开评分窗口
+   */
+  atRateOpen() {
+    this.setState({
+      atRateFloat: true,
+    });
+  }
+
+  /**
+   * 改变评价星级
+   */
+  atRateChange(value) {
+    this.setState({
+      atRate: value,
+    });
+    return value;
+  }
+
+  textareaChange(event) {
+    this.setState({
+      textarea: event.target.value,
+    });
+  }
+  sendAtRate() {
+    Taro.showToast({
+      title: "感谢您的评价",
+      icon: "success",
+      duration: 2000,
+    });
+    this.setState({
+      atRateFloat: false,
+    });
+  }
   render() {
     const {
       cardPage: {
         cardPage: { offsetTop },
-        info
-      }
+        info,
+      },
     } = this.props;
-    const { index, modal } = this.state;
+    const {
+      currentIndex,
+      modal,
+      modalLockerInfo,
+      lockerList,
+      atRateFloat,
+      atRate,
+      textarea,
+    } = this.state;
     return (
       <View className="hotelOrderPage_item" style={`margin-top:${offsetTop}`}>
         <View className="hotelOrderPage_container">
@@ -143,14 +289,14 @@ class HCpageCard extends Component {
               X
             </CoverView>
             <Swiper
-              current={index}
+              current={currentIndex}
               indicatorColor="#ffffff"
               indicatorActiveColor="#333"
               circular
               indicatorDots
               autoplay={false}
               className="swiper"
-              style="width:100%;height:600rpx"
+              style="width:100%;height:600px"
               onChange={this.currentChange.bind(this)}
             >
               {this.hotelSwiper()}
@@ -179,7 +325,7 @@ class HCpageCard extends Component {
                         <Text className="checkout hotelOrderPage_icon iconfont icon-RectangleCopy1"></Text>
                         已退房
                       </View>
-                    )
+                    ),
                   }[info.status]
                 }
               </View>
@@ -198,24 +344,96 @@ class HCpageCard extends Component {
                         </View>
                       </View>
                       <View className="hr"></View>
-                      <View className="hotelOrderPage_backHotel at-col at-col-3">
-                        <AtButton
-                          type="secondary"
-                          size="small"
-                          style="color:black"
-                          onClick={this.openModal.bind(this)}
-                        >
-                          预约寄存柜
-                        </AtButton>
-                        <AtModal
-                          isOpened={modal}
-                          title="寄存确认"
-                          cancelText="取消"
-                          confirmText="确认"
-                          onClose={this.closeModal.bind(this)}
-                          onCancel={this.closeModal.bind(this)}
-                          content={`寄存时间的免费开放时间仅在预约时间\n前的6小时和后3小时内，请确认自己的\n时间`}
-                        />
+                      <View className="at-row">
+                        <View className="hotelOrderPage_backHotel at-col at-col-3">
+                          <AtButton
+                            type="secondary"
+                            size="small"
+                            style="color:black"
+                            onClick={this.openModalLocker.bind(this)}
+                          >
+                            预约寄存柜
+                          </AtButton>
+                          <AtModal
+                            isOpened={modal}
+                            title="寄存确认"
+                            cancelText="取消"
+                            confirmText="确认"
+                            onClose={this.closeModal.bind(this)}
+                            onConfirm={this.postLocker.bind(this)}
+                            onCancel={this.closeModal.bind(this)}
+                            content={`寄存时间的免费开放时间仅在预约时间\n前的6小时和后3小时内，请确认自己的\n时间`}
+                          />
+                        </View>
+                        <View className="hotelOrderPage_backHotel at-col at-col-3">
+                          <AtButton
+                            type="secondary"
+                            size="small"
+                            style="color:black"
+                            onClick={this.openLockerInfo.bind(this)}
+                          >
+                            寄存信息
+                          </AtButton>
+                          <AtFloatLayout
+                            isOpened={modalLockerInfo}
+                            title="寄存信息"
+                            onClose={this.closeModal.bind(this)}
+                            scrollY={true}
+                          >
+                            {lockerList &&
+                              lockerList.map((item, order) => {
+                                return (
+                                  <View taroKey={order} className="lockerList">
+                                    <AtCard
+                                      extra={
+                                        {
+                                          applying: "预约中",
+                                          using: "使用中",
+                                          canceled: "被取消",
+                                          done: "使用完毕",
+                                        }[item.status]
+                                      }
+                                      title={"预约单号:" + item.locker_id}
+                                    >
+                                      <View style="padding-bottom:20px;font-size:40px">
+                                        寄存柜位置:第{item.index}柜{item.num}号
+                                      </View>
+                                      <View>
+                                        到期时间:
+                                        {new Date(
+                                          item.expire_time * 1000
+                                        ).getFullYear() +
+                                          "." +
+                                          (new Date(
+                                            item.expire_time * 1000
+                                          ).getMonth() +
+                                            1) +
+                                          "." +
+                                          new Date(
+                                            item.expire_time * 1000
+                                          ).getDate()}
+                                      </View>
+                                      {item.status == "applying" ? (
+                                        <View>
+                                          <AtButton
+                                            size="small"
+                                            onClick={this.cacelLockerOrder.bind(
+                                              this,
+                                              item.apply_id
+                                            )}
+                                          >
+                                            取消预订
+                                          </AtButton>
+                                        </View>
+                                      ) : (
+                                        void 0
+                                      )}
+                                    </AtCard>
+                                  </View>
+                                );
+                              })}
+                          </AtFloatLayout>
+                        </View>
                       </View>
                     </View>
                   </View>
@@ -248,7 +466,7 @@ class HCpageCard extends Component {
                       <View className="hotelOrderPage_title at-col at-col-12">
                         欢迎光临本酒店，期待再次光临
                         <View className="hotelOrderPage_title_tips">
-                          !取消及扣款政策 >
+                          取消及扣款政策 >
                         </View>
                       </View>
                       <View className="hr"></View>
@@ -263,7 +481,7 @@ class HCpageCard extends Component {
                       </View>
                     </View>
                   </View>
-                )
+                ),
               }[info.status]
             }
             <View className="hotelOrderPage_paylist">
@@ -274,7 +492,7 @@ class HCpageCard extends Component {
                 icon={{
                   value: "iconfont icon-RectangleCopy33",
                   color: "red",
-                  size: "20"
+                  size: "20",
                 }}
               >
                 <AtList hasBorder={false}>
@@ -294,7 +512,7 @@ class HCpageCard extends Component {
                 icon={{
                   value: "iconfont icon-RectangleCopy128",
                   color: "blue",
-                  size: "20"
+                  size: "20",
                 }}
               >
                 <AtList hasBorder={false}>
@@ -315,15 +533,15 @@ class HCpageCard extends Component {
                       "入住时间: " +
                       new Date(info.check_in_time * 1000).getFullYear() +
                       "." +
-                      new Date(info.check_in_time * 1000).getMonth() +
+                      (new Date(info.check_in_time * 1000).getMonth() + 1) +
                       "." +
-                      new Date(info.check_in_time * 1000).getDay() +
+                      new Date(info.check_in_time * 1000).getDate() +
                       "--" +
                       new Date(info.check_out_time * 1000).getFullYear() +
                       "." +
-                      new Date(info.check_out_time * 1000).getMonth() +
+                      (new Date(info.check_out_time * 1000).getMonth() + 1) +
                       "." +
-                      new Date(info.check_out_time * 1000).getDay()
+                      new Date(info.check_out_time * 1000).getDate()
                     }
                   />
                 </AtList>
@@ -335,7 +553,7 @@ class HCpageCard extends Component {
                 icon={{
                   value: "iconfont icon-RectangleCopy161",
                   color: "green",
-                  size: "20"
+                  size: "20",
                 }}
               >
                 <AtList hasBorder={false}>
@@ -345,9 +563,9 @@ class HCpageCard extends Component {
                       "付款时间:" +
                       new Date(info.order.pay_time * 1000).getFullYear() +
                       "-" +
-                      new Date(info.order.pay_time * 1000).getMonth() +
+                      (new Date(info.order.pay_time * 1000).getMonth() + 1) +
                       "-" +
-                      new Date(info.order.pay_time * 1000).getDay()
+                      new Date(info.order.pay_time * 1000).getDate()
                     }
                   />
                 </AtList>
@@ -362,9 +580,38 @@ class HCpageCard extends Component {
                 </Text>
               </View>
               <View className="hotelOrderPage_other at-row at-row__align--center at-row__justify--center">
-                <View className="hotelOrderPage_other_pingjia at-col at-col-5">
+                <View
+                  className="hotelOrderPage_other_pingjia at-col at-col-5"
+                  onClick={this.atRateOpen.bind(this)}
+                >
                   <View className="icon iconfont icon-RectangleCopy254"></View>
                   入住评价
+                  <AtFloatLayout
+                    isOpened={atRateFloat}
+                    title="撰写评价"
+                    onClose={this.atRateClose.bind(this)}
+                  >
+                    <View style="padding-bottom:45px">
+                      <AtRate
+                        value={atRate}
+                        onChange={this.atRateChange.bind(this)}
+                      />
+                    </View>
+                    <View style="padding-bottom:30px">
+                      <AtTextarea
+                        value={textarea}
+                        onChange={this.textareaChange.bind(this)}
+                        maxLength={200}
+                        placeholder="请写下您的评价~"
+                      />
+                    </View>
+                    <AtButton
+                      type="primary"
+                      onClick={this.sendAtRate.bind(this)}
+                    >
+                      确认
+                    </AtButton>
+                  </AtFloatLayout>
                 </View>
                 <View className="hrx">|</View>
                 <View className="hotelOrderPage_other_kefu at-col at-col-5">

@@ -9,7 +9,7 @@ import { HTTP } from "@constants/api";
  */
 const baseOptions = (param, method = "GET") => {
   let { url, data } = param;
-  let contentType = "json";
+  let contentType = "application/json";
   contentType = param.contentType || contentType;
   const option = {
     // url: url.indexOf("http") !== -1 ? url : "http://" + url,
@@ -18,8 +18,9 @@ const baseOptions = (param, method = "GET") => {
     method: method,
     header: {
       "content-type": contentType,
-      Authorization: ""
+      Authorization: "",
     },
+    mode: "cors",
     success(res) {
       if (res.statusCode === HTTP_STATUS.NOT_FOUND) {
         return console.log("api", "请求资源不存在");
@@ -29,7 +30,7 @@ const baseOptions = (param, method = "GET") => {
         let path = getCurrentPageUrl();
         if (path !== "pages/login/login") {
           Taro.navigateTo({
-            url: "/pages/login/login"
+            url: "/pages/login/login",
           });
         }
         return console.log("api", "没有权限访问");
@@ -37,7 +38,7 @@ const baseOptions = (param, method = "GET") => {
         let path = getCurrentPageUrl();
         if (path !== "pages/login/login") {
           Taro.navigateTo({
-            url: "/pages/login/login"
+            url: "/pages/login/login",
           });
         }
         return console.log("api", "需要鉴权");
@@ -49,7 +50,7 @@ const baseOptions = (param, method = "GET") => {
     },
     fail(e) {
       console.log("api", "请求接口出现问题", e);
-    }
+    },
   };
   return Taro.request(option);
 };
@@ -57,7 +58,7 @@ const baseOptions = (param, method = "GET") => {
 export const get = (url, data = "") => {
   let option = {
     url,
-    data
+    data,
   };
   return baseOptions(option);
 };
@@ -66,7 +67,7 @@ export const post = (url, data, contentType) => {
   let params = {
     url,
     data,
-    contentType
+    contentType,
   };
   console.log(params);
   return baseOptions(params, "POST");
@@ -74,7 +75,7 @@ export const post = (url, data, contentType) => {
 export const put = (url, data = "") => {
   let option = {
     url,
-    data
+    data,
   };
   return baseOptions(option, "PUT");
 };
@@ -84,7 +85,7 @@ export const put = (url, data = "") => {
 export const delet = (url, data = "") => {
   let option = {
     url,
-    data
+    data,
   };
   return baseOptions(option, "DELETE");
 };
