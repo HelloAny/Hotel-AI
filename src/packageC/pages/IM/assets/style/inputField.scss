@@ -19,6 +19,9 @@
     .iconfont{
       padding: 3Px;
     }
+    .input-right{
+      line-height: 1;
+    }
     .input-right,.input-left{
       display: flex;
       flex-direction: row;
@@ -28,7 +31,6 @@
       background-color: #67C23A;
       color: white;
       padding: 0Px 10Px;
-      line-height: 30Px;
       border-radius: 5Px;
     }
   }

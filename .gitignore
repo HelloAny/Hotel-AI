@@ -7,3 +7,4 @@ node_modules/
 yarn-error.log
 yarn.lock
 project.config.json
+package-lock.json

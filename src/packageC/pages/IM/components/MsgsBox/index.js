@@ -1,5 +1,5 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, ScrollView } from "@tarojs/components";
+import { View, ScrollView, Text } from "@tarojs/components";
 import { Message, MessageDB } from "../../message";
 import TextMsg from "./Text";
 import TimeMsg from "./Time";
@@ -14,7 +14,7 @@ export default class MsgsBox extends Component {
     addGlobalClass: true
   };
 
-  static defaultProps = {
+  props = {
     scrollOffset: 0,
     roomName: "",
     refresh: false,
@@ -144,7 +144,6 @@ export default class MsgsBox extends Component {
       nextProps.breakBug != this.props.breakBug ||
       nextProps.roomName != this.props.roomName
     ) {
-      console.log(nextProps.roomName);
       this.init(nextProps.roomName);
     }
   }
@@ -267,6 +266,7 @@ export default class MsgsBox extends Component {
   componentWillReceiveProps(nextProps) {
     this._newOffset = nextProps.scrollOffset;
     this._checkUpdate(nextProps);
+    this.props = nextProps
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -309,6 +309,7 @@ export default class MsgsBox extends Component {
       >
         {messageList.map((msg, index) => {
           let { sender, description } = msg;
+          let uuid = msg.uuid.uuid
           let type = description.type;
           let position = "left";
           if (sender == null) position = "center";
@@ -316,31 +317,31 @@ export default class MsgsBox extends Component {
             position = "right";
           if (type == "TEXT")
             return (
-              <View key={msg.uuid.uuid} id={"MsgBox" + index} className={"bubble " + position}>
+              <View key={uuid} id={"MsgBox" + index} className={"bubble " + position}>
                 <TextMsg position={position} description={description} />
               </View>
             );
           if (type == "TIME")
             return (
-              <View key={msg.uuid.uuid} id={"MsgBox" + index} className={"bubble " + position}>
+              <View key={uuid} id={"MsgBox" + index} className={"bubble " + position}>
                 <TimeMsg description={description} />
               </View>
             );
           if (type == "EMOJI")
             return (
-              <View key={msg.uuid.uuid} id={"MsgBox" + index} className={"bubble " + position}>
+              <View key={uuid} id={"MsgBox" + index} className={"bubble " + position}>
                 <ImageMsg description={description} />
               </View>
             );
           if (type == "IMAGE")
             return (
-              <View key={msg.uuid.uuid} id={"MsgBox" + index} className={"bubble " + position}>
+              <View key={uuid} id={"MsgBox" + index} className={"bubble " + position}>
                 <ImageMsg description={description} />
               </View>
             );
           if (type == "VOICE")
             return (
-              <View key={msg.uuid.uuid} id={"MsgBox" + index} className={"bubble " + position}>
+              <View key={uuid} id={"MsgBox" + index} className={"bubble " + position}>
                 <VoiceMsg description={description} position={position} />
               </View>
             );

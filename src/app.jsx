@@ -7,8 +7,8 @@ import Server from "@service/SocketServer";
 import Index from "./pages/index";
 
 import "./app.scss";
-import "./assets/icons/fontsOne/iconfont.css";
-import "./assets/icons/fonts/iconfont.css";
+// import "./assets/icons/fontsOne/iconfont.css";
+// import "./assets/icons/fonts/iconfont.css";
 
 //*************taro-ui组件按需引入！！！！*****************
 
@@ -52,6 +52,7 @@ class App extends Component {
 
   config = {
     pages: [
+      "pages/home/index",
       "pages/journey/index",
       "pages/notify/index",
       "pages/account/account"
@@ -81,8 +82,6 @@ class App extends Component {
       },
       {
         root: "packageB",
-        pages: ["ActivityService/activityService"],
-      },
         pages: [
           "Reservation/page/homePage/homePage",
           "Reservation/page/bookHotel/bookHotel",
@@ -138,16 +137,20 @@ class App extends Component {
           text: "首页",
         },
         {
-          pagePath: "pages/account/account",
-          text: "我的",
-        },
-        {
           pagePath: "pages/journey/index",
-          text: "行程"
+          text: "行程",
+          iconPath: "assets/icons/journey.png",
+          selectedIconPath: "assets/icons/journey-active.png"
         },
         {
           pagePath: "pages/notify/index",
-          text: "消息"
+          text: "消息",
+          iconPath: "assets/icons/msg.png",
+          selectedIconPath: "assets/icons/msg-active.png"
+        },
+        {
+          pagePath: "pages/account/account",
+          text: "我的",
         }
       ]
     }

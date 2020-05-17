@@ -31,7 +31,7 @@ $text-placeholder: #c0c4cc;
     }
     .subTitle {
       margin-top: 4rpx;
-      font-size: 20rpx;
+      font-size: 10Px;
       color: $text-secondary;
     }
   }
@@ -40,7 +40,8 @@ $text-placeholder: #c0c4cc;
     margin-right: 2Px;
     @include flex-box(row, flex-end);
   }
-  View {
+  .right,.center,.left {
     padding: 3Px;
+    line-height: 1;
   }
 }

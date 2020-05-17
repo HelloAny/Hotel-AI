@@ -57,7 +57,7 @@ export default class Header extends Component {
         </View>
         <View className="right">
           <Text>{rightTitle}</Text>
-          <View className={`iconfont ${rightIcon}`} />
+          <View style={{display: Taro.getEnv() === "WEAPP" ? "none" : "block"}} className={`iconfont ${rightIcon}`} />
         </View>
       </View>
     );

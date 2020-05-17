@@ -31,3 +31,5 @@ class user extends Component {
     );
   }
 }
+
+export default user

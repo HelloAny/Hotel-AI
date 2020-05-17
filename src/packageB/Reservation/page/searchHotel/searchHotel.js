@@ -16,6 +16,7 @@ class SearchHotel extends Component {
   };
 
   constructor() {
+    super();
     this.state = {
       nowLocation: "",
       hotelList: [],

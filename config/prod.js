@@ -5,12 +5,11 @@ module.exports = {
   defineConstants: {},
   weapp: {
     module: {
-        // 小程序端样式引用本地资源内联配置
-        url: {
-          enable: true,
-          config: {
-            limit: 10240 // 文件大小限制
-          }
+      // 小程序端样式引用本地资源内联配置
+      url: {
+        enable: true,
+        config: {
+          limit: 10240 // 文件大小限制
         }
       }
     }

@@ -1,5 +1,5 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Swiper, SwiperItem, Image } from "@tarojs/components";
+import { View, Text, Swiper, SwiperItem, Image } from "@tarojs/components";
 
 import "../../../../assets/style/extension/extensionArea.scss";
 

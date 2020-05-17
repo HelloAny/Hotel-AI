@@ -21,6 +21,7 @@ export default class HotelListItemTmpl extends Taro.Component {
   };
 
   constructor(props) {
+    super();
     Object.assign(this.state, { ...props.info });
   }
 

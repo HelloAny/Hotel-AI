@@ -69,8 +69,8 @@ let objectDeepCompare = (sourceObj, compareObj, keys=[]) => {
     const key = keys[i];
     const source = sourceObj[key];
     const target = compareObj[key];
-    if (typeof source === "undefined" || typeof target === "undefined") throw "compare keys error";
-    if (!comparisonObject(source, target)) return false;
+    if (typeof source === "undefined" || typeof target === "undefined") console.warn( "compare keys error: " + key );
+    else if (!comparisonObject(source, target)) return false;
   }
   return true;
 };
