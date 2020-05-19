@@ -3,7 +3,7 @@ import { View } from "@tarojs/components";
 import { AtInput, AtForm, AtButton, AtSteps } from "taro-ui";
 import { reLaunch } from "@utils"; //测试用
 import { observer, inject } from "@tarojs/mobx";
-import { HCinfo, HCcamera } from "@components";
+import { HCinfo, HCcamera, Navbar } from "@components";
 
 import "./realAuth.sass";
 
@@ -18,8 +18,7 @@ class realAuth extends Component {
     };
   }
   config = {
-    navigationBarTitleText: "实名认证",
-    navigationBarBackgroundColor: "#2d8cf0"
+    navigationStyle: "custom"
   };
   hadRealAuth() {
     const {
@@ -59,20 +58,23 @@ class realAuth extends Component {
     ];
     const { current, hadRealAuth } = this.state;
     return (
-      <View className="container">
-        <AtSteps className="stepText" items={items} current={current} />
-        <View>
-          {
+      <View className="ra_container">
+        <Navbar title="实名认证" weight={true}></Navbar>
+        <View className="topbar">
+          <AtSteps className="stepText" items={items} current={current} />
+          <View>
             {
-              0: (
-                <HCinfo
-                  nextBtn={this.changeCurrent}
-                  detailAuth={hadRealAuth}
-                ></HCinfo>
-              ),
-              1: <HCcamera></HCcamera>
-            }[current]
-          }
+              {
+                0: (
+                  <HCinfo
+                    nextBtn={this.changeCurrent.bind(this)}
+                    detailAuth={hadRealAuth}
+                  ></HCinfo>
+                ),
+                1: <HCcamera></HCcamera>
+              }[current]
+            }
+          </View>
         </View>
       </View>
     );

@@ -12,7 +12,7 @@ let reLaunch = iteratee => {
     tokenValidate(token).then(res => {
       if (res.data.status == 0) {
         return iteratee(token, arguments);
-      } else if (res.data.status == -101) {
+      } else {
         Taro.reLaunch({
           url: "/packageA/login/login"
         });

@@ -7,7 +7,7 @@ import {
   SwiperItem,
   Image,
   ScrollView,
-  Button,
+  Button
 } from "@tarojs/components";
 import {
   AtRate,
@@ -15,11 +15,11 @@ import {
   AtTabs,
   AtTabsPane,
   AtActionSheet,
-  AtActionSheetItem,
+  AtActionSheetItem
 } from "taro-ui";
 import { observer, inject } from "@tarojs/mobx";
 import { reLaunch } from "@utils";
-import { HCtabsjingdian, HCtabshotel } from "@components";
+import { HCtabsjingdian, HCtabshotel, Navbar } from "@components";
 import zhoubian from "./assets/zhoubian.png";
 import like1 from "./assets/like1.png";
 import more from "./assets/more.png";
@@ -39,65 +39,64 @@ class Home extends Component {
       atSearchBar: "",
       address: "获取定位",
       atActionSheet: false,
-      swiperAutoplay: true,
+      swiperAutoplay: true
     };
   }
 
   config = {
-    navigationBarTitleText: "首页",
-    navigationBarTextStyle: "white",
-    navigationBarBackgroundColor: "#4F4FCB",
+    navigationStyle: "custom"
   };
 
   swiperChange(event) {
+    console.log(event);
     this.setState({
       swiperName: this.state.swiperNamearr[event.target.current],
-      swiperRate: this.state.swiperRateArr[event.target.current],
+      swiperRate: this.state.swiperRateArr[event.target.current]
     });
   }
 
   changeAtSearchBar(value) {
     this.setState({
-      atSearchBar: value,
+      atSearchBar: value
     });
   }
 
-  getLocation() {
-    Taro.getLocation({
-      type: "gcj02",
-      success: (res) => {
-        const lat = res.latitude;
-        const lon = res.longitude;
-        Taro.chooseLocation({
-          latitude: lat,
-          longitude: lon,
-          success: (res) => {
-            this.setState({
-              address: res.address.match(/(?<=省).*(?=市)/)[0],
-            });
-            Taro.setStorage({
-              key: "location",
-              data: res.address.match(/(?<=省).*(?=市)/)[0],
-            });
-          },
-        });
-      },
-      fail: (err) => {
-        console.log(err);
-      },
-    });
-  }
+  // getLocation() {
+  //   Taro.getLocation({
+  //     type: "gcj02",
+  //     success: (res) => {
+  //       const lat = res.latitude;
+  //       const lon = res.longitude;
+  //       Taro.chooseLocation({
+  //         latitude: lat,
+  //         longitude: lon,
+  //         success: (res) => {
+  //           this.setState({
+  //             address: res.address.match(/(?<=省).*(?=市)/)[0],
+  //           });
+  //           Taro.setStorage({
+  //             key: "location",
+  //             data: res.address.match(/(?<=省).*(?=市)/)[0],
+  //           });
+  //         },
+  //       });
+  //     },
+  //     fail: (err) => {
+  //       console.log(err);
+  //     },
+  //   });
+  // }
   changeAtActionSheet() {
     this.setState({
       atActionSheet: !this.state.atActionSheet,
-      swiperAutoplay: false,
+      swiperAutoplay: false
     });
   }
 
   closeAtActionSheet() {
     this.setState({
       atActionSheet: !this.state.atActionSheet,
-      swiperAutoplay: true,
+      swiperAutoplay: true
     });
   }
   clickLike() {
@@ -105,24 +104,24 @@ class Home extends Component {
       ? Taro.showToast({
           title: "收藏成功",
           icon: "success",
-          duration: 2000,
+          duration: 2000
         })
       : Taro.showToast({
           title: "请先登录",
           icon: "none",
-          duration: 2000,
+          duration: 2000
         });
   }
-  componentDidMount() {
+  componentWillMount() {
     this.setState({
       swiperName: this.state.swiperNamearr[0],
-      swiperRate: this.state.swiperRateArr[0],
+      swiperRate: this.state.swiperRateArr[0]
     });
-    Taro.getStorageSync("location")
-      ? this.setState({
-          address: Taro.getStorageSync("location"),
-        })
-      : this.getLocation();
+    // Taro.getStorageSync("location")
+    //   ? this.setState({
+    //       address: Taro.getStorageSync("location"),
+    //     })
+    //   : this.getLocation();
   }
   render() {
     const {
@@ -131,16 +130,23 @@ class Home extends Component {
       atSearchBar,
       address,
       atActionSheet,
-      swiperAutoplay,
+      swiperAutoplay
     } = this.state;
     return (
       <View className="home-container">
+        <Navbar
+          title="首页"
+          isBackBtn={false}
+          weight={true}
+          backgroundColor="#4F4FCB"
+          color="white"
+        ></Navbar>
         <View className="tabbar"></View>
-        <ScrollView style="height:470vh">
+        <View style="position: relative;margin-top: 50px">
           <View className="at-row">
             <View
               className="address at-col at-col-3"
-              onClick={this.getLocation.bind(this)}
+              // onClick={this.getLocation.bind(this)}
             >
               <Image className="zhoubian" src={zhoubian} />
               {address}
@@ -184,14 +190,14 @@ class Home extends Component {
               circular
               indicatorDots
               autoplay={swiperAutoplay}
-              onChange={this.swiperChange.bind(this)}
+              // onChange={this.swiperChange.bind(this)}
             >
               <SwiperItem>
                 <View className="demo-text-1">
                   <Image
                     mode="aspectFit"
                     style="width:100vw;height:100vh"
-                    src="http://q74d0nj5h.bkt.clouddn.com/511584086420_.pic.jpg"
+                    src="http://cdn.amikara.com/511584086420_.pic.jpg"
                   ></Image>
                 </View>
               </SwiperItem>
@@ -200,7 +206,7 @@ class Home extends Component {
                   <Image
                     mode="widthFix"
                     style="width:100vw;height:100vh"
-                    src="http://q74d0nj5h.bkt.clouddn.com/IMG_6289%2820200220-213548%29.JPG"
+                    src="http://cdn.amikara.com/IMG_6289%2820200220-213548%29.JPG"
                   ></Image>
                 </View>
               </SwiperItem>
@@ -209,7 +215,7 @@ class Home extends Component {
                   <Image
                     mode="aspectFill"
                     style="width:100vw;height:100vh"
-                    src="http://q74d0nj5h.bkt.clouddn.com/501584086419_.pic.jpg"
+                    src="http://cdn.amikara.com/501584086419_.pic.jpg"
                   ></Image>
                 </View>
               </SwiperItem>
@@ -223,7 +229,7 @@ class Home extends Component {
           <View className="plusHotel">
             <Image
               style="width:100%;height:100%"
-              src="http://q74d0nj5h.bkt.clouddn.com/1.jpg"
+              src="http://cdn.amikara.com/1.jpg"
             ></Image>
             <View className="plusBtn">浏 览 PLUS 酒 店</View>
           </View>
@@ -270,7 +276,7 @@ class Home extends Component {
           <View className="title">周边娱乐</View>
           <View className="subtitle">游玩享受更多超低优惠</View>
           <HCtabsjingdian></HCtabsjingdian>
-        </ScrollView>
+        </View>
         <AtActionSheet
           isOpened={atActionSheet}
           onClose={this.closeAtActionSheet.bind(this)}

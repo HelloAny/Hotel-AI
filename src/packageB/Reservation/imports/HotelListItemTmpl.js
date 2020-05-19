@@ -3,11 +3,11 @@ import Taro from "@tarojs/taro";
 
 export default class HotelListItemTmpl extends Taro.Component {
   static options = {
-    addGlobalClass: true
+    addGlobalClass: true,
   };
 
   static defaultProps = {
-    onClick: () => {}
+    onClick: () => {},
   };
 
   state = {
@@ -17,10 +17,11 @@ export default class HotelListItemTmpl extends Taro.Component {
     imageUrl: "图片地址",
     score: 0,
     price: 0,
-    hotelId: 1
+    hotelId: 1,
   };
 
   constructor(props) {
+    super();
     Object.assign(this.state, { ...props.info });
   }
 

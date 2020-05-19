@@ -2,7 +2,7 @@ import Taro, { Component } from "@tarojs/taro";
 import { View, ScrollView } from "@tarojs/components";
 import { observer, inject } from "@tarojs/mobx";
 import { userHotelInfo } from "@actions/hotel";
-import { HCcard, HCpageCard } from "@components";
+import { HCcard, HCpageCard, Navbar } from "@components";
 import "./hotelOrder.sass";
 
 @inject("cardPage", "userStore")
@@ -26,14 +26,14 @@ class hotelOrder extends Component {
               id: "", //酒店id
               imgs: {
                 Upright: [],
-                horizontal: []
+                horizontal: [],
               },
               lat: "" /***废弃***/,
               location: "", //酒店地址
               lon: "" /***废弃***/,
               name: "", //酒店名
               province: "", //省
-              update_time: ""
+              update_time: "",
             },
             name: "",
             order: {
@@ -50,7 +50,7 @@ class hotelOrder extends Component {
               room: "", //房间id
               status: "", //付款订单状态
               totalprice: "", //总价
-              update_time: "" //
+              update_time: "", //
             },
             room: {
               add_time: "" /***废弃***/,
@@ -62,32 +62,30 @@ class hotelOrder extends Component {
               number: "", //房间号
               room_type_content: "", //房间类型
               room_type_name: "", //房间类型描述
-              update_time: "" /***废弃***/
-            }
-          }
-        }
-      ]
+              update_time: "" /***废弃***/,
+            },
+          },
+        },
+      ],
     };
   }
   config = {
-    navigationBarTitleText: "订单",
-    navigationBarBackgroundColor: "#2d8cf0",
-    navigationBarTextStyle: "white"
+    navigationStyle: "custom",
   };
 
   userHotelInfoGet() {
     const {
       userStore: {
-        user: { id }
-      }
+        user: { id },
+      },
     } = this.props;
     const param = {
-      id: id
+      id: id,
     };
-    userHotelInfo(param).then(res => {
+    userHotelInfo(param).then((res) => {
       console.log(res.data.res);
       this.setState({
-        records: res.data.res
+        records: res.data.res,
       });
     });
   }
@@ -103,7 +101,7 @@ class hotelOrder extends Component {
 
   hotelList() {
     const { records } = this.state;
-    const list = records.map(item => {
+    const list = records.map((item) => {
       return (
         <View taroKey={item.status}>
           <HCcard data={item.fields}></HCcard>
@@ -116,16 +114,16 @@ class hotelOrder extends Component {
   render() {
     const {
       cardPage: {
-        cardPage: { display, allDisplay, orScroll }
+        cardPage: { display, allDisplay, orScroll },
       },
       userStore: {
-        user: { userName }
-      }
+        user: { userName },
+      },
     } = this.props;
     const { records } = this.state;
     return (
       <View>
-        <navbar />
+        <Navbar title="酒店订单" weight={true}></Navbar>
         <View className="container">
           {records ? (
             <View>
@@ -151,3 +149,4 @@ class hotelOrder extends Component {
     );
   }
 }
+export default hotelOrder;

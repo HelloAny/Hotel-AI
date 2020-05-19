@@ -3,13 +3,12 @@ import { View, Text, Picker } from "@tarojs/components";
 import { observer, inject } from "@tarojs/mobx";
 import { AtButton, AtInput } from "taro-ui";
 import { Sms, RegisterPsw } from "@actions/api";
+import { Navbar } from "@components";
 import "./loginByPsw.sass";
 
 class LoginByPsw extends Component {
   config = {
-    navigationBarTitleText: "密码注册",
-    navigationBarBackgroundColor: "#2d8cf0",
-    navigationBarTextStyle: "white",
+    navigationStyle: "custom",
   };
   constructor() {
     super();
@@ -337,6 +336,7 @@ class LoginByPsw extends Component {
   render() {
     return (
       <View className="container">
+        <Navbar title="密码注册" isBackBtn={false} weight={true}></Navbar>
         <View className="at-row">
           <View className="loginByPsw_title at-col">密码注册</View>
         </View>

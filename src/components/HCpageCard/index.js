@@ -1,13 +1,5 @@
 import Taro, { Component } from "@tarojs/taro";
 import {
-  View,
-  Text,
-  Image,
-  Swiper,
-  SwiperItem,
-  CoverView,
-} from "@tarojs/components";
-import {
   AtButton,
   AtAccordion,
   AtList,
@@ -21,8 +13,17 @@ import {
   AtRate,
   AtTextarea,
 } from "taro-ui";
+import {
+  View,
+  Text,
+  Image,
+  Swiper,
+  SwiperItem,
+  CoverView,
+} from "@tarojs/components";
 import { observer, inject } from "@tarojs/mobx";
 import { locker, getLocker, getLockerList, cacelLocker } from "@actions/api";
+
 import "./index.sass";
 
 @inject("cardPage")
@@ -88,7 +89,7 @@ class HCpageCard extends Component {
           <SwiperItem taroKey={index}>
             <Image
               mode="aspectFill"
-              style="width:100vw;height:600px"
+              style="width:100vw;height:600rpx"
               src={item}
             ></Image>
           </SwiperItem>
@@ -296,7 +297,7 @@ class HCpageCard extends Component {
               indicatorDots
               autoplay={false}
               className="swiper"
-              style="width:100%;height:600px"
+              style="width:100%;height:600rpx"
               onChange={this.currentChange.bind(this)}
             >
               {this.hotelSwiper()}
@@ -395,7 +396,7 @@ class HCpageCard extends Component {
                                       }
                                       title={"预约单号:" + item.locker_id}
                                     >
-                                      <View style="padding-bottom:20px;font-size:40px">
+                                      <View style="padding-bottom:20rpx;font-size:40rpx">
                                         寄存柜位置:第{item.index}柜{item.num}号
                                       </View>
                                       <View>
@@ -591,13 +592,13 @@ class HCpageCard extends Component {
                     title="撰写评价"
                     onClose={this.atRateClose.bind(this)}
                   >
-                    <View style="padding-bottom:45px">
+                    <View style="padding-bottom:45rpx">
                       <AtRate
                         value={atRate}
                         onChange={this.atRateChange.bind(this)}
                       />
                     </View>
-                    <View style="padding-bottom:30px">
+                    <View style="padding-bottom:30rpx">
                       <AtTextarea
                         value={textarea}
                         onChange={this.textareaChange.bind(this)}

@@ -12,24 +12,25 @@ const priceList = [200, 223, 180, 199, 780, 650, 1111, 150, 350];
 class SearchHotel extends Component {
   config = {
     navigationBarTitleText: "酒店列表",
-    enablePullDownRefresh: true
+    enablePullDownRefresh: true,
   };
 
   constructor() {
+    super();
     this.state = {
       nowLocation: "",
       hotelList: [],
       isLoading: false,
       filterIndex: 1,
       priceL2H: true,
-      value: ""
+      value: "",
     };
   }
 
   //初始化酒店列表
   initHotels(data) {
     this.setState({
-      hotelList: data.map(hotel => {
+      hotelList: data.map((hotel) => {
         const { pk: hotelId } = hotel;
         const { name, location, imgs } = hotel.fields;
         return {
@@ -39,9 +40,9 @@ class SearchHotel extends Component {
           name,
           score: (Math.random() + 4).toFixed(1),
           price: priceList[Math.floor(Math.random() * 9)],
-          distance: distanceList[Math.floor(Math.random() * 9)]
+          distance: distanceList[Math.floor(Math.random() * 9)],
         };
-      })
+      }),
     });
   }
 
@@ -51,26 +52,26 @@ class SearchHotel extends Component {
     Taro.navigateTo({
       url: `/packageB/Reservation/page/hotelDetail/hotelDetail?location=${location}&startDate=${startDate}&endDate=${endDate}&hotel=${JSON.stringify(
         hotel
-      )}`
+      )}`,
     });
   }
 
   componentWillMount() {
     const nowLocation = this.$router.params.location;
     this.setState({
-      nowLocation: nowLocation || "定位中..."
+      nowLocation: nowLocation || "定位中...",
     });
 
     Server.getHotels() //加载酒店
-      .then(data => {
+      .then((data) => {
         this.initHotels(data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log("服务出错啦", err);
         Taro.showToast({
           title: "网络开小差了...",
           icon: "none",
-          duration: 2000
+          duration: 2000,
         });
       });
   }
@@ -78,7 +79,7 @@ class SearchHotel extends Component {
   // 监听搜索栏内容
   onChange(value) {
     this.setState({
-      value: value
+      value: value,
     });
   }
 
@@ -86,7 +87,7 @@ class SearchHotel extends Component {
   onActionClick() {
     console.log(this.state.value);
     this.setState({
-      value: ""
+      value: "",
     });
   }
 
@@ -105,9 +106,9 @@ class SearchHotel extends Component {
     if (this.state.priceL2H && key == "price") ks.reverse();
 
     this.setState({
-      hotelList: ks.map(k => {
+      hotelList: ks.map((k) => {
         return m.get(k);
-      })
+      }),
     });
   }
 
@@ -115,15 +116,15 @@ class SearchHotel extends Component {
   filterMenuTap(e) {
     let index = e.currentTarget.dataset.index;
     this.setState({
-      filterIndex: index
+      filterIndex: index,
     });
     if (index == 2)
       this.setState({
-        priceL2H: !this.state.priceL2H
+        priceL2H: !this.state.priceL2H,
       });
     else
       this.setState({
-        priceL2H: true
+        priceL2H: true,
       });
 
     switch (index) {
@@ -145,7 +146,7 @@ class SearchHotel extends Component {
   // 筛选酒店条件选择
   filterTap() {
     Taro.navigateTo({
-      url: "/packageB/Reservation/page/hotelFilter/hotelFilter"
+      url: "/packageB/Reservation/page/hotelFilter/hotelFilter",
     });
   }
 
@@ -157,29 +158,29 @@ class SearchHotel extends Component {
   //下拉刷新
   onPullDownRefresh() {
     this.setState({
-      isLoading: true
+      isLoading: true,
     });
     Server.getHotels() //加载酒店
-      .then(data => {
+      .then((data) => {
         this.initHotels(data);
         Taro.showToast({
           title: "刷新成功",
-          duration: 1500
+          duration: 1500,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log("服务出错啦", err);
         Taro.showToast({
           title: "网络开小差了...",
           icon: "none",
-          duration: 2000
+          duration: 2000,
         });
       })
       .then(() => {
         setTimeout(() => {
           Taro.stopPullDownRefresh();
           this.setState({
-            isLoading: false
+            isLoading: false,
           });
         }, 1500);
       });
@@ -191,7 +192,7 @@ class SearchHotel extends Component {
       filterIndex,
       priceL2H,
       hotelList,
-      isLoading
+      isLoading,
     } = this.state;
     return (
       <View className="seH-container-smt">
@@ -256,7 +257,7 @@ class SearchHotel extends Component {
           </View>
         </View>
         <View className="hotelListContent">
-          {hotelList.map(hotel => {
+          {hotelList.map((hotel) => {
             return (
               <HotelListItemTmpl
                 key={hotel.hotelId}

@@ -1,9 +1,10 @@
 import Taro, { Component, getUserInfo } from "@tarojs/taro";
-import { View } from "@tarojs/components";
+import { View, Image } from "@tarojs/components";
 import { AtAvatar } from "taro-ui";
 import { infoByToken, picUpload } from "@actions/api";
 import { reLaunch } from "@utils"; //测试用
 import { observer, inject } from "@tarojs/mobx";
+import { Navbar } from "@components";
 
 import "./user.sass";
 
@@ -11,16 +12,15 @@ import background from "@assets/images/realAuth/realAuth.png";
 
 @inject("userStore")
 @observer
-class user extends Component {
+class User extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userNickName: ""
+      userNickName: "",
     };
   }
   config = {
-    navigationBarTitleText: "个人资料",
-    navigationBarBackgroundColor: "#2d8cf0"
+    navigationStyle: "custom",
   };
   /**界面初始化*/
   mountedInterface = () => {
@@ -29,15 +29,15 @@ class user extends Component {
      * 获取个人信息并保存到mobx
      * @param {string} token token缓存
      */
-    const setUserInfo = token => {
-      infoByToken(token).then(res => {
+    const setUserInfo = (token) => {
+      infoByToken(token).then((res) => {
         if (res.data.status == 0) {
           userStore.setUserInfo(res.data.data); //保存到mobx
         } else if (res.data.status == -100) {
           Taro.showToast({
             title: "参数丢失",
             icon: "fail",
-            duration: 2000
+            duration: 2000,
           });
         }
       });
@@ -52,7 +52,7 @@ class user extends Component {
    */
   nickNameChange(value) {
     this.setState({
-      userNickName: value
+      userNickName: value,
     });
     return value;
   }
@@ -65,42 +65,42 @@ class user extends Component {
     const { portrait } = this.state;
     const {
       userStore: {
-        user: { userName }
-      }
+        user: { userName },
+      },
     } = this.props;
     const that = this;
     wx.chooseImage({
       count: 1,
       sizeType: "original",
       sourceType: ["camera", "album"],
-      success: function(res) {
+      success: function (res) {
         Taro.getImageInfo({
           src: res.tempFilePaths[0],
-          success: function(res) {
+          success: function (res) {
             const param = {
               imagePath: res.path,
               type: res.type,
               name: userName,
               upload_to: "users",
               if_local: false,
-              content: "头像"
+              content: "头像",
             };
-            picUpload(param).then(res => {
+            picUpload(param).then((res) => {
               console.log(res);
               if (res.data.status == 0) {
                 Taro.showToast({
                   title: "上传成功",
                   icon: "success",
-                  duration: 2000
+                  duration: 2000,
                 });
                 Taro.reLaunch({
-                  url: "/pages/account/account"
+                  url: "/pages/account/account",
                 });
               }
             });
-          }
+          },
         });
-      }
+      },
     });
   }
 
@@ -110,7 +110,7 @@ class user extends Component {
    */
   navigateTo(url) {
     Taro.navigateTo({
-      url: url
+      url: url,
     });
   }
 
@@ -122,11 +122,12 @@ class user extends Component {
   render() {
     const {
       userStore: {
-        user: { userName, nickName, ID, email, if_face }
-      }
+        user: { userName, nickName, ID, email, if_face },
+      },
     } = this.props;
     return (
       <View className="container">
+        <Navbar title="个人信息" weight={true}></Navbar>
         <View
           className="at-row at-row__align--center userInfo userPortrait"
           onClick={this.uploadPortrait}
@@ -223,3 +224,4 @@ class user extends Component {
     );
   }
 }
+export default User;

@@ -3,14 +3,12 @@ import { View, Text, Picker } from "@tarojs/components";
 import { observer, inject } from "@tarojs/mobx";
 import { AtButton, AtInput } from "taro-ui";
 import { loginByPsw } from "@actions/api";
-import { HCerror } from "@components";
+import { HCerror, Navbar } from "@components";
 import "./registerByPsw.sass";
 
 class LoginByPsw extends Component {
   config = {
-    navigationBarTitleText: "密码登录",
-    navigationBarBackgroundColor: "#2d8cf0",
-    navigationBarTextStyle: "white",
+    navigationStyle: "custom",
   };
 
   constructor() {
@@ -137,13 +135,15 @@ class LoginByPsw extends Component {
   }
 
   render() {
+    const { errorCap } = this.state;
     return (
       <View className="container">
+        <Navbar title="密码登录" isBackBtn={false} weight={true}></Navbar>
         <View className="at-row">
           <View className="loginByPsw_title at-col">密码登录</View>
         </View>
         {this.renderInfo()}
-        <HCerror error={this.state.errorCap} />
+        <HCerror error={errorCap} />
         <View className="phone_btn at-row">
           <View className="phone_input at-col">
             {this.state.show_resBtn ? (

@@ -129,7 +129,7 @@ class HCcard extends Component {
         timingFunction: "ease",
         delay: 0,
       });
-      animate.width("90%").height("600px").step();
+      animate.width("90%").height("600rpx").step();
       this.setState({
         ani: animate.export(),
       });
@@ -150,7 +150,7 @@ class HCcard extends Component {
           <View className="hotelOrder_image">
             <Image
               mode="aspectFill"
-              style="width:100%;height:600px"
+              className="image"
               src={Upright[0]}
               lazyLoad={true}
             ></Image>

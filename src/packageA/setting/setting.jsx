@@ -3,16 +3,16 @@ import { View, Button } from "@tarojs/components";
 import { AtAvatar } from "taro-ui";
 import { infoByToken, picUpload } from "@actions/api";
 import { reLaunch } from "@utils";
+import { Navbar } from "@components";
 
 import "./setting.sass";
 
-class user extends Component {
+class setting extends Component {
   constructor(props) {
     super(props);
   }
   config = {
-    navigationBarTitleText: "设置",
-    navigationBarBackgroundColor: "#2d8cf0",
+    navigationStyle: "custom"
   };
 
   /**
@@ -26,8 +26,12 @@ class user extends Component {
   render() {
     return (
       <View className="setting-container">
-        <Button onClick={this.clearLoginStatus.bind(this)}>退出登录</Button>
+        <Navbar title="设置" weight={true}></Navbar>
+        <Button className="signout" onClick={this.clearLoginStatus.bind(this)}>
+          退出登录
+        </Button>
       </View>
     );
   }
 }
+export default setting;

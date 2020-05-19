@@ -6,7 +6,7 @@ import { getDeviceInfo } from "../../utils";
 const defaultMenuButton = {
   height: 25,
   top: 20,
-  right: 350
+  right: 350,
 };
 
 export class Navbar extends Component {
@@ -14,7 +14,9 @@ export class Navbar extends Component {
     color: "#303133", //字体颜色
     shade: false, // 返回添加黑色阴影
     title: "", // 标题
-    weight: false //标题是否加粗
+    weight: false, //标题是否加粗
+    isBackBtn: true,
+    backgroundColor: "rgba(0,0,0,0)",
   };
 
   state = {};
@@ -29,7 +31,7 @@ export class Navbar extends Component {
   }
 
   componentWillMount() {
-    const props = this.props
+    const props = this.props;
     const MenuButton =
       typeof wx == "undefined" || !wx
         ? defaultMenuButton
@@ -43,21 +45,25 @@ export class Navbar extends Component {
     let top = MenuButton.top || 30;
     let left = DeviceInfo.windowWidth - MenuButton.right || 10;
     let btnHeight = MenuButton.height || 32;
- 
-    Object.assign(StyleSheet.container, {
+
+    Object.assign(StyleSheet.navcontainer, {
       height: Math.min(headerHeight, 50) + "Px",
-      color: this.props.color
+      color: this.props.color,
+      backgroundColor: props.backgroundColor,
     });
-    Object.assign(StyleSheet.header, {
+    Object.assign(StyleSheet.navheader, {
       height: btnHeight + "Px",
       top: top + "Px",
-      left: left + "Px"
+      left: left + "Px",
     });
-    Object.assign(StyleSheet.btn, {
-      backgroundColor: props.shade ? "rgba(0,0,0,.25)" : ""
+    Object.assign(StyleSheet.navbtn, {
+      backgroundColor: props.shade ? "rgba(0,0,0,.25)" : "",
     });
-    Object.assign(StyleSheet.title, {
-      fontWeight: props.weight ? "800" : "300"
+    Object.assign(StyleSheet.navtitle, {
+      fontWeight: props.weight ? "800" : "300",
+      transform: props.isBackBtn
+        ? "translate(-67%,-50%)"
+        : "translate(-100%,-50%)",
     });
   }
 
@@ -75,15 +81,23 @@ export class Navbar extends Component {
   }
 
   render() {
-    const { title } = this.props;
+    const { title, isBackBtn } = this.props;
     return (
-      <View style={StyleSheet.container}>
-        <View style={StyleSheet.header}>
-          <View style={StyleSheet.btn} onClick={this.handleClick.bind(this)}>
-            <AtIcon value="chevron-left" />
-            <Text style={StyleSheet.backTitle}>返回</Text>
-          </View>
-          <View style={StyleSheet.title}>{title}</View>
+      <View style={StyleSheet.navcontainer}>
+        <View style={StyleSheet.navheader}>
+          {isBackBtn ? (
+            <View
+              style={StyleSheet.navbtn}
+              onClick={this.handleClick.bind(this)}
+            >
+              <AtIcon value="chevron-left" />
+              <Text style={StyleSheet.navbackTitle}>返回</Text>
+            </View>
+          ) : (
+            <View>{""}</View>
+          )}
+
+          <View style={StyleSheet.navtitle}>{title}</View>
         </View>
       </View>
     );
@@ -91,22 +105,21 @@ export class Navbar extends Component {
 }
 
 const StyleSheet = {
-  container: {
+  navcontainer: {
     zIndex: "999",
     position: "fixed",
     width: "100%",
     height: "50Px",
     top: "0",
     left: "0",
-    backgroundColor: "transparent"
   },
-  header: {
+  navheader: {
     position: "absolute",
     display: "flex",
     alignItems: "center",
-    width: "100%"
+    width: "100%",
   },
-  btn: {
+  navbtn: {
     transform: "translateY(2px)",
     backgroundColor: "",
     borderRadius: "20Px",
@@ -114,15 +127,15 @@ const StyleSheet = {
     display: "flex",
     alignItems: "center",
   },
-  backTitle: {
-    fontSize: "18Px"
+  navbackTitle: {
+    fontSize: "18Px",
   },
-  title: {
+  navtitle: {
     position: "absolute",
     left: "50%",
     top: "50%",
-    transform: "translate(-68%,-50%)"
-  }
+    transform: "translate(-100%,-50%)",
+  },
 };
 
 export default Navbar;

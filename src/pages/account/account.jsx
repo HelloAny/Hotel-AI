@@ -5,7 +5,7 @@ import { AtAvatar } from "taro-ui";
 import { observer, inject } from "@tarojs/mobx";
 import { infoByToken } from "@actions/api";
 import { reLaunch } from "@utils";
-import { HClist, HClistline } from "@components";
+import { HClist, HClistline, Navbar } from "@components";
 
 import "./account.sass";
 
@@ -22,36 +22,36 @@ class Account extends Component {
         name: "我的订单",
         hr: true,
         icon: "icon-RectangleCopy153",
-        url: "",
+        url: ""
       },
       {
         id: 2,
         name: "收藏",
         hr: true,
         icon: "icon-RectangleCopy19",
-        url: "",
+        url: ""
       },
       {
         id: 3,
         name: "优惠券",
         hr: true,
         icon: "icon-RectangleCopy42",
-        url: "",
+        url: ""
       },
       {
         id: 4,
         name: "会员服务",
         hr: true,
         icon: "icon-RectangleCopy59",
-        url: "",
+        url: ""
       },
       {
         id: 5,
         name: "设置",
         hr: false,
         icon: "icon-RectangleCopy16",
-        url: "/packageA/setting/setting",
-      },
+        url: "/packageA/setting/setting"
+      }
     ]),
       (this.listline = [
         {
@@ -59,27 +59,26 @@ class Account extends Component {
           name: "酒店订单",
           icon: "icon-RectangleCopy103",
           badge: "",
-          url: "/packageA/hotelOrder/hotelOrder",
+          url: "/packageA/hotelOrder/hotelOrder"
         },
         {
           id: 2,
           name: "账户",
           icon: "icon-RectangleCopy153",
           badge: "",
-          url: "/packageA/bill/bill",
+          url: "/packageA/bill/bill"
         },
         {
           id: 3,
           name: "客服",
           icon: "icon-kefu",
           badge: "",
-          url: "",
-        },
+          url: ""
+        }
       ]);
   }
   config = {
-    navigationBarTitleText: "我的",
-    navigationBarBackgroundColor: "#4F4FCB",
+    navigationStyle: "custom"
   };
 
   /**界面初始化*/
@@ -89,15 +88,15 @@ class Account extends Component {
      * 获取个人信息并保存到mobx
      * @param {string} token token缓存
      */
-    const setUserInfo = (token) => {
-      infoByToken(token).then((res) => {
+    const setUserInfo = token => {
+      infoByToken(token).then(res => {
         if (res.data.status == 0) {
           userStore.setUserInfo(res.data.data); //保存到mobx
         } else if (res.data.status == -100) {
           Taro.showToast({
             title: "参数错误",
             icon: "fail",
-            duration: 2000,
+            duration: 2000
           });
         }
       });
@@ -112,17 +111,17 @@ class Account extends Component {
    */
   navgiateTo(url) {
     Taro.navigateTo({
-      url: url,
+      url: url
     });
   }
 
-  componentWillMount() {}
+  componentWillMount() {
+    this.mountedInterface();
+  }
 
   componentWillReact() {}
 
-  componentDidMount() {
-    this.mountedInterface();
-  }
+  componentDidMount() {}
 
   componentWillUnmount() {}
 
@@ -132,11 +131,18 @@ class Account extends Component {
   render() {
     const {
       userStore: {
-        user: { nickName, userName },
-      },
+        user: { nickName, userName }
+      }
     } = this.props;
     return (
-      <View className="container">
+      <View className="account_container">
+        <Navbar
+          title="我的"
+          isBackBtn={false}
+          weight={true}
+          backgroundColor="#4F4FCB"
+          color="white"
+        ></Navbar>
         <View className="topSet at-row at-row__align--center">
           <View
             className="at-col at-col-3"

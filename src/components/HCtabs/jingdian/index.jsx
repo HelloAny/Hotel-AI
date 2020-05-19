@@ -21,22 +21,22 @@ class HCtabs extends PureComponent {
                 people: 2658,
                 kilo: 2.1,
                 left: 1,
-                image: "http://q74d0nj5h.bkt.clouddn.com/timg.jpeg",
+                image: "http://cdn.amikara.com/timg.jpeg"
               },
               {
                 name: "断桥残雪",
                 people: 45962,
                 kilo: 1.3,
                 left: 0,
-                image: "http://q74d0nj5h.bkt.clouddn.com/timg%20%281%29.jpeg",
+                image: "http://cdn.amikara.com/timg%20%281%29.jpeg"
               },
               {
                 name: "湖滨银泰",
                 people: 4056,
                 kilo: 3.6,
                 left: 1,
-                image: "http://q74d0nj5h.bkt.clouddn.com/timg%20%282%29.jpeg",
-              },
+                image: "http://cdn.amikara.com/timg%20%282%29.jpeg"
+              }
             ]}
           ></HCtabCardjingdian>
         </View>

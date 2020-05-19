@@ -11,7 +11,7 @@ import "./style/journey.scss";
 @inject("userStore")
 class Journey extends Component {
   config = {
-    navigationStyle: "custom"
+    navigationStyle: "custom",
   };
 
   static defaultProps = {};
@@ -19,7 +19,7 @@ class Journey extends Component {
   state = {
     ambitus: [],
     records: [],
-    ongoing: []
+    ongoing: [],
   };
 
   propsKeys = [];
@@ -29,14 +29,14 @@ class Journey extends Component {
   initState(data) {
     const { ambitus, records } = data;
     this.setState({
-      ambitus: ambitus.map(ambit => {
+      ambitus: ambitus.map((ambit) => {
         ambit.tab2 = ["经典打卡"];
         if (ambit.tabs.length > 1) ambit.tab2.push(ambit.tabs.pop());
         ambit.tab1 = ambit.tabs;
         return ambit;
       }),
       ongoing: records
-        .map(record => {
+        .map((record) => {
           if (
             record.status == "booking" ||
             record.status == "checkin" ||
@@ -79,8 +79,8 @@ class Journey extends Component {
             return task;
           }
         })
-        .filter(v => v !== undefined),
-      records: records.map(record => {
+        .filter((v) => v !== undefined),
+      records: records.map((record) => {
         record.time1 = dateFormat(
           "YYYY.mm.dd",
           record.check_in_time || record.start_time
@@ -117,18 +117,18 @@ class Journey extends Component {
         let imgs = record.imgs.Upright;
         record.img = imgs[Math.floor(Math.random() * imgs.length)];
         return record;
-      })
+      }),
     });
   }
 
   pullDate() {
     Taro.showLoading({
-      title: "loading"
+      title: "loading",
     });
     Server.getJourneyList({
-      uid: userStore.user.id
+      uid: userStore.user.id,
     })
-      .then(res => {
+      .then((res) => {
         Taro.hideLoading();
         if (res.code == 200) {
           this.initState(res);
@@ -136,16 +136,16 @@ class Journey extends Component {
           Taro.showToast({
             title: "网络开小差了...",
             icon: "none",
-            duration: 2000
+            duration: 2000,
           });
         }
       })
-      .catch(err => {
+      .catch((err) => {
         Taro.hideLoading();
         Taro.showToast({
           title: "网络开小差了...",
           icon: "none",
-          duration: 2000
+          duration: 2000,
         });
       });
   }
@@ -153,7 +153,7 @@ class Journey extends Component {
   handleAddJourney() {
     setTimeout(() => {
       Taro.navigateTo({
-        url: "/packageC/pages/addTrip/chose"
+        url: "/packageC/pages/addTrip/chose",
       });
     }, 200);
   }
@@ -163,11 +163,11 @@ class Journey extends Component {
       return Taro.showToast({
         title: "暂时无法查看哦",
         icon: "none",
-        duration: 2000
+        duration: 2000,
       });
     }
     Taro.navigateTo({
-      url: "/packageC/pages/details/index?id=" + id
+      url: "/packageC/pages/details/index?id=" + id,
     });
   }
 
@@ -216,7 +216,7 @@ class Journey extends Component {
         </View>
         <View className="notice">
           <Text className="title">行程动态</Text>
-          {ongoing.map(o => (
+          {ongoing.map((o) => (
             <NoticeItem
               key={o.hotel_id}
               info={o}
@@ -232,7 +232,7 @@ class Journey extends Component {
         <View className="overview">
           <Text className="title">我的行程</Text>
           <View className="overview-box">
-            {records.map(r => (
+            {records.map((r) => (
               <View className="overview-container">
                 <OverviewItem
                   key={r.hotel_id}
@@ -251,7 +251,7 @@ class Journey extends Component {
         <View className="recommend">
           <Text className="title">周边精彩</Text>
           {ambitus.map((a, index) => (
-            <View key={index} className="recommend-container">
+            <View taroKey={index} className="recommend-container">
               <RecmdItem info={a} />
             </View>
           ))}
@@ -261,4 +261,4 @@ class Journey extends Component {
   }
 }
 
-export default Journey
+export default Journey;

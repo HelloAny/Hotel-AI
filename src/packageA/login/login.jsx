@@ -3,14 +3,12 @@ import { View, Text, Picker } from "@tarojs/components";
 import { observer, inject } from "@tarojs/mobx";
 import { AtButton, AtInput, AtForm, AtCountdown, AtToast } from "taro-ui";
 import { Register, Sms } from "@actions/api";
-import { HCinterval, HCerror } from "@components";
+import { HCinterval, HCerror, Navbar } from "@components";
 import "./login.sass";
 
 class Login extends Component {
   config = {
-    navigationBarTitleText: "登录",
-    navigationBarBackgroundColor: "#2d8cf0",
-    navigationBarTextStyle: "white",
+    navigationStyle: "custom"
   };
   constructor() {
     super();
@@ -21,7 +19,7 @@ class Login extends Component {
       errorCap: 0, //错误代码
       rand: "", //rand值
       showResBtn: false, //登录按钮是否可点击
-      smsStatus: 0, //验证码按钮状态~
+      smsStatus: 0 //验证码按钮状态~
     };
   }
   /**
@@ -32,19 +30,19 @@ class Login extends Component {
   phoneChange(value) {
     this.setState({
       phone: value,
-      errorCap: 0,
+      errorCap: 0
     });
     if (value.length == 11) {
       if (!/^1[3456789]\d{9}$/.test(value)) {
         //电话号码格式判断
         this.setState({
-          errorCap: 2,
+          errorCap: 2
         });
         return;
       }
       if (this.state.smsStatus == 0) {
         this.setState({
-          smsStatus: 1,
+          smsStatus: 1
         });
       }
     }
@@ -60,12 +58,12 @@ class Login extends Component {
     this.setState({
       captcha: value,
       showResBtn: false,
-      errorCap: 0,
+      errorCap: 0
     });
     if (value.length == 5 && (this.state.smsStatus == 1 || 2)) {
       //判断验证码个数和可点击状态来改变登录按钮
       this.setState({
-        showResBtn: true,
+        showResBtn: true
       });
     }
     return value;
@@ -80,27 +78,27 @@ class Login extends Component {
     const param = {
       phone: this.state.finalPhone,
       code: this.state.captcha,
-      rand: this.state.rand,
+      rand: this.state.rand
     };
     //快捷注册登录接口
-    Register(param).then((res) => {
+    Register(param).then(res => {
       if (res.data.status == -4) {
         this.setState({
-          errorCap: 1,
+          errorCap: 1
         });
       } else if (res.data.status == 0) {
         Taro.setStorage({
           key: "token",
-          data: res.data.data.token,
+          data: res.data.data.token
         });
         //若传参的路由不存在，则跳转到个人中心界面
         if (!this.props.navigate) {
           Taro.switchTab({
-            url: "/pages/account/account",
+            url: "/pages/account/account"
           });
         } else {
           Taro.redirectTo({
-            url: this.props.navigate,
+            url: this.props.navigate
           });
         }
       }
@@ -116,22 +114,22 @@ class Login extends Component {
       //幕布
       Taro.showLoading({
         title: "loading",
-        mask: true,
+        mask: true
       });
       this.setState(
         {
-          finalPhone: this.state.phone,
+          finalPhone: this.state.phone
         },
         () => {
           // smsStatus是false时会出现灰色按钮，当倒计时结束又变成可以触发的按钮
           //验证码接口
-          Sms(this.state.phone).then((res) => {
+          Sms(this.state.phone).then(res => {
             console.log(res);
             if (res.data.status == 0) {
               this.setState(
                 {
                   rand: res.data.data.rand,
-                  smsStatus: 2,
+                  smsStatus: 2
                 },
                 () => {
                   Taro.hideLoading();
@@ -139,13 +137,13 @@ class Login extends Component {
                     title: "验证码发送成功",
                     icon: "none",
                     duration: 2000,
-                    mask: true,
+                    mask: true
                   });
                 }
               );
             } else if (res.data.status == 1016) {
               this.setState({
-                errorCap: 1,
+                errorCap: 1
               });
             }
           });
@@ -159,7 +157,7 @@ class Login extends Component {
    */
   changeIntervalStatus() {
     this.setState({
-      smsStatus: 1,
+      smsStatus: 1
     });
   }
 
@@ -169,7 +167,7 @@ class Login extends Component {
    */
   navigateTo(url) {
     Taro.navigateTo({
-      url: url,
+      url: url
     });
   }
   componentWillReceiveProps(nextProps) {
@@ -196,7 +194,7 @@ class Login extends Component {
       numberChecked,
       showResBtn,
       smsStatus,
-      errorCap,
+      errorCap
     } = this.state;
     return (
       <View>
@@ -262,7 +260,7 @@ class Login extends Component {
                       changeIntervalStatus={this.changeIntervalStatus}
                     />
                   </AtButton>
-                ),
+                )
               }[smsStatus]
             }
           </View>
@@ -293,6 +291,7 @@ class Login extends Component {
   render() {
     return (
       <View className="login-container">
+        <Navbar title="登录" isBackBtn={false} weight={true}></Navbar>
         {this.renderA()}
         <View className="toPsw at-row">
           <View

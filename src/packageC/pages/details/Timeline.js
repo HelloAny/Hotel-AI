@@ -9,17 +9,17 @@ export default class Timeline extends Component {
   static defaultProps = {
     timeline: [],
     id: "",
-    endTime: ""
+    endTime: "",
   };
 
   state = {
     packUp: {
       time1: "",
       time2: "",
-      index: -1
+      index: -1,
     },
     list: [],
-    startTime: ""
+    startTime: "",
   };
 
   propsKeys = ["timeline"];
@@ -51,7 +51,7 @@ export default class Timeline extends Component {
     this.setState({
       list,
       packUp,
-      startTime: oldTime
+      startTime: oldTime,
     });
   }
 
@@ -64,8 +64,8 @@ export default class Timeline extends Component {
       packUp: {
         time1: "",
         time2: "",
-        index: -1
-      }
+        index: -1,
+      },
     });
   }
 
@@ -114,7 +114,7 @@ export default class Timeline extends Component {
         )}
         {list.map((e, index) => (
           <View
-            key={index}
+            taroKey={index}
             style={{ display: index <= packUp.index ? "none" : "block" }}
             className="row"
           >
@@ -129,11 +129,11 @@ export default class Timeline extends Component {
             </View>
             <View className="main">
               {e
-                ? e.map(v => (
+                ? e.map((v) => (
                     <View key={v.time}>
                       <View
                         style={{
-                          display: v.type == "process" ? "block" : "none"
+                          display: v.type == "process" ? "block" : "none",
                         }}
                         className="process"
                       >

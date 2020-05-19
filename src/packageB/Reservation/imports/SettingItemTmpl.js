@@ -3,38 +3,39 @@ import { View, Image, Text, Input, Picker } from "@tarojs/components";
 
 export default class SettingItemTmpl extends Taro.Component {
   static options = {
-    addGlobalClass: true
+    addGlobalClass: true,
   };
 
   defaultProps = {
-    onInput: () => {}
+    onInput: () => {},
   };
 
   state = {
     caption: "",
-    v:"",
+    v: "",
     value: "",
     hint: "",
     inputType: "text",
     needIcon: false,
     isInput: false,
-    isPicker: false
+    isPicker: false,
   };
 
   constructor(props) {
+    super();
     Object.assign(this.state, { ...props });
   }
 
   handleInput(e) {
     this.setState({
-      v: e.detail.value
+      v: e.detail.value,
     });
     if (this.props.onInput) this.props.onInput(e.detail.value);
   }
 
   handleTimeChange(e) {
     this.setState({
-      hint: e.detail.value
+      hint: e.detail.value,
     });
     if (this.props.onInput) this.props.onInput(e.detail.value);
   }
@@ -44,7 +45,15 @@ export default class SettingItemTmpl extends Taro.Component {
   }
 
   render() {
-    const { caption, v, value, isInput, hint, inputType, needIcon } = this.state;
+    const {
+      caption,
+      v,
+      value,
+      isInput,
+      hint,
+      inputType,
+      needIcon,
+    } = this.state;
     return (
       <View>
         <View className="settingItem">

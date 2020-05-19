@@ -3,14 +3,12 @@ import { View, Text, Picker } from "@tarojs/components";
 import { observer, inject } from "@tarojs/mobx";
 import { AtButton, AtInput, AtForm, AtCountdown, AtToast } from "taro-ui";
 import { SmsValidate, ForgetPsw, Sms } from "@actions/api";
-import { HCerror, HCinterval } from "@components";
+import { HCerror, HCinterval, Navbar } from "@components";
 import "./forgetPsw.sass";
 
 class Login extends Component {
   config = {
-    navigationBarTitleText: "忘记密码",
-    navigationBarBackgroundColor: "#2d8cf0",
-    navigationBarTextStyle: "white"
+    navigationStyle: "custom",
   };
   constructor() {
     super(...arguments);
@@ -25,7 +23,7 @@ class Login extends Component {
       smsStatus: 0, //验证码按钮
       passWordAgain: "", //再次输入密码
       passWord: "", //密码
-      validation: true //界面是否跳转(手机号验证成功)
+      validation: true, //界面是否跳转(手机号验证成功)
     };
   }
   /**
@@ -36,18 +34,18 @@ class Login extends Component {
   phoneChange(value) {
     this.setState({
       phone: value,
-      errorCap: 0
+      errorCap: 0,
     });
     if (value.length == 11) {
       if (!/^1[3456789]\d{9}$/.test(value)) {
         this.setState({
-          errorCap: 2
+          errorCap: 2,
         });
         return;
       }
       if (this.state.showBtn == 0) {
         this.setState({
-          showBtn: 1
+          showBtn: 1,
         });
       }
     }
@@ -65,11 +63,11 @@ class Login extends Component {
     this.setState({
       captcha: value,
       show_resBtn: false,
-      errorCap: 0
+      errorCap: 0,
     });
     if (value.length == 5 && (this.state.smsStatus == 1 || 2)) {
       this.setState({
-        show_resBtn: true
+        show_resBtn: true,
       });
     }
   }
@@ -82,17 +80,17 @@ class Login extends Component {
   next(event) {
     const param = {
       code: this.state.captcha,
-      rand: this.state.rand
+      rand: this.state.rand,
     };
-    SmsValidate(param).then(res => {
+    SmsValidate(param).then((res) => {
       console.log(res.data);
       if (res.data.status == 100) {
         this.setState({
-          errorCap: 1
+          errorCap: 1,
         });
       } else if (res.data.status == 0) {
         this.setState({
-          pswChange: true
+          pswChange: true,
         });
       }
     });
@@ -107,18 +105,18 @@ class Login extends Component {
       phone: this.state.finalPhone,
       code: this.state.captcha,
       rand: this.state.rand,
-      passWord: this.state.passWord
+      passWord: this.state.passWord,
     };
     //忘记密码接口
-    ForgetPsw(param).then(res => {
+    ForgetPsw(param).then((res) => {
       console.log(res);
       if (res.data.status == 0) {
         Taro.navigateTo({
-          url: "/pages/login/login"
+          url: "/pages/login/login",
         });
       } else if (res.data.status == 100) {
         this.setState({
-          error: 0
+          error: 0,
         });
         console.log("未知错误!");
       }
@@ -136,21 +134,21 @@ class Login extends Component {
       //幕布
       Taro.showLoading({
         title: "loading",
-        mask: true
+        mask: true,
       });
       this.setState(
         {
-          finalPhone: this.state.phone
+          finalPhone: this.state.phone,
         },
         () => {
           // showBtn是false时会出现灰色按钮，当倒计时结束又变成可以触发的按钮
           //验证码接口
-          Sms(this.state.phone).then(res => {
+          Sms(this.state.phone).then((res) => {
             if (res.data.status == 0) {
               this.setState(
                 {
                   rand: res.data.data.rand,
-                  smsStatus: 2
+                  smsStatus: 2,
                 },
                 () => {
                   Taro.hideLoading();
@@ -158,7 +156,7 @@ class Login extends Component {
                     title: "验证码发送成功",
                     icon: "none",
                     duration: 2000,
-                    mask: true
+                    mask: true,
                   });
                 }
               );
@@ -175,7 +173,7 @@ class Login extends Component {
    */
   passWordChange(value) {
     this.setState({
-      passWord: value
+      passWord: value,
     });
     return value;
   }
@@ -187,7 +185,7 @@ class Login extends Component {
   passWordChangeAgain(value) {
     this.setState({
       passWordAgain: value,
-      smsStatus: 0
+      smsStatus: 0,
     });
     if (
       this.state.passWord == value &&
@@ -196,12 +194,12 @@ class Login extends Component {
       this.setState({
         smsStatus: 1,
         validation: true,
-        errorCap: 5
+        errorCap: 5,
       });
     } else if (!value) {
       this.setState({
         validation: true,
-        errorCap: 5
+        errorCap: 5,
       });
     }
   }
@@ -211,7 +209,7 @@ class Login extends Component {
    */
   changeIntervalStatus() {
     this.setState({
-      smsStatus: 1
+      smsStatus: 1,
     });
   }
 
@@ -223,7 +221,7 @@ class Login extends Component {
     if (this.state.passWord !== value) {
       this.setState({
         validation: false,
-        errorCap: 5
+        errorCap: 5,
       });
     }
   }
@@ -256,7 +254,7 @@ class Login extends Component {
       pswChange,
       passWordAgain,
       passWord,
-      validation
+      validation,
     } = this.state;
     if (!pswChange) {
       return (
@@ -318,7 +316,7 @@ class Login extends Component {
                         changeIntervalStatus={this.changeIntervalStatus}
                       />
                     </AtButton>
-                  )
+                  ),
                 }[smsStatus]
               }
             </View>
@@ -412,6 +410,7 @@ class Login extends Component {
   render() {
     return (
       <View className="container">
+        <Navbar title="忘记密码" isBackBtn={false} weight={true}></Navbar>
         {this.renderA()}
         <HCerror error={this.state.errorCap} />>
       </View>

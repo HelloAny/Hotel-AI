@@ -3,21 +3,22 @@ import { View, Image, Text } from "@tarojs/components";
 
 export default class RoomListItemTmpl extends Taro.Component {
   static options = {
-    addGlobalClass: true
+    addGlobalClass: true,
   };
 
   defaultProps = {
-    onBook: ()=>{}
-  }
+    onBook: () => {},
+  };
 
   state = {
     imageUrl: "",
     roomName: "",
     services: "",
-    price: 0
+    price: 0,
   };
 
   constructor(props) {
+    super();
     Object.assign(this.state, { ...props.info });
   }
 

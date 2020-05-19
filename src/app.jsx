@@ -5,6 +5,7 @@ import * as store from "@store";
 import { objectDeepCompare } from "@utils";
 import Server from "@service/SocketServer";
 import Index from "./pages/index";
+import "taro-ui/dist/style/index.scss";
 
 import "./app.scss";
 import "./assets/icons/fontsOne/iconfont.css";
@@ -48,13 +49,12 @@ onError(error => {
 });
 
 class App extends Component {
-  componentDidMount() {}
-
   config = {
     pages: [
+      "pages/home/index",
+      "pages/account/account",
       "pages/journey/index",
-      "pages/notify/index",
-      "pages/account/account"
+      "pages/notify/index"
     ],
     permission: {
       "scope.userLocation": {
@@ -76,13 +76,11 @@ class App extends Component {
           "realAuth/realAuth",
           "realAuth/detailAuth/detailAuth",
           "bill/bill",
-          "setting/setting",
-        ],
+          "setting/setting"
+        ]
       },
       {
         root: "packageB",
-        pages: ["ActivityService/activityService"],
-      },
         pages: [
           "Reservation/page/homePage/homePage",
           "Reservation/page/bookHotel/bookHotel",
@@ -121,9 +119,6 @@ class App extends Component {
       navigationBarTitleText: "WeChat",
       navigationBarTextStyle: "black",
       enablePullDownRefresh: true,
-      backgroundTextStyle: "dark",
-      // enablePullDownRefresh: true,
-      // backgroundTextStyle:"dark"
       backgroundTextStyle: "dark"
     },
     tabBar: {
@@ -135,11 +130,11 @@ class App extends Component {
       list: [
         {
           pagePath: "pages/home/index",
-          text: "首页",
+          text: "首页"
         },
         {
           pagePath: "pages/account/account",
-          text: "我的",
+          text: "我的"
         },
         {
           pagePath: "pages/journey/index",
@@ -175,7 +170,7 @@ class App extends Component {
 Taro.render(<App />, document.getElementById("app"));
 
 // 对象深度比较函数，注入到所有组件
-Component.prototype.compare = function (nextProps, nextState) {
+Component.prototype.compare = function(nextProps, nextState) {
   return (
     objectDeepCompare(this.props, nextProps, this.propsKeys) &&
     objectDeepCompare(this.state, nextState, this.stateKeys)
