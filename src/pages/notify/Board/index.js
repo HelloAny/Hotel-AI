@@ -86,7 +86,7 @@ export default class Board extends Component {
         <View className="head">
           <Text className="title">通知列表</Text>
           <View onClick={this.handleClick.bind(this, "all")}>
-            <Text className="title">全部已读 </Text>
+            <Text className="title iconfont icon-sign-readied">全部已读 </Text>
             <Ico value="icon-sign-readied" />
           </View>
         </View>

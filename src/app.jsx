@@ -8,8 +8,8 @@ import Index from "./pages/index";
 import "taro-ui/dist/style/index.scss";
 
 import "./app.scss";
-import "./assets/icons/fontsOne/iconfont.css";
-import "./assets/icons/fonts/iconfont.css";
+// import "./assets/icons/fontsOne/iconfont.css";
+// import "./assets/icons/fonts/iconfont.css";
 
 //*************taro-ui组件按需引入！！！！*****************
 
@@ -50,12 +50,7 @@ onError(error => {
 
 class App extends Component {
   config = {
-    pages: [
-      "pages/home/index",
-      "pages/account/account",
-      "pages/journey/index",
-      "pages/notify/index"
-    ],
+    pages: ["pages/home/index", "pages/journey/index", "pages/notify/index"],
     permission: {
       "scope.userLocation": {
         desc: "你的位置信息将用于小程序位置接口的效果展示"
@@ -133,16 +128,20 @@ class App extends Component {
           text: "首页"
         },
         {
-          pagePath: "pages/account/account",
-          text: "我的"
-        },
-        {
           pagePath: "pages/journey/index",
-          text: "行程"
+          text: "行程",
+          iconPath: "assets/icons/journey.png",
+          selectedIconPath: "assets/icons/journey-active.png"
         },
         {
           pagePath: "pages/notify/index",
-          text: "消息"
+          text: "消息",
+          iconPath: "assets/icons/msg.png",
+          selectedIconPath: "assets/icons/msg-active.png"
+        },
+        {
+          pagePath: "pages/account/account",
+          text: "我的"
         }
       ]
     }

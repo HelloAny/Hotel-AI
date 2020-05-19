@@ -20,8 +20,6 @@ export default class IM extends Component {
   headerHeight = 45;
   InputFieldHeight = 45;
 
-  defaultProps = {};
-
   state = {
     initialized: false,
     msgBoxHeight: "calc(100% - 45Px)",

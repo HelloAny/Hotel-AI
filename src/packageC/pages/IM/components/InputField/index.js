@@ -1,5 +1,5 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Input } from "@tarojs/components";
+import { View, Input, Text } from "@tarojs/components";
 import { EmojiBox, ImgPicker, SoundRecorder, ExtensionArea } from "./extension";
 import { Message, MessageDB } from "../../message";
 import Server from "../../../../../service/SocketServer";
@@ -249,7 +249,7 @@ export default class InputField extends Component {
               className="input-confirm"
               onClick={this.handleConfirm.bind(this)}
             >
-              发 送
+              <Text style={{fontSize: "12Px", lineHeight:"30Px"}}>发 送</Text>
             </View>
           </View>
         </View>
