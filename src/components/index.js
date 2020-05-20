@@ -10,7 +10,6 @@ export { default as HCerror } from "./HCerror";
 export { default as HCinterval } from "./HCinterval";
 export { default as HCtabsjingdian } from "./HCtabs/jingdian";
 export { default as HCtabshotel } from "./HCtabs/hotel";
-export { default as HCdistrict } from "./HCdistrict";
 
 export { default as HCtabCardjingdian } from "./HCtabCard/jingdian";
 export { default as HCtabCardhotel } from "./HCtabCard/hotel";

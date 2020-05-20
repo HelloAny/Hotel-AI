@@ -16,11 +16,11 @@ class User extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userNickName: "",
+      userNickName: ""
     };
   }
   config = {
-    navigationStyle: "custom",
+    navigationStyle: "custom"
   };
   /**界面初始化*/
   mountedInterface = () => {
@@ -29,15 +29,15 @@ class User extends Component {
      * 获取个人信息并保存到mobx
      * @param {string} token token缓存
      */
-    const setUserInfo = (token) => {
-      infoByToken(token).then((res) => {
+    const setUserInfo = token => {
+      infoByToken(token).then(res => {
         if (res.data.status == 0) {
           userStore.setUserInfo(res.data.data); //保存到mobx
         } else if (res.data.status == -100) {
           Taro.showToast({
             title: "参数丢失",
             icon: "fail",
-            duration: 2000,
+            duration: 2000
           });
         }
       });
@@ -52,7 +52,7 @@ class User extends Component {
    */
   nickNameChange(value) {
     this.setState({
-      userNickName: value,
+      userNickName: value
     });
     return value;
   }
@@ -65,42 +65,42 @@ class User extends Component {
     const { portrait } = this.state;
     const {
       userStore: {
-        user: { userName },
-      },
+        user: { userName }
+      }
     } = this.props;
     const that = this;
     wx.chooseImage({
       count: 1,
       sizeType: "original",
       sourceType: ["camera", "album"],
-      success: function (res) {
+      success: function(res) {
         Taro.getImageInfo({
           src: res.tempFilePaths[0],
-          success: function (res) {
+          success: function(res) {
             const param = {
               imagePath: res.path,
               type: res.type,
               name: userName,
               upload_to: "users",
               if_local: false,
-              content: "头像",
+              content: "头像"
             };
-            picUpload(param).then((res) => {
+            picUpload(param).then(res => {
               console.log(res);
               if (res.data.status == 0) {
                 Taro.showToast({
                   title: "上传成功",
                   icon: "success",
-                  duration: 2000,
+                  duration: 2000
                 });
                 Taro.reLaunch({
-                  url: "/pages/account/account",
+                  url: "/pages/account/account"
                 });
               }
             });
-          },
+          }
         });
-      },
+      }
     });
   }
 
@@ -110,7 +110,7 @@ class User extends Component {
    */
   navigateTo(url) {
     Taro.navigateTo({
-      url: url,
+      url: url
     });
   }
 
@@ -122,8 +122,8 @@ class User extends Component {
   render() {
     const {
       userStore: {
-        user: { userName, nickName, ID, email, if_face },
-      },
+        user: { userName, nickName, ID, email, if_face }
+      }
     } = this.props;
     return (
       <View className="container">

@@ -35,4 +35,4 @@ class setting extends Component {
   }
 }
 
-export default user;
+export default setting;
