@@ -56,7 +56,7 @@ class changeName extends Component {
             icon: "success",
             duration: 2000,
             mask: true,
-            success: function() {
+            success: function () {
               userStore.updateUserInfo(param);
               Taro.reLaunch({
                 url: "/packageA/user/user"
@@ -73,6 +73,17 @@ class changeName extends Component {
       });
     }
   }
+
+  componentDidMount() {
+    const {
+      userStore: {
+        user: { nickName }
+      }
+    } = this.props;
+    this.setState({
+      nickNameChange: nickName
+    })
+  }
   render() {
     const {
       userStore: {
@@ -87,9 +98,7 @@ class changeName extends Component {
               name="value"
               title="昵称"
               type="text"
-              value={nickName}
-              autoFocus={true}
-              selectionStart="-1"
+              value={this.state.nickNameChange}
               onChange={this.nameChange.bind(this)}
             />
           </View>
@@ -109,3 +118,5 @@ class changeName extends Component {
     );
   }
 }
+
+export default changeName;

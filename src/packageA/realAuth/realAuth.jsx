@@ -80,3 +80,5 @@ class realAuth extends Component {
     );
   }
 }
+
+export default realAuth;

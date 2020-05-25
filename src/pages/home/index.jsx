@@ -61,31 +61,31 @@ class Home extends Component {
     });
   }
 
-  // getLocation() {
-  //   Taro.getLocation({
-  //     type: "gcj02",
-  //     success: (res) => {
-  //       const lat = res.latitude;
-  //       const lon = res.longitude;
-  //       Taro.chooseLocation({
-  //         latitude: lat,
-  //         longitude: lon,
-  //         success: (res) => {
-  //           this.setState({
-  //             address: res.address.match(/(?<=省).*(?=市)/)[0],
-  //           });
-  //           Taro.setStorage({
-  //             key: "location",
-  //             data: res.address.match(/(?<=省).*(?=市)/)[0],
-  //           });
-  //         },
-  //       });
-  //     },
-  //     fail: (err) => {
-  //       console.log(err);
-  //     },
-  //   });
-  // }
+  getLocation() {
+    Taro.getLocation({
+      type: "gcj02",
+      success: (res) => {
+        const lat = res.latitude;
+        const lon = res.longitude;
+        Taro.chooseLocation({
+          latitude: lat,
+          longitude: lon,
+          success: (res) => {
+            this.setState({
+              address: res.address.match(/(?<=省).*(?=市)/)[0],
+            });
+            Taro.setStorage({
+              key: "location",
+              data: res.address.match(/(?<=省).*(?=市)/)[0],
+            });
+          },
+        });
+      },
+      fail: (err) => {
+        console.log(err);
+      },
+    });
+  }
   changeAtActionSheet() {
     this.setState({
       atActionSheet: !this.state.atActionSheet,
@@ -102,26 +102,26 @@ class Home extends Component {
   clickLike() {
     Taro.getStorageSync("token")
       ? Taro.showToast({
-          title: "收藏成功",
-          icon: "success",
-          duration: 2000
-        })
+        title: "收藏成功",
+        icon: "success",
+        duration: 2000
+      })
       : Taro.showToast({
-          title: "请先登录",
-          icon: "none",
-          duration: 2000
-        });
+        title: "请先登录",
+        icon: "none",
+        duration: 2000
+      });
   }
   componentWillMount() {
     this.setState({
       swiperName: this.state.swiperNamearr[0],
       swiperRate: this.state.swiperRateArr[0]
     });
-    // Taro.getStorageSync("location")
-    //   ? this.setState({
-    //       address: Taro.getStorageSync("location"),
-    //     })
-    //   : this.getLocation();
+    Taro.getStorageSync("location")
+      ? this.setState({
+        address: Taro.getStorageSync("location"),
+      })
+      : this.getLocation();
   }
   render() {
     const {
@@ -146,7 +146,7 @@ class Home extends Component {
           <View className="at-row">
             <View
               className="address at-col at-col-3"
-              // onClick={this.getLocation.bind(this)}
+            // onClick={this.getLocation.bind(this)}
             >
               <Image className="zhoubian" src={zhoubian} />
               {address}
@@ -190,14 +190,14 @@ class Home extends Component {
               circular
               indicatorDots
               autoplay={swiperAutoplay}
-              // onChange={this.swiperChange.bind(this)}
+            // onChange={this.swiperChange.bind(this)}
             >
               <SwiperItem>
                 <View className="demo-text-1">
                   <Image
-                    mode="aspectFit"
+                    mode="widthFix"
                     style="width:100vw;height:100vh"
-                    src="http://cdn.amikara.com/511584086420_.pic.jpg"
+                    src="http://cdn.amikara.com/IMG_6289%2820200220-213548%29.JPG"
                   ></Image>
                 </View>
               </SwiperItem>
@@ -206,7 +206,7 @@ class Home extends Component {
                   <Image
                     mode="widthFix"
                     style="width:100vw;height:100vh"
-                    src="http://cdn.amikara.com/IMG_6289%2820200220-213548%29.JPG"
+                    src="http://cdn.amikara.com/511584086420_.pic.jpg"
                   ></Image>
                 </View>
               </SwiperItem>

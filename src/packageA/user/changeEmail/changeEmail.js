@@ -60,7 +60,7 @@ class changeEmail extends Component {
             icon: "success",
             duration: 2000,
             mask: true,
-            success: function() {
+            success: function () {
               userStore.updateUserInfo(param);
               Taro.reLaunch({
                 url: "/packageA/user/user"
@@ -77,6 +77,16 @@ class changeEmail extends Component {
       });
     }
   }
+  componentDidMount() {
+    const {
+      userStore: {
+        user: { email }
+      }
+    } = this.props;
+    this.setState({
+      emailChange: email
+    })
+  }
   render() {
     const {
       userStore: {
@@ -91,7 +101,7 @@ class changeEmail extends Component {
               name="value"
               title="邮箱"
               type="text"
-              value={email}
+              value={this.state.emailChange}
               autoFocus={true}
               onChange={this.emailChange.bind(this)}
             />
@@ -112,3 +122,5 @@ class changeEmail extends Component {
     );
   }
 }
+
+export default changeEmail;

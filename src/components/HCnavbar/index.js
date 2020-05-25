@@ -10,8 +10,10 @@ class Navbar extends Component {
     };
     // 将状态栏的区域空余出来
     return (
-      <View className="navbarWrap" style={style}>
-        <View className="navbar">自定义导航栏</View>
+      <View className="navbarContainer">
+        <View className="navbarWrap" style={style}>
+          <View className="navbar">自定义导航栏</View>
+        </View>
       </View>
     );
   }

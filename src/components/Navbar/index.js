@@ -40,14 +40,14 @@ export class Navbar extends Component {
 
     let headerHeight =
       DeviceInfo.statusBarHeight +
-        MenuButton.height +
-        (MenuButton.top - DeviceInfo.statusBarHeight) * 2 || 70;
-    let top = MenuButton.top || 30;
+      MenuButton.height +
+      (MenuButton.top - DeviceInfo.statusBarHeight) || 70;
+    let top = 90 || 30;
     let left = DeviceInfo.windowWidth - MenuButton.right || 10;
     let btnHeight = MenuButton.height || 32;
 
     Object.assign(StyleSheet.navcontainer, {
-      height: Math.min(headerHeight, 50) + "Px",
+      height: 127 + "Px",
       color: this.props.color,
       backgroundColor: props.backgroundColor,
     });
@@ -94,8 +94,8 @@ export class Navbar extends Component {
               <Text style={StyleSheet.navbackTitle}>返回</Text>
             </View>
           ) : (
-            <View>{""}</View>
-          )}
+              <View>{""}</View>
+            )}
 
           <View style={StyleSheet.navtitle}>{title}</View>
         </View>
