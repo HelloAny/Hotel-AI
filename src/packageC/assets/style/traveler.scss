@@ -1,7 +1,8 @@
 .traveler-container {
   background-color: whitesmoke;
   padding-top: 10Px;
-  min-height: calc(100vh - 10Px);
+  min-height: calc(100vh - 135Px);
+  padding-top: 135Px;
   .add-traveler {
     display: flex;
     justify-content: space-between;

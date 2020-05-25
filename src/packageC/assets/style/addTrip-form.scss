@@ -1,6 +1,7 @@
 .trip-form-container {
   position: relative;
-  min-height: 100vh;
+  min-height: calc(100vh - 85Px);
+  padding-top: 85Px;
   margin-left: 50Px;
   width: calc(100% - 50Px);
   .btn1,
@@ -102,7 +103,7 @@
     position: absolute;
     height: 100%;
     width: 100%;
-    padding-top: 10Px;
+    padding-top: 55Px;
     transition: all 0.5s;
     background-color: white;
     &.ready {

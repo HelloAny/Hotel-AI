@@ -1,5 +1,6 @@
 .IM {
-  height: 100vh;
+  height: calc(100vh - 85Px);
+  margin-top: 85Px;
   width: 100vw;
   position: relative;
   overflow: hidden;
