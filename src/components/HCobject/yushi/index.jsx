@@ -1,7 +1,6 @@
 import Taro, { PureComponent } from "@tarojs/taro";
 import { AtSlider } from "taro-ui";
 import { View, Image } from "@tarojs/components";
-import yushi from "./assets/yushi.png";
 import "./index.sass";
 
 class HCyushi extends PureComponent {
@@ -15,7 +14,7 @@ class HCyushi extends PureComponent {
       <View>
         <View className="object_title at-row at-row__align--center">
           <View className="object_image">
-            <Image style="height:100%;width:100%" src={yushi}></Image>
+            <Image style="height:100%;width:100%" src="http://cdn.amikara.com/yushi.png"></Image>
           </View>
           浴室
         </View>

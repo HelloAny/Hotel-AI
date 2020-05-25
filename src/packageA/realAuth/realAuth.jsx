@@ -1,6 +1,6 @@
 import Taro, { Component, getUserInfo } from "@tarojs/taro";
 import { View } from "@tarojs/components";
-import { AtInput, AtForm, AtButton, AtSteps } from "taro-ui";
+import { AtInput, AtButton, AtSteps } from "taro-ui";
 import { reLaunch } from "@utils"; //测试用
 import { observer, inject } from "@tarojs/mobx";
 import { HCinfo, HCcamera, Navbar } from "@components";

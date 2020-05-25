@@ -1,7 +1,6 @@
 import Taro, { PureComponent } from "@tarojs/taro";
 import { View } from "@tarojs/components";
 // import { CommonEventFunction，ITouchEvent } from "@tarojs/components/types/common";
-import { AtAvatar } from "taro-ui";
 import { observer, inject } from "@tarojs/mobx";
 
 import "./index.sass";
@@ -62,8 +61,8 @@ export default class HClist extends PureComponent {
               <View className="hr"></View>
             </View>
           ) : (
-            <View></View>
-          )}
+              <View></View>
+            )}
         </View>
       );
     });

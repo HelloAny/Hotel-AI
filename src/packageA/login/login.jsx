@@ -1,7 +1,7 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Picker } from "@tarojs/components";
 import { observer, inject } from "@tarojs/mobx";
-import { AtButton, AtInput, AtForm, AtCountdown, AtToast } from "taro-ui";
+import { AtButton, AtInput } from "taro-ui";
 import { Register, Sms } from "@actions/api";
 import { HCinterval, HCerror, Navbar } from "@components";
 import "./login.sass";
@@ -173,17 +173,17 @@ class Login extends Component {
   componentWillReceiveProps(nextProps) {
     console.log(this.props, nextProps);
   }
-  componentWillMount() {}
+  componentWillMount() { }
 
-  componentWillReact() {}
+  componentWillReact() { }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
-  componentWillUnmount() {}
+  componentWillUnmount() { }
 
-  componentDidShow() {}
+  componentDidShow() { }
 
-  componentDidHide() {}
+  componentDidHide() { }
 
   renderA() {
     const {
@@ -278,10 +278,10 @@ class Login extends Component {
                 登录/注册
               </AtButton>
             ) : (
-              <AtButton type="primary" circle size="normal" disabled={true}>
-                登录/注册
-              </AtButton>
-            )}
+                <AtButton type="primary" circle size="normal" disabled={true}>
+                  登录/注册
+                </AtButton>
+              )}
           </View>
         </View>
       </View>

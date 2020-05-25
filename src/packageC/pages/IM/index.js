@@ -6,7 +6,6 @@ import * as API from "../../../actions";
 import Server from "../../../service/SocketServer";
 
 import "./assets/style/index.scss";
-import "./assets/icon/iconfont.css";
 
 let ID =
   MessageDB.dbInfo.master.info.id ||

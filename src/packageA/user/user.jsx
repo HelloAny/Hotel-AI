@@ -8,7 +8,6 @@ import { Navbar } from "@components";
 
 import "./user.sass";
 
-import background from "@assets/images/realAuth/realAuth.png";
 
 @inject("userStore")
 @observer
@@ -73,10 +72,10 @@ class User extends Component {
       count: 1,
       sizeType: "original",
       sourceType: ["camera", "album"],
-      success: function(res) {
+      success: function (res) {
         Taro.getImageInfo({
           src: res.tempFilePaths[0],
-          success: function(res) {
+          success: function (res) {
             const param = {
               imagePath: res.path,
               type: res.type,
@@ -114,7 +113,7 @@ class User extends Component {
     });
   }
 
-  getUserPortrait() {}
+  getUserPortrait() { }
   componentWillMount() {
     this.mountedInterface();
   }
@@ -175,7 +174,7 @@ class User extends Component {
         <View className="hr"></View>
         <View className="hr"></View>
         <View className="realAuth">
-          <Image className="realAuthBackground" src={background} />
+          <Image className="realAuthBackground" src="http://cdn.amikara.com/realAuth.png" />
           <View className="at-row">
             <View className="at-col at-col-2">
               <View className="realAuthLogo">
@@ -191,7 +190,7 @@ class User extends Component {
             <View className="realAuthInfo at-col at-col-8">
               {!!ID && if_face ? (
                 <View className="realAuthText">
-                  <View className="iconRealAuthYes iconfont icon-RectangleCopy1"></View>
+                  <View className="iconRealAuthYes iconfont icon-RectangleCopy11"></View>
                   已认证
                   <View className="realAuthWhy">ID证件:{ID}</View>
                   <View
@@ -205,18 +204,18 @@ class User extends Component {
                   </View>
                 </View>
               ) : (
-                <View
-                  className="realAuthText"
-                  onClick={this.navigateTo.bind(
-                    this,
-                    "/packageA/realAuth/realAuth"
-                  )}
-                >
-                  <View className="iconRealAuthNo iconfont icon-RectangleCopy"></View>
+                  <View
+                    className="realAuthText"
+                    onClick={this.navigateTo.bind(
+                      this,
+                      "/packageA/realAuth/realAuth"
+                    )}
+                  >
+                    <View className="iconRealAuthNo iconfont icon-RectangleCopy"></View>
                   未实名认证和人脸认证
-                  <View className="realAuthWhy">了解为什么要实名认证?</View>
-                </View>
-              )}
+                    <View className="realAuthWhy">了解为什么要实名认证?</View>
+                  </View>
+                )}
             </View>
           </View>
         </View>

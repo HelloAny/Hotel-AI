@@ -1,5 +1,13 @@
 import Taro, { Component } from "@tarojs/taro";
 import {
+  View,
+  Text,
+  Image,
+  Swiper,
+  SwiperItem,
+  CoverView,
+} from "@tarojs/components";
+import {
   AtButton,
   AtAccordion,
   AtList,
@@ -13,14 +21,6 @@ import {
   AtRate,
   AtTextarea,
 } from "taro-ui";
-import {
-  View,
-  Text,
-  Image,
-  Swiper,
-  SwiperItem,
-  CoverView,
-} from "@tarojs/components";
 import { observer, inject } from "@tarojs/mobx";
 import { locker, getLocker, getLockerList, cacelLocker } from "@actions/api";
 
@@ -140,7 +140,6 @@ class HCpageCard extends Component {
       hotel_id: this.props.cardPage.info.order.id,
     };
     getLockerList(param).then((res) => {
-      console.log(res);
       this.setState(
         {
           lockerList: res.data.data.list,
@@ -165,7 +164,6 @@ class HCpageCard extends Component {
    * 预约寄存柜
    */
   postLocker = () => {
-    console.log(this.props.cardPage.info.order.id);
     const param = {
       token: Taro.getStorageSync("token"),
       hotel_id: this.props.cardPage.info.order.id,
@@ -402,8 +400,8 @@ class HCpageCard extends Component {
                                       <View>
                                         到期时间:
                                         {new Date(
-                                          item.expire_time * 1000
-                                        ).getFullYear() +
+                                        item.expire_time * 1000
+                                      ).getFullYear() +
                                           "." +
                                           (new Date(
                                             item.expire_time * 1000
@@ -427,8 +425,8 @@ class HCpageCard extends Component {
                                           </AtButton>
                                         </View>
                                       ) : (
-                                        void 0
-                                      )}
+                                          void 0
+                                        )}
                                     </AtCard>
                                   </View>
                                 );
@@ -491,7 +489,7 @@ class HCpageCard extends Component {
                 onClick={this.handleClickone.bind(this)}
                 title={"在线支付  ￥" + info.order.totalprice}
                 icon={{
-                  value: "iconfont icon-RectangleCopy33",
+                  value: "iconfont icon-zhifu",
                   color: "red",
                   size: "20",
                 }}
@@ -616,7 +614,7 @@ class HCpageCard extends Component {
                 </View>
                 <View className="hrx">|</View>
                 <View className="hotelOrderPage_other_kefu at-col at-col-5">
-                  <View className="icon iconfont icon-RectangleCopy46"></View>
+                  <View className="icon iconfont icon-kefu"></View>
                   联系客服
                 </View>
               </View>
