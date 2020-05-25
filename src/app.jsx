@@ -29,7 +29,7 @@ let onNotify = () => {
 };
 
 // 自动开始连接socket,尝试初始化身份信息,绑定全局事件
-!(function() {
+!(function () {
   Server.connect();
   Server.on("notify", onNotify);
   Server.emit(
@@ -130,7 +130,9 @@ class App extends Component {
       list: [
         {
           pagePath: "pages/home/index",
-          text: "首页"
+          text: "首页",
+          iconPath: "assets/icons/home.png",
+          selectedIconPath: "assets/icons/home-active.png"
         },
         {
           pagePath: "pages/journey/index",
@@ -152,13 +154,13 @@ class App extends Component {
     }
   };
 
-  componentDidMount() {}
+  componentDidMount() { }
 
-  componentDidShow() {}
+  componentDidShow() { }
 
-  componentDidHide() {}
+  componentDidHide() { }
 
-  componentDidCatchError() {}
+  componentDidCatchError() { }
 
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数
@@ -174,7 +176,7 @@ class App extends Component {
 Taro.render(<App />, document.getElementById("app"));
 
 // 对象深度比较函数，注入到所有组件
-Component.prototype.compare = function(nextProps, nextState) {
+Component.prototype.compare = function (nextProps, nextState) {
   return (
     objectDeepCompare(this.props, nextProps, this.propsKeys) &&
     objectDeepCompare(this.state, nextState, this.stateKeys)

@@ -13,13 +13,13 @@ let reLaunch = iteratee => {
       if (res.data.status == 0) {
         return iteratee(token, arguments);
       } else {
-        Taro.reLaunch({
+        Taro.navigateTo({
           url: "/packageA/login/login"
         });
       }
     });
   } else {
-    Taro.reLaunch({
+    Taro.navigateTo({
       url: "/packageA/login/login"
     });
   }
