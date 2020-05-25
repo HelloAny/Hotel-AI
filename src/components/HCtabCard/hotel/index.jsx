@@ -2,7 +2,6 @@ import Taro, { PureComponent } from "@tarojs/taro";
 import { View, Image, CoverImage, CoverView } from "@tarojs/components";
 import { AtRate } from "taro-ui";
 import { observer, inject } from "@tarojs/mobx";
-import soucang from "./assets/soucang.png";
 import "./index.sass";
 
 class HChotel extends PureComponent {
@@ -23,7 +22,7 @@ class HChotel extends PureComponent {
             <View taroKey={index}>
               <View className="box at-row">
                 <View className="at-col at-col-6" style="position:relative">
-                  <Image className="soucang" src={soucang}></Image>
+                  <Image className="soucang" src="http://cdn.amikara.com/soucang.png"></Image>
                   <View className="hotel_img" style="background:#eeeeee;">
                     <Image
                       style="height:100%;width:100%"
@@ -39,7 +38,7 @@ class HChotel extends PureComponent {
                   </View>
                 </View>
                 <View className="at-col at-col-6" style="position:relative">
-                  <Image className="soucang" src={soucang}></Image>
+                  <Image className="soucang" src="http://cdn.amikara.com/soucang.png"></Image>
                   <View className="hotel_img" style="background:red">
                     <Image
                       style="height:100%;width:100%"

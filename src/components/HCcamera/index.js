@@ -1,10 +1,9 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Camera, CoverView, CoverImage, Image } from "@tarojs/components";
-import { AtAvatar, AtInput, AtForm, AtButton } from "taro-ui";
+import { AtInput, AtButton } from "taro-ui";
 import { faceRegister } from "@actions/api";
 import { image2Base64 } from "@utils"; //测试用
 import { observer, inject } from "@tarojs/mobx";
-import cover from "@assets/images/cover/cover.png";
 import "./index.sass";
 
 @inject("userStore")
@@ -83,7 +82,7 @@ class HCcamera extends Component {
       }
     });
   }
-  componentWillMount() {}
+  componentWillMount() { }
   render() {
     const { imageCameraPath, changeCameraBtn } = this.state;
     return (
@@ -91,17 +90,17 @@ class HCcamera extends Component {
         {imageCameraPath ? (
           <CoverView className="cameraImage">
             <cover-image
-              src={imageCameraPath}
+              src="http://cdn.amikara.com/cover.png"
               className="coverImage"
             ></cover-image>
           </CoverView>
         ) : (
-          <Camera devicePosition="front" className="camera">
-            <CoverView className="cameraBorder">
-              <cover-image src={cover} className="coverImage"></cover-image>
-            </CoverView>
-          </Camera>
-        )}
+            <Camera devicePosition="front" className="camera">
+              <CoverView className="cameraBorder">
+                <cover-image src="http://cdn.amikara.com/cover.png" className="coverImage"></cover-image>
+              </CoverView>
+            </Camera>
+          )}
 
         <View>
           {changeCameraBtn ? (
@@ -130,18 +129,18 @@ class HCcamera extends Component {
               </View>
             </View>
           ) : (
-            <View className="at-row cameraBtn">
-              <View className="at-col">
-                <AtButton
-                  circle
-                  type="primary"
-                  onClick={this.takePhoto.bind(this)}
-                >
-                  拍摄
+              <View className="at-row cameraBtn">
+                <View className="at-col">
+                  <AtButton
+                    circle
+                    type="primary"
+                    onClick={this.takePhoto.bind(this)}
+                  >
+                    拍摄
                 </AtButton>
+                </View>
               </View>
-            </View>
-          )}
+            )}
         </View>
       </View>
     );

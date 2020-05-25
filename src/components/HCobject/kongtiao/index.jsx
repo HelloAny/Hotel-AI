@@ -1,7 +1,6 @@
 import Taro, { PureComponent } from "@tarojs/taro";
 import { AtSlider } from "taro-ui";
 import { View, Image } from "@tarojs/components";
-import kongtiao from "./assets/kongtiao.png";
 import "./index.sass";
 
 class HCkongtiao extends PureComponent {
@@ -16,7 +15,7 @@ class HCkongtiao extends PureComponent {
       <View>
         <View className="object_title at-row at-row__align--center">
           <View className="object_image">
-            <Image style="height:100%;width:100%" src={kongtiao}></Image>
+            <Image style="height:100%;width:100%" src="http://cdn.amikara.com/kongtiao.png"></Image>
           </View>
           空调
         </View>

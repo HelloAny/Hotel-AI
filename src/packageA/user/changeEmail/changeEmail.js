@@ -1,9 +1,10 @@
 import Taro, { Component, getUserInfo } from "@tarojs/taro";
 import { View } from "@tarojs/components";
-import { AtAvatar, AtInput, AtForm, AtButton } from "taro-ui";
+import { AtInput, AtButton } from "taro-ui";
 import { infoUpdataByToken } from "@actions/api";
 import { reLaunch } from "@utils"; //测试用
 import { observer, inject } from "@tarojs/mobx";
+import { Navbar } from "@components";
 
 import "./changeEmail.sass";
 
@@ -15,8 +16,7 @@ class changeEmail extends Component {
     this.state = { emailChange: "" };
   }
   config = {
-    navigationBarTitleText: "修改邮箱",
-    navigationBarBackgroundColor: "#2d8cf0"
+    navigationStyle: "custom"
   };
   /**
    * 更改昵称
@@ -95,6 +95,7 @@ class changeEmail extends Component {
     } = this.props;
     return (
       <View className="container">
+        <Navbar title="个人信息" weight={true}></Navbar>
         <View className="at-row nameInput">
           <View className="at-col at-col-11">
             <AtInput

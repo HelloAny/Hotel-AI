@@ -172,7 +172,7 @@ class HomePage extends Component {
           <View className="filterView">
             <View className="location">
               <View
-                className="iconfont icon-dingweiweizhi"
+                className="iconfont icon-juli"
                 style="font-size:20PX;color:#1296db"
                 onClick={this.getLocalLocation}
               ></View>

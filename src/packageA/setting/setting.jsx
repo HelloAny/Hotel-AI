@@ -1,6 +1,5 @@
 import Taro, { Component, getUserInfo } from "@tarojs/taro";
 import { View, Button } from "@tarojs/components";
-import { AtAvatar } from "taro-ui";
 import { infoByToken, picUpload } from "@actions/api";
 import { reLaunch } from "@utils";
 import { Navbar } from "@components";

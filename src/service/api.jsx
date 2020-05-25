@@ -22,6 +22,7 @@ const baseOptions = (param, method = "GET") => {
     },
     mode: "cors",
     success(res) {
+      console.log(res)
       if (res.statusCode === HTTP_STATUS.NOT_FOUND) {
         return console.log("api", "请求资源不存在");
       } else if (res.statusCode === HTTP_STATUS.BAD_GATEWAY) {

@@ -20,12 +20,6 @@ import {
 import { observer, inject } from "@tarojs/mobx";
 import { reLaunch } from "@utils";
 import { HCtabsjingdian, HCtabshotel, Navbar } from "@components";
-import zhoubian from "./assets/zhoubian.png";
-import like1 from "./assets/like1.png";
-import more from "./assets/more.png";
-import anquan from "./assets/anquan.png";
-import shuju from "./assets/shuju.png";
-import renlian from "./assets/renlian.png";
 import "./index.sass";
 
 class Home extends Component {
@@ -48,7 +42,6 @@ class Home extends Component {
   };
 
   swiperChange(event) {
-    console.log(event);
     this.setState({
       swiperName: this.state.swiperNamearr[event.target.current],
       swiperRate: this.state.swiperRateArr[event.target.current]
@@ -148,7 +141,7 @@ class Home extends Component {
               className="address at-col at-col-3"
             // onClick={this.getLocation.bind(this)}
             >
-              <Image className="zhoubian" src={zhoubian} />
+              <Image className="zhoubian" src="http://cdn.amikara.com/zhoubian.png" />
               {address}
             </View>
             <View className="at-col at-col-9">
@@ -172,11 +165,11 @@ class Home extends Component {
                 <Image
                   className="more"
                   onClick={this.clickLike.bind(this)}
-                  src={like1}
+                  src="http://cdn.amikara.com/like1.png"
                 />
                 <Image
                   className="more"
-                  src={more}
+                  src="http://cdn.amikara.com/more.png"
                   onClick={this.changeAtActionSheet.bind(this)}
                 />
               </View>
@@ -190,7 +183,7 @@ class Home extends Component {
               circular
               indicatorDots
               autoplay={swiperAutoplay}
-            // onChange={this.swiperChange.bind(this)}
+              onChange={this.swiperChange.bind(this)}
             >
               <SwiperItem>
                 <View className="demo-text-1">
@@ -238,7 +231,7 @@ class Home extends Component {
           <View className="tripfuwu">
             <View className="at-row at-row__align--center" style="height:33.3%">
               <View className="at-col at-col-3 at-col__offset-1">
-                <Image className="baozhang" src={anquan}></Image>
+                <Image className="baozhang" src="http://cdn.amikara.com/anquan.png"></Image>
               </View>
               <View className="at-col at-col-9">
                 <View className="tripmsg">
@@ -250,7 +243,7 @@ class Home extends Component {
             </View>
             <View className="at-row at-row__align--center" style="height:33.3%">
               <View className="at-col at-col-3 at-col__offset-1">
-                <Image className="baozhang" src={renlian}></Image>
+                <Image className="baozhang" src="http://cdn.amikara.com/renlian.png"></Image>
               </View>
               <View className="at-col at-col-9">
                 <View className="tripmsg">
@@ -262,7 +255,7 @@ class Home extends Component {
             </View>
             <View className="at-row at-row__align--center" style="height:33.3%">
               <View className="at-col at-col-3 at-col__offset-1">
-                <Image className="baozhang" src={shuju}></Image>
+                <Image className="baozhang" src="http://cdn.amikara.com/shuju.png"></Image>
               </View>
               <View className="at-col at-col-9">
                 <View className="tripmsg">

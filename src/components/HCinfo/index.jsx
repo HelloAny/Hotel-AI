@@ -1,6 +1,6 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View } from "@tarojs/components";
-import { AtInput, AtForm, AtButton } from "taro-ui";
+import { AtInput, AtButton } from "taro-ui";
 import { realAuthCreate } from "@actions/api";
 import { reLaunch } from "@utils"; //测试用
 import { observer, inject } from "@tarojs/mobx";
@@ -231,14 +231,14 @@ class HCinfo extends Component {
                 下一步
               </AtButton>
             ) : (
-              <AtButton
-                type="primary"
-                disabled={true}
-                onClick={this.updateUserInfo.bind(this)}
-              >
-                下一步
-              </AtButton>
-            )}
+                <AtButton
+                  type="primary"
+                  disabled={true}
+                  onClick={this.updateUserInfo.bind(this)}
+                >
+                  下一步
+                </AtButton>
+              )}
           </View>
         </View>
         {detailAuth ? (
@@ -260,8 +260,8 @@ class HCinfo extends Component {
             </View>
           </View>
         ) : (
-          <View></View>
-        )}
+            <View></View>
+          )}
       </View>
     );
   }

@@ -8,7 +8,7 @@ import Index from "./pages/index";
 // import "taro-ui/dist/style/index.scss";
 
 import "./app.scss";
-// import "./assets/icons/fontsOne/iconfont.css";
+import "./assets/iconfont/iconfont.css";
 // import "./assets/icons/fonts/iconfont.css";
 
 //*************taro-ui组件按需引入！！！！*****************
@@ -148,7 +148,9 @@ class App extends Component {
         },
         {
           pagePath: "pages/account/account",
-          text: "我的"
+          text: "我的",
+          iconPath: "assets/icons/user.png",
+          selectedIconPath: "assets/icons/user-active.png"
         }
       ]
     }

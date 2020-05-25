@@ -123,7 +123,7 @@ class hotelOrder extends Component {
     const { records } = this.state;
     return (
       <View>
-        <Navbar title="酒店订单" weight={true}></Navbar>
+        <Navbar title="酒店订单" weight={true} backgroundColor="white"></Navbar>
         <View className="container">
           {records ? (
             <View>
@@ -142,8 +142,8 @@ class hotelOrder extends Component {
               </View>
             </View>
           ) : (
-            <View className="noMsg">暂无订单</View>
-          )}
+              <View className="noMsg">暂无订单</View>
+            )}
         </View>
       </View>
     );
