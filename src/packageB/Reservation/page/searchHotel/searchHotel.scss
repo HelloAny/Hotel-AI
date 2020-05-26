@@ -4,9 +4,9 @@
   flex-direction: column;
   justify-content: center;
   position: relative;
+  padding-top: 135Px;
   .pageHeader {
     width: 100%;
-    position: fixed;
     display: flex;
     background: #fff;
     top: 0;
@@ -33,7 +33,6 @@
   .hotelListItem .content {
     display: flex;
     flex-direction: column;
-    position: absolute;
     left: 166px;
     right: 16px;
     top: 16px;
@@ -182,7 +181,7 @@
 
   .hotelListContent {
     width: 100%;
-    position: absolute;
+    // position: absolute;
     top: 166px;
     left: 0;
     right: 0;

@@ -4,6 +4,7 @@
   flex-direction: column;
   position: relative;
   box-sizing: border-box;
+  padding-top: 135Px;
   .divideItem {
     box-sizing: border-box;
     width: 100%;
@@ -259,7 +260,7 @@
     display: flex;
     flex: 1;
     flex-direction: row;
-    align-items: center;
+    // align-items: center;
     overflow: scroll;
     white-space: nowrap;
   }

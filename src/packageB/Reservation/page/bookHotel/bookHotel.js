@@ -4,12 +4,14 @@ import { userStore } from "../../../../store";
 import * as Server from "../../../../actions";
 import { dateFormat } from "../../../../utils";
 import SettingItemTmpl from "../../imports/SettingItemTmpl";
+import Navbar from "@components/Navbar";
 import "./bookHotel.scss";
 
 class BookHotel extends Taro.Component {
   config = {
-    navigationBarTitleText: "客房预订",
-    backgroundColor: "#ffffff"
+    // navigationBarTitleText: "客房预订",
+    // backgroundColor: "#ffffff"
+    navigationStyle: "custom"
   };
 
   state = {
@@ -75,7 +77,7 @@ class BookHotel extends Taro.Component {
           title: "支付成功",
           icon: "success",
           duration: 2000
-        })
+        });
       })
       .catch(err => {
         console.log(err);
@@ -130,6 +132,7 @@ class BookHotel extends Taro.Component {
     } = this.state;
     return (
       <View className="bh-container">
+        <Navbar title="客房预订" backgroundColor="white" />
         <View className="bookScroll">
           <View className="bookBody">
             <View className="bookMsg">
