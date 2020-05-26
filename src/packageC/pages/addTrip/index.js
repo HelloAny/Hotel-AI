@@ -20,7 +20,9 @@ export default class AddTrip extends Component {
   stateKeys = [];
 
   handleNavigateToReserve() {
-    console.log("haha");
+    Taro.navigateTo({
+      url: "/packageC/pages/addTrip/tripForm"
+    });
   }
 
   handleNavigateToVisit() {
