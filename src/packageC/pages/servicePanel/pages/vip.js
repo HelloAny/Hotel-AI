@@ -1,9 +1,11 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Image } from "@tarojs/components";
+import { Navbar } from "../../../../components/Navbar";
 
 export default class Vip extends Component {
   config = {
-    navigationBarTitleText: "我的会员"
+    // navigationBarTitleText: "我的会员"
+    navigationStyle: "custom"
   };
   static defaultProps = {};
 
@@ -28,7 +30,8 @@ export default class Vip extends Component {
 
   render() {
     return (
-      <View>
+      <View style="padding-top:85PX">
+        <Navbar title="我的会员" />
         <Image
           style={{ width: "100vw", height: "1890Px" }}
           mode="aspectFit"
