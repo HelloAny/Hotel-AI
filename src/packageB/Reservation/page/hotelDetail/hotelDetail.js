@@ -4,13 +4,15 @@ import RoomListItemTmpl from "../../imports/RoomListItemTmpl";
 import * as Server from "../../../../actions";
 import { dateFormat } from "../../../../utils";
 import "./hotelDetail.scss";
+import Navbar from "@components/Navbar";
 
 const ic_hotel_image =
   "https://hotel-ai-1257814705.cos.ap-shanghai.myqcloud.com/%E5%89%8D%E7%AB%AF/reservation/ic_hotel_image.png";
 
 class HotelDetail extends Taro.Component {
   config = {
-    navigationBarTitleText: "酒店详情"
+    // navigationBarTitleText: "酒店详情"
+    navigationStyle: "custom"
   };
 
   state = {
@@ -51,7 +53,7 @@ class HotelDetail extends Taro.Component {
     ]
   };
 
-  bookRoom(index) {
+  bookRoom = (index) => {
     const { startDate, endDate, hotel, roomArray, dayCount } = this.state;
     const room = roomArray[index];
     Taro.navigateTo({
@@ -146,6 +148,7 @@ class HotelDetail extends Taro.Component {
     } = this.state;
     return (
       <View className="hd-container-smt">
+        <Navbar title="酒店详情" backgroundColor="white" />
         <View className="hotelDetailPic">
           <Image
             className="image"
@@ -250,7 +253,7 @@ class HotelDetail extends Taro.Component {
                 services: item.service,
                 price: item.price
               }}
-              onBook={this.bookRoom.bind(this, index)}
+              onBook={this.bookRoom(index)}
             ></RoomListItemTmpl>
           );
         })}

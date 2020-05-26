@@ -4,16 +4,21 @@ import { AtSearchBar } from "taro-ui";
 import HotelListItemTmpl from "../../imports/HotelListItemTmpl";
 import * as Server from "../../../../actions";
 import "./searchHotel.scss";
+import Navbar from "@components/Navbar";
 
 const distanceList = [640, 1500, 700, 300, 1200, 1700, 850, 1300, 550];
 
 const priceList = [200, 223, 180, 199, 780, 650, 1111, 150, 350];
 
 class SearchHotel extends Component {
+  // config = {
+  //   navigationBarTitleText: "酒店列表",
+  //   enablePullDownRefresh: true,
+  // };
   config = {
-    navigationBarTitleText: "酒店列表",
-    enablePullDownRefresh: true,
+    navigationStyle: "custom"
   };
+
 
   constructor() {
     super();
@@ -196,6 +201,7 @@ class SearchHotel extends Component {
     } = this.state;
     return (
       <View className="seH-container-smt">
+         <Navbar title="酒店列表" backgroundColor="white" />
         <View className="pageHeader">
           <View className="searchHeader">
             <Text className="location" onClick={this.locationTap}>

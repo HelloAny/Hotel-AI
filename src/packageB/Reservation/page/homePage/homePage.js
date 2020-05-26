@@ -11,13 +11,15 @@ import { AtIcon } from "taro-ui";
 import { HCdistrict } from "../../../../components";
 import * as Server from "../../../../actions";
 import { dateFormat } from "../../../../utils";
+import Navbar from "@components/Navbar";
 
 import "./homePage.scss";
 import "../overall.scss";
 
 class HomePage extends Component {
   config = {
-    navigationBarTitleText: "预订酒店"
+    // navigationBarTitleText: "预订酒店"
+    navigationStyle: "custom"
   };
 
   constructor() {
@@ -92,7 +94,7 @@ class HomePage extends Component {
   // 选择城市
   handleChangeCity(e) {
     this.setState({
-      location: e[2].name,
+      location: e[2].name
     });
   }
 
@@ -146,6 +148,7 @@ class HomePage extends Component {
     } = this.state;
     return (
       <View className="hP-container-smt">
+        <Navbar title="预订酒店" backgroundColor="white" />
         <Swiper
           className="homeHeader"
           indicatorDots
