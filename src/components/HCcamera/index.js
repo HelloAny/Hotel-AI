@@ -71,12 +71,16 @@ class HCcamera extends Component {
           title: "认证成功",
           icon: "success",
           mask: true,
-          duration: 2000
+          duration: 2000,
+          success() {
+            Taro.navigateBack({
+              delta: 1
+            })
+          }
         });
       } else {
         Taro.showToast({
           title: "认证失败",
-          icon: "fail",
           duration: 2000
         });
       }
@@ -90,7 +94,7 @@ class HCcamera extends Component {
         {imageCameraPath ? (
           <CoverView className="cameraImage">
             <cover-image
-              src="http://cdn.amikara.com/cover.png"
+              src={imageCameraPath}
               className="coverImage"
             ></cover-image>
           </CoverView>
