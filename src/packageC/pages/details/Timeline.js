@@ -55,9 +55,9 @@ export default class Timeline extends Component {
     });
   }
 
-  handleAddNote() {}
+  handleAddNote() { }
 
-  handleUpdateNote() {}
+  handleUpdateNote() { }
 
   handleOpenTimeline() {
     this.setState({
@@ -130,32 +130,32 @@ export default class Timeline extends Component {
             <View className="main">
               {e
                 ? e.map((v) => (
-                    <View key={v.time}>
-                      <View
-                        style={{
-                          display: v.type == "process" ? "block" : "none",
-                        }}
-                        className="process"
-                      >
-                        {dateFormat("HH:MM", v.time) + " " + v.content}
+                  <View key={v.time}>
+                    <View
+                      style={{
+                        display: v.type == "process" ? "block" : "none",
+                      }}
+                      className="process"
+                    >
+                      {dateFormat("HH:MM", v.time) + " " + v.content}
+                    </View>
+                    <View className="memo">
+                      <View className="icon">
+                        <View className="adjust">
+                          <AtIcon size="12" value="edit" />
+                        </View>
                       </View>
-                      <View className="memo">
-                        <View className="icon">
-                          <View className="adjust">
-                            <AtIcon size="12" value="edit" />
-                          </View>
-                        </View>
-                        <View className="name">备忘</View>
-                        <View className="content">aaaaa啊啊啊啊啊啊啊啊</View>
-                        <View
-                          className="memo-btn"
-                          onClick={this.handleUpdateNote.bind(this, index)}
-                        >
-                          <Text className="value">修改备忘</Text>
-                        </View>
+                      <View className="name">备忘</View>
+                      <View className="content">明天去XX地玩</View>
+                      <View
+                        className="memo-btn"
+                        onClick={this.handleUpdateNote.bind(this, index)}
+                      >
+                        <Text className="value">修改备忘</Text>
                       </View>
                     </View>
-                  ))
+                  </View>
+                ))
                 : null}
               <Button
                 className="add-memo"

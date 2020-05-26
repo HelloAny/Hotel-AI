@@ -93,7 +93,7 @@ class Login extends Component {
         });
         //若传参的路由不存在，则跳转到个人中心界面
         if (!this.props.navigate) {
-          Taro.switchTab({
+          Taro.reLaunch({
             url: "/pages/account/account"
           });
         } else {

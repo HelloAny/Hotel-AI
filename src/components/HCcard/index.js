@@ -117,6 +117,7 @@ class HCcard extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log("aa")
     if (this.props.cardPage.cardPage.display == "display:none") {
       const {
         cardPage: {
@@ -145,7 +146,7 @@ class HCcard extends Component {
     } = this.props.data;
     const { ani } = this.state;
     return (
-      <View className="hotelOrder_item" onClick={this.changeMode}>
+      <View className="hotelOrder_item" onClick={this.changeMode.bind(this)}>
         <View className="hotelOrder_container" animation={ani}>
           <View className="hotelOrder_image">
             <Image
@@ -183,9 +184,6 @@ class HCcard extends Component {
             </View>
           </View>
           <View className="hotelOrder_content at-row at-row__align--center at-row__justify--center">
-            {/* <View className="hotelOrder_time at-col">
-              <Text>入住时间:{time}</Text>
-            </View> */}
           </View>
         </View>
       </View>

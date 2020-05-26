@@ -83,7 +83,7 @@ class hotelOrder extends Component {
       id: id,
     };
     userHotelInfo(param).then((res) => {
-      console.log(res.data.res);
+      console.log("userHotel", res.data)
       this.setState({
         records: res.data.res,
       });
