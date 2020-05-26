@@ -262,7 +262,7 @@ class SearchHotel extends Component {
               <HotelListItemTmpl
                 key={hotel.hotelId}
                 info={hotel}
-                onClick={this.navHotelDetail.bind(this, hotel)}
+                onHotelClick={this.navHotelDetail.bind(this, hotel)}
               />
             );
           })}
@@ -277,8 +277,8 @@ class SearchHotel extends Component {
               <Text style="margin-left:20rpx;">正在加载更多</Text>
             </View>
           ) : (
-            <Text className="loadmore">没有更多了</Text>
-          )}
+              <Text className="loadmore">没有更多了</Text>
+            )}
         </View>
       </View>
     );

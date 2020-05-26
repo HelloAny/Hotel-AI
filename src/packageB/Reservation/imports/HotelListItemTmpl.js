@@ -7,7 +7,8 @@ export default class HotelListItemTmpl extends Taro.Component {
   };
 
   static defaultProps = {
-    onClick: () => {},
+    onHotelClick: () => { },
+    info: {}
   };
 
   state = {
@@ -21,8 +22,9 @@ export default class HotelListItemTmpl extends Taro.Component {
   };
 
   constructor(props) {
-    super();
+    super(props);
     Object.assign(this.state, { ...props.info });
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -32,7 +34,7 @@ export default class HotelListItemTmpl extends Taro.Component {
   render() {
     const { name, address, distance, imageUrl, score, price } = this.state;
     return (
-      <View className="hotelListItem" onClick={this.props.onClick}>
+      <View className="hotelListItem" onClick={this.props.onHotelClick}>
         <Image className="image" mode="scaleToFill" src={imageUrl}></Image>
         <View className="content">
           <Text className="hotelName">{name}</Text>
