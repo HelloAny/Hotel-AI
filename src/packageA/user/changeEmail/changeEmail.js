@@ -16,7 +16,9 @@ class changeEmail extends Component {
     this.state = { emailChange: "" };
   }
   config = {
-    navigationStyle: "custom"
+    navigationBarBackgroundColor: "#4F4FCB",
+    navigationBarTextStyle: "black",
+    navigationBarTitleText: "修改邮箱",
   };
   /**
    * 更改昵称
@@ -95,7 +97,6 @@ class changeEmail extends Component {
     } = this.props;
     return (
       <View className="container">
-        <Navbar title="个人信息" weight={true}></Navbar>
         <View className="at-row nameInput">
           <View className="at-col at-col-11">
             <AtInput

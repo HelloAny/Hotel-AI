@@ -1,14 +1,16 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Picker } from "@tarojs/components";
 import { observer, inject } from "@tarojs/mobx";
-import { AtButton, AtInput, AtForm, AtCountdown, AtToast } from "taro-ui";
+import { AtButton, AtInput } from "taro-ui";
 import { SmsValidate, ForgetPsw, Sms } from "@actions/api";
 import { HCerror, HCinterval, Navbar } from "@components";
 import "./forgetPsw.sass";
 
 class Login extends Component {
   config = {
-    navigationStyle: "custom",
+    navigationBarBackgroundColor: "#4F4FCB",
+    navigationBarTextStyle: "black",
+    navigationBarTitleText: "忘记密码",
   };
   constructor() {
     super(...arguments);
@@ -228,17 +230,17 @@ class Login extends Component {
   componentWillReceiveProps(nextProps) {
     console.log(this.props, nextProps);
   }
-  componentWillMount() {}
+  componentWillMount() { }
 
-  componentWillReact() {}
+  componentWillReact() { }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
-  componentWillUnmount() {}
+  componentWillUnmount() { }
 
-  componentDidShow() {}
+  componentDidShow() { }
 
-  componentDidHide() {}
+  componentDidHide() { }
 
   renderA() {
     const {
@@ -333,10 +335,10 @@ class Login extends Component {
                   下一步
                 </AtButton>
               ) : (
-                <AtButton type="primary" circle size="normal" disabled={true}>
-                  下一步
-                </AtButton>
-              )}
+                  <AtButton type="primary" circle size="normal" disabled={true}>
+                    下一步
+                  </AtButton>
+                )}
             </View>
           </View>
         </View>
@@ -372,16 +374,16 @@ class Login extends Component {
                   onBlur={this.passWordValidation.bind(this)}
                 />
               ) : (
-                <AtInput
-                  name="密码"
-                  border={true}
-                  type="password"
-                  placeholder="再次输入密码"
-                  value={passWordAgain}
-                  error={true}
-                  onChange={this.passWordChangeAgain.bind(this)}
-                />
-              )}
+                  <AtInput
+                    name="密码"
+                    border={true}
+                    type="password"
+                    placeholder="再次输入密码"
+                    value={passWordAgain}
+                    error={true}
+                    onChange={this.passWordChangeAgain.bind(this)}
+                  />
+                )}
             </View>
           </View>
           <View className="phone_btn at-row">
@@ -396,10 +398,10 @@ class Login extends Component {
                   确认
                 </AtButton>
               ) : (
-                <AtButton type="primary" circle size="normal" disabled={true}>
-                  确认
-                </AtButton>
-              )}
+                  <AtButton type="primary" circle size="normal" disabled={true}>
+                    确认
+                  </AtButton>
+                )}
             </View>
           </View>
         </View>
@@ -410,7 +412,6 @@ class Login extends Component {
   render() {
     return (
       <View className="container">
-        <Navbar title="忘记密码" isBackBtn={false} weight={true}></Navbar>
         {this.renderA()}
         <HCerror error={this.state.errorCap} />>
       </View>

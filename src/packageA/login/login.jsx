@@ -291,7 +291,6 @@ class Login extends Component {
   render() {
     return (
       <View className="login-container">
-        <Navbar title="登录" isBackBtn={false} weight={true}></Navbar>
         {this.renderA()}
         <View className="toPsw at-row">
           <View

@@ -34,6 +34,13 @@ export default class HClist extends PureComponent {
    * @param {string} url
    */
   navgiateTo(url) {
+    if (url == "kefu") {
+      Taro.showToast({
+        title: "系统升级中",
+        duration: 2000
+      })
+      return
+    }
     Taro.navigateTo({
       url: url
     });

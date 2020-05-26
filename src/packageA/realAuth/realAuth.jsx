@@ -18,7 +18,9 @@ class realAuth extends Component {
     };
   }
   config = {
-    navigationStyle: "custom"
+    navigationBarBackgroundColor: "#4F4FCB",
+    navigationBarTextStyle: "black",
+    navigationBarTitleText: "实名认证",
   };
   hadRealAuth() {
     const {
@@ -59,7 +61,6 @@ class realAuth extends Component {
     const { current, hadRealAuth } = this.state;
     return (
       <View className="ra_container">
-        <Navbar title="实名认证" weight={true}></Navbar>
         <View className="topbar">
           <AtSteps className="stepText" items={items} current={current} />
           <View>

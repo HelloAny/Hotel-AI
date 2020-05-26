@@ -16,7 +16,9 @@ class changeName extends Component {
     this.state = { nickNameChange: "" };
   }
   config = {
-    navigationStyle: "custom"
+    navigationBarBackgroundColor: "#4F4FCB",
+    navigationBarTextStyle: "black",
+    navigationBarTitleText: "修改昵称",
   };
   /**
    * 更改昵称
@@ -92,7 +94,6 @@ class changeName extends Component {
     } = this.props;
     return (
       <View className="container">
-        <Navbar title="个人信息" weight={true}></Navbar>
         <View className="at-row nameInput">
           <View className="at-col at-col-11">
             <AtInput

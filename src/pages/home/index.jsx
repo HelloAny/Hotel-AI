@@ -38,7 +38,9 @@ class Home extends Component {
   }
 
   config = {
-    navigationStyle: "custom"
+    navigationBarBackgroundColor: "#4F4FCB",
+    navigationBarTextStyle: "black",
+    navigationBarTitleText: "首页",
   };
 
   swiperChange(event) {
@@ -127,15 +129,8 @@ class Home extends Component {
     } = this.state;
     return (
       <View className="home-container">
-        <Navbar
-          title="首页"
-          isBackBtn={false}
-          weight={true}
-          backgroundColor="#4F4FCB"
-          color="white"
-        ></Navbar>
         <View className="tabbar"></View>
-        <View style="position: relative;margin-top: 50px">
+        <View style="position: relative;margin-top: 10px">
           <View className="at-row">
             <View
               className="address at-col at-col-3"

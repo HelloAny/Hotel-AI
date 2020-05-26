@@ -8,7 +8,9 @@ import "./loginByPsw.sass";
 
 class LoginByPsw extends Component {
   config = {
-    navigationStyle: "custom",
+    navigationBarBackgroundColor: "#4F4FCB",
+    navigationBarTextStyle: "black",
+    navigationBarTitleText: "密码注册",
   };
   constructor() {
     super();
@@ -203,7 +205,7 @@ class LoginByPsw extends Component {
         });
       } else if (res.data.status == 0) {
         if (!this.props.navigate) {
-          Taro.navigateTo({
+          Taro.switchTab({
             url: "/pages/account/account",
           });
         }
@@ -336,7 +338,6 @@ class LoginByPsw extends Component {
   render() {
     return (
       <View className="container">
-        <Navbar title="密码注册" isBackBtn={true} weight={true}></Navbar>
         <View className="at-row">
           <View className="loginByPsw_title at-col">密码注册</View>
         </View>

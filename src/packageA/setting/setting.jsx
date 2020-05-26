@@ -11,7 +11,9 @@ class setting extends Component {
     super(props);
   }
   config = {
-    navigationStyle: "custom"
+    navigationBarBackgroundColor: "#4F4FCB",
+    navigationBarTextStyle: "black",
+    navigationBarTitleText: "设置",
   };
 
   /**
@@ -25,7 +27,6 @@ class setting extends Component {
   render() {
     return (
       <View className="setting-container">
-        <Navbar title="设置" weight={true}></Navbar>
         <Button className="signout" onClick={this.clearLoginStatus.bind(this)}>
           退出登录
         </Button>

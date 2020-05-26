@@ -1,6 +1,6 @@
 import Taro, { PureComponent } from "@tarojs/taro";
 import { View } from "@tarojs/components";
-import { AtBadge, AtButton } from "taro-ui";
+import { AtBadge } from "taro-ui";
 import { observer, inject } from "@tarojs/mobx";
 
 import "./index.sass";
@@ -32,6 +32,13 @@ export default class HClistline extends PureComponent {
    * @param {string} url
    */
   navgiateTo(url) {
+    if (url == "kefu") {
+      Taro.showToast({
+        title: "系统升级中",
+        duration: 2000
+      })
+      return
+    }
     Taro.navigateTo({
       url: url
     });

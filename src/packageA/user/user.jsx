@@ -19,7 +19,9 @@ class User extends Component {
     };
   }
   config = {
-    navigationStyle: "custom"
+    navigationBarBackgroundColor: "#4F4FCB",
+    navigationBarTextStyle: "black",
+    navigationBarTitleText: "个人信息",
   };
   /**界面初始化*/
   mountedInterface = () => {
@@ -85,7 +87,6 @@ class User extends Component {
               content: "头像"
             };
             picUpload(param).then(res => {
-              console.log(res);
               if (res.data.status == 0) {
                 Taro.showToast({
                   title: "上传成功",
@@ -126,7 +127,6 @@ class User extends Component {
     } = this.props;
     return (
       <View className="container">
-        <Navbar title="个人信息" weight={true}></Navbar>
         <View
           className="at-row at-row__align--center userInfo userPortrait"
           onClick={this.uploadPortrait}
