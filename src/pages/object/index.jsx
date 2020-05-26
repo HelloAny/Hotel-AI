@@ -1,6 +1,6 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, ScrollView, Text } from "@tarojs/components";
-import { HCwifi, HCkongtiao, HCyushi } from "@components";
+import { Navbar, HCwifi, HCkongtiao, HCyushi } from "@components";
 import "./index.sass";
 
 class object extends Component {
@@ -12,17 +12,15 @@ class object extends Component {
   }
 
   config = {
-    navigationBarTitleText: "物联设置",
-    navigationBarTextStyle: "white",
-    navigationBarBackgroundColor: "#4F4FCB"
+    navigationStyle: "custom"
   };
 
   render() {
     const { objectNumber } = this.state;
     return (
       <View>
-        <View className="container">
-          <View className="top_title">物联设备</View>
+        <View className="Objectcontainer">
+          <Navbar title="物联信息" weight={true} backgroundColor="white"></Navbar>
           <View className="tip">
             已检测到{objectNumber}个设备，若无法显示或缺少设备，请
             <Text className="subtip">点此重新刷新>></Text>

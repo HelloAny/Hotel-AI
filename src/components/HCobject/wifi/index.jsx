@@ -8,7 +8,7 @@ class HCwifi extends PureComponent {
   };
   render() {
     return (
-      <View>
+      <View className="wificontainer">
         <View className="object_title at-row at-row__align--center">
           <View className="object_image">
             <Image style="height:100%;width:100%" src="http://cdn.amikara.com/wifi.png"></Image>
