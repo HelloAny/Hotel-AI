@@ -89,17 +89,17 @@ class LoginByPsw extends Component {
     });
   }
 
-  componentWillMount() {}
+  componentWillMount() { }
 
-  componentWillReact() {}
+  componentWillReact() { }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
-  componentWillUnmount() {}
+  componentWillUnmount() { }
 
-  componentDidShow() {}
+  componentDidShow() { }
 
-  componentDidHide() {}
+  componentDidHide() { }
 
   renderInfo() {
     const { phone, passWord, show_resBtn } = this.state;
@@ -138,7 +138,7 @@ class LoginByPsw extends Component {
     const { errorCap } = this.state;
     return (
       <View className="container">
-        <Navbar title="密码登录" isBackBtn={false} weight={true}></Navbar>
+        <Navbar title="密码登录" isBackBtn={true} weight={true}></Navbar>
         <View className="at-row">
           <View className="loginByPsw_title at-col">密码登录</View>
         </View>
@@ -156,10 +156,10 @@ class LoginByPsw extends Component {
                 登录
               </AtButton>
             ) : (
-              <AtButton type="primary" circle size="normal" disabled={true}>
-                登录
-              </AtButton>
-            )}
+                <AtButton type="primary" circle size="normal" disabled={true}>
+                  登录
+                </AtButton>
+              )}
           </View>
         </View>
         <View className="forgetPsw at-row">
