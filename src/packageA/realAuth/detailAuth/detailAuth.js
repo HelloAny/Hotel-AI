@@ -23,7 +23,9 @@ class detailAuth extends Component {
     };
   }
   config = {
-    navigationStyle: "custom",
+    navigationBarBackgroundColor: "#4F4FCB",
+    navigationBarTextStyle: "black",
+    navigationBarTitleText: "详细信息",
   };
   static options = {
     addGlobalClass: true,
@@ -233,7 +235,6 @@ class detailAuth extends Component {
     const { detailAuth } = this.props;
     return (
       <View className="da_container">
-        <Navbar title="详细信息" weight={true}></Navbar>
         <View className="topbar">
           <View className="at-row inputMargin">
             <View className="at-col at-col-11">

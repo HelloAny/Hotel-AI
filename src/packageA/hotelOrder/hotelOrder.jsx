@@ -70,7 +70,9 @@ class hotelOrder extends Component {
     };
   }
   config = {
-    navigationStyle: "custom",
+    navigationBarBackgroundColor: "#4F4FCB",
+    navigationBarTextStyle: "black",
+    navigationBarTitleText: "酒店订单",
   };
 
   userHotelInfoGet() {
@@ -123,7 +125,6 @@ class hotelOrder extends Component {
     const { records } = this.state;
     return (
       <View>
-        <Navbar title="酒店订单" weight={true} backgroundColor="white"></Navbar>
         <View className="container">
           {records ? (
             <View>

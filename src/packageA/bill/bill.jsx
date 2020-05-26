@@ -11,13 +11,14 @@ class bill extends Component {
     this.state = {};
   }
   config = {
-    navigationStyle: "custom",
+    navigationBarBackgroundColor: "#4F4FCB",
+    navigationBarTextStyle: "black",
+    navigationBarTitleText: "账户"
   };
 
   render() {
     return (
       <View className="body">
-        <Navbar title="余额" weight={true}></Navbar>
         <View className="container">
           <View className="bill">
             余额:{"  "} <Text className="bill_number">2.5元</Text>

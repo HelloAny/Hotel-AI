@@ -8,7 +8,9 @@ import "./registerByPsw.sass";
 
 class LoginByPsw extends Component {
   config = {
-    navigationStyle: "custom",
+    navigationBarBackgroundColor: "#4F4FCB",
+    navigationBarTextStyle: "black",
+    navigationBarTitleText: "密码登录",
   };
 
   constructor() {
@@ -52,13 +54,12 @@ class LoginByPsw extends Component {
       passWord: this.state.passWord,
     };
     loginByPsw(param).then((res) => {
-      console.log(res);
       if (res.data.status == 0) {
         Taro.setStorage({
           key: "token",
           data: res.data.data.token,
         });
-        Taro.reLaunch({
+        Taro.switchTab({
           url: "/pages/account/account",
         });
       } else if (res.data.status == 102) {
@@ -89,17 +90,17 @@ class LoginByPsw extends Component {
     });
   }
 
-  componentWillMount() {}
+  componentWillMount() { }
 
-  componentWillReact() {}
+  componentWillReact() { }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
-  componentWillUnmount() {}
+  componentWillUnmount() { }
 
-  componentDidShow() {}
+  componentDidShow() { }
 
-  componentDidHide() {}
+  componentDidHide() { }
 
   renderInfo() {
     const { phone, passWord, show_resBtn } = this.state;
@@ -138,7 +139,6 @@ class LoginByPsw extends Component {
     const { errorCap } = this.state;
     return (
       <View className="container">
-        <Navbar title="密码登录" isBackBtn={false} weight={true}></Navbar>
         <View className="at-row">
           <View className="loginByPsw_title at-col">密码登录</View>
         </View>
@@ -156,10 +156,10 @@ class LoginByPsw extends Component {
                 登录
               </AtButton>
             ) : (
-              <AtButton type="primary" circle size="normal" disabled={true}>
-                登录
-              </AtButton>
-            )}
+                <AtButton type="primary" circle size="normal" disabled={true}>
+                  登录
+                </AtButton>
+              )}
           </View>
         </View>
         <View className="forgetPsw at-row">

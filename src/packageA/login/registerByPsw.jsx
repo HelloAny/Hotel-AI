@@ -8,7 +8,9 @@ import "./loginByPsw.sass";
 
 class LoginByPsw extends Component {
   config = {
-    navigationStyle: "custom",
+    navigationBarBackgroundColor: "#4F4FCB",
+    navigationBarTextStyle: "black",
+    navigationBarTitleText: "密码注册",
   };
   constructor() {
     super();
@@ -203,24 +205,24 @@ class LoginByPsw extends Component {
         });
       } else if (res.data.status == 0) {
         if (!this.props.navigate) {
-          Taro.navigateTo({
+          Taro.switchTab({
             url: "/pages/account/account",
           });
         }
       }
     });
   }
-  componentWillMount() {}
+  componentWillMount() { }
 
-  componentWillReact() {}
+  componentWillReact() { }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
-  componentWillUnmount() {}
+  componentWillUnmount() { }
 
-  componentDidShow() {}
+  componentDidShow() { }
 
-  componentDidHide() {}
+  componentDidHide() { }
 
   renderInfo() {
     const {
@@ -273,16 +275,16 @@ class LoginByPsw extends Component {
                 onBlur={this.passWordValidation.bind(this)}
               />
             ) : (
-              <AtInput
-                name="密码"
-                border={true}
-                type="password"
-                placeholder="再次输入密码"
-                value={passWordAgain}
-                error={true}
-                onChange={this.passWordChangeAgain.bind(this)}
-              />
-            )}
+                <AtInput
+                  name="密码"
+                  border={true}
+                  type="password"
+                  placeholder="再次输入密码"
+                  value={passWordAgain}
+                  error={true}
+                  onChange={this.passWordChangeAgain.bind(this)}
+                />
+              )}
           </View>
         </View>
         <View className="at-row at-row__align--center">
@@ -336,7 +338,6 @@ class LoginByPsw extends Component {
   render() {
     return (
       <View className="container">
-        <Navbar title="密码注册" isBackBtn={false} weight={true}></Navbar>
         <View className="at-row">
           <View className="loginByPsw_title at-col">密码注册</View>
         </View>
@@ -363,10 +364,10 @@ class LoginByPsw extends Component {
                 登录/注册
               </AtButton>
             ) : (
-              <AtButton type="primary" circle size="normal" disabled={true}>
-                登录/注册
-              </AtButton>
-            )}
+                <AtButton type="primary" circle size="normal" disabled={true}>
+                  登录/注册
+                </AtButton>
+              )}
           </View>
         </View>
         <View className="forgetPsw at-row">

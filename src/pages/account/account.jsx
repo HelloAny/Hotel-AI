@@ -21,7 +21,7 @@ class Account extends Component {
         id: 1,
         name: "我的订单",
         hr: true,
-        icon: "icon-RectangleCopy153",
+        icon: "icon-RectangleCopy154",
         url: ""
       },
       {
@@ -43,7 +43,7 @@ class Account extends Component {
         name: "会员服务",
         hr: true,
         icon: "icon-RectangleCopy59",
-        url: ""
+        url: "/packageC/pages/servicePanel/pages/vip"
       },
       {
         id: 5,
@@ -73,12 +73,14 @@ class Account extends Component {
           name: "客服",
           icon: "icon-kefu",
           badge: "",
-          url: ""
+          url: "kefu"
         }
       ]);
   }
   config = {
-    navigationStyle: "custom"
+    navigationBarBackgroundColor: "#4F4FCB",
+    navigationBarTextStyle: "black",
+    navigationBarTitleText: "个人",
   };
 
   /**界面初始化*/
@@ -110,6 +112,13 @@ class Account extends Component {
    * @param {string} url 路径
    */
   navgiateTo(url) {
+    if (url == "kefu") {
+      Taro.showToast({
+        title: "系统升级中",
+        duration: 2000
+      })
+      return
+    }
     Taro.navigateTo({
       url: url
     });
@@ -119,15 +128,15 @@ class Account extends Component {
     this.mountedInterface();
   }
 
-  componentWillReact() {}
+  componentWillReact() { }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
-  componentWillUnmount() {}
+  componentWillUnmount() { }
 
-  componentDidShow() {}
+  componentDidShow() { }
 
-  componentDidHide() {}
+  componentDidHide() { }
   render() {
     const {
       userStore: {
@@ -136,13 +145,6 @@ class Account extends Component {
     } = this.props;
     return (
       <View className="account_container">
-        <Navbar
-          title="我的"
-          isBackBtn={false}
-          weight={true}
-          backgroundColor="#4F4FCB"
-          color="white"
-        ></Navbar>
         <View className="topSet at-row at-row__align--center">
           <View
             className="at-col at-col-3"
