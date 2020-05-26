@@ -2,7 +2,8 @@
   display: flex;
   flex-direction: column;
   background-color: whitesmoke;
-  min-height: 100vh;
+  min-height: calc(100vh - 85Px);
+  padding-top: 85Px;
   .bg-container{
     width: 100%;
     height: 195Px;
@@ -97,7 +98,7 @@
       &.active{
         color: #303133;
       }
-    } 
+    }
     .center{
       width: 100Px;
       height: 56Px;

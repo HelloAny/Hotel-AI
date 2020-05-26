@@ -24,7 +24,6 @@ export default class RecmdItem extends Component {
     return (
       <View className="rd-container">
         <Image src={img} className="bg" />
-        <View className="icon">推 荐</View>
         <View className="content">
           <View className="title-box">
             <Text className="title">{name}</Text>

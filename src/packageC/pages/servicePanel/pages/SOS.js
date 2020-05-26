@@ -46,8 +46,8 @@ export default class Vip extends Component {
 
   render() {
     return (
-      <View>
-        <Navbar color="white" />
+      <View style="padding-top:85PX">
+        <Navbar color="white"/>
         <View
           style={StyleSheet[this.state.class]}
           onClick={this.handleSOS.bind(this)}
@@ -66,8 +66,8 @@ export default class Vip extends Component {
 
 const StyleSheet = {
   btn: {
-    position: "fixed",
-    top: "110Px",
+    position: "absolute",
+    top: "195Px",
     left: "40Px",
     height: "45Px",
     padding: "0Px 30Px",
@@ -78,8 +78,8 @@ const StyleSheet = {
     fontSize: "28Px"
   },
   activeBtn: {
-    position: "fixed",
-    top: "110Px",
+    position: "absolute",
+    top: "195Px",
     left: "40Px",
     height: "45Px",
     padding: "0Px 30Px",

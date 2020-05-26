@@ -39,20 +39,20 @@ export default class Vip extends Component {
 
   render() {
     return (
-      <View>
+      <View style="padding-top:85PX">
         <Navbar title="物品借用" />
         <Image
           style={StyleSheet.bg}
           mode="aspectFit"
           src="https://hotel-ai-1257814705.cos.ap-shanghai.myqcloud.com/%E5%89%8D%E7%AB%AF/servicePanel/psGroup/tool-bg.png"
         />
-        <View style={StyleSheet.help}>
+        {/* <View style={StyleSheet.help}>
           <View>
             <View>借用站：酒店二楼房间B2671</View>
             <View>请根据物品借用码按流程操作</View>
           </View>
           <View style={StyleSheet.helpBtn}>找人代取</View>
-        </View>
+        </View> */}
         <View style={StyleSheet.content}>
           <AtTabs
             current={this.state.current}
@@ -96,9 +96,9 @@ export default class Vip extends Component {
 const StyleSheet = {
   bg: {
     width: "100vw",
-    height: "730Px",
+    height: "calc(100% - 85Px)",
     position: "fixed",
-    top: "0",
+    top: "85Px",
     left: "0",
     backgroundColor: "#e8e8e8"
   },
@@ -128,7 +128,7 @@ const StyleSheet = {
     height: "480Px",
     position: "fixed",
     marginLeft: "10vw",
-    top: "200PX",
+    top: "260PX",
     left: "0"
   },
   box: {

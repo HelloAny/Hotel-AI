@@ -2,12 +2,16 @@ import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Image } from "@tarojs/components";
 import { AtIcon, AtActionSheet, AtActionSheetItem } from "taro-ui";
 import { Ico } from "../../../components/Ico";
+import { Navbar } from "../../../components/Navbar";
 
 import "../../assets/style/traveler.scss";
 
 export default class Traveler extends Component {
+  // config = {
+  //   navigationBarTitleText: "同行者"
+  // };
   config = {
-    navigationBarTitleText: "同行者"
+    navigationStyle: "custom",
   };
   static defaultProps = {};
 
@@ -91,6 +95,7 @@ export default class Traveler extends Component {
     const { boxOpen } = this.state;
     return (
       <View className="traveler-container">
+        <Navbar title="同行者" isBackBtn={false} backgroundColor="white"/>
         <View
           className="add-traveler"
           onClick={this.handleOpenInviteBox.bind(this)}
