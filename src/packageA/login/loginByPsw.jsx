@@ -58,7 +58,7 @@ class LoginByPsw extends Component {
           key: "token",
           data: res.data.data.token,
         });
-        Taro.reLaunch({
+        Taro.switchTab({
           url: "/pages/account/account",
         });
       } else if (res.data.status == 102) {

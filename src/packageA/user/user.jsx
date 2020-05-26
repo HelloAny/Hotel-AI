@@ -125,7 +125,7 @@ class User extends Component {
       }
     } = this.props;
     return (
-      <View className="container">
+      <View className="Usercontainer">
         <Navbar title="个人信息" weight={true}></Navbar>
         <View
           className="at-row at-row__align--center userInfo userPortrait"

@@ -190,7 +190,7 @@ class HCinfo extends Component {
     const { name, idcard, errorCap, verifyNextBtn } = this.state;
     const { detailAuth } = this.props;
     return (
-      <View className="container">
+      <View className="HCinfocontainer">
         <View className="at-row inputMargin">
           <View className="at-col at-col-11">
             <AtInput

@@ -83,57 +83,57 @@ class HCcard extends Component {
       },
       cardPage,
     } = this.props;
-    Taro.createSelectorQuery()
-      .selectViewport()
-      .scrollOffset((rect) => {
-        const animate = Taro.createAnimation({
-          transformOrigin: "50% 50%",
-          duration: 400,
-          timingFunction: "ease",
-          delay: 0,
-        });
-        setTimeout(() => {
-          animate
-            .translateY(-(event.currentTarget["offsetTop"] - scrollTop))
-            .width("100%")
-            .height("100vh")
-            .step();
-          this.setState(
-            {
-              ani: animate.export(),
-            },
-            () => {
-              setTimeout(() => {
-                cardPage.setOrScroll(false);
-                cardPage.setInfo(data);
-                cardPage.setDisplay("display:block");
-                cardPage.setAllDisplay("opacity:0");
-              }, 300);
-            }
-          );
-        }, 200);
-      })
-      .exec();
+    // Taro.createSelectorQuery()
+    //   .selectViewport()
+    //   .scrollOffset((rect) => {
+    //     const animate = Taro.createAnimation({
+    //       transformOrigin: "50% 50%",
+    //       duration: 400,
+    //       timingFunction: "ease",
+    //       delay: 0,
+    //     });
+    //     setTimeout(() => {
+    //       animate
+    //         .translateY(-(event.currentTarget["offsetTop"] - scrollTop))
+    //         .width("100%")
+    //         .height("100vh")
+    //         .step();
+    //       this.setState(
+    //         {
+    //           ani: animate.export(),
+    //         },
+    //         () => {
+    //           setTimeout(() => {
+    //             cardPage.setOrScroll(false);
+    //             cardPage.setInfo(data);
+    //             cardPage.setDisplay("display:block");
+    //             cardPage.setAllDisplay("opacity:0");
+    //           }, 300);
+    //         }
+    //       );
+    //     }, 200);
+    //   })
+    //   .exec();
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.cardPage.cardPage.display == "display:none") {
-      const {
-        cardPage: {
-          cardPage: { offsetTop },
-        },
-      } = this.props;
-      const animate = Taro.createAnimation({
-        transformOrigin: "50% 50%",
-        duration: 300,
-        timingFunction: "ease",
-        delay: 0,
-      });
-      animate.width("90%").height("600rpx").step();
-      this.setState({
-        ani: animate.export(),
-      });
-    }
+    // if (this.props.cardPage.cardPage.display == "display:none") {
+    //   const {
+    //     cardPage: {
+    //       cardPage: { offsetTop },
+    //     },
+    //   } = this.props;
+    //   const animate = Taro.createAnimation({
+    //     transformOrigin: "50% 50%",
+    //     duration: 300,
+    //     timingFunction: "ease",
+    //     delay: 0,
+    //   });
+    //   animate.width("90%").height("600rpx").step();
+    //   this.setState({
+    //     ani: animate.export(),
+    //   });
+    // }
   }
   render() {
     const {

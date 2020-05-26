@@ -203,7 +203,7 @@ class LoginByPsw extends Component {
         });
       } else if (res.data.status == 0) {
         if (!this.props.navigate) {
-          Taro.navigateTo({
+          Taro.switchTab({
             url: "/pages/account/account",
           });
         }

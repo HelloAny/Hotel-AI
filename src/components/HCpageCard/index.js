@@ -62,13 +62,6 @@ class HCpageCard extends Component {
     this.setState(
       {
         currentIndex: 0,
-      },
-      () => {
-        setTimeout(() => {
-          cardPage.setOrScroll(true);
-          cardPage.setAllDisplay("opacity:1");
-          cardPage.setDisplay("display:none");
-        }, 200);
       }
     );
   };
@@ -284,9 +277,9 @@ class HCpageCard extends Component {
       <View className="hotelOrderPage_item" style={`margin-top:${offsetTop}`}>
         <View className="hotelOrderPage_container">
           <View className="hotelOrderPage_image">
-            <CoverView className="close" onClick={this.close.bind(this)}>
+            <View className="close" onClick={this.close.bind(this)}>
               X
-            </CoverView>
+            </View>
             <Swiper
               current={currentIndex}
               indicatorColor="#ffffff"

@@ -42,12 +42,12 @@ export class Navbar extends Component {
       DeviceInfo.statusBarHeight +
       MenuButton.height +
       (MenuButton.top - DeviceInfo.statusBarHeight) || 70;
-    let top = 90 || 30;
+    let top = 15;
     let left = DeviceInfo.windowWidth - MenuButton.right || 10;
     let btnHeight = MenuButton.height || 32;
 
     Object.assign(StyleSheet.navcontainer, {
-      height: 127 + "Px",
+      height: 50 + "Px",
       color: this.props.color,
       backgroundColor: props.backgroundColor,
     });

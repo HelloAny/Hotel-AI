@@ -69,6 +69,6 @@ export default class HClist extends PureComponent {
     return <View className="">{list}</View>;
   };
   render() {
-    return <View className="container">{this.renderList()}</View>;
+    return <View className="HClistcontainer">{this.renderList()}</View>;
   }
 }

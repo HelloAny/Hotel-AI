@@ -56,6 +56,6 @@ export default class HClistline extends PureComponent {
     return <View className="at-row at-row__justify--center">{list}</View>;
   };
   render() {
-    return <View className="container">{this.renderListline()}</View>;
+    return <View className="HClistlinecontainer">{this.renderListline()}</View>;
   }
 }
