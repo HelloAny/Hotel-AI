@@ -114,10 +114,19 @@ class User extends Component {
     });
   }
 
+  checkInfo() {
+    Taro.showToast({
+      title: "系统维护中",
+      duration: 2000
+    })
+  }
+
   getUserPortrait() { }
   componentWillMount() {
     this.mountedInterface();
   }
+
+
 
   render() {
     const {
@@ -195,10 +204,11 @@ class User extends Component {
                   <View className="realAuthWhy">ID证件:{ID}</View>
                   <View
                     className="realAuthAgain"
-                    onClick={this.navigateTo.bind(
-                      this,
-                      "/packageA/realAuth/realAuth"
-                    )}
+                    // onClick={this.navigateTo.bind(
+                    //   this,
+                    //   "/packageA/realAuth/realAuth"
+                    // )}
+                    onClick={this.checkInfo.bind(this)}
                   >
                     重新认证
                   </View>
@@ -206,10 +216,11 @@ class User extends Component {
               ) : (
                   <View
                     className="realAuthText"
-                    onClick={this.navigateTo.bind(
-                      this,
-                      "/packageA/realAuth/realAuth"
-                    )}
+                    // onClick={this.navigateTo.bind(
+                    //   this,
+                    //   "/packageA/realAuth/realAuth"
+                    // )}
+                    onClick={this.checkInfo.bind(this)}
                   >
                     <View className="iconRealAuthNo iconfont icon-RectangleCopy"></View>
                   未实名认证和人脸认证
