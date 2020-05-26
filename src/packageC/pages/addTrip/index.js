@@ -6,7 +6,7 @@ import "../../assets/style/addTrip.scss";
 import yvding from "../../assets/imgs/yvding.png";
 import fangke from "../../assets/imgs/fangke.png";
 
-export default class AddTrip extends Component {
+class AddTrip extends Component {
   config = {
     navigationStyle: "custom"
   };
@@ -72,3 +72,6 @@ export default class AddTrip extends Component {
     );
   }
 }
+
+
+export default AddTrip
