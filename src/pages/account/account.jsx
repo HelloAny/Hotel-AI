@@ -21,7 +21,7 @@ class Account extends Component {
         id: 1,
         name: "我的订单",
         hr: true,
-        icon: "icon-RectangleCopy153",
+        icon: "icon-RectangleCopy154",
         url: ""
       },
       {
@@ -43,7 +43,7 @@ class Account extends Component {
         name: "会员服务",
         hr: true,
         icon: "icon-RectangleCopy59",
-        url: ""
+        url: "/packageC/pages/servicePanel/pages/vip"
       },
       {
         id: 5,
@@ -119,15 +119,15 @@ class Account extends Component {
     this.mountedInterface();
   }
 
-  componentWillReact() {}
+  componentWillReact() { }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
-  componentWillUnmount() {}
+  componentWillUnmount() { }
 
-  componentDidShow() {}
+  componentDidShow() { }
 
-  componentDidHide() {}
+  componentDidHide() { }
   render() {
     const {
       userStore: {
