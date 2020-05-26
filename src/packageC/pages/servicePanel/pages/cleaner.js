@@ -64,7 +64,7 @@ export default class Vip extends Component {
   render() {
     const { date, time1, time2, dateList } = this.state;
     return (
-      <View onClick={this.handleConfirm.bind(this)} style="padding-top:85Px">
+      <View onClick={this.handleConfirm.bind(this)}>
         <Navbar color="white" />
         <Image
           style={{ width: "100vw", height: "730Px" }}
@@ -102,7 +102,7 @@ const styleSheet = {
   pickerBox: {
     position: "absolute",
     width: "100vw",
-    top: "435Px",
+    top: "350Px",
     display: "flex",
     justifyContent: "center",
     color: "#333"

@@ -29,14 +29,14 @@ export default class Vip extends Component {
 
   render() {
     return (
-      <View style="padding-top:85PX">
+      <View>
         <Navbar color="white" />
         <Image
           style={{ width: "360Px", height: "730Px" }}
           mode="aspectFit"
           src="https://hotel-ai-1257814705.cos.ap-shanghai.myqcloud.com/%E5%89%8D%E7%AB%AF/servicePanel/psGroup/order1.png"
         />
-        <View style={{ position: "absolute", right: "0Px", top: "469Px", height: "346Px", width: "289Px", overflowY: "scroll" }}>
+        <View style={{ position: "absolute", right: "0Px", top: "384Px", height: "346Px", width: "289Px", overflowY: "scroll" }}>
           <Image
             style={{ width: "289Px", height: "884Px" }}
             mode="aspectFit"
