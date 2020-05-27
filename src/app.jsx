@@ -54,7 +54,8 @@ class App extends Component {
       "pages/home/index",
       "pages/journey/index",
       "pages/notify/index",
-      "pages/account/account"
+      "pages/account/account",
+      "pages/object/index"
     ],
     permission: {
       "scope.userLocation": {

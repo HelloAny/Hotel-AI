@@ -12,7 +12,7 @@ class HCkongtiao extends PureComponent {
 
   render() {
     return (
-      <View>
+      <View className="kongtiaocontainer">
         <View className="object_title at-row at-row__align--center">
           <View className="object_image">
             <Image style="height:100%;width:100%" src="http://cdn.amikara.com/kongtiao.png"></Image>
