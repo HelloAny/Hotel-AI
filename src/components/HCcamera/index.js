@@ -65,7 +65,6 @@ class HCcamera extends Component {
     });
     faceRegister(param).then(res => {
       Taro.hideLoading();
-      console.log("身份认证" + res);
       if (res.data.status == 0) {
         Taro.showToast({
           title: "认证成功",
