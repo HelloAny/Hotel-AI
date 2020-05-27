@@ -59,8 +59,8 @@ export function calculatePrices(param) {
   const req = {
     uid,
     room_type,
-    start_date: Math.floor(start_date / 1000),
-    end_date: Math.floor(end_date / 1000)
+    start_time: Math.floor(start_date / 1000),
+    end_time: Math.floor(end_date / 1000)
   };
 
   return request(post, url, req).then(res => {

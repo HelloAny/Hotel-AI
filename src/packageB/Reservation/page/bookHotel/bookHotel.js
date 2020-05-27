@@ -78,6 +78,9 @@ class BookHotel extends Taro.Component {
           icon: "success",
           duration: 2000
         });
+        Taro.switchTab({
+          url: '/pages/journey/index'
+        })
       })
       .catch(err => {
         console.log(err);

@@ -53,11 +53,13 @@ class HotelDetail extends Taro.Component {
     ]
   };
 
-  bookRoom = (index) => {
+  bookRoom(index) {
     const { startDate, endDate, hotel, roomArray, dayCount } = this.state;
     const room = roomArray[index];
     Taro.navigateTo({
-      url: `/packageB/Reservation/page/bookHotel/bookHotel?startDate=${startDate}&endDate=${endDate}&hotel=${JSON.stringify(hotel)}&roomType=${room.name}&price=${room.price}&dayCount=${dayCount}`
+      url: `/packageB/Reservation/page/bookHotel/bookHotel?startDate=${startDate}&endDate=${endDate}&hotel=${JSON.stringify(
+        hotel
+      )}&roomType=${room.name}&price=${room.price}&dayCount=${dayCount}`
     });
   }
 
@@ -97,9 +99,9 @@ class HotelDetail extends Taro.Component {
       endDate,
       dayCount,
       hotel: {
-        hotelId:h.hotelId,
-        hotelImage:h.imageUrl,
-        hotelAddress:h.address,
+        hotelId: h.hotelId,
+        hotelImage: h.imageUrl,
+        hotelAddress: h.address,
         hotelName: h.name
       }
     });
@@ -126,6 +128,19 @@ class HotelDetail extends Taro.Component {
             };
           })
         });
+
+        setTimeout(() => {
+          this.setState({
+            roomArray: roomArray.map(room => {
+              return {
+                image: room.imgs[0] || ic_hotel_image,
+                name: room.type,
+                service: room.room_type_content,
+                price: room.price
+              };
+            })
+          });
+        }, 1000);
       })
       .catch(err => {
         console.log(err);
@@ -148,7 +163,7 @@ class HotelDetail extends Taro.Component {
     } = this.state;
     return (
       <View className="hd-container-smt">
-        <Navbar title="酒店详情" backgroundColor="white" />
+        <Navbar title="酒店详情" />
         <View className="hotelDetailPic">
           <Image
             className="image"
@@ -253,7 +268,7 @@ class HotelDetail extends Taro.Component {
                 services: item.service,
                 price: item.price
               }}
-              onBook={this.bookRoom(index)}
+              onBook={this.bookRoom.bind(this, index)}
             ></RoomListItemTmpl>
           );
         })}
