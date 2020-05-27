@@ -73,9 +73,11 @@ class HCcamera extends Component {
           mask: true,
           duration: 2000,
           success() {
-            Taro.navigateBack({
-              delta: 1
-            })
+            this.props.onOrderSuccess
+              ? this.props.onOrderSuccess()
+              : Taro.navigateBack({
+                  delta: 1
+                });
           }
         });
       } else {
@@ -86,7 +88,7 @@ class HCcamera extends Component {
       }
     });
   }
-  componentWillMount() { }
+  componentWillMount() {}
   render() {
     const { imageCameraPath, changeCameraBtn } = this.state;
     return (
@@ -99,12 +101,15 @@ class HCcamera extends Component {
             ></cover-image>
           </CoverView>
         ) : (
-            <Camera devicePosition="front" className="camera">
-              <CoverView className="cameraBorder">
-                <cover-image src="http://cdn.amikara.com/cover.png" className="coverImage"></cover-image>
-              </CoverView>
-            </Camera>
-          )}
+          <Camera devicePosition="front" className="camera">
+            <CoverView className="cameraBorder">
+              <cover-image
+                src="http://cdn.amikara.com/cover.png"
+                className="coverImage"
+              ></cover-image>
+            </CoverView>
+          </Camera>
+        )}
 
         <View>
           {changeCameraBtn ? (
@@ -133,18 +138,18 @@ class HCcamera extends Component {
               </View>
             </View>
           ) : (
-              <View className="at-row cameraBtn">
-                <View className="at-col">
-                  <AtButton
-                    circle
-                    type="primary"
-                    onClick={this.takePhoto.bind(this)}
-                  >
-                    拍摄
+            <View className="at-row cameraBtn">
+              <View className="at-col">
+                <AtButton
+                  circle
+                  type="primary"
+                  onClick={this.takePhoto.bind(this)}
+                >
+                  拍摄
                 </AtButton>
-                </View>
               </View>
-            )}
+            </View>
+          )}
         </View>
       </View>
     );
