@@ -24,7 +24,13 @@ export default class Notify extends Component {
 
   propsKeys = [];
 
-  stateKeys = ["current", "notificationNum", "messageNum", "unreadList", "chatListRefreshFlag"];
+  stateKeys = [
+    "current",
+    "notificationNum",
+    "messageNum",
+    "unreadList",
+    "chatListRefreshFlag"
+  ];
 
   // 页面数据
   pullData() {
@@ -75,8 +81,8 @@ export default class Notify extends Component {
   handleChatReadied(people) {
     let num = this.state.unreadList[people];
     if (num) {
-      let list =  this.state.unreadList
-      list[people] = 0
+      let list = this.state.unreadList;
+      list[people] = 0;
       this.setState({
         messageNum: Math.max(this.state.messageNum - num, 0),
         unreadList: list
@@ -85,16 +91,22 @@ export default class Notify extends Component {
   }
 
   componentWillMount() {
-    this.pullData();
-    SocketServer.on("globalMessage", () => {
+    if (!!Taro.getStorageSync("userInfo")) {
       this.pullData();
-      this.setState({
-        chatListRefreshFlag: !this.state.chatListRefreshFlag
-      })
-    });
-    SocketServer.on("notify", () => {
-      this.pullData();
-    });
+      SocketServer.on("globalMessage", () => {
+        this.pullData();
+        this.setState({
+          chatListRefreshFlag: !this.state.chatListRefreshFlag
+        });
+      });
+      SocketServer.on("notify", () => {
+        this.pullData();
+      });
+    } else {
+      Taro.navigateTo({
+        url: "/packageA/login/login"
+      });
+    }
   }
 
   componentDidShow() {
@@ -128,7 +140,13 @@ export default class Notify extends Component {
   }
 
   render() {
-    const { current, notificationNum, messageNum, unreadList, chatListRefreshFlag } = this.state;
+    const {
+      current,
+      notificationNum,
+      messageNum,
+      unreadList,
+      chatListRefreshFlag
+    } = this.state;
     const tabList = [
       {
         title:
