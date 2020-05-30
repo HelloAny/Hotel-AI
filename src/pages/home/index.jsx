@@ -42,9 +42,10 @@ class Home extends Component {
   };
 
   swiperChange(event) {
+    console.log(event)
     this.setState({
-      swiperName: this.state.swiperNamearr[event.target.current],
-      swiperRate: this.state.swiperRateArr[event.target.current]
+      swiperName: this.state.swiperNamearr[event.detail.current],
+      swiperRate: this.state.swiperRateArr[event.detail.current]
     });
   }
 
@@ -110,11 +111,11 @@ class Home extends Component {
       swiperName: this.state.swiperNamearr[0],
       swiperRate: this.state.swiperRateArr[0]
     });
-    Taro.getStorageSync("location")
-      ? this.setState({
-        address: Taro.getStorageSync("location"),
-      })
-      : this.getLocation();
+    // Taro.getStorageSync("location")
+    //   ? this.setState({
+    //     address: Taro.getStorageSync("location"),
+    //   })
+    //   : this.getLocation();
   }
   render() {
     const {
@@ -158,7 +159,7 @@ class Home extends Component {
               <View className="at-col at-col-8">
                 {swiperName}
                 <View>
-                  <AtRate value={swiperRate} size={20}></AtRate>
+                  <AtRate className="swpier_rate" value={swiperRate} size={20}></AtRate>
                 </View>
               </View>
               <View className="at-col at-col-4">
