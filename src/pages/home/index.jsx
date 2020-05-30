@@ -19,6 +19,7 @@ import {
 } from "taro-ui";
 import { observer, inject } from "@tarojs/mobx";
 import { reLaunch } from "@utils";
+import * as Server from "@actions";
 import { HCtabsjingdian, HCtabshotel, Navbar } from "@components";
 import "./index.sass";
 
@@ -55,31 +56,59 @@ class Home extends Component {
     });
   }
 
-  getLocation() {
-    Taro.getLocation({
-      type: "gcj02",
-      success: (res) => {
-        const lat = res.latitude;
-        const lon = res.longitude;
-        Taro.chooseLocation({
-          latitude: lat,
-          longitude: lon,
-          success: (res) => {
-            this.setState({
-              address: res.address.match(/(?<=省).*(?=市)/)[0],
-            });
-            Taro.setStorage({
-              key: "location",
-              data: res.address.match(/(?<=省).*(?=市)/)[0],
-            });
-          },
-        });
-      },
-      fail: (err) => {
-        console.log(err);
-      },
-    });
+  checkAddress(address) {
+    return address.split("省").pop()
   }
+
+  getLocation() {
+    Taro.getLocation()
+      .then(res => {
+        return Server.getLocation(res);
+      })
+      .then(res => {
+        let city = res.result.address_component.city;
+        this.setState({
+          address: city
+        });
+        Taro.setStorage({
+          key: "location",
+          data: city,
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({
+          address: "定位失败"
+        });
+      });
+  }
+
+  // getLocation() {
+  //   Taro.getLocation({
+  //     type: "gcj02",
+  //     success: (res) => {
+  //       const lat = res.latitude;
+  //       const lon = res.longitude;
+  //       const cityExp = ".+[市]";
+  //       Taro.chooseLocation({
+  //         latitude: lat,
+  //         longitude: lon,
+  //         success: (res) => {
+  //           this.setState({
+  //             address: res.address.match(new RegExp(cityExp))[0],
+  //           });
+  //           Taro.setStorage({
+  //             key: "location",
+  //             data: res.address.match(new RegExp(cityExp))[0],
+  //           });
+  //         },
+  //       });
+  //     },
+  //     fail: (err) => {
+  //       console.log(err);
+  //     },
+  //   });
+  // }
   changeAtActionSheet() {
     this.setState({
       atActionSheet: !this.state.atActionSheet,
@@ -111,11 +140,11 @@ class Home extends Component {
       swiperName: this.state.swiperNamearr[0],
       swiperRate: this.state.swiperRateArr[0]
     });
-    // Taro.getStorageSync("location")
-    //   ? this.setState({
-    //     address: Taro.getStorageSync("location"),
-    //   })
-    //   : this.getLocation();
+    Taro.getStorageSync("location")
+      ? this.setState({
+        address: Taro.getStorageSync("location"),
+      })
+      : this.getLocation();
   }
   render() {
     const {
@@ -140,7 +169,7 @@ class Home extends Component {
           <View className="at-row">
             <View
               className="address at-col at-col-3"
-            // onClick={this.getLocation.bind(this)}
+              onClick={this.getLocation.bind(this)}
             >
               <Image className="zhoubian" src="http://cdn.amikara.com/zhoubian.png" />
               {address}
