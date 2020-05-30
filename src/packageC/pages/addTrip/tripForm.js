@@ -3,7 +3,6 @@ import { View, Text, Picker, Textarea, Image } from "@tarojs/components";
 import * as Server from "../../../actions";
 import { AtIcon, AtList, AtListItem, AtSearchBar } from "taro-ui";
 import { dateFormat } from "../../../utils";
-import { Navbar } from "../../../components/Navbar"
 
 import "../../assets/style/addTrip-form.scss";
 
@@ -12,12 +11,11 @@ import error from "../../assets/imgs/error.png";
 
 export default class TripForm extends Component {
   config = {
-    // navigationBarBackgroundColor: "#67c23a",
-    // navigationBarTextStyle: "black",
-    // navigationBarTitleText: "申请访问",
-    // backgroundColor: "#eeeeee",
-    // backgroundTextStyle: "light",
-    navigationStyle: "custom"
+    navigationBarBackgroundColor: "#67c23a",
+    navigationBarTextStyle: "black",
+    navigationBarTitleText: "申请访问",
+    backgroundColor: "#eeeeee",
+    backgroundTextStyle: "light"
   };
 
   static defaultProps = {};
@@ -359,7 +357,6 @@ export default class TripForm extends Component {
     } = this.state;
     return (
       <View className="trip-form-container">
-        <Navbar backgroundColor="#67c23a" title="申请访问" />
         <View className="process-container">
           <View
             className={

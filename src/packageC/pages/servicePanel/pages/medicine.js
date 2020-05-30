@@ -37,7 +37,7 @@ export default class Vip extends Component {
 
   render() {
     return (
-      <View onClick={this.handleNext.bind(this)} style="padding-top:85PX">
+      <View onClick={this.handleNext.bind(this)}>
         <Navbar color="white" />
         <Image
           style={{ width: "100vw", height: "730Px", display: this.state.index == 0 ? "block" : "none" }}

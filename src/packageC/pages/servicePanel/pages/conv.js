@@ -1,11 +1,9 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text } from "@tarojs/components";
-import { Navbar } from "../../../../components/Navbar";
 
 export default class Vip extends Component {
   config = {
-    // navigationBarTitleText: "小蓝鲸线上便利店"
-    navigationStyle: "custom"
+    navigationBarTitleText: "小蓝鲸线上便利店"
   };
   static defaultProps = {};
 
@@ -42,10 +40,9 @@ export default class Vip extends Component {
 
   render() {
     return (
-      <View onClick={this.handleAddCart.bind(this)} style="padding-top: 85Px">
-        <Navbar color="white" title="小蓝鲸线上便利店" backgroundColor="white"/>
+      <View onClick={this.handleAddCart.bind(this)}>
         <Image
-          style={{ height: "2991Px", width: "100vw"}}
+          style={{ height: "2991Px", width: "100vw" }}
           mode="aspectFit"
           src="https://hotel-ai-1257814705.cos.ap-shanghai.myqcloud.com/%E5%89%8D%E7%AB%AF/servicePanel/psGroup/conv.png"
         />
