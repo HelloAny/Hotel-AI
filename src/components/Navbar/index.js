@@ -106,7 +106,7 @@ export class Navbar extends Component {
 
 const StyleSheet = {
   navcontainer: {
-    zIndex: "999",
+    zIndex: "9999",
     position: "fixed",
     width: "100%",
     height: "50Px",

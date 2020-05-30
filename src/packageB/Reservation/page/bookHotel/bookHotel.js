@@ -24,7 +24,8 @@ class BookHotel extends Taro.Component {
     startDate: Date.now(),
     endDate: Date.now(),
     discount: "不选择优惠",
-    callBack: ()=>{}
+    callBack: () => { },
+    faceShow: false
   };
 
   floorOfDay(time) {
@@ -43,10 +44,7 @@ class BookHotel extends Taro.Component {
   }
 
   handleBook() {
-    Taro.showLoading({
-      title: "支付中...",
-      mask: true
-    });
+
     const { startDate, endDate } = this.state;
     const { roomType } = this.$router.params;
     let st = Math.max(
@@ -70,6 +68,10 @@ class BookHotel extends Taro.Component {
         });
       })
       .then(res => {
+        Taro.showLoading({
+          title: "支付中...",
+          mask: true
+        });
         this.setState({
           roomId: res.room_id || "",
           roomPrice: res.total_price
@@ -140,7 +142,8 @@ class BookHotel extends Taro.Component {
       endDate,
       discount,
       roomPrice,
-      isDiscount
+      isDiscount,
+      faceShow
     } = this.state;
     return (
       <View className="bh-container">
@@ -148,80 +151,80 @@ class BookHotel extends Taro.Component {
         {faceShow ? (
           <HCcamera onOrderSuccess={this.state.callBack} />
         ) : (
-          <View>
-            <View className="bookScroll">
-              <View className="bookBody">
-                <View className="bookMsg">
-                  <View>{hotelName}</View>
-                  <View style="margin-top:10rpx;">{"房型：" + roomName}</View>
+            <View>
+              <View className="bookScroll">
+                <View className="bookBody">
+                  <View className="bookMsg">
+                    <View>{hotelName}</View>
+                    <View style="margin-top:10rpx;">{"房型：" + roomName}</View>
+                  </View>
+                  <SettingItemTmpl
+                    caption="入住/离店"
+                    value={
+                      dateFormat("YYYY-mm-dd", startDate) +
+                      "/" +
+                      dateFormat("YYYY-mm-dd", endDate)
+                    }
+                  />
+                  <SettingItemTmpl caption="房间数量" value="1间" />
+                  <View style="width:100%;height:24rpx;"></View>
+                  <SettingItemTmpl
+                    caption="入住人 "
+                    isInput
+                    hint="请输入姓名"
+                    onInput={this.handleNameChange.bind(this)}
+                  />
+                  <SettingItemTmpl
+                    caption="手机号码 "
+                    hint="请输入手机号码"
+                    isInput
+                    inputType="number"
+                    onInput={this.handlePhoneChange.bind(this)}
+                  />
+                  <SettingItemTmpl
+                    caption="到店时间"
+                    hint="13:00"
+                    isPicker
+                    onInput={this.handleTimeChange.bind(this)}
+                  />
+                  <View style="width:100%;height:24rpx;"></View>
+                  <View className="settingItem">
+                    <Text className="caption">选择优惠</Text>
+                    <Text className="discount">{discount}</Text>
+                    <Image
+                      src={require("../../res/images/ic_down_arrow.png")}
+                      mode="widthFix"
+                      className="icon"
+                    ></Image>
+                  </View>
+                  <View className="settingItem">
+                    <Text className="caption">发票</Text>
+                    <Switch className="invoice" color="#409EFF" checked></Switch>
+                  </View>
+                  <View className="settingItem">
+                    <Text className="caption">备注</Text>
+                    <Input
+                      className="remark"
+                      placeholder="请补充你的其他需求"
+                    ></Input>
+                  </View>
+                  <View style="width:100%;height:100rpx;"></View>
                 </View>
-                <SettingItemTmpl
-                  caption="入住/离店"
-                  value={
-                    dateFormat("YYYY-mm-dd", startDate) +
-                    "/" +
-                    dateFormat("YYYY-mm-dd", endDate)
-                  }
-                />
-                <SettingItemTmpl caption="房间数量" value="1间" />
-                <View style="width:100%;height:24rpx;"></View>
-                <SettingItemTmpl
-                  caption="入住人 "
-                  isInput
-                  hint="请输入姓名"
-                  onInput={this.handleNameChange.bind(this)}
-                />
-                <SettingItemTmpl
-                  caption="手机号码 "
-                  hint="请输入手机号码"
-                  isInput
-                  inputType="number"
-                  onInput={this.handlePhoneChange.bind(this)}
-                />
-                <SettingItemTmpl
-                  caption="到店时间"
-                  hint="13:00"
-                  isPicker
-                  onInput={this.handleTimeChange.bind(this)}
-                />
-                <View style="width:100%;height:24rpx;"></View>
-                <View className="settingItem">
-                  <Text className="caption">选择优惠</Text>
-                  <Text className="discount">{discount}</Text>
-                  <Image
-                    src={require("../../res/images/ic_down_arrow.png")}
-                    mode="widthFix"
-                    className="icon"
-                  ></Image>
+              </View>
+              <View className="payItem">
+                <View className="priceItem">
+                  <Text>应付：</Text>
+                  <Text>{"¥" + roomPrice}</Text>
+                  {isDiscount && (
+                    <Text className="payMsg">{"(已优惠" + discount + "元)"}</Text>
+                  )}
                 </View>
-                <View className="settingItem">
-                  <Text className="caption">发票</Text>
-                  <Switch className="invoice" color="#409EFF" checked></Switch>
-                </View>
-                <View className="settingItem">
-                  <Text className="caption">备注</Text>
-                  <Input
-                    className="remark"
-                    placeholder="请补充你的其他需求"
-                  ></Input>
-                </View>
-                <View style="width:100%;height:100rpx;"></View>
+                <View className="payBtn" onClick={this.handleBook.bind(this)}>
+                  立即支付
+              </View>
               </View>
             </View>
-            <View className="payItem">
-              <View className="priceItem">
-                <Text>应付：</Text>
-                <Text>{"¥" + roomPrice}</Text>
-                {isDiscount && (
-                  <Text className="payMsg">{"(已优惠" + discount + "元)"}</Text>
-                )}
-              </View>
-              <View className="payBtn" onClick={this.handleBook.bind(this)}>
-                立即支付
-              </View>
-            </View>
-          </View>
-        )}
+          )}
       </View>
     );
   }

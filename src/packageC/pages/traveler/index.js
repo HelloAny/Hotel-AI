@@ -46,16 +46,16 @@ export default class Traveler extends Component {
   }
 
   // 微信好友分享
-  handleInviteByWx() {}
+  handleInviteByWx() { }
 
   // QQ好友分享
-  handleInviteByQQ() {}
+  handleInviteByQQ() { }
 
   // 微信朋友圈分享
-  handleInviteByWxShare() {}
+  handleInviteByWxShare() { }
 
   // 二维码分享邀请
-  handleInviteByCode() {}
+  handleInviteByCode() { }
 
   // 复制到粘贴板
   handleInviteByText() {
@@ -95,7 +95,7 @@ export default class Traveler extends Component {
     const { boxOpen } = this.state;
     return (
       <View className="traveler-container">
-        <Navbar title="同行者" isBackBtn={false} backgroundColor="white"/>
+        <Navbar title="同行者" isBackBtn={false} backgroundColor="white" />
         <View
           className="add-traveler"
           onClick={this.handleOpenInviteBox.bind(this)}
@@ -112,27 +112,27 @@ export default class Traveler extends Component {
                   src="https://hotel.lcworkroom.cn/api/pic/get/users/?name=13858181317"
                   className="user-portrait"
                 />
-                <Text className="user-name">用户名</Text>
+                <Text className="user-name">九九六六</Text>
               </View>
               <Text className="character">发起者</Text>
             </View>
             <View className="traveler-item">
               <View className="user">
                 <Image
-                  src="https://hotel.lcworkroom.cn/api/pic/get/users/?name=13858181317"
+                  src="http://cdn.amikara.com/A8B1DDA8AF3AEC9F3E1021E2338AFC69.jpg"
                   className="user-portrait"
                 />
-                <Text className="user-name">用户名</Text>
+                <Text className="user-name">小猪</Text>
               </View>
               <Text className="character">成员</Text>
             </View>
             <View className="traveler-item">
               <View className="user">
                 <Image
-                  src="https://hotel.lcworkroom.cn/api/pic/get/users/?name=13858181317"
+                  src="http://cdn.amikara.com/5794F2685E33F92B8916121576765DA8.jpg"
                   className="user-portrait"
                 />
-                <Text className="user-name">用户名</Text>
+                <Text className="user-name">山山</Text>
               </View>
               <Text className="character">成员</Text>
             </View>

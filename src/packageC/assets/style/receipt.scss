@@ -1,7 +1,8 @@
 .container {
   background-color: #4c2497;
-  height: 100vh;
+  height: calc(100vh - 80Px);
   width: 100vw;
+  padding-top:80Px;
 }
 
 .img {

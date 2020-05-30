@@ -284,7 +284,7 @@ export const locker = param => {
     type: "locker",
     subtype: "apply",
     data: {
-      order_id: 4
+      order_id: hotel_id
     }
   };
   return request(post, url, data);
@@ -302,7 +302,7 @@ export const getLocker = param => {
     type: "locker",
     subtype: "get",
     data: {
-      apply_id: 4
+      apply_id: hotel_id
     }
   };
   return request(post, url, data);
@@ -320,7 +320,7 @@ export const getLockerList = param => {
     type: "locker",
     subtype: "list",
     data: {
-      order_id: 4
+      order_id: hotel_id
     }
   };
   return request(post, url, data);

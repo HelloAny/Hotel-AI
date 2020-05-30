@@ -73,7 +73,7 @@ class Account extends Component {
           name: "客服",
           icon: "icon-kefu",
           badge: "",
-          url: ""
+          url: `/packageC/pages/IM/index?phone=18957856792&nickName=鲸跃小助手`
         }
       ]);
   }

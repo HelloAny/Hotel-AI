@@ -65,6 +65,7 @@ class HCcamera extends Component {
     });
     faceRegister(param).then(res => {
       Taro.hideLoading();
+      let that = this;
       if (res.data.status == 0) {
         Taro.showToast({
           title: "认证成功",
@@ -72,11 +73,12 @@ class HCcamera extends Component {
           mask: true,
           duration: 2000,
           success() {
-            this.props.onOrderSuccess
-              ? this.props.onOrderSuccess()
+            console.log(that.props)
+            that.props.onOrderSuccess
+              ? that.props.onOrderSuccess()
               : Taro.navigateBack({
-                  delta: 1
-                });
+                delta: 1
+              });
           }
         });
       } else {
@@ -87,7 +89,7 @@ class HCcamera extends Component {
       }
     });
   }
-  componentWillMount() {}
+  componentWillMount() { }
   render() {
     const { imageCameraPath, changeCameraBtn } = this.state;
     return (
@@ -100,15 +102,16 @@ class HCcamera extends Component {
             ></cover-image>
           </CoverView>
         ) : (
-          <Camera devicePosition="front" className="camera">
-            <CoverView className="cameraBorder">
-              <cover-image
-                src="http://cdn.amikara.com/cover.png"
-                className="coverImage"
-              ></cover-image>
-            </CoverView>
-          </Camera>
-        )}
+            <Camera devicePosition="front" className="camera">
+              <CoverView className="cameraBorder">
+                <cover-image
+                  // src={this.props.onOrderSuccess ? "http://cdn.amikara.com/cover1.png" : "http://cdn.amikara.com/cover.png"}
+                  src="http://cdn.amikara.com/cnmqny.png"
+                  className="coverImage"
+                ></cover-image>
+              </CoverView>
+            </Camera>
+          )}
 
         <View>
           {changeCameraBtn ? (
@@ -137,18 +140,18 @@ class HCcamera extends Component {
               </View>
             </View>
           ) : (
-            <View className="at-row cameraBtn">
-              <View className="at-col">
-                <AtButton
-                  circle
-                  type="primary"
-                  onClick={this.takePhoto.bind(this)}
-                >
-                  拍摄
+              <View className="at-row cameraBtn">
+                <View className="at-col">
+                  <AtButton
+                    circle
+                    type="primary"
+                    onClick={this.takePhoto.bind(this)}
+                  >
+                    拍摄
                 </AtButton>
+                </View>
               </View>
-            </View>
-          )}
+            )}
         </View>
       </View>
     );
